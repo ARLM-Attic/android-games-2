@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<map row="20" col="20">
+  <objs>
+    <obj id="0" caption="obj0" unit-id="88" site-pos="4,3" />
+    <obj id="1" caption="obj1" unit-id="88" site-pos="4,8" />
+    <obj id="2" caption="obj2" unit-id="88" site-pos="4,12" />
+    <obj id="3" caption="obj3" unit-id="88" site-pos="8,8" />
+    <obj id="4" caption="obj4" unit-id="88" site-pos="11,8" />
+    <obj id="5" caption="obj5" unit-id="88" site-pos="11,5" />
+    <obj id="6" caption="obj6" unit-id="88" site-pos="11,11" />
+  </objs>
+</map>

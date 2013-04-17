@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<models>
+  <model id="88" caption="m88">
+    <action id="1">
+      <direction id="1">
+        <frame index="1" width="48" height="65" offset-x="22" offset-y="46" />
+        <frame index="2" width="44" height="65" offset-x="22" offset-y="46" />
+        <frame index="3" width="44" height="65" offset-x="21" offset-y="45" />
+        <frame index="4" width="44" height="63" offset-x="22" offset-y="43" />
+        <frame index="5" width="44" height="65" offset-x="23" offset-y="45" />
+        <frame index="6" width="44" height="66" offset-x="23" offset-y="46" />
+        <frame index="7" width="52" height="64" offset-x="25" offset-y="46" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="48" height="67" offset-x="27" offset-y="52" />
+        <frame index="2" width="48" height="67" offset-x="26" offset-y="51" />
+        <frame index="3" width="44" height="67" offset-x="25" offset-y="50" />
+        <frame index="4" width="52" height="67" offset-x="28" offset-y="51" />
+        <frame index="5" width="56" height="67" offset-x="30" offset-y="52" />
+        <frame index="6" width="60" height="67" offset-x="30" offset-y="53" />
+        <frame index="7" width="52" height="66" offset-x="27" offset-y="52" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="68" height="68" offset-x="34" offset-y="55" />
+        <frame index="2" width="64" height="68" offset-x="34" offset-y="55" />
+        <frame index="3" width="64" height="67" offset-x="34" offset-y="55" />
+        <frame index="4" width="68" height="68" offset-x="35" offset-y="56" />
+        <frame index="5" width="68" height="69" offset-x="34" offset-y="57" />
+        <frame index="6" width="64" height="67" offset-x="34" offset-y="56" />
+        <frame index="7" width="64" height="70" offset-x="34" offset-y="55" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="48" height="67" offset-x="26" offset-y="55" />
+        <frame index="2" width="56" height="67" offset-x="28" offset-y="56" />
+        <frame index="3" width="60" height="67" offset-x="30" offset-y="57" />
+        <frame index="4" width="52" height="68" offset-x="28" offset-y="58" />
+        <frame index="5" width="48" height="68" offset-x="26" offset-y="57" />
+        <frame index="6" width="44" height="69" offset-x="25" offset-y="56" />
+        <frame index="7" width="48" height="68" offset-x="26" offset-y="55" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="48" height="67" offset-x="24" offset-y="53" />
+        <frame index="2" width="44" height="68" offset-x="23" offset-y="54" />
+        <frame index="3" width="44" height="70" offset-x="23" offset-y="55" />
+        <frame index="4" width="44" height="70" offset-x="22" offset-y="56" />
+        <frame index="5" width="44" height="69" offset-x="21" offset-y="55" />
+        <frame index="6" width="44" height="69" offset-x="21" offset-y="54" />
+        <frame index="7" width="52" height="67" offset-x="26" offset-y="53" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="52" height="66" offset-x="23" offset-y="55" />
+        <frame index="2" width="44" height="68" offset-x="19" offset-y="56" />
+        <frame index="3" width="44" height="71" offset-x="18" offset-y="57" />
+        <frame index="4" width="52" height="68" offset-x="23" offset-y="58" />
+        <frame index="5" width="56" height="67" offset-x="25" offset-y="57" />
+        <frame index="6" width="60" height="66" offset-x="28" offset-y="56" />
+        <frame index="7" width="48" height="68" offset-x="22" offset-y="55" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="64" height="67" offset-x="31" offset-y="55" />
+        <frame index="2" width="68" height="68" offset-x="31" offset-y="56" />
+        <frame index="3" width="64" height="69" offset-x="29" offset-y="57" />
+        <frame index="4" width="68" height="68" offset-x="31" offset-y="56" />
+        <frame index="5" width="68" height="68" offset-x="31" offset-y="56" />
+        <frame index="6" width="64" height="66" offset-x="28" offset-y="55" />
+        <frame index="7" width="60" height="70" offset-x="27" offset-y="55" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="52" height="67" offset-x="22" offset-y="52" />
+        <frame index="2" width="56" height="66" offset-x="26" offset-y="52" />
+        <frame index="3" width="60" height="67" offset-x="28" offset-y="53" />
+        <frame index="4" width="52" height="67" offset-x="22" offset-y="51" />
+        <frame index="5" width="48" height="67" offset-x="20" offset-y="50" />
+        <frame index="6" width="44" height="67" offset-x="19" offset-y="50" />
+        <frame index="7" width="52" height="66" offset-x="22" offset-y="52" />
+      </direction>
+    </action>
+    <action id="17">
+      <direction id="1">
+        <frame index="1" width="52" height="65" offset-x="26" offset-y="56" />
+        <frame index="2" width="44" height="81" offset-x="22" offset-y="68" />
+        <frame index="3" width="48" height="76" offset-x="23" offset-y="61" />
+        <frame index="4" width="52" height="68" offset-x="25" offset-y="46" />
+        <frame index="5" width="52" height="58" offset-x="27" offset-y="38" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="48" height="66" offset-x="16" offset-y="58" />
+        <frame index="2" width="56" height="79" offset-x="24" offset-y="68" />
+        <frame index="3" width="52" height="77" offset-x="25" offset-y="64" />
+        <frame index="4" width="52" height="70" offset-x="33" offset-y="53" />
+        <frame index="5" width="48" height="63" offset-x="30" offset-y="47" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="60" height="70" offset-x="20" offset-y="55" />
+        <frame index="2" width="52" height="79" offset-x="25" offset-y="68" />
+        <frame index="3" width="52" height="76" offset-x="26" offset-y="63" />
+        <frame index="4" width="60" height="74" offset-x="42" offset-y="60" />
+        <frame index="5" width="56" height="70" offset-x="37" offset-y="55" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="48" height="67" offset-x="16" offset-y="49" />
+        <frame index="2" width="52" height="77" offset-x="22" offset-y="66" />
+        <frame index="3" width="48" height="79" offset-x="23" offset-y="68" />
+        <frame index="4" width="48" height="71" offset-x="32" offset-y="62" />
+        <frame index="5" width="48" height="68" offset-x="29" offset-y="59" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="56" height="70" offset-x="27" offset-y="50" />
+        <frame index="2" width="48" height="75" offset-x="23" offset-y="66" />
+        <frame index="3" width="48" height="80" offset-x="23" offset-y="71" />
+        <frame index="4" width="52" height="69" offset-x="25" offset-y="61" />
+        <frame index="5" width="52" height="68" offset-x="26" offset-y="57" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="48" height="67" offset-x="32" offset-y="49" />
+        <frame index="2" width="56" height="77" offset-x="30" offset-y="66" />
+        <frame index="3" width="48" height="79" offset-x="24" offset-y="68" />
+        <frame index="4" width="48" height="72" offset-x="16" offset-y="63" />
+        <frame index="5" width="48" height="69" offset-x="16" offset-y="59" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="60" height="70" offset-x="40" offset-y="55" />
+        <frame index="2" width="52" height="80" offset-x="26" offset-y="68" />
+        <frame index="3" width="52" height="76" offset-x="26" offset-y="63" />
+        <frame index="4" width="60" height="74" offset-x="18" offset-y="60" />
+        <frame index="5" width="56" height="70" offset-x="19" offset-y="55" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="48" height="66" offset-x="32" offset-y="58" />
+        <frame index="2" width="52" height="79" offset-x="30" offset-y="68" />
+        <frame index="3" width="48" height="77" offset-x="24" offset-y="64" />
+        <frame index="4" width="48" height="70" offset-x="15" offset-y="53" />
+        <frame index="5" width="48" height="64" offset-x="18" offset-y="48" />
+      </direction>
+    </action>
+    <action id="33">
+      <direction id="1">
+        <frame index="1" width="48" height="64" offset-x="24" offset-y="45" />
+        <frame index="2" width="52" height="53" offset-x="25" offset-y="32" />
+        <frame index="3" width="52" height="66" offset-x="25" offset-y="51" />
+        <frame index="4" width="44" height="78" offset-x="22" offset-y="67" />
+        <frame index="5" width="44" height="75" offset-x="22" offset-y="64" />
+        <frame index="6" width="44" height="66" offset-x="22" offset-y="51" />
+        <frame index="7" width="52" height="58" offset-x="25" offset-y="41" />
+        <frame index="8" width="52" height="56" offset-x="25" offset-y="38" />
+        <frame index="9" width="56" height="67" offset-x="27" offset-y="51" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="48" height="67" offset-x="27" offset-y="52" />
+        <frame index="2" width="48" height="59" offset-x="30" offset-y="42" />
+        <frame index="3" width="56" height="67" offset-x="30" offset-y="53" />
+        <frame index="4" width="64" height="75" offset-x="32" offset-y="65" />
+        <frame index="5" width="48" height="77" offset-x="26" offset-y="66" />
+        <frame index="6" width="52" height="62" offset-x="26" offset-y="49" />
+        <frame index="7" width="48" height="57" offset-x="27" offset-y="42" />
+        <frame index="8" width="52" height="58" offset-x="27" offset-y="43" />
+        <frame index="9" width="52" height="69" offset-x="24" offset-y="56" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="64" height="69" offset-x="34" offset-y="55" />
+        <frame index="2" width="60" height="65" offset-x="37" offset-y="51" />
+        <frame index="3" width="48" height="68" offset-x="28" offset-y="54" />
+        <frame index="4" width="72" height="66" offset-x="32" offset-y="57" />
+        <frame index="5" width="40" height="74" offset-x="20" offset-y="64" />
+        <frame index="6" width="52" height="60" offset-x="27" offset-y="48" />
+        <frame index="7" width="60" height="63" offset-x="33" offset-y="49" />
+        <frame index="8" width="68" height="64" offset-x="32" offset-y="50" />
+        <frame index="9" width="60" height="75" offset-x="29" offset-y="60" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="48" height="67" offset-x="26" offset-y="55" />
+        <frame index="2" width="48" height="64" offset-x="30" offset-y="55" />
+        <frame index="3" width="48" height="72" offset-x="24" offset-y="60" />
+        <frame index="4" width="64" height="69" offset-x="32" offset-y="61" />
+        <frame index="5" width="48" height="66" offset-x="26" offset-y="58" />
+        <frame index="6" width="52" height="59" offset-x="26" offset-y="50" />
+        <frame index="7" width="48" height="61" offset-x="26" offset-y="51" />
+        <frame index="8" width="52" height="65" offset-x="26" offset-y="52" />
+        <frame index="9" width="52" height="74" offset-x="23" offset-y="59" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="52" height="68" offset-x="25" offset-y="53" />
+        <frame index="2" width="52" height="65" offset-x="25" offset-y="53" />
+        <frame index="3" width="52" height="72" offset-x="25" offset-y="63" />
+        <frame index="4" width="44" height="70" offset-x="22" offset-y="61" />
+        <frame index="5" width="44" height="65" offset-x="22" offset-y="59" />
+        <frame index="6" width="44" height="54" offset-x="22" offset-y="47" />
+        <frame index="7" width="52" height="61" offset-x="25" offset-y="49" />
+        <frame index="8" width="52" height="68" offset-x="25" offset-y="50" />
+        <frame index="9" width="52" height="74" offset-x="26" offset-y="56" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="48" height="66" offset-x="21" offset-y="55" />
+        <frame index="2" width="48" height="66" offset-x="17" offset-y="55" />
+        <frame index="3" width="56" height="72" offset-x="24" offset-y="60" />
+        <frame index="4" width="64" height="68" offset-x="31" offset-y="60" />
+        <frame index="5" width="48" height="67" offset-x="22" offset-y="59" />
+        <frame index="6" width="52" height="59" offset-x="24" offset-y="50" />
+        <frame index="7" width="48" height="62" offset-x="19" offset-y="51" />
+        <frame index="8" width="52" height="65" offset-x="25" offset-y="52" />
+        <frame index="9" width="52" height="74" offset-x="26" offset-y="59" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="64" height="69" offset-x="29" offset-y="55" />
+        <frame index="2" width="64" height="65" offset-x="24" offset-y="51" />
+        <frame index="3" width="48" height="68" offset-x="19" offset-y="54" />
+        <frame index="4" width="72" height="66" offset-x="39" offset-y="57" />
+        <frame index="5" width="40" height="74" offset-x="20" offset-y="64" />
+        <frame index="6" width="52" height="60" offset-x="22" offset-y="48" />
+        <frame index="7" width="60" height="63" offset-x="25" offset-y="49" />
+        <frame index="8" width="68" height="64" offset-x="34" offset-y="50" />
+        <frame index="9" width="60" height="75" offset-x="31" offset-y="60" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="48" height="67" offset-x="20" offset-y="52" />
+        <frame index="2" width="48" height="59" offset-x="18" offset-y="42" />
+        <frame index="3" width="52" height="69" offset-x="25" offset-y="53" />
+        <frame index="4" width="64" height="74" offset-x="30" offset-y="65" />
+        <frame index="5" width="48" height="78" offset-x="22" offset-y="67" />
+        <frame index="6" width="52" height="62" offset-x="24" offset-y="49" />
+        <frame index="7" width="48" height="56" offset-x="19" offset-y="42" />
+        <frame index="8" width="52" height="58" offset-x="24" offset-y="43" />
+        <frame index="9" width="52" height="69" offset-x="27" offset-y="56" />
+      </direction>
+    </action>
+    <action id="49">
+      <direction id="1">
+        <frame index="1" width="56" height="61" offset-x="29" offset-y="59" />
+        <frame index="2" width="56" height="64" offset-x="28" offset-y="68" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="60" height="70" offset-x="21" offset-y="59" />
+        <frame index="2" width="60" height="70" offset-x="14" offset-y="65" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="44" height="67" offset-x="5" offset-y="52" />
+        <frame index="2" width="52" height="69" offset-x="3" offset-y="54" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="60" height="72" offset-x="21" offset-y="52" />
+        <frame index="2" width="60" height="66" offset-x="9" offset-y="42" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="56" height="71" offset-x="27" offset-y="52" />
+        <frame index="2" width="60" height="65" offset-x="30" offset-y="37" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="60" height="72" offset-x="37" offset-y="52" />
+        <frame index="2" width="64" height="67" offset-x="49" offset-y="42" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="44" height="69" offset-x="38" offset-y="52" />
+        <frame index="2" width="48" height="69" offset-x="52" offset-y="54" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="60" height="71" offset-x="37" offset-y="59" />
+        <frame index="2" width="56" height="71" offset-x="47" offset-y="65" />
+      </direction>
+    </action>
+    <action id="65">
+      <direction id="1">
+        <frame index="1" width="44" height="53" offset-x="22" offset-y="40" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="48" height="60" offset-x="23" offset-y="47" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="60" height="62" offset-x="26" offset-y="50" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="48" height="62" offset-x="23" offset-y="50" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="44" height="63" offset-x="22" offset-y="46" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="48" height="62" offset-x="25" offset-y="50" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="60" height="62" offset-x="34" offset-y="50" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="48" height="60" offset-x="25" offset-y="47" />
+      </direction>
+    </action>
+    <action id="81">
+      <direction id="1">
+        <frame index="1" width="60" height="76" offset-x="21" offset-y="57" />
+        <frame index="2" width="48" height="73" offset-x="24" offset-y="54" />
+        <frame index="3" width="64" height="66" offset-x="28" offset-y="38" />
+        <frame index="4" width="52" height="58" offset-x="26" offset-y="26" />
+        <frame index="5" width="56" height="48" offset-x="27" offset-y="15" />
+      </direction>
+      <direction id="17">
+        <frame index="1" width="52" height="69" offset-x="24" offset-y="50" />
+        <frame index="2" width="56" height="76" offset-x="35" offset-y="57" />
+        <frame index="3" width="60" height="65" offset-x="40" offset-y="40" />
+        <frame index="4" width="60" height="51" offset-x="48" offset-y="24" />
+        <frame index="5" width="72" height="49" offset-x="51" offset-y="21" />
+      </direction>
+      <direction id="16">
+        <frame index="1" width="56" height="75" offset-x="34" offset-y="56" />
+        <frame index="2" width="52" height="70" offset-x="33" offset-y="58" />
+        <frame index="3" width="64" height="66" offset-x="52" offset-y="46" />
+        <frame index="4" width="64" height="49" offset-x="54" offset-y="34" />
+        <frame index="5" width="72" height="49" offset-x="57" offset-y="34" />
+      </direction>
+      <direction id="18">
+        <frame index="1" width="60" height="75" offset-x="37" offset-y="60" />
+        <frame index="2" width="60" height="72" offset-x="34" offset-y="62" />
+        <frame index="3" width="52" height="65" offset-x="42" offset-y="54" />
+        <frame index="4" width="68" height="57" offset-x="46" offset-y="50" />
+        <frame index="5" width="72" height="61" offset-x="49" offset-y="49" />
+      </direction>
+      <direction id="2">
+        <frame index="1" width="56" height="74" offset-x="37" offset-y="61" />
+        <frame index="2" width="48" height="73" offset-x="23" offset-y="62" />
+        <frame index="3" width="64" height="65" offset-x="35" offset-y="58" />
+        <frame index="4" width="52" height="62" offset-x="25" offset-y="56" />
+        <frame index="5" width="52" height="63" offset-x="25" offset-y="55" />
+      </direction>
+      <direction id="34">
+        <frame index="1" width="52" height="72" offset-x="27" offset-y="60" />
+        <frame index="2" width="52" height="73" offset-x="18" offset-y="60" />
+        <frame index="3" width="60" height="63" offset-x="20" offset-y="58" />
+        <frame index="4" width="60" height="61" offset-x="12" offset-y="50" />
+        <frame index="5" width="72" height="61" offset-x="21" offset-y="49" />
+      </direction>
+      <direction id="32">
+        <frame index="1" width="56" height="74" offset-x="22" offset-y="62" />
+        <frame index="2" width="52" height="71" offset-x="19" offset-y="59" />
+        <frame index="3" width="64" height="65" offset-x="13" offset-y="51" />
+        <frame index="4" width="68" height="49" offset-x="11" offset-y="35" />
+        <frame index="5" width="72" height="49" offset-x="15" offset-y="34" />
+      </direction>
+      <direction id="33">
+        <frame index="1" width="56" height="76" offset-x="20" offset-y="62" />
+        <frame index="2" width="60" height="73" offset-x="24" offset-y="54" />
+        <frame index="3" width="52" height="64" offset-x="9" offset-y="43" />
+        <frame index="4" width="68" height="58" offset-x="21" offset-y="31" />
+        <frame index="5" width="76" height="49" offset-x="22" offset-y="21" />
+      </direction>
+    </action>
+  </model>
+</models>
