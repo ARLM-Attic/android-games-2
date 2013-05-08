@@ -26,5 +26,9 @@ namespace AGShell.GI
                 _engine.SwitchSence(new LoadMapSence(_engine));
             }
         }
+
+        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        {
+        }
     }
 }

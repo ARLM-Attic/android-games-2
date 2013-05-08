@@ -13,7 +13,9 @@ namespace AGShell.GI
         public Sence CurrentSence { get; private set; }
 
         private Thread _thread;
+        private Thread _inputThread;
         private EventWaitHandle _waitHanle;
+        private EventWaitHandle _waitHanleInput;
         private bool _isRunning;
 
         #region fps
@@ -28,6 +30,7 @@ namespace AGShell.GI
 
         private AGGDI _gdi;
         private AGADI _adi;
+        private AGIDI _idi;
 
         public IADI ADI { get { return _adi; } }
 
@@ -43,8 +46,13 @@ namespace AGShell.GI
             _adi = new AGADI();
             _adi.Init(form);
 
+            _idi = new AGIDI();
+            _idi.Init(form);
+
             _thread = new Thread(Run);
+            _inputThread = new Thread(InputRunning);
             _waitHanle = new EventWaitHandle(false, EventResetMode.ManualReset);
+            _waitHanleInput = new EventWaitHandle(false, EventResetMode.ManualReset);
 
             Debug.WriteLine("AGEngine Init!");
         }
@@ -53,6 +61,8 @@ namespace AGShell.GI
         {
             _isRunning = true;
             _thread.Start();
+            _inputThread.Start();
+
 
             Debug.WriteLine("AGEngine Start!");
         }
@@ -60,14 +70,28 @@ namespace AGShell.GI
         public void Stop()
         {
             _isRunning = false;
+            Debug.WriteLine("AGEngine Running False!");
 
-            _waitHanle.WaitOne();
+            WaitHandle[] handles = new WaitHandle[] { _waitHanle, _waitHanleInput };
+            if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+            {
+                // 使用foreach，在多线程中等待每一个句柄
+                foreach (WaitHandle handle in handles)
+                {
+                    WaitHandle.WaitAny(new WaitHandle[] { handle });
+                }
+            }
+            else
+            {
+                WaitHandle.WaitAll(handles);
+            }
 
             Debug.WriteLine("AGEngine Stop!");
         }
 
         private void Run()
         {
+            Debug.WriteLine("AGEngine Loop Thread Start!");
             while (_isRunning)
             {
                 _ticks = DateTime.Now.Ticks;
@@ -84,12 +108,63 @@ namespace AGShell.GI
 
                     _gdi.Clear();
                     Render(_gdi);
-                    _gdi.DrawText(string.Format("fps:{0}", _fps), 0, 0);
+                    _gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
                     _gdi.Flush();
                 }
             }
-            Debug.WriteLine("AGEngine Thread Exist!");
             _waitHanle.Set();
+            Debug.WriteLine("AGEngine Loop Thread Exist!");
+        }
+
+        private void InputRunning()
+        {
+            Debug.WriteLine("AGEngine Input Thread Start!");
+            while (_isRunning)
+            {
+                //Thread.Sleep(200);
+                if (CurrentSence == null)
+                {
+                    continue;
+                }
+
+                byte[] buttons;
+                int x;
+                int y;
+                int z;
+                _idi.Update(out buttons, out x, out y, out z);
+
+                if (buttons == null)
+                {
+                    continue;
+                }
+
+                if (0 != buttons[0])
+                {
+                    CurrentSence.MouseInput(0, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+                else
+                {
+                    CurrentSence.MouseInput(0, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+                if (0 != buttons[1])
+                {
+                    CurrentSence.MouseInput(1, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+                else
+                {
+                    CurrentSence.MouseInput(1, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+                if (0 != buttons[2])
+                {
+                    CurrentSence.MouseInput(2, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+                else
+                {
+                    CurrentSence.MouseInput(2, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
+                }
+            }
+            _waitHanleInput.Set();
+            Debug.WriteLine("AGEngine Input Thread Exist!");
         }
 
         private void Render(AGGDI gdi)

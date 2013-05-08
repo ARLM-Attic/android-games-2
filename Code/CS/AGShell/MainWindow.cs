@@ -54,31 +54,5 @@ namespace AGShell
 
             base.OnKeyDown(e);
         }
-
-        protected override void OnMouseDown(MouseEventArgs e)
-        {
-            _engine.InputEvent(3, e.X, e.Y);
-            base.OnMouseDown(e);
-        }
-
-        protected override void OnMouseMove(MouseEventArgs e)
-        {
-            _engine.InputEvent(5, e.X, e.Y);
-
-            base.OnMouseMove(e);
-        }
-
-        protected override void OnMouseUp(MouseEventArgs e)
-        {
-            _engine.InputEvent(4, e.X, e.Y);
-            base.OnMouseUp(e);
-        }
-
-        protected override void OnMouseClick(MouseEventArgs e)
-        {
-            _engine.InputEvent(2, e.X, e.Y);
-
-            base.OnMouseClick(e);
-        }
     }
 }

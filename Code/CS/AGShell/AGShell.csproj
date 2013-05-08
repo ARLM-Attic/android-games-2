@@ -46,6 +46,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>_DXLIB\Microsoft.DirectX.DirectDraw.DLL</HintPath>
     </Reference>
+    <Reference Include="Microsoft.DirectX.DirectInput, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_DXLIB\Microsoft.DirectX.DirectInput.DLL</HintPath>
+    </Reference>
     <Reference Include="Microsoft.DirectX.DirectSound, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>_DXLIB\Microsoft.DirectX.DirectSound.DLL</HintPath>
@@ -66,6 +70,7 @@
     <Compile Include="GI\AGADI.cs" />
     <Compile Include="GI\AGEngine.cs" />
     <Compile Include="GI\AGGDI.cs" />
+    <Compile Include="GI\AGIDI.cs" />
     <Compile Include="GI\AGRES.cs" />
     <Compile Include="GI\HUD.cs" />
     <Compile Include="GI\Map\MapRender.cs" />

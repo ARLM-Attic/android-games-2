@@ -24,6 +24,7 @@ namespace AGShell.GI
             }
             else if (_engine.CurrentMap != null)
             {
+                _engine.ADI.PlayBGM(_engine.CurrentMap.ID);
                 _engine.SwitchSence(new MapTestSence(_engine, _engine.CurrentMap));
             }
             else
@@ -33,6 +34,10 @@ namespace AGShell.GI
         }
 
         public override void InputEvent(int msg, int lParam, int wParam)
+        {
+        }
+
+        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
         {
         }
     }

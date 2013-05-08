@@ -241,14 +241,21 @@ namespace AGShell
             Rectangle destRect = new Rectangle((int)x, (int)y, (int)width, (int)height);
             Rectangle srcRect = new Rectangle((int)0, (int)0, (int)originalWidth, (int)originalHeight);
             m_bs.Draw(destRect, surface, srcRect, DrawFlags.KeySource | DrawFlags.DoNotWait);
+            surface.Dispose();
         }
 
         public void DrawImage(Bitmap image, float x, float y, float width, float height, float srcX, float srcY, float originalWidth, float originalHeight)
         {
+            if (srcY <= 0)
+            {
+                srcY = 0;
+            }
+
             Surface surface = CraeteSurface(image, Color.Black);
             Rectangle destRect = new Rectangle((int)x, (int)y, (int)width, (int)height);
             Rectangle srcRect = new Rectangle((int)srcX, (int)srcY, (int)originalWidth, (int)originalHeight);
-            m_bs.Draw(destRect, surface, srcRect, DrawFlags.KeySource | DrawFlags.DoNotWait);
+            m_bs.Draw(destRect, surface, srcRect, DrawFlags.KeySource | DrawFlags.Wait);
+            surface.Dispose();
         }
 
         public void Clear()

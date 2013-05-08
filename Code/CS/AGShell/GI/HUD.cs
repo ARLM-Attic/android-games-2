@@ -13,12 +13,14 @@ namespace AGShell
             OnRender(gdi);
         }
 
-        public void InputEvent(int msg, int lParam, int wParam)
+        public bool InputEvent(int msg, int lParam, int wParam)
         {
-            OnInputEvent(msg, lParam, wParam);
+            return OnInputEvent(msg, lParam, wParam);
         }
 
         protected abstract void OnRender(AGGDI gdi);
-        protected abstract void OnInputEvent(int msg, int lParam, int wParam);
+        protected abstract bool OnInputEvent(int msg, int lParam, int wParam);
+
+        public abstract bool MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY);
     }
 }

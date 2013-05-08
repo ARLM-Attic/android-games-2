@@ -11,6 +11,7 @@ public class Map2D
     public int Row { get; set; }
     public int Col { get; set; }
     public byte[] Background { get; set; }
+    public byte[] BGM { get; set; }
 
     private Size2D _size;
 

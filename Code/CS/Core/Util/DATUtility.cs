@@ -108,7 +108,8 @@ public static class DATUtility
     public static Map2D GetMap(int mapId)
     {
         string datFile = string.Format("{0}maps\\{1}.dat",GetResPath(), mapId);
-        string datBGFile = string.Format("{0}maps\\{1}.bg.dat",GetResPath(), mapId);
+        string datBGFile = string.Format("{0}maps\\{1}.bg.dat", GetResPath(), mapId);
+        string datBGMFile = string.Format("{0}maps\\{1}.bgm.dat", GetResPath(), mapId);
         if (!System.IO.File.Exists(datFile))
         {
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(datFile);
@@ -185,6 +186,11 @@ public static class DATUtility
         if (File.Exists(datBGFile))
         {
             map.Background = File.ReadAllBytes(datBGFile);
+        }
+
+        if(File.Exists(datBGMFile))
+        {
+            map.BGM = File.ReadAllBytes(datBGMFile);
         }
 
         return map;

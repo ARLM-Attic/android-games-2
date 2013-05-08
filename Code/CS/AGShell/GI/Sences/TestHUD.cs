@@ -51,20 +51,12 @@ namespace AGShell
             }
         }
 
-        protected override void OnInputEvent(int msg, int lParam, int wParam)
+        protected override bool OnInputEvent(int msg, int lParam, int wParam)
         {
-            if (msg == 2)
+            if (msg == 2 || msg == 3)
             {
-                for (int iControl = 0; iControl < _controls.Count; iControl++)
-                {
-                    AGControl control = _controls[iControl];
-                    if (control.InRect(lParam, wParam))
-                    {
-                        _controls[iControl].OnInputEvent(msg, lParam, wParam);
-                        return;
-                    }
-                }
             }
+            return false;
         }
 
         void button_Click(object sender, EventArgs e)
@@ -77,6 +69,20 @@ namespace AGShell
                 AGSUtility.MoveTo(obj, _map.Camps[1].StartPos);
                 button.ColdDownTick = button.ColdDown;
             }
+        }
+
+        public override bool MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        {
+            for (int iControl = 0; iControl < _controls.Count; iControl++)
+            {
+                AGControl control = _controls[iControl];
+                if (control.InRect(ptX, ptY))
+                {
+                    _controls[iControl].OnInputEvent(button, ptX, ptY);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace AGShell.GI
             : base(engine)
         {
             _map = map;
-            _camera = new Camera(MainWindow.Width, MainWindow.Height - 20 - 50, new Point2D(MainWindow.Width / 2, 20 + (MainWindow.Height - 20 - 50) / 2));
+            _camera = new Camera(MainWindow.Width, MainWindow.Height, new Point2D(MainWindow.Width / 2, 20 + (MainWindow.Height) / 2));
             _camera.Attach(_map, new Point2D(0, 0));
             _camera.Target(_map.Camps[0].StartPos);
             _hud = new TestHUD(_map);
@@ -45,7 +45,7 @@ namespace AGShell.GI
                 MapRender.Render(_engine, gdi, _map, _camera);
                 _hud.Render(gdi);
 
-                gdi.DrawText(string.Format("map:{0} Time:{1}  {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 50, 0);
+                gdi.DrawText(string.Format("map:{0} Time:{1}  {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 250, 0);
 
                 if (AGSUtility.CheckVictory(_map))
                 {
@@ -59,10 +59,12 @@ namespace AGShell.GI
             else if (_map.State == GState.Victory)
             {
                 _engine.SwitchSence(new VictorySence(_engine, _map));
+                _engine.ADI.PlayBGM(1);
             }
             else if (_map.State == GState.Defeat)
             {
                 _engine.SwitchSence(new DefeatSence(_engine, _map));
+                _engine.ADI.PlayBGM(1);
             }
         }
 
@@ -70,12 +72,12 @@ namespace AGShell.GI
         {
             if (_camera != null)
             {
-                if (_moveCamera)
+
+                if (_hud.InputEvent(msg, lParam, wParam))
                 {
-                    _camera.MoveTo(_storedCameraPos.X - (_currentPos.X - _storedPos.X), _storedCameraPos.Y - (_currentPos.Y - _storedPos.Y));
+                    return;
                 }
 
-                _hud.InputEvent(msg, lParam, wParam);
                 if (msg == 1)
                 {
                     //if (lParam == 81)
@@ -129,6 +131,39 @@ namespace AGShell.GI
                 {
                     _currentPos = new Point2D(lParam, wParam);
                 }
+            }
+        }
+
+        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        {
+            if (button == 0)
+            {
+                if (state == 1)
+                {
+                    if (_camera != null)
+                    {
+                        if (_hud.MouseInput(2,1, deltaX, deltaY, deltaZ, ptX, ptY))
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                if (state == 1)
+                {
+                    _storedCameraPos = _camera.CenterTargetPos;
+                    _moveCamera = true;
+                }
+                else
+                {
+                    _moveCamera = false;
+                }
+            }
+
+            if (_moveCamera)
+            {
+                _storedCameraPos = _camera.CenterTargetPos;
+                _camera.MoveTo(_storedCameraPos.X + deltaX, _storedCameraPos.Y + deltaY);
             }
         }
     }

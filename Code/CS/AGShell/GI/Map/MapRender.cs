@@ -18,7 +18,7 @@ namespace AGShell.GI
             if (map.Background != null)
             {
                 Bitmap bgImage = new Bitmap(new MemoryStream(map.Background));
-                gdi.DrawImage(bgImage, 0, 20, camera.Width, camera.Height, camera.ViewRect.X, camera.ViewRect.Y, camera.ViewRect.W, camera.ViewRect.H);
+                gdi.DrawImage(bgImage, 0, 0, camera.Width, camera.Height, camera.ViewRect.X, camera.ViewRect.Y, camera.ViewRect.W, camera.ViewRect.H);
             }
 #if DEBUG
             for (int row = 0; row < map.Row; row++)
