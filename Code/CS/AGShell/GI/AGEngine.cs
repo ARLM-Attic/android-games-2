@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AGShell.GI
+namespace AGShell
 {
     public class AGEngine : IEngine
     {
@@ -38,7 +38,7 @@ namespace AGShell.GI
 
         public void Init(System.Windows.Forms.Form form)
         {
-            CurrentSence = new LoadMapSence(this);
+            CurrentSence = new SplashSence(this);
 
             _gdi = new AGGDI();
             _gdi.Init(form);
@@ -108,7 +108,8 @@ namespace AGShell.GI
 
                     _gdi.Clear();
                     Render(_gdi);
-                    _gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
+                    _gdi.DrawText(string.Format("fps:{0})", _fps), 0, 0);
+                    //_gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
                     _gdi.Flush();
                 }
             }

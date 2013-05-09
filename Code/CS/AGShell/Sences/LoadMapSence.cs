@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGShell.GI
+namespace AGShell
 {
     public class LoadMapSence : Sence
     {
         private bool _first;
-        public LoadMapSence(AGEngine engine)
+        private int _mapId;
+        public LoadMapSence(AGEngine engine, int mapId)
             : base(engine)
         {
+            _mapId = mapId;
             _first = true;
         }
 
@@ -19,7 +21,7 @@ namespace AGShell.GI
         {
             if (_first)
             {
-                _engine.LoadMap(100);
+                _engine.LoadMap(_mapId);
                 _first = false;
             }
             else if (_engine.CurrentMap != null)

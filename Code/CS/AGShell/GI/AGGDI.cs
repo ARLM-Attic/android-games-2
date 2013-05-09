@@ -202,6 +202,7 @@ namespace AGShell
 
         public void DrawText(string text, float x, float y)
         {
+            //m_bs.FontHandle = AGRES.DEBUGFONT.ToHfont();
             m_bs.ForeColor = Color.FromArgb(0xee, 0xee, 0xee);
             m_bs.DrawText((int)x, (int)y, text, false);
         }
@@ -221,18 +222,28 @@ namespace AGShell
             m_bs.DrawLine((int)x1, (int)y1, (int)x2, (int)y2);
         }
 
+        public void DrawEllipse(float x, float y, float w, float h)
+        {
+            return;
+            m_bs.ForeColor = Color.Red;
+            m_bs.FillColor = Color.Transparent;
+            m_bs.DrawEllipse((int)x, (int)y, (int)(x + w), (int)(y + h));
+        }
+
         public void DrawRectangle(float x, float y, float w, float h)
         {
-            //m_bs.ForeColor = Color.Green;
-            //m_bs.FillColor = Color.Transparent;
-            //m_bs.DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h));
+            return;
+            m_bs.ForeColor = Color.Green;
+            m_bs.FillColor = Color.Transparent;
+            m_bs.DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h));
         }
 
         public void DrawBlock(float x, float y, float w, float h)
         {
-            //DrawRectangle(x, y, w, h);
-            //DrawLine(x, y, x + w, y + h);
-            //DrawLine(x, y + h, x + w, y);
+            //return;
+            DrawRectangle(x, y, w, h);
+            DrawLine(x, y, x + w, y + h);
+            DrawLine(x, y + h, x + w, y);
         }
 
         public void DrawImage(Bitmap image, float x, float y, float width, float height, float originalWidth, float originalHeight)

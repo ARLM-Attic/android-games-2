@@ -24,7 +24,7 @@ public class Object2D
     public int DirectionId { get; internal set; }
 
     private int _counter;
-    private int _updateCounter = 2;
+    private int _updateCounter = 3;
 
     #region 属性
     public long HP { get; set; }
@@ -37,6 +37,7 @@ public class Object2D
     public List<Skill> Skills { get; set; }
 
     public int DeadTime { get; set; }
+    private bool _isDead = false;
 
     public int DefenceCount { get; set; }
     public int DefenceCounter { get; set; }
@@ -89,12 +90,12 @@ public class Object2D
             }
             else if (state == ObjState.Die)
             {
-                if (FrameIndex >= Unit.Model.GetFrames(ActionId, DirectionId).Count)
-                {
+                //if (FrameIndex >= Unit.Model.GetFrames(ActionId, DirectionId).Count)
+                //{
                     State = state;
                     ActionId = Action2DDef.Die.Id;
                     FrameIndex = 0x01;
-                }
+                //}
             }
             else if (state == ObjState.Move)
             {
@@ -204,12 +205,27 @@ public class Object2D
     /// <returns></returns>
     public bool IsDead()
     {
-        if (HP <= 0)
+        if (!_isDead)
         {
-            HP = 0;
-            State = ObjState.Die;
-            return true;
+            if (HP <= 0)
+            {
+                _isDead = true;
+                HP = 0;
+                #region 从单元格的单位列表中删除
+                MapCell cell = this.Map.GetCell(this.SitePos);
+                for (int objIndex = 0; objIndex < cell.ObjList.Count; objIndex++)
+                {
+                    if (cell.ObjList[objIndex].ID == this.ID)
+                    {
+                        cell.ObjList.RemoveAt(objIndex);
+                        break;
+                    }
+                }
+                #endregion
+
+                SetAction(ObjState.Die);
+            }
         }
-        return false;
+        return _isDead;
     }
 }

@@ -16,7 +16,7 @@ namespace AGShell
         //public static int Width = 960;
         //public static int Height = 600;
 
-        private GI.AGEngine _engine;
+        private AGEngine _engine;
 
         public MainWindow()
         {
@@ -24,7 +24,7 @@ namespace AGShell
 
             this.ClientSize = new Size(MainWindow.Width, MainWindow.Height);
 
-            _engine = new GI.AGEngine();
+            _engine = new AGEngine();
         }
 
         protected override void OnLoad(EventArgs e)

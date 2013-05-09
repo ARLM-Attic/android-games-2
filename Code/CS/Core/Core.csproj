@@ -72,6 +72,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceLoader.cs" />
+    <Compile Include="Result\GameResult.cs" />
     <Compile Include="Skill\AttackSkill.cs" />
     <Compile Include="Skill\CritAttackSkill.cs" />
     <Compile Include="Skill\DefSkill.cs" />

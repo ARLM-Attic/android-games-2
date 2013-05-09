@@ -43,7 +43,7 @@ public class Unit2D
 
     public Unit2D()
     {
-        MSpeed = 5;
+        MSpeed = 6;
         Size = 16;
         ADDistance = 16;
 

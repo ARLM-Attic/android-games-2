@@ -25,6 +25,8 @@ public class Camp
     /// </summary>
     public List<Unit2D> AvailableUnitList { get; set; }
 
+    public GameResult Result { get; set; }
+
     public Camp()
     {
         ObjList = new List<Object2D>();

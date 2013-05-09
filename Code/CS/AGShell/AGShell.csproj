@@ -75,12 +75,13 @@
     <Compile Include="GI\HUD.cs" />
     <Compile Include="GI\Map\MapRender.cs" />
     <Compile Include="GI\Sence.cs" />
-    <Compile Include="GI\Sences\DefeatSence.cs" />
-    <Compile Include="GI\Sences\LoadMapSence.cs" />
-    <Compile Include="GI\Sences\MapTestSence.cs" />
-    <Compile Include="GI\Sences\SelectLevelSence.cs" />
-    <Compile Include="GI\Sences\TestHUD.cs" />
-    <Compile Include="GI\Sences\VictorySence.cs" />
+    <Compile Include="Sences\Result\ResultSence.cs" />
+    <Compile Include="Sences\LoadMapSence.cs" />
+    <Compile Include="Sences\Run\MapTestSence.cs" />
+    <Compile Include="Sences\Stages\SelectLevelSence.cs" />
+    <Compile Include="Sences\Stages\StagesHUD.cs" />
+    <Compile Include="Sences\Splash\SplashSence.cs" />
+    <Compile Include="Sences\Run\TestHUD.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +92,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\AGButton.cs" />
     <Compile Include="UI\AGControl.cs" />
+    <Compile Include="UI\AGTextButton.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

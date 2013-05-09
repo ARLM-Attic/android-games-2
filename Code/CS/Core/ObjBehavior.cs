@@ -30,47 +30,7 @@ class ObjBehavior
                 }
                 else
                 {
-                    if (deltaX > 0)
-                    {
-                        if (deltaY > 0)
-                        {
-                            obj.DirectionId = Direction2DDef.SouthEast.Id;
-                        }
-                        else if (deltaY < 0)
-                        {
-                            obj.DirectionId = Direction2DDef.NorthEast.Id;
-                        }
-                        else
-                        {
-                            obj.DirectionId = Direction2DDef.East.Id;
-                        }
-                    }
-                    else if (deltaX < 0)
-                    {
-                        if (deltaY > 0)
-                        {
-                            obj.DirectionId = Direction2DDef.SouthWest.Id;
-                        }
-                        else if (deltaY < 0)
-                        {
-                            obj.DirectionId = Direction2DDef.NorthWest.Id;
-                        }
-                        else
-                        {
-                            obj.DirectionId = Direction2DDef.West.Id;
-                        }
-                    }
-                    else
-                    {
-                        if (deltaY > 0)
-                        {
-                            obj.DirectionId = Direction2DDef.South.Id;
-                        }
-                        else if (deltaY < 0)
-                        {
-                            obj.DirectionId = Direction2DDef.North.Id;
-                        }
-                    }
+                    obj.DirectionId = ObjectUtil.GetDirection(deltaX, deltaY);
 
                     if (deltaX > 0)
                     {
@@ -127,51 +87,16 @@ class ObjBehavior
                     for (int iUnit = 0; iUnit < map.Widgets.Count; iUnit++)
                     {
                         Object2D objInstance = map.Widgets[iUnit];
-                        if (objInstance.ID != obj.ID && objInstance.Unit.Model.Id != 1056)
+                        if (objInstance.ID != obj.ID && !objInstance.IsDead())// objInstance.Unit.Model.Id != 1056)
                         {
                             if (ObjectUtil.CalcDistance(new Point2D(nextPointX, nextPointY), objInstance.CurrentPoint) <= obj.Unit.Size + objInstance.Unit.Size)
                             {
-                                isCanMove = false;
+                                isCanMove = CheckNear(map, obj, out deltaX, out deltaY);
                                 break;
                             }
                         }
                     }
 
-                    if (!isCanMove)
-                    {
-                        int[] xarr = new int[] { 0, 1, 1, 1, 0, -1, -1, -1 };
-                        int[] yarr = new int[] { 1, 1, 0, -1, -1, -1, 0, 1 };
-                        for (int iDir = 0; iDir < 8; iDir++)
-                        {
-                            deltaX = xarr[iDir] * obj.Unit.MSpeed;
-                            deltaY = yarr[iDir] * obj.Unit.MSpeed;
-                            nextPointX = obj.CurrentPoint.X + deltaX;
-                            nextPointY = obj.CurrentPoint.Y + deltaY;
-
-                            isCanMove = true;
-
-                            for (int iUnit = 0; iUnit < map.Widgets.Count; iUnit++)
-                            {
-                                Object2D objInstance = map.Widgets[iUnit];
-                                if (objInstance.ID != obj.ID && objInstance.Unit.Model.Id != 1056)
-                                {
-                                    MapCell cell = map.GetCell(new MapPos((int)(nextPointY / MapCell.Height), (int)(nextPointX / MapCell.Width)));
-
-                                    if (cell != null && cell.Value == 0 && ObjectUtil.CalcDistance(new Point2D(nextPointX, nextPointY), objInstance.CurrentPoint) <= obj.Unit.Size + objInstance.Unit.Size)
-                                    {
-                                        isCanMove = false;
-                                        break;
-                                    }
-                                }
-                            }
-
-                            if (isCanMove)
-                            {
-                                obj.DirectionId = ObjectUtil.GetDirection(obj.CurrentPoint, new Point2D(nextPointX, nextPointY));
-                                break;
-                            }
-                        }
-                    }
 
                     if (isCanMove)
                     {
@@ -181,7 +106,15 @@ class ObjBehavior
                         int row = (int)obj.CurrentPoint.Y / MapCell.Height;
                         int col = (int)obj.CurrentPoint.X / MapCell.Width;
 
-                        obj.SitePos = new MapPos(row, col);
+                        if (obj.SitePos.Row != row || obj.SitePos.Col != col)
+                        {
+                            MapCell curCell = map.GetCell(obj.SitePos);
+                            curCell.ObjList.Remove(obj);
+                            obj.SitePos = new MapPos(row, col);
+                            MapCell cell = map.GetCell(obj.SitePos);
+                            cell.ObjList.Add(obj);
+                        }
+
                         obj.SetAction(ObjState.Move);
                     }
                     else
@@ -217,5 +150,49 @@ class ObjBehavior
             }
         }
         return false;
+    }
+
+    private static bool CheckNear(Map2D map, Object2D obj, out float  deltaX, out float deltaY)
+    {
+        bool bcm = true;
+        float nextPointX = 0.0f;
+        float nextPointY = 0.0f;
+        deltaX = 0.0f;
+        deltaY = 0.0f;
+        for (int dirIndex = -2; dirIndex <= 2; dirIndex++)
+        {
+            bcm = true;
+            //System.Diagnostics.Debug.WriteLine(string.Format("check {0}", dirIndex));
+            int dirId = Direction2D.Right(obj.DirectionId, dirIndex);
+            ObjectUtil.GetDeltaXY(dirId, obj.Unit.MSpeed, out deltaX, out deltaY);
+            nextPointX = obj.CurrentPoint.X + deltaX;
+            nextPointY = obj.CurrentPoint.Y + deltaY;
+
+            for (int iUnit = 0; iUnit < map.Widgets.Count; iUnit++)
+            {
+                Object2D objInstance = map.Widgets[iUnit];
+                if (objInstance.ID != obj.ID)
+                {
+                    MapCell cell = map.GetCell(new MapPos((int)(nextPointY / MapCell.Height), (int)(nextPointX / MapCell.Width)));
+
+                    if (cell != null && cell.Value == 0
+                        && ObjectUtil.CalcDistance(new Point2D(nextPointX, nextPointY), objInstance.CurrentPoint) <= obj.Unit.Size + objInstance.Unit.Size)
+                    {
+                        bcm = false;
+                        //System.Diagnostics.Debug.WriteLine(string.Format("{0} can not pass", dirIndex));
+                        break;
+                    }
+                }
+            }
+
+            if (bcm)
+            {
+                obj.DirectionId = ObjectUtil.GetDirection(obj.CurrentPoint, new Point2D(nextPointX, nextPointY));
+
+                //System.Diagnostics.Debug.WriteLine(string.Format("{0} can pass", dirIndex));
+                return bcm;
+            }
+        }
+        return bcm;
     }
 }

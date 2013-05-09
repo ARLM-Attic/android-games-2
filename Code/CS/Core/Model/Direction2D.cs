@@ -32,6 +32,8 @@ public class Direction2D
     /// <returns></returns>
     public static int Right(int dir, int count)
     {
-        return 0;
+        int remainder = dir + count % 8;
+
+        return remainder == 0 ? 8 : remainder;
     }
 }

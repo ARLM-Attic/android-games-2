@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGShell.GI
+namespace AGShell
 {
     public static class MapRender
     {
@@ -26,10 +26,17 @@ namespace AGShell.GI
                 for (int col = 0; col < map.Col; col++)
                 {
                     MapCell cell = map.GetCell(new MapPos(row, col));
-
-                    if (cell.Value == 0)
+                    if (cell.Value != 0)
                     {
-                        gdi.DrawRectangle(
+                        gdi.DrawBlock(
+                            camera.ZeroPoint.X + col * curWidth,
+                            camera.ZeroPoint.Y + row * curHeight,
+                            curWidth,
+                            curHeight);
+                    }
+                    else if (!cell.HasEnuRange(null, 0))
+                    {
+                        gdi.DrawBlock(
                             camera.ZeroPoint.X + col * curWidth,
                             camera.ZeroPoint.Y + row * curHeight,
                             curWidth,
@@ -37,7 +44,7 @@ namespace AGShell.GI
                     }
                     else
                     {
-                        gdi.DrawBlock(
+                        gdi.DrawRectangle(
                             camera.ZeroPoint.X + col * curWidth,
                             camera.ZeroPoint.Y + row * curHeight,
                             curWidth,
@@ -93,6 +100,7 @@ namespace AGShell.GI
                 float curfh = frameHeight * camera.Zoom;
                 float curfx = camera.ZeroPoint.X + (item.CurrentPoint.X - frameOffsetX) * camera.Zoom;
                 float curfy = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameOffsetY) * camera.Zoom;
+
                 gdi.DrawImage(
                     image,
                     curfx,
@@ -105,6 +113,11 @@ namespace AGShell.GI
                     item.HP.ToString(),
                     (int)camera.ZeroPoint.X + (int)(item.CurrentPoint.X * camera.Zoom) - 20,
                     (int)camera.ZeroPoint.Y + (int)(item.CurrentPoint.Y * camera.Zoom));
+
+                //gdi.DrawEllipse(
+                //    (int)camera.ZeroPoint.X + item.CurrentPoint.X - item.Unit.Size,
+                //    (int)camera.ZeroPoint.Y + item.CurrentPoint.Y - item.Unit.Size, 
+                //    item.Unit.Size * 2, item.Unit.Size * 2);
             }
 
             for (int iAnimation = 0; iAnimation < map.AnimationList.Count; iAnimation++)

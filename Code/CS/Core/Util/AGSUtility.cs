@@ -26,6 +26,11 @@ public class AGSUtility
         obj.Map = map;
         obj.Camp = camp;
 
+        if (obj.Camp.Result != null)
+        {
+            obj.Camp.Result.BuildCount++;
+        }
+
         camp.Income -= unit.CostM;
         camp.Population += unit.CostP;
         camp.ObjList.Add(obj);
@@ -35,6 +40,16 @@ public class AGSUtility
 
     public static void RemoveObject(Object2D obj)
     {
+        MapCell cell = obj.Map.GetCell(obj.SitePos);
+        for (int objIndex = 0; objIndex < cell.ObjList.Count; objIndex++)
+        {
+            if (cell.ObjList[objIndex].ID == obj.ID)
+            {
+                cell.ObjList.RemoveAt(objIndex);
+                break;
+            }
+        }
+
         obj.Camp.ObjList.Remove(obj);
         obj.Camp.Population -= obj.Unit.CostP;
         obj.Map.Widgets.Remove(obj);
@@ -71,6 +86,18 @@ public class AGSUtility
     {
         int demage = (obj1.AD - obj2.ADDEF);
         obj2.HP -= demage;
+        if (obj2.IsDead())
+        {
+            if (obj2.Camp.Result != null)
+            {
+                obj2.Camp.Result.DeadCount++;
+            }
+
+            if (obj1.Camp.Result != null)
+            {
+                obj1.Camp.Result.KilledCount++;
+            }
+        }
 
         FloatString floatString = new FloatString();
         floatString.Pos = new Point2D(obj2.CurrentPoint.X, obj2.CurrentPoint.Y);
@@ -82,6 +109,18 @@ public class AGSUtility
     {
         int demage = (obj1.AD * 2 - obj2.ADDEF);
         obj2.HP -= demage;
+        if (obj2.IsDead())
+        {
+            if (obj2.Camp.Result != null)
+            {
+                obj2.Camp.Result.DeadCount++;
+            }
+
+            if (obj1.Camp.Result != null)
+            {
+                obj1.Camp.Result.KilledCount++;
+            }
+        }
 
         FloatString floatString = new FloatString();
         floatString.Pos = new Point2D(obj2.CurrentPoint.X, obj2.CurrentPoint.Y);
@@ -92,11 +131,19 @@ public class AGSUtility
     public static void Victory(Map2D map, Camp camp)
     {
         map.State = GState.Victory;
+        if (camp.Result != null)
+        {
+            camp.Result.IsVictory = true;
+        }
     }
 
     public static void Defeat(Map2D map, Camp camp)
     {
         map.State = GState.Defeat;
+        if (camp.Result != null)
+        {
+            camp.Result.IsVictory = false;
+        }
     }
 
     #region 结束条件

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AGShell.GI
+namespace AGShell
 {
     public class MapTestSence : Sence
     {
@@ -21,10 +21,14 @@ namespace AGShell.GI
             : base(engine)
         {
             _map = map;
-            _camera = new Camera(MainWindow.Width, MainWindow.Height, new Point2D(MainWindow.Width / 2, 20 + (MainWindow.Height) / 2));
+            _camera = new Camera(MainWindow.Width, MainWindow.Height, new Point2D(MainWindow.Width / 2, (MainWindow.Height) / 2));
             _camera.Attach(_map, new Point2D(0, 0));
             _camera.Target(_map.Camps[0].StartPos);
-            _hud = new TestHUD(_map);
+            _hud = new TestHUD(engine, _map);
+
+            _map.Camps[0].Result = new GameResult();
+            _map.Camps[0].Result.MapId = _map.ID;
+
         }
 
         protected override void OnRender(AGGDI gdi)
@@ -32,11 +36,17 @@ namespace AGShell.GI
             if(_map.State == GState.Running)
             {
                 _map.GameTime++;
+
                 if (_map.GameTime % 30 == 0)
                 {
                     for (int iCamp = 0; iCamp < _map.Camps.Count; iCamp++)
                     {
                         _map.Camps[iCamp].Income += _map.Camps[iCamp].IncomePreSec;
+
+                        if (_map.Camps[iCamp].Result != null)
+                        {
+                            _map.Camps[iCamp].Result.GameTime++;
+                        }
                     }
                 }
 
@@ -56,14 +66,9 @@ namespace AGShell.GI
                     AGSUtility.Defeat(_map, _map.Camps[0]);
                 }
             }
-            else if (_map.State == GState.Victory)
+            else if (_map.State != GState.Running)
             {
-                _engine.SwitchSence(new VictorySence(_engine, _map));
-                _engine.ADI.PlayBGM(1);
-            }
-            else if (_map.State == GState.Defeat)
-            {
-                _engine.SwitchSence(new DefeatSence(_engine, _map));
+                _engine.SwitchSence(new ResultSence(_engine, _map, _map.Camps[0].Result));
                 _engine.ADI.PlayBGM(1);
             }
         }
@@ -80,6 +85,7 @@ namespace AGShell.GI
 
                 if (msg == 1)
                 {
+                    #region key-camera
                     //if (lParam == 81)
                     //{
                     //    _camera.Far();
@@ -114,6 +120,7 @@ namespace AGShell.GI
                     //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[1], DATUtility.GetUnit(300), "unknown", _map.Camps[1].StartPos, Direction2DDef.South.Id);
                     //    AGSUtility.MoveTo(obj, _map.Camps[0].StartPos);
                     //}
+                    #endregion
                 }
                 else if (msg == 3)
                 {

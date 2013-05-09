@@ -8,10 +8,10 @@ namespace AGShell
 {
     public class TestHUD : HUD
     {
-        private List<AGControl> _controls;
         private Map2D _map;
 
-        public TestHUD(Map2D map)
+        public TestHUD(AGEngine engine, Map2D map)
+            : base(engine)
         {
             _controls = new List<AGControl>();
             _map = map;
@@ -32,23 +32,18 @@ namespace AGShell
 
         protected override void OnRender(AGGDI gdi)
         {
-            gdi.DrawRectangle(0, MainWindow.Height - 50, MainWindow.Width, 50);
+            //gdi.DrawRectangle(0, MainWindow.Height - 50, MainWindow.Width, 50);
 
             // 头像区域 100*120
-            gdi.DrawRectangle(0, MainWindow.Height - 120, 100, 120);
+            //gdi.DrawRectangle(0, MainWindow.Height - 120, 100, 120);
 
             // 地图区域 120*120
-            gdi.DrawRectangle(MainWindow.Width - 120, MainWindow.Height - 120, 120, 120);
+            //gdi.DrawRectangle(MainWindow.Width - 120, MainWindow.Height - 120, 120, 120);
 
             // 资源栏 width*10
-            gdi.DrawRectangle(0, 0, MainWindow.Width, 20);
+            //gdi.DrawRectangle(0, 0, MainWindow.Width, 20);
             gdi.DrawText(string.Format("M:{0}", _map.Camps[0].Income), MainWindow.Width - 200, 5);
             gdi.DrawText(string.Format("U:{0}/{1}", _map.Camps[0].Population, _map.Camps[0].PopulationLimit), MainWindow.Width - 100, 5);
-
-            for (int iControl = 0; iControl < _controls.Count; iControl++)
-            {
-                _controls[iControl].Render(gdi);
-            }
         }
 
         protected override bool OnInputEvent(int msg, int lParam, int wParam)

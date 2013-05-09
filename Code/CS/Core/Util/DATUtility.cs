@@ -450,9 +450,9 @@ public static class DATUtility
                 unit.BuildCoolDown = Convert.ToInt32(xUnit.Attribute("cd-build").Value);
             }
             #endregion
-        }
 
-        s_units.Add(unit);
+            s_units.Add(unit);
+        }
 
         return unit;
     }

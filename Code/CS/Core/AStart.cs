@@ -21,10 +21,20 @@ public class AStart
         return Pmin;
     }
 
-    //判断一个点是否为障碍物
-    private bool IsBar(PointAStart p, byte[,] map)
+    //判断一个点是不是障碍
+    private bool IsBar(Map2D map, MapPos pos)
     {
-        if (map[p.y, p.x] == 0) return true;
+        MapCell cell = map.GetCell(pos);
+
+        if (cell.Value != 0)
+        {
+            return true;
+        }
+
+        if (cell.ObjList.Count > 0)
+        {
+            return true;
+        }
         return false;
     }
 
@@ -91,7 +101,7 @@ public class AStart
                 {
                     // 排除跳过2个不能通过的格子，斜穿
                     //排除障碍点和关闭列表中的点
-                    if ((map.GetCell(new MapPos(yt, xt)).Value == 0 && CanCross(yt, xt, p0, map))
+                    if ((!IsBar(map,new MapPos(yt, xt)) && CanCross(yt, xt, p0, map))
                         && !IsInCloseList(xt, yt))
                     {
                         if (IsInOpenList(xt, yt))
@@ -130,8 +140,8 @@ public class AStart
         if (Math.Abs(yt - p0.y) + Math.Abs(xt - p0.x) == 2)
         {
             // 交叉的2个格子都可以通行才能斜着通过
-            if (map.GetCell(new MapPos(p0.y, xt)).Value == 0
-                && map.GetCell(new MapPos(yt, p0.x)).Value == 0)
+            if (!IsBar(map,new MapPos(p0.y, xt))
+                && !IsBar(map,new MapPos(yt, p0.x)))
             {
                 return true;
             }
