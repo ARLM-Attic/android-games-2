@@ -38,7 +38,7 @@ namespace AGShell
             Device.SetDataFormat(DeviceDataFormat.Mouse);
         }
 
-        public void Update(out byte[] buttons, out int x, out int y, out int z)
+        public MouseMessage Update()
         {
 
             try
@@ -62,23 +62,25 @@ namespace AGShell
 
             if (_isOK)
             {
+                MouseMessage mouse = new MouseMessage();
+
                 MouseState mouseState = Device.CurrentMouseState;
 
-                buttons = mouseState.GetMouseButtons();
-                x = mouseState.X;
-                y = mouseState.Y;
-                z = mouseState.Z;
+                mouse.Buttons = mouseState.GetMouseButtons();
+                mouse.DeltaX = mouseState.X;
+                mouse.DeltaY = mouseState.Y;
+                mouse.DeltaZ = mouseState.Z;
 
                 AGIDI.GetCursorPos(ref _mousePointT);
                 _mousePoint.X = _mousePointT.X - _startPos.X;
                 _mousePoint.Y = _mousePointT.Y - _startPos.Y;
+                mouse.X = _mousePoint.X;
+                mouse.Y = _mousePoint.Y;
+                return mouse;
             }
             else
             {
-                buttons = null;
-                x = 0;
-                y = 0;
-                z = 0;
+                return null;
             }
         }
     }

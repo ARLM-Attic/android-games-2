@@ -29,16 +29,16 @@ namespace AGShell
         {
             Frame2D frame = Model.GetFrame(0x01, 0x01, _frameIndex);
             gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)),
-                Pos.X,
-                Pos.Y,
+                ClientPos.X,
+                ClientPos.Y,
                 Size.W,
                 Size.H,
                 frame.Width,
                 frame.Height);
-            gdi.DrawShadowText(Text, Pos.X + 20, Pos.Y + 25);
+            gdi.DrawShadowText(Text, ClientPos.X + 20, ClientPos.Y + 5);
         }
 
-        public override void OnInputEvent(int msg, int lParam, int wParam)
+        public override void OnInputEvent(MouseMessage mouse)
         {
             _frameIndex = (_frameIndex + 1) % 3;
             _frameIndex++;

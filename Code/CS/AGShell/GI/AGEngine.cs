@@ -108,7 +108,7 @@ namespace AGShell
 
                     _gdi.Clear();
                     Render(_gdi);
-                    _gdi.DrawText(string.Format("fps:{0})", _fps), 0, 0);
+                    _gdi.DrawText(string.Format("fps:{0}", _fps), 0, 0);
                     //_gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
                     _gdi.Flush();
                 }
@@ -128,41 +128,15 @@ namespace AGShell
                     continue;
                 }
 
-                byte[] buttons;
-                int x;
-                int y;
-                int z;
-                _idi.Update(out buttons, out x, out y, out z);
+                MouseMessage mouse = _idi.Update();
 
-                if (buttons == null)
+                if (mouse == null)
                 {
                     continue;
                 }
 
-                if (0 != buttons[0])
-                {
-                    CurrentSence.MouseInput(0, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
-                else
-                {
-                    CurrentSence.MouseInput(0, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
-                if (0 != buttons[1])
-                {
-                    CurrentSence.MouseInput(1, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
-                else
-                {
-                    CurrentSence.MouseInput(1, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
-                if (0 != buttons[2])
-                {
-                    CurrentSence.MouseInput(2, 1, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
-                else
-                {
-                    CurrentSence.MouseInput(2, 0, x, y, z, _idi.MousePoint.X, _idi.MousePoint.Y);
-                }
+                CurrentSence.MouseInput(mouse);
+                
             }
             _waitHanleInput.Set();
             Debug.WriteLine("AGEngine Input Thread Exist!");

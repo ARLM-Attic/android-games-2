@@ -49,9 +49,9 @@ namespace AGShell
             gdi.DrawShadowText(CostM.ToString(), Pos.X + 20, Pos.Y + 25);
         }
 
-        public override void OnInputEvent(int msg, int lParam, int wParam)
+        public override void OnInputEvent(MouseMessage mouse)
         {
-            if (msg == 2)
+            if (mouse.IsLBDown())
             {
                 if (ColdDownTick == 0 && Click != null)
                 {

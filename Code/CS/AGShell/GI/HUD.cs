@@ -37,6 +37,6 @@ namespace AGShell
 
         protected abstract bool OnInputEvent(int msg, int lParam, int wParam);
 
-        public abstract bool MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY);
+        public abstract bool MouseInput(MouseMessage mouse);
     }
 }

@@ -66,14 +66,14 @@ namespace AGShell
             }
         }
 
-        public override bool MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        public override bool MouseInput(MouseMessage mouse)
         {
             for (int iControl = 0; iControl < _controls.Count; iControl++)
             {
                 AGControl control = _controls[iControl];
-                if (control.InRect(ptX, ptY))
+                if (control.InRect(mouse.X, mouse.Y))
                 {
-                    _controls[iControl].OnInputEvent(button, ptX, ptY);
+                    _controls[iControl].OnInputEvent(mouse);
                     return true;
                 }
             }

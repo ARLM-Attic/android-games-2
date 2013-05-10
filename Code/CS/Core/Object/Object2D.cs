@@ -48,6 +48,8 @@ public class Object2D
     public Object2D TargetObj { get; set; }
     public ObjState State { get; set; }
 
+    private IMoveStrategy MoveStrategy { get; set; }
+
     public Object2D()
     {
         ActionId = Action2DDef.Stand.Id;
@@ -76,6 +78,8 @@ public class Object2D
         Skills.Add(new DefSkill());
         Skills.Add(new CritAttackSkill());
         Skills.Add(new AttackSkill());
+
+        MoveStrategy = new NCDMoveStrategy();
     }
 
     public void SetAction(ObjState state)
@@ -159,7 +163,7 @@ public class Object2D
 
             if (!isValidate)
             {
-                ObjBehavior.Move(this, Map);
+                MoveStrategy.Move(Map, this);
             }
         }
         else

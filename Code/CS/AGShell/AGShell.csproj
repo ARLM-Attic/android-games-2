@@ -75,10 +75,11 @@
     <Compile Include="GI\HUD.cs" />
     <Compile Include="GI\Map\MapRender.cs" />
     <Compile Include="GI\Sence.cs" />
+    <Compile Include="Sences\Result\ResultHUD.cs" />
     <Compile Include="Sences\Result\ResultSence.cs" />
     <Compile Include="Sences\LoadMapSence.cs" />
     <Compile Include="Sences\Run\MapTestSence.cs" />
-    <Compile Include="Sences\Stages\SelectLevelSence.cs" />
+    <Compile Include="Sences\Stages\StagesSence.cs" />
     <Compile Include="Sences\Stages\StagesHUD.cs" />
     <Compile Include="Sences\Splash\SplashSence.cs" />
     <Compile Include="Sences\Run\TestHUD.cs" />
@@ -90,9 +91,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sences\Upgrade\UpgradeHUD.cs" />
+    <Compile Include="Sences\Upgrade\UpgradeSence.cs" />
     <Compile Include="UI\AGButton.cs" />
     <Compile Include="UI\AGControl.cs" />
     <Compile Include="UI\AGTextButton.cs" />
+    <Compile Include="UI\BigMapPanel.cs" />
+    <Compile Include="UI\UnitPanel.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,43 +10,51 @@ namespace AGShell
     {
         private Map2D _map;
         private GameResult _result;
+        private ResultHUD _hud;
 
         public ResultSence(AGEngine engine, Map2D map, GameResult result)
             : base(engine)
         {
             _map = map;
             _result = result;
+
+            _hud = new ResultHUD(engine);
         }
 
         protected override void OnRender(AGGDI gdi)
         {
             if (_result.IsVictory)
             {
-                gdi.DrawText("胜利", MainWindow.Width / 2, 50);
+                gdi.DrawText(AGRES.LargeUIFontHandle, 0x22ff22, "Victory", 210, 100);
             }
             else
             {
-                gdi.DrawText("失败", MainWindow.Width / 2, 50);
+                gdi.DrawText(AGRES.LargeUIFontHandle, 0xff2222, "Defeat", 210, 100);
             }
 
-            gdi.DrawText(string.Format("GameTime:{0}", _result.GameTime), MainWindow.Width / 2, 70);
-            gdi.DrawText(string.Format("Build Unit:{0}", _result.BuildCount), MainWindow.Width / 2, 90);
-            gdi.DrawText(string.Format("Killed Unit:{0}", _result.KilledCount), MainWindow.Width / 2, 110);
-            gdi.DrawText(string.Format("Deaded Unit:{0}", _result.DeadCount), MainWindow.Width / 2, 130);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Game Time:", 200, 170);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.GameTime), 380, 170);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Build Unit:", 200, 200);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.BuildCount), 380, 200);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Killed Unit:", 200, 230);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.KilledCount), 380, 230);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Deaded Unit:", 200, 260);
+            gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.DeadCount), 380, 260);
 
-            gdi.DrawText("按任意键继续", MainWindow.Width / 2, MainWindow.Height / 2 + 20);
+            _hud.Render(gdi);
         }
 
         public override void InputEvent(int msg, int lParam, int wParam)
         {
             if (msg == 1)
             {
-                _engine.SwitchSence(new SelectLevelSence(_engine));
+                _engine.SwitchSence(new StagesSence(_engine));
             }
         }
 
-        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        public override void MouseInput(MouseMessage mouse)
         {
+            _hud.MouseInput(mouse);
         }
     }
 }

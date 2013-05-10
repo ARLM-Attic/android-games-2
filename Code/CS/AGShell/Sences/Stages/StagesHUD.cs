@@ -7,27 +7,38 @@ namespace AGShell
 {
     public class StagesHUD : HUD
     {
-        public StagesHUD(AGEngine engine)
+        private int _y;
+        private Model2D _model;
+        private BigMapPanel _panel;
+
+        public StagesHUD(AGEngine engine, Model2D model)
             : base(engine)
         {
-            _controls = new List<AGControl>();
+            _model = model;
 
-            List<int> maps = DATUtility.GetMaps();
+            _panel = new BigMapPanel(model);
+            _panel.Pos = new Point2D(0, 0);
+            _panel.SelectMap += new Action<int>(_panel_SelectMap);
+            _controls.Add(_panel);
 
-            for (int mapIndex = 0; mapIndex < maps.Count; mapIndex++)
-            {
-                AGTextButton button = new AGTextButton(
-                    maps[mapIndex].ToString(),
-                    new Point2D(MainWindow.Width / 2, mapIndex * 50),
-                    new Size2D(50, 150));
-                button.Click += new EventHandler(button_Click);
-                _controls.Add(button);
-            }
+            AGTextButton btnUpgrade = new AGTextButton("Upgrade", new Point2D(10, MainWindow.Height - 60), new Size2D(100, 100));
+            btnUpgrade.Click += new EventHandler(btnUpgrade_Click);
+            _controls.Add(btnUpgrade);
         }
 
-        void button_Click(object sender, EventArgs e)
+        void _panel_SelectMap(int obj)
         {
-            _engine.SwitchSence(new LoadMapSence(_engine, 100));
+            _engine.SwitchSence(new LoadMapSence(_engine, obj));
+        }
+
+        void btnUpgrade_Click(object sender, EventArgs e)
+        {
+            _engine.SwitchSence(new UpgradeSence(_engine));
+        }
+
+        protected override void OnRender(AGGDI gdi)
+        {
+            base.OnRender(gdi);
         }
 
         protected override bool OnInputEvent(int msg, int lParam, int wParam)
@@ -35,17 +46,18 @@ namespace AGShell
             return false;
         }
 
-        public override bool MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        public override bool MouseInput(MouseMessage mouse)
         {
-            for (int iControl = 0; iControl < _controls.Count; iControl++)
+            for (int iControl = _controls.Count - 1; iControl >= 0; iControl--)
             {
                 AGControl control = _controls[iControl];
-                if (control.InRect(ptX, ptY))
+                if (control.InRect(mouse.X, mouse.Y))
                 {
-                    _controls[iControl].OnInputEvent(button, ptX, ptY);
+                    _controls[iControl].OnInputEvent(mouse);
                     return true;
                 }
             }
+
             return false;
         }
     }

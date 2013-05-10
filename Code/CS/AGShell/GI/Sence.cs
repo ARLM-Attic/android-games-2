@@ -23,6 +23,6 @@ namespace AGShell
         protected abstract void OnRender(AGGDI gdi);
 
         public abstract void InputEvent(int msg, int lParam, int wParam);
-        public abstract void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY);
+        public abstract void MouseInput(MouseMessage mouse);
     }
 }

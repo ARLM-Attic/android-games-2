@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class AStart
+public class AStart2
 {
+    private IMoveStrategy _moveStrategy;
+
     Map2D R;
 
     //开启列表
@@ -12,6 +14,11 @@ public class AStart
 
     //关闭列表
     List<PointAStart> Close_List = new List<PointAStart>();
+
+    public AStart2(IMoveStrategy moveStrategy)
+    {
+        _moveStrategy = moveStrategy;
+    }
 
     //从开启列表查找F值最小的节点
     private PointAStart GetMinFFromOpenList()
@@ -24,18 +31,7 @@ public class AStart
     //判断一个点是不是障碍
     private bool IsBar(Map2D map, MapPos pos)
     {
-        MapCell cell = map.GetCell(pos);
-
-        if (cell.Value != 0)
-        {
-            return true;
-        }
-
-        if (cell.ObjList.Count > 0)
-        {
-            return true;
-        }
-        return false;
+        return _moveStrategy.IsBar(map, pos);
     }
 
     //判断关闭列表是否包含一个坐标的点
@@ -184,4 +180,33 @@ public class AStart
         }
         return path;
     }
+}
+
+public class PointAStart
+{
+    public int y;
+    public int x;
+    public int G;
+    public int H;
+
+    public PointAStart()
+    {
+    }
+    
+    public PointAStart(MapPos pos)
+    {
+        x = pos.Col;
+        y = pos.Row;
+    }
+
+    public PointAStart(int x0, int y0, int G0, int H0, PointAStart F)
+    {
+        x = x0;
+        y = y0;
+        G = G0;
+        H = H0;
+        father = F;
+    }
+
+    public PointAStart father;
 }

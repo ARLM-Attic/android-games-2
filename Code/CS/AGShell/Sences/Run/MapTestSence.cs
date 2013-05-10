@@ -141,36 +141,30 @@ namespace AGShell
             }
         }
 
-        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        public override void MouseInput(MouseMessage mouse)
         {
-            if (button == 0)
+            if (_camera != null)
             {
-                if (state == 1)
+                if (_hud.MouseInput(mouse))
                 {
-                    if (_camera != null)
-                    {
-                        if (_hud.MouseInput(2,1, deltaX, deltaY, deltaZ, ptX, ptY))
-                        {
-                            return;
-                        }
-                    }
+                    return;
                 }
+            }
 
-                if (state == 1)
-                {
-                    _storedCameraPos = _camera.CenterTargetPos;
-                    _moveCamera = true;
-                }
-                else
-                {
-                    _moveCamera = false;
-                }
+            if (mouse.IsLBDown())
+            {
+                _storedCameraPos = _camera.CenterTargetPos;
+                _moveCamera = true;
+            }
+            else
+            {
+                _moveCamera = false;
             }
 
             if (_moveCamera)
             {
                 _storedCameraPos = _camera.CenterTargetPos;
-                _camera.MoveTo(_storedCameraPos.X + deltaX, _storedCameraPos.Y + deltaY);
+                _camera.MoveTo(_storedCameraPos.X + mouse.DeltaX, _storedCameraPos.Y + mouse.DeltaY);
             }
         }
     }

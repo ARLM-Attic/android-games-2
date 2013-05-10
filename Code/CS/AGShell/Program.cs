@@ -5,6 +5,10 @@ using System.Windows.Forms;
 
 namespace AGShell
 {
+    /// <summary>
+    /// mail:group.agame@gmail.com
+    /// 0p;/9ol.
+    /// </summary>
     static class Program
     {
         /// <summary>

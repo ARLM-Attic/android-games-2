@@ -39,7 +39,7 @@ namespace AGShell
         {
         }
 
-        public override void MouseInput(int button, int state, int deltaX, int deltaY, int deltaZ, int ptX, int ptY)
+        public override void MouseInput(MouseMessage mouse)
         {
         }
     }
