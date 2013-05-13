@@ -54,10 +54,9 @@ namespace AGShell
             }
 #endif
 
-            if (map.PlayerSkill != null)
+            if (map.PlayerSkill != null && map.PlayerSkill.IsPrepare)
             {
                 MapPos pos = new MapPos(engine.IDI.MousePoint.Y / MapCell.Height, engine.IDI.MousePoint.X / MapCell.Width);
-                map.PlayerSkill.IsPrepare = true;
                 map.PlayerSkill.Pos = pos;
             }
 

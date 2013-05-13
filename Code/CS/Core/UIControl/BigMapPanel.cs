@@ -23,7 +23,7 @@ public class BigMapPanel : AGControl
     public BigMapPanel(Model2D model, Point2D pos, Size2D size)
     {
         Model = model;
-        FrameModel = DATUtility.GetModel(15);
+        FrameModel = DATUtility.GetModel(16);
 
         _controls = new List<AGControl>();
 
@@ -101,7 +101,15 @@ public class BigMapPanel : AGControl
         {
             if (_isMoving)
             {
-                _mapVY += mouse.DeltaY;
+                if (Math.Abs(mouse.DeltaY) > 20)
+                {
+                    _mapVY += mouse.DeltaY % 10;
+                }
+                else
+                {
+                    _mapVY += mouse.DeltaY;
+                }
+
                 if (_mapVY < -(Model.GetFrame(0x01, 0x01, 0x01).Height - Size.H))
                 {
                     _mapVY = -(Model.GetFrame(0x01, 0x01, 0x01).Height - (int)Size.H);

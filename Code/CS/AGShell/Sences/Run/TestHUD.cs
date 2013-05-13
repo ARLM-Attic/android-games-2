@@ -28,6 +28,16 @@ namespace AGShell
                 button.Click += button_Click;
                 _controls.Add(button);
             }
+
+            AGSkillButton skillButton = new AGSkillButton();
+            skillButton.Pos = new Point2D(0, 430);
+            skillButton.Click += new EventHandler(skillButton_Click);
+            _controls.Add(skillButton);
+        }
+
+        void skillButton_Click(object sender, EventArgs e)
+        {
+            _map.PlayerSkill.IsPrepare = !_map.PlayerSkill.IsPrepare;
         }
 
         protected override void OnRender(IGDI gdi)
