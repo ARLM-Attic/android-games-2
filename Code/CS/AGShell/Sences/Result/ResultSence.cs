@@ -11,7 +11,7 @@ namespace AGShell
         private Map2D _map;
         private GameResult _result;
 
-        public ResultSence(AGEngine engine, Map2D map, GameResult result)
+        public ResultSence(IEngine engine, Map2D map, GameResult result)
             : base(engine)
         {
             _map = map;
@@ -23,7 +23,7 @@ namespace AGShell
             return new ResultHUD(_engine);
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             if (_result.IsVictory)
             {

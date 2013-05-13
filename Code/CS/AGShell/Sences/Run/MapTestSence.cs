@@ -16,7 +16,7 @@ namespace AGShell
         private Point2D _currentPos;
         private bool _moveCamera = false;
 
-        public MapTestSence(AGEngine engine, Map2D map)
+        public MapTestSence(IEngine engine, Map2D map)
             : base(engine)
         {
             _map = map;
@@ -34,7 +34,7 @@ namespace AGShell
             return new TestHUD(_engine, _map);
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             if(_map.State == GState.Running)
             {

@@ -10,7 +10,7 @@ namespace AGShell
     {
         private Map2D _map;
 
-        public TestHUD(AGEngine engine, Map2D map)
+        public TestHUD(IEngine engine, Map2D map)
             : base(engine)
         {
             _controls = new List<AGControl>();
@@ -30,7 +30,7 @@ namespace AGShell
             }
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             //gdi.DrawRectangle(0, MainWindow.Height - 50, MainWindow.Width, 50);
 

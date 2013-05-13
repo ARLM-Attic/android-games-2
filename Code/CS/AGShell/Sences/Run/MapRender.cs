@@ -10,7 +10,7 @@ namespace AGShell
 {
     public static class MapRender
     {
-        public static void Render(IEngine engine, AGGDI gdi, Map2D map, Camera camera)
+        public static void Render(IEngine engine, IGDI gdi, Map2D map, Camera camera)
         {
             float curWidth = MapCell.Width * camera.Zoom;
             float curHeight = MapCell.Height * camera.Zoom;

@@ -34,7 +34,7 @@ namespace AGShell
 
         public IADI ADI { get { return _adi; } }
 
-        public Map2D CurrentMap { get; private set; }
+        public Map2D CurrentMap { get; set; }
 
         public void Init(System.Windows.Forms.Form form)
         {
@@ -91,6 +91,7 @@ namespace AGShell
         {
             Debug.WriteLine("AGEngine Loop Thread Start!");
 
+            PlayerData.Current = PlayerDataUtil.Load(1);
             SwitchSence(new SplashSence(this));
 
             while (_isRunning)

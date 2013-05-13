@@ -7,7 +7,7 @@ namespace AGShell
 {
     public class UpgradeHUD : HUD
     {
-        public UpgradeHUD(AGEngine engine)
+        public UpgradeHUD(IEngine engine)
             : base(engine)
         {
             UnitPanel uPanel = new UnitPanel(DATUtility.GetUnit(301));

@@ -7,7 +7,7 @@ namespace AGShell
 {
     public class ResultHUD : HUD
     {
-        public ResultHUD(AGEngine engine)
+        public ResultHUD(IEngine engine)
             : base(engine)
         {
             AGTextButton button = new AGTextButton(

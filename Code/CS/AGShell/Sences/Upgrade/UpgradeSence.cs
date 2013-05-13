@@ -7,7 +7,7 @@ namespace AGShell
 {
     public class UpgradeSence : Sence
     {
-        public UpgradeSence(AGEngine engine)
+        public UpgradeSence(IEngine engine)
             : base(engine)
         {
             
@@ -18,7 +18,7 @@ namespace AGShell
             return new UpgradeHUD(_engine);
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             gdi.DrawText(AGRES.LargeUIFontHandle, 0x22ff22, "Upgrade", 210, 100);
         }

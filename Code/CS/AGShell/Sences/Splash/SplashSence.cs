@@ -13,13 +13,13 @@ namespace AGShell
 
         private bool _isFirst = true;
 
-        public SplashSence(AGEngine engine)
+        public SplashSence(IEngine engine)
             : base(engine)
         {
             _model = DATUtility.GetModel(12);
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             _counter++;
             //Frame2D frame = _model.GetFrame(0x01, 0x01, 0x01);

@@ -10,14 +10,14 @@ namespace AGShell
     {
         private bool _first;
         private int _mapId;
-        public LoadMapSence(AGEngine engine, int mapId)
+        public LoadMapSence(IEngine engine, int mapId)
             : base(engine)
         {
             _mapId = mapId;
             _first = true;
         }
 
-        protected override void OnRender(AGGDI gdi)
+        protected override void OnRender(IGDI gdi)
         {
             if (_first)
             {

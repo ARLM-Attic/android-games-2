@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace AGShell
 {
-    public class AGGDI
+    public class AGGDI : IGDI
     {
 #region gdi
         //private Graphics _primaryGraphics;

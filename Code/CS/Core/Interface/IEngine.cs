@@ -6,4 +6,7 @@ using System.Text;
 public interface IEngine
 {
     IADI ADI { get; }
+    Map2D CurrentMap { get; set; }
+    void SwitchSence(Sence sence);
+    void LoadMap(int mapId);
 }
