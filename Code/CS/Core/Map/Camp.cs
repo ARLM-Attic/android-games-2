@@ -27,6 +27,11 @@ public class Camp
 
     public GameResult Result { get; set; }
 
+    /// <summary>
+    /// 目标位置,该阵营的单位会自动往该地方移动
+    /// </summary>
+    public MapPos TargetPos { get; set; }
+
     public Camp()
     {
         ObjList = new List<Object2D>();

@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace AGShell
 {
-    public class AGIDI
+    public class AGIDI : IIDI
     {
         [DllImport("user32.dll")]
         // GetCursorPos() makes everything possible

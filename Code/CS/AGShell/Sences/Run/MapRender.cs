@@ -54,6 +54,29 @@ namespace AGShell
             }
 #endif
 
+            if (map.PlayerSkill != null)
+            {
+                MapPos pos = new MapPos(engine.IDI.MousePoint.Y / MapCell.Height, engine.IDI.MousePoint.X / MapCell.Width);
+                map.PlayerSkill.IsPrepare = true;
+                map.PlayerSkill.Pos = pos;
+            }
+
+            if (map.PlayerSkill.IsPrepare)
+            {
+                Frame2D frame = map.PlayerSkill.Model.GetFrame(1, 1, 1);
+                float curX = map.PlayerSkill.Pos.Center.X - frame.OffsetX;
+                float curY = map.PlayerSkill.Pos.Center.Y - frame.offsetY;
+                Bitmap image = new Bitmap(new MemoryStream(frame.Data));
+                gdi.DrawImage(
+                    image,
+                    curX,
+                    curY,
+                    frame.Width,
+                    frame.Height,
+                    frame.Width,
+                    frame.Height);
+            }
+
             for (int iObj = 0; iObj < map.Widgets.Count; iObj++)
             {
                 Object2D item = map.Widgets[iObj];

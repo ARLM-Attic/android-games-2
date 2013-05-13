@@ -61,7 +61,7 @@ namespace AGShell
             if (_map.Camps[0].Income >= unit.CostM)
             {
                 Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[0], DATUtility.GetUnit(button.UnitId), "unknown", _map.Camps[0].StartPos, Direction2DDef.South.Id);
-                AGSUtility.MoveTo(obj, _map.Camps[1].StartPos);
+                AGSUtility.MoveTo(obj, _map.Camps[0].TargetPos);
                 button.ColdDownTick = button.ColdDown;
             }
         }

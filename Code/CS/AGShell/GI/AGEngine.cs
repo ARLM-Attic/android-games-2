@@ -33,6 +33,7 @@ namespace AGShell
         private AGIDI _idi;
 
         public IADI ADI { get { return _adi; } }
+        public IIDI IDI { get { return _idi; } }
 
         public Map2D CurrentMap { get; set; }
 
@@ -179,6 +180,7 @@ namespace AGShell
             CurrentMap = DATUtility.GetMap(mapId);
 
             //CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(300));
+            CurrentMap.Camps[0].TargetPos = CurrentMap.Camps[1].StartPos;
             CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(301));
             CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
 

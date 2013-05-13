@@ -39,11 +39,15 @@ public class Map2D
 
     public List<Animation> AnimationList { get; private set; }
 
+    public PlayerSkill PlayerSkill { get; set; }
+
     public Map2D()
     {
         Camps = new List<Camp>();
 
         AnimationList = new List<Animation>();
+
+        PlayerSkill = new global::PlayerSkill();
 
         Widgets = new List<Object2D>();
         CameraTargetPos = new MapPos(0, 0);
