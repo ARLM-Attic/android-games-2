@@ -66,7 +66,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AI\AI.cs" />
     <Compile Include="GI\AGADI.cs" />
     <Compile Include="GI\AGEngine.cs" />
     <Compile Include="GI\AGGDI.cs" />
@@ -118,10 +117,6 @@
       <Project>{7729CACB-A16C-4231-9DD0-A02E60BA8947}</Project>
       <Name>Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Animation\" />
-    <Folder Include="GI\Map\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="_DXLIB\Microsoft.DirectX.DirectDraw.DLL" />

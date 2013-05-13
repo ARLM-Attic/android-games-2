@@ -46,6 +46,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\AI.cs" />
     <Compile Include="MoveStrategy\IMoveStrategy.cs" />
     <Compile Include="MoveStrategy\NCDMoveStrategy.cs" />
     <Compile Include="AStart\AStart2.cs" />
