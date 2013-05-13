@@ -38,9 +38,5 @@ namespace AGShell
         public override void InputEvent(int msg, int lParam, int wParam)
         {
         }
-
-        public override void MouseInput(MouseMessage mouse)
-        {
-        }
     }
 }

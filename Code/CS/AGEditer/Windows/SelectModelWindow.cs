@@ -31,7 +31,7 @@ namespace AGEditer
                 foreach (var item in models)
                 {
                     TreeNode tnModel = new TreeNode();
-                    tnModel.Text = item.Caption;
+                    tnModel.Text = string.Format("{0}({1})", item.Caption, item.Id);
                     tnModel.Tag = item;
                     tnCategory.Nodes.Add(tnModel);
                 }

@@ -37,6 +37,20 @@ namespace AGShell
 
         protected abstract bool OnInputEvent(int msg, int lParam, int wParam);
 
-        public abstract bool MouseInput(MouseMessage mouse);
+        public bool MouseInput(MouseMessage mouse)
+        {
+            for (int ctlIndex = _controls.Count - 1; ctlIndex >= 0; ctlIndex--)
+            {
+                AGControl control = _controls[ctlIndex];
+                if (control.InRect(mouse.X, mouse.Y))
+                {
+                    if (control.OnInputEvent(mouse))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

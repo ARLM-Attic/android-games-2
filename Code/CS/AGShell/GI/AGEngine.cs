@@ -38,8 +38,6 @@ namespace AGShell
 
         public void Init(System.Windows.Forms.Form form)
         {
-            CurrentSence = new SplashSence(this);
-
             _gdi = new AGGDI();
             _gdi.Init(form);
 
@@ -92,6 +90,9 @@ namespace AGShell
         private void Run()
         {
             Debug.WriteLine("AGEngine Loop Thread Start!");
+
+            SwitchSence(new SplashSence(this));
+
             while (_isRunning)
             {
                 _ticks = DateTime.Now.Ticks;
@@ -178,7 +179,7 @@ namespace AGShell
 
             //CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(300));
             CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(301));
-            //CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
+            CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
 
 
             CurrentMap.Camps[1].AvailableUnitList.Add(DATUtility.GetUnit(301));
@@ -187,6 +188,7 @@ namespace AGShell
         public void SwitchSence(Sence sence)
         {
             CurrentSence = sence;
+            CurrentSence.Init();
         }
     }
 }

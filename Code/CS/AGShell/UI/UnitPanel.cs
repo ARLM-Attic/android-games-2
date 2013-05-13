@@ -41,8 +41,9 @@ namespace AGShell
                 frame.Height);
         }
 
-        public override void OnInputEvent(MouseMessage mouse)
+        public override bool OnInputEvent(MouseMessage mouse)
         {
+            return true;
         }
     }
 }

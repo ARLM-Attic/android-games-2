@@ -27,19 +27,5 @@ namespace AGShell
         {
             return false;
         }
-
-        public override bool MouseInput(MouseMessage mouse)
-        {
-            for (int iControl = 0; iControl < _controls.Count; iControl++)
-            {
-                AGControl control = _controls[iControl];
-                if (control.InRect(mouse.X, mouse.Y))
-                {
-                    _controls[iControl].OnInputEvent(mouse);
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

@@ -10,7 +10,6 @@ namespace AGShell
     {
         private Map2D _map;
         private Camera _camera;
-        private HUD _hud;
 
         private Point2D _storedCameraPos;
         private Point2D _storedPos;
@@ -24,11 +23,15 @@ namespace AGShell
             _camera = new Camera(MainWindow.Width, MainWindow.Height, new Point2D(MainWindow.Width / 2, (MainWindow.Height) / 2));
             _camera.Attach(_map, new Point2D(0, 0));
             _camera.Target(_map.Camps[0].StartPos);
-            _hud = new TestHUD(engine, _map);
 
             _map.Camps[0].Result = new GameResult();
             _map.Camps[0].Result.MapId = _map.ID;
 
+        }
+
+        protected override HUD CreateHUD()
+        {
+            return new TestHUD(_engine, _map);
         }
 
         protected override void OnRender(AGGDI gdi)
@@ -53,9 +56,8 @@ namespace AGShell
                 AI.Run(_map, _map.Camps[1]);
 
                 MapRender.Render(_engine, gdi, _map, _camera);
-                _hud.Render(gdi);
 
-                gdi.DrawText(string.Format("map:{0} Time:{1}  {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 250, 0);
+                gdi.DrawText(string.Format("map:{0} Time:{1} {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 250, 0);
 
                 if (AGSUtility.CheckVictory(_map))
                 {
@@ -69,7 +71,7 @@ namespace AGShell
             else if (_map.State != GState.Running)
             {
                 _engine.SwitchSence(new ResultSence(_engine, _map, _map.Camps[0].Result));
-                _engine.ADI.PlayBGM(1);
+                _engine.ADI.PlayBGM(22);
             }
         }
 
@@ -77,12 +79,6 @@ namespace AGShell
         {
             if (_camera != null)
             {
-
-                if (_hud.InputEvent(msg, lParam, wParam))
-                {
-                    return;
-                }
-
                 if (msg == 1)
                 {
                     #region key-camera
@@ -141,14 +137,11 @@ namespace AGShell
             }
         }
 
-        public override void MouseInput(MouseMessage mouse)
+        protected override void OnMouseInput(MouseMessage mouse)
         {
             if (_camera != null)
             {
-                if (_hud.MouseInput(mouse))
-                {
-                    return;
-                }
+                return;
             }
 
             if (mouse.IsLBDown())

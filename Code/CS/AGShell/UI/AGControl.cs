@@ -42,6 +42,6 @@ namespace AGShell
             return false;
         }
 
-        public abstract void OnInputEvent(MouseMessage mouse);
+        public abstract bool OnInputEvent(MouseMessage mouse);
     }
 }

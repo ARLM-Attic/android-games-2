@@ -10,15 +10,17 @@ namespace AGShell
     {
         private Map2D _map;
         private GameResult _result;
-        private ResultHUD _hud;
 
         public ResultSence(AGEngine engine, Map2D map, GameResult result)
             : base(engine)
         {
             _map = map;
             _result = result;
+        }
 
-            _hud = new ResultHUD(engine);
+        protected override HUD CreateHUD()
+        {
+            return new ResultHUD(_engine);
         }
 
         protected override void OnRender(AGGDI gdi)
@@ -40,8 +42,6 @@ namespace AGShell
             gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.KilledCount), 380, 230);
             gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Deaded Unit:", 200, 260);
             gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.DeadCount), 380, 260);
-
-            _hud.Render(gdi);
         }
 
         public override void InputEvent(int msg, int lParam, int wParam)
@@ -52,9 +52,5 @@ namespace AGShell
             }
         }
 
-        public override void MouseInput(MouseMessage mouse)
-        {
-            _hud.MouseInput(mouse);
-        }
     }
 }

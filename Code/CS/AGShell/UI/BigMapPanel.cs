@@ -7,11 +7,16 @@ namespace AGShell
 {
     public class BigMapPanel : AGControl
     {
+        private int[] _xarr = new int[] { 320, 320 };
+        private int[] _yarr = new int[] { 220, 300 };
+
         public Model2D Model { get; set; }
 
         private List<AGControl> _controls;
 
         public event Action<int> SelectMap;
+
+        private bool _isMoving = false;
 
         public BigMapPanel(Model2D model)
         {
@@ -22,9 +27,9 @@ namespace AGShell
             List<int> maps = DATUtility.GetMaps();
             for (int mapIndex = 0; mapIndex < maps.Count; mapIndex++)
             {
-                AGTextButton button = new AGTextButton(
+                AGStageMarker button = new AGStageMarker(
                     maps[mapIndex].ToString(),
-                    new Point2D(MainWindow.Width / 2, 150 + mapIndex * 50),
+                    new Point2D(_xarr[mapIndex], _yarr[mapIndex]),
                     new Size2D(50, 150));
                 button.Click += new EventHandler(button_Click);
                 _controls.Add(button);
@@ -60,26 +65,40 @@ namespace AGShell
             }
         }
 
-        public override void OnInputEvent(MouseMessage mouse)
+        public override bool OnInputEvent(MouseMessage mouse)
         {
             for (int ctlIndex = 0; ctlIndex < _controls.Count; ctlIndex++)
             {
                 if (_controls[ctlIndex].InRect(mouse.X, mouse.Y))
                 {
-                    _controls[ctlIndex].OnInputEvent(mouse);
-                    return;
+                    if (_controls[ctlIndex].OnInputEvent(mouse))
+                    {
+                        return true;
+                    }
                 }
             }
 
-            Pos.Y += mouse.DeltaY;
-            if (Pos.Y < -(Model.GetFrame(0x01, 0x01, 0x01).Height - MainWindow.Height))
+            if (mouse.IsLBDown())
             {
-                Pos.Y = -(Model.GetFrame(0x01, 0x01, 0x01).Height - MainWindow.Height);
+                if (_isMoving)
+                {
+                    Pos.Y += mouse.DeltaY;
+                    if (Pos.Y < -(Model.GetFrame(0x01, 0x01, 0x01).Height - MainWindow.Height))
+                    {
+                        Pos.Y = -(Model.GetFrame(0x01, 0x01, 0x01).Height - MainWindow.Height);
+                    }
+                    else if (Pos.Y > 0)
+                    {
+                        Pos.Y = 0;
+                    }
+                }
+                _isMoving = true;
             }
-            else if (Pos.Y > 0)
+            else
             {
-                Pos.Y = 0;
+                _isMoving = false;
             }
+            return true;
         }
     }
 }

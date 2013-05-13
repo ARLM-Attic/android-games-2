@@ -95,6 +95,7 @@
     <Compile Include="Sences\Upgrade\UpgradeSence.cs" />
     <Compile Include="UI\AGButton.cs" />
     <Compile Include="UI\AGControl.cs" />
+    <Compile Include="UI\AGStageMarker.cs" />
     <Compile Include="UI\AGTextButton.cs" />
     <Compile Include="UI\BigMapPanel.cs" />
     <Compile Include="UI\UnitPanel.cs" />

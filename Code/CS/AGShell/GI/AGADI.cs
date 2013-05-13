@@ -36,12 +36,29 @@ namespace AGShell
                 BGMBuffer.Dispose();
             }
 
-            if (id != 100)
+            if (id == 1)
+            {
+                // splash
+                BufferDescription bufferDesc = new BufferDescription();
+                bufferDesc.Flags = BufferDescriptionFlags.GlobalFocus;
+                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sap_07.wav", DATUtility.GetResPath()), bufferDesc, _device);
+                ApplicationBuffer.Play(0, BufferPlayFlags.Default);
+                BGMBuffer = ApplicationBuffer;
+            }
+            else if (id == 2)
+            {
+                // stage
+                BufferDescription bufferDesc = new BufferDescription();
+                bufferDesc.Flags = BufferDescriptionFlags.GlobalFocus;
+                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sabgm_s1.wav", DATUtility.GetResPath()), bufferDesc, _device);
+                ApplicationBuffer.Play(0, BufferPlayFlags.Looping);
+                BGMBuffer = ApplicationBuffer;
+            }
+            else if(id==100)
             {
                 BufferDescription bufferDesc = new BufferDescription();
                 bufferDesc.Flags = BufferDescriptionFlags.GlobalFocus;
-
-                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sabgm_f1.wav", DATUtility.GetResPath()), bufferDesc, _device);
+                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sabgm_b1.wav", DATUtility.GetResPath()), bufferDesc, _device);
                 ApplicationBuffer.Play(0, BufferPlayFlags.Looping);
                 BGMBuffer = ApplicationBuffer;
             }
@@ -49,7 +66,8 @@ namespace AGShell
             {
                 BufferDescription bufferDesc = new BufferDescription();
                 bufferDesc.Flags = BufferDescriptionFlags.GlobalFocus;
-                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sabgm_b1.wav", DATUtility.GetResPath()), bufferDesc, _device);
+
+                SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\sabgm_f1.wav", DATUtility.GetResPath()), bufferDesc, _device);
                 ApplicationBuffer.Play(0, BufferPlayFlags.Looping);
                 BGMBuffer = ApplicationBuffer;
             }

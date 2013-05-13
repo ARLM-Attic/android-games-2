@@ -30,10 +30,5 @@ namespace AGShell
         {
             return false;
         }
-
-        public override bool MouseInput(MouseMessage mouse)
-        {
-            return false;
-        }
     }
 }

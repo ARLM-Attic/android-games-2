@@ -49,7 +49,7 @@ namespace AGShell
             gdi.DrawShadowText(CostM.ToString(), Pos.X + 20, Pos.Y + 25);
         }
 
-        public override void OnInputEvent(MouseMessage mouse)
+        public override bool OnInputEvent(MouseMessage mouse)
         {
             if (mouse.IsLBDown())
             {
@@ -57,7 +57,10 @@ namespace AGShell
                 {
                     Click(this, null);
                 }
+
+                return true;
             }
+            return false;
         }
     }
 }
