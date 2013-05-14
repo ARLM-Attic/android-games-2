@@ -5,6 +5,11 @@ using System.Text;
 
 public class CritAttackSkill : Skill
 {
+    public CritAttackSkill()
+        : base(null, 0)
+    {
+    }
+
     public override bool Check(IEngine engine, Object2D obj)
     {
         obj.Unit.CritProbability = 30;

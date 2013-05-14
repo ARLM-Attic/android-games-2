@@ -34,6 +34,7 @@ namespace AGShell
 
         public IADI ADI { get { return _adi; } }
         public IIDI IDI { get { return _idi; } }
+        public IGDI GDI { get { return _gdi; } }
 
         public Map2D CurrentMap { get; set; }
 
@@ -101,7 +102,7 @@ namespace AGShell
                 if (_ticks - _lastTicks > _invant)
                 {
                     _fpsCounter++;
-                    if (_ticks - _fpsTicks > 1000*10000)
+                    if (_ticks - _fpsTicks > 1000 * 10000)
                     {
                         _fps = _fpsCounter;
                         _fpsCounter = 0;
@@ -115,6 +116,10 @@ namespace AGShell
                     //_gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
                     _gdi.Flush();
                 }
+                else
+                {
+                    Thread.Sleep(10);
+                }
             }
             _waitHanle.Set();
             Debug.WriteLine("AGEngine Loop Thread Exist!");
@@ -125,7 +130,7 @@ namespace AGShell
             Debug.WriteLine("AGEngine Input Thread Start!");
             while (_isRunning)
             {
-                //Thread.Sleep(200);
+                Thread.Sleep(20);
                 if (CurrentSence == null)
                 {
                     continue;
@@ -181,6 +186,7 @@ namespace AGShell
 
             //CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(300));
             CurrentMap.Camps[0].TargetPos = CurrentMap.Camps[1].StartPos;
+            CurrentMap.Camps[1].TargetPos = CurrentMap.Camps[0].StartPos;
             CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(301));
             CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
 

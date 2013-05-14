@@ -5,23 +5,26 @@ using System.Text;
 
 public class AGSkillButton : AGControl
 {
-    public Model2D Model { get; private set; }
-    public Model2D ModelIcon { get; private set; }
+    private Skill _skill;
+    private Model2D _btnModel;
 
     private bool _isPreClick = false;
     public event EventHandler Click;
 
-    public AGSkillButton()
-    {
-        Model = DATUtility.GetModel(17);
-        ModelIcon = DATUtility.GetModel(101);
+    public Skill Skill { get { return _skill; } }
 
-        Size = new Size2D(Model.GetFrame(1, 1, 1).Width,Model.GetFrame(1, 1, 1).Height);
+    public AGSkillButton(Skill skill)
+    {
+        _btnModel = DATUtility.GetModel(17);
+        //ModelIcon = DATUtility.GetModel(101);
+        _skill = skill;
+
+        Size = new Size2D(_btnModel.GetFrame(1, 1, 1).Width, _btnModel.GetFrame(1, 1, 1).Height);
     }
 
     protected override void OnRender(IGDI gdi)
     {
-        Frame2D frameIcon = ModelIcon.GetFrame(0x01, 0x01, 0x01);
+        Frame2D frameIcon = _skill.IconModel.GetFrame(0x01, 0x01, 0x01);
         gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frameIcon.Data)),
             ClientPos.X + 1,
             ClientPos.Y + 1,
@@ -30,7 +33,7 @@ public class AGSkillButton : AGControl
             frameIcon.Width,
             frameIcon.Height);
 
-        Frame2D frame = Model.GetFrame(0x01, 0x01, 0x01);
+        Frame2D frame = _btnModel.GetFrame(0x01, 0x01, 0x01);
         gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)),
             ClientPos.X,
             ClientPos.Y,
@@ -38,6 +41,16 @@ public class AGSkillButton : AGControl
             Size.H,
             frame.Width,
             frame.Height);
+
+        if (Skill.IsCoolDown)
+        {
+            gdi.DrawShadowText("ok", Pos.X + 1, Pos.Y + 1);
+        }
+        else
+        {
+            gdi.DrawShadowText("cd", Pos.X + 1, Pos.Y + 1);
+            gdi.DrawShadowText(((int)(Skill.CoolDownConter / 30)).ToString(), Pos.X, Pos.Y + 20);
+        }
     }
 
     public override bool OnInputEvent(MouseMessage mouse)
@@ -56,6 +69,7 @@ public class AGSkillButton : AGControl
                 {
                     Click(this, null);
                 }
+                
             }
         }
         return false;

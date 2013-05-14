@@ -5,13 +5,19 @@ using System.Text;
 
 public abstract class Skill
 {
-    public int ColdDown { get; set; }
+    public int CoolDownTime { get; set; }
+    public int CoolDownConter { get; set; }
 
-    public bool IsColdDown { get; private set; }
+    public bool IsCoolDown { get; private set; }
 
-    public Skill()
+    public Model2D IconModel { get; private set; }
+
+    public bool IsRepare { get; set; }
+
+    public Skill(Model2D iconModel, int cdTime)
     {
-        //ColdDown = 4 * 30;
+        IconModel = iconModel;
+        CoolDownTime = cdTime;// 1 * 30;
     }
 
     public abstract bool Check(IEngine engine, Object2D obj);
@@ -19,24 +25,53 @@ public abstract class Skill
     public void Cast(Object2D obj)
     {
         OnCast(obj);
-        ColdDown = 1 * 30;
+        CoolDownConter = CoolDownTime;
+    }
+
+    /// <summary>
+    /// 让技能进入cd状态
+    /// </summary>
+    public void CoolDowning()
+    {
+        CoolDownConter = CoolDownTime;
     }
 
     public abstract void OnCast(Object2D obj);
 
-    public void Loop()
+    public void Loop(IEngine engine)
     {
-        ColdDown--;
-        if (ColdDown <= 0)
+        CoolDownConter--;
+        if (CoolDownConter <= 0)
         {
-            ColdDown = 0;
+            CoolDownConter = 0;
             
-            IsColdDown = true;
+            IsCoolDown = true;
         }
         else
         {
-            IsColdDown = false;
+            IsCoolDown = false;
+        }
+
+        OnUpdate(engine);
+    }
+
+    public void Begin()
+    {
+        if (IsRepare)
+        {
+            IsRepare = false;
+        }
+        else
+        {
+            IsRepare = true;
         }
     }
 
+    public virtual void Render(IEngine engine)
+    {
+    }
+
+    protected virtual void OnUpdate(IEngine engine)
+    {
+    }
 }

@@ -18,6 +18,7 @@ public class ModelCategory
     public static ModelCategory Head = new ModelCategory(2, "head");
     public static ModelCategory UI = new ModelCategory(3, "ui");
     public static ModelCategory Design = new ModelCategory(4, "design");
+    public static ModelCategory Icon = new ModelCategory(5, "icon");
 
     public override string ToString()
     {
@@ -34,6 +35,7 @@ public class ModelCategory
             _defs.Add(Head);
             _defs.Add(UI);
             _defs.Add(Design);
+            _defs.Add(Icon);
         }
 
         return _defs;

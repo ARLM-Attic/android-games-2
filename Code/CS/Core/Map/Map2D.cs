@@ -41,6 +41,8 @@ public class Map2D
 
     public PlayerSkill PlayerSkill { get; set; }
 
+    public List<Skill> SkillList { get; set; }
+
     public Map2D()
     {
         Camps = new List<Camp>();
@@ -48,6 +50,12 @@ public class Map2D
         AnimationList = new List<Animation>();
 
         PlayerSkill = new global::PlayerSkill();
+        SkillList = new List<Skill>();
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(302)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
 
         Widgets = new List<Object2D>();
         CameraTargetPos = new MapPos(0, 0);

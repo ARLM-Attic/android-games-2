@@ -17,12 +17,16 @@ public class AGSUtility
     /// <returns></returns>
     public static Object2D CreateObject(Map2D map, Camp camp, Unit2D unit, string caption, MapPos pos, int direction)
     {
+        Random rd = new Random();
+
         Object2D obj = new Object2D(Action2DDef.Stand.Id, direction);
         obj.ID = ++map.ObjectIdIndex;
         obj.Caption = caption;
         obj.SetUnit(unit);
         obj.SitePos = pos;
-        obj.CurrentPoint = obj.SitePos.Center;
+        obj.CurrentPoint = new Point2D(
+            pos.Center.X - MapCell.Width / 2 + rd.Next(0, MapCell.Width / 2),
+            pos.Center.Y - MapCell.Height / 2 + rd.Next(0, MapCell.Height / 2));
         obj.Map = map;
         obj.Camp = camp;
 

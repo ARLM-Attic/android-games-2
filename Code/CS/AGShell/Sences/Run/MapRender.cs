@@ -54,6 +54,26 @@ namespace AGShell
             }
 #endif
 
+            #region 渲染各个阵营的目标位置
+            for (int campIndex = 0; campIndex < map.Camps.Count; campIndex++)
+            {
+                Camp camp = map.Camps[campIndex];
+
+                Frame2D frame = map.PlayerSkill.Model.GetFrame(1, 1, 1);
+                float curX = camp.TargetPos.Center.X - frame.OffsetX;
+                float curY = camp.TargetPos.Center.Y - frame.offsetY;
+                Bitmap image = new Bitmap(new MemoryStream(frame.Data));
+                gdi.DrawImage(
+                    image,
+                    curX,
+                    curY,
+                    frame.Width,
+                    frame.Height,
+                    frame.Width,
+                    frame.Height);
+            }
+            #endregion
+
             if (map.PlayerSkill != null && map.PlayerSkill.IsPrepare)
             {
                 MapPos pos = new MapPos(engine.IDI.MousePoint.Y / MapCell.Height, engine.IDI.MousePoint.X / MapCell.Width);
@@ -75,6 +95,23 @@ namespace AGShell
                     frame.Width,
                     frame.Height);
             }
+
+            #region 更新技能
+            for (int skillIndex = 0; skillIndex < map.SkillList.Count; skillIndex++)
+            {
+                map.SkillList[skillIndex].Loop(engine);
+            }
+            #endregion
+            #region 渲染技能效果
+            for (int skillIndex = 0; skillIndex < map.SkillList.Count; skillIndex++)
+            {
+                Skill skill = map.SkillList[skillIndex];
+                if (skill.IsRepare)
+                {
+                    skill.Render(engine);
+                }
+            }
+            #endregion
 
             for (int iObj = 0; iObj < map.Widgets.Count; iObj++)
             {

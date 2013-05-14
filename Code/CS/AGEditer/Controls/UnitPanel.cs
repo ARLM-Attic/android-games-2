@@ -68,8 +68,11 @@ namespace AGEditer
                     break;
                 }
             }
-            linkLabel1.Text = Unit.Model.Caption;
-            linkLabel1.Tag = Unit.Model;
+            _ctlBtnModel.Text = Unit.Model.Caption;
+            _ctlBtnModel.Tag = Unit.Model;
+
+            this._ctlBtnIcon.Text = Unit.IconModel.Caption;
+            this._ctlBtnIcon.Tag = Unit.IconModel;
 
             _ctlEditScale.Text = Unit.Scale.ToString();
 
@@ -95,7 +98,8 @@ namespace AGEditer
             Unit.Caption = _ctlEditCaption.Text;
             Unit.Category = (_ctlListCategory.SelectedItem as UnitCategory);
             Unit.Stirps = (comboBox1.SelectedItem as UnitStirps);
-            Unit.Model = (linkLabel1.Tag as Model2D);
+            Unit.Model = (_ctlBtnModel.Tag as Model2D);
+            Unit.IconModel = (this._ctlBtnIcon.Tag as Model2D);
             Unit.Scale = Convert.ToSingle(_ctlEditScale.Text);
 
             Unit.MaxHP = Convert.ToInt32(_ctlEditHP.Text);
@@ -120,6 +124,28 @@ namespace AGEditer
             else
             {
                 MessageBox.Show("save unit failure!");
+            }
+        }
+
+        private void _ctlBtnIcon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SelectModelWindow window = new SelectModelWindow();
+            if (window.ShowDialog() == DialogResult.OK)
+            {
+                Unit.IconModel = window.SelectedModel;
+                this._ctlBtnIcon.Text = Unit.IconModel.Caption;
+                this._ctlBtnIcon.Tag = Unit.IconModel;
+            }
+        }
+
+        private void _ctlBtnModel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SelectModelWindow window = new SelectModelWindow();
+            if (window.ShowDialog() == DialogResult.OK)
+            {
+                Unit.Model = window.SelectedModel;
+                this._ctlBtnModel.Text = Unit.Model.Caption;
+                this._ctlBtnModel.Tag = Unit.Model;
             }
         }
     }

@@ -5,6 +5,11 @@ using System.Text;
 
 public class AttackSkill : Skill
 {
+    public AttackSkill()
+        : base(null, 2 * 30)
+    {
+    }
+
     public override bool Check(IEngine engine, Object2D obj)
     {
         if (obj.State == ObjState.Def)
@@ -20,7 +25,7 @@ public class AttackSkill : Skill
                 {
                     if (!opponentObj.IsDead() && ObjectUtil.CheckAttackDistance(obj, opponentObj))
                     {
-                        if (IsColdDown)
+                        if (IsCoolDown)
                         {
                             obj.TargetObj = opponentObj;
                             engine.ADI.Play();

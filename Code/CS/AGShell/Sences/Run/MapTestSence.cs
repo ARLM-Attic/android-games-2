@@ -139,9 +139,21 @@ namespace AGShell
 
         protected override void OnMouseInput(MouseMessage mouse)
         {
-            if (_camera != null)
+            if (_camera == null)
             {
                 return;
+            }
+
+            if (_map.PlayerSkill.IsPrepare)
+            {
+                if (mouse.IsLBDown())
+                {
+                    _map.Camps[0].TargetPos = new MapPos(
+                        mouse.Y / MapCell.Height,
+                        mouse.X / MapCell.Width);
+                    _map.PlayerSkill.IsPrepare = false;
+                    return;
+                }
             }
 
             if (mouse.IsLBDown())

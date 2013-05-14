@@ -236,6 +236,7 @@ public static class DATUtility
         xUnit.Add(new XAttribute("category-id", unit.Category.Id));
         xUnit.Add(new XAttribute("stirps-id", unit.Stirps.Id));
         xUnit.Add(new XAttribute("model-id", unit.Model.Id));
+        xUnit.Add(new XAttribute("icon-id", unit.IconModel.Id));
         xUnit.Add(new XAttribute("scale", unit.Scale));
         xUnit.Add(new XAttribute("max-hp", unit.MaxHP));
         xUnit.Add(new XAttribute("max-mp", unit.MaxMP));
@@ -278,6 +279,7 @@ public static class DATUtility
         }
         return idList;
     }
+
     public static List<int> GetUnits(int stirpsId, int categoryId)
     {
         List<int> idList = new List<int>();
@@ -340,6 +342,16 @@ public static class DATUtility
             }
             #endregion
             unit.Model = DATUtility.GetModel(Convert.ToInt32(xUnit.Attribute("model-id").Value));
+            #region icon model
+            if (xUnit.Attribute("icon-id") == null)
+            {
+                unit.IconModel= DATUtility.GetModel(102);
+            }
+            else
+            {
+                unit.IconModel = DATUtility.GetModel(Convert.ToInt32(xUnit.Attribute("icon-id").Value));
+            }
+            #endregion
             #region scale
             if (xUnit.Attribute("scale") == null)
             {
