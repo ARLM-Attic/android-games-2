@@ -42,6 +42,7 @@ public class Map2D
     public PlayerSkill PlayerSkill { get; set; }
 
     public List<Skill> SkillList { get; set; }
+    public List<Skill> SkillList2 { get; set; }
 
     public Map2D()
     {
@@ -56,6 +57,9 @@ public class Map2D
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
+
+        SkillList2 = new List<Skill>();
+        SkillList2.Add(new SetTargetPosSkill());
 
         Widgets = new List<Object2D>();
         CameraTargetPos = new MapPos(0, 0);

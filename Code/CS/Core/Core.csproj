@@ -80,6 +80,7 @@
     <Compile Include="Object\ObjState.cs" />
     <Compile Include="Skill\Player\BuildUnitSkill.cs" />
     <Compile Include="Skill\Player\PlayerSkill.cs" />
+    <Compile Include="Skill\Player\SetTargetPosSkill.cs" />
     <Compile Include="UIControl\AGSkillButton.cs" />
     <Compile Include="Util\AGRES.cs" />
     <Compile Include="Util\PACKUtility.cs" />

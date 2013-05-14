@@ -38,7 +38,7 @@ public abstract class Skill
 
     public abstract void OnCast(Object2D obj);
 
-    public void Loop(IEngine engine)
+    public void Loop(IEngine engine, MouseMessage mouse)
     {
         CoolDownConter--;
         if (CoolDownConter <= 0)
@@ -52,7 +52,7 @@ public abstract class Skill
             IsCoolDown = false;
         }
 
-        OnUpdate(engine);
+        OnUpdate(engine, mouse);
     }
 
     public void Begin()
@@ -71,7 +71,7 @@ public abstract class Skill
     {
     }
 
-    protected virtual void OnUpdate(IEngine engine)
+    protected virtual void OnUpdate(IEngine engine, MouseMessage mouse)
     {
     }
 }

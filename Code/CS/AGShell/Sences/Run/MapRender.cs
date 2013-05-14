@@ -99,13 +99,21 @@ namespace AGShell
             #region 更新技能
             for (int skillIndex = 0; skillIndex < map.SkillList.Count; skillIndex++)
             {
-                map.SkillList[skillIndex].Loop(engine);
+                map.SkillList[skillIndex].Loop(engine, null);
             }
             #endregion
             #region 渲染技能效果
             for (int skillIndex = 0; skillIndex < map.SkillList.Count; skillIndex++)
             {
                 Skill skill = map.SkillList[skillIndex];
+                if (skill.IsRepare)
+                {
+                    skill.Render(engine);
+                }
+            }
+            for (int skillIndex = 0; skillIndex < map.SkillList2.Count; skillIndex++)
+            {
+                Skill skill = map.SkillList2[skillIndex];
                 if (skill.IsRepare)
                 {
                     skill.Render(engine);

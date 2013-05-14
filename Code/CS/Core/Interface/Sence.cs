@@ -34,6 +34,16 @@ public abstract class Sence
         }
     }
 
+    public void Loop(IEngine engine)
+    {
+        if (_hud != null)
+        {
+            _hud.Loop(engine);
+        }
+
+        OnLoop(engine);
+    }
+
     protected virtual HUD CreateHUD()
     {
         return null;
@@ -41,16 +51,23 @@ public abstract class Sence
 
     protected abstract void OnRender(IGDI gdi);
 
-    public abstract void InputEvent(int msg, int lParam, int wParam);
-    public void MouseInput(MouseMessage mouse)
+    protected virtual void OnLoop(IEngine engine)
     {
-        if (_hud != null)
-        {
-            _hud.MouseInput(mouse);
-        }
-
-        OnMouseInput(mouse);
     }
+
+    //[Obsolete("废弃的函数")]
+    //public abstract void InputEvent(int msg, int lParam, int wParam);
+
+    //[Obsolete("废弃的函数")]
+    //public void MouseInput(MouseMessage mouse)
+    //{
+    //    if (_hud != null)
+    //    {
+    //        _hud.MouseInput(mouse);
+    //    }
+
+    //    OnMouseInput(mouse);
+    //}
 
     protected virtual void OnMouseInput(MouseMessage mouse)
     {

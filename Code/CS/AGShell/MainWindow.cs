@@ -50,7 +50,7 @@ namespace AGShell
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            _engine.InputEvent(1, e.KeyValue, 0);
+            //_engine.InputEvent(1, e.KeyValue, 0);
 
             base.OnKeyDown(e);
         }

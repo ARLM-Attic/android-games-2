@@ -24,8 +24,16 @@ namespace AGShell
         Point _startPos;
         Point _mousePointT;
 
+        internal MouseMessage _mouse;
+        public MouseMessage Mouse
+        {
+            get { return _mouse; }
+        }
+
         public void Init(Form form)
         {
+            _mouse = new MouseMessage();
+
             _form = form;
 
             _startPos = _form.PointToScreen(new Point(0, 0));

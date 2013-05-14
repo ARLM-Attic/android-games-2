@@ -53,7 +53,7 @@ public class BuildUnitSkill : Skill
         //    frame.Height);
     }
 
-    protected override void OnUpdate(IEngine engine)
+    protected override void OnUpdate(IEngine engine, MouseMessage mouse)
     {
         if (IsRepare && IsCoolDown)
         {

@@ -11,6 +11,7 @@ public class MouseMessage
     public int DeltaX { get; set; }
     public int DeltaY { get; set; }
     public int DeltaZ { get; set; }
+    public bool IsHandled { get; set; }
 
     public bool IsLBDown()
     {
@@ -19,5 +20,21 @@ public class MouseMessage
             return false;
         }
         return true;
+    }
+
+    public MouseMessage()
+    {
+        IsHandled = false;
+    }
+
+    public void Copy(MouseMessage source)
+    {
+        this.Buttons = source.Buttons;
+        this.X = source.X;
+        this.Y = source.Y;
+        this.DeltaX = source.DeltaX;
+        this.DeltaY = source.DeltaY;
+        this.DeltaZ = source.DeltaZ;
+        this.IsHandled = source.IsHandled;
     }
 }

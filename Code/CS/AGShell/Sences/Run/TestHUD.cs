@@ -43,6 +43,15 @@ namespace AGShell
                 skillButton.Click += new EventHandler(skillButton_Click);
                 _controls.Add(skillButton);
             }
+
+            int startX2 = (MainWindow.Width - frame.Width) / 2 + 226;
+            for (int skillIndex = 0; skillIndex < map.SkillList2.Count; skillIndex++)
+            {
+                AGSkillButton skillButton = new AGSkillButton(map.SkillList2[skillIndex]);
+                skillButton.Pos = new Point2D(startX2 + skillIndex * 38, startY);
+                skillButton.Click += new EventHandler(skillButton_Click);
+                _controls.Add(skillButton);
+            }
         }
 
         void skillButton_Click(object sender, EventArgs e)
@@ -75,14 +84,6 @@ namespace AGShell
                 frame.Height,
                 frame.Width,
                 frame.Height);
-        }
-
-        protected override bool OnInputEvent(int msg, int lParam, int wParam)
-        {
-            if (msg == 2 || msg == 3)
-            {
-            }
-            return false;
         }
 
         void button_Click(object sender, EventArgs e)

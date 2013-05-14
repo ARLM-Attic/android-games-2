@@ -24,30 +24,51 @@ public abstract class HUD
         OnRender(gdi);
     }
 
-    public bool InputEvent(int msg, int lParam, int wParam)
+    public void Loop(IEngine engine)
     {
-        return OnInputEvent(msg, lParam, wParam);
+        for (int ctlIndex = _controls.Count - 1; ctlIndex >= 0; ctlIndex--)
+        {
+            if (engine.IDI.Mouse.IsHandled)
+            {
+                return;
+            }
+
+            AGControl control = _controls[ctlIndex];
+            if (control.InRect(engine.IDI.Mouse.X, engine.IDI.Mouse.Y))
+            {
+                if (control.OnInputEvent(engine.IDI.Mouse))
+                {
+                    engine.IDI.Mouse.IsHandled = true;
+                    return;
+                }
+            }
+        }
     }
+
+    //public bool InputEvent(int msg, int lParam, int wParam)
+    //{
+    //    return OnInputEvent(msg, lParam, wParam);
+    //}
 
     protected virtual void OnRender(IGDI gdi)
     {
     }
 
-    protected abstract bool OnInputEvent(int msg, int lParam, int wParam);
+    //protected abstract bool OnInputEvent(int msg, int lParam, int wParam);
 
-    public bool MouseInput(MouseMessage mouse)
-    {
-        for (int ctlIndex = _controls.Count - 1; ctlIndex >= 0; ctlIndex--)
-        {
-            AGControl control = _controls[ctlIndex];
-            if (control.InRect(mouse.X, mouse.Y))
-            {
-                if (control.OnInputEvent(mouse))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+    //public bool MouseInput(MouseMessage mouse)
+    //{
+    //    for (int ctlIndex = _controls.Count - 1; ctlIndex >= 0; ctlIndex--)
+    //    {
+    //        AGControl control = _controls[ctlIndex];
+    //        if (control.InRect(mouse.X, mouse.Y))
+    //        {
+    //            if (control.OnInputEvent(mouse))
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
+    //    return false;
+    //}
 }

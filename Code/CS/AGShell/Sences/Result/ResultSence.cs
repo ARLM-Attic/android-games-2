@@ -43,14 +43,5 @@ namespace AGShell
             gdi.DrawText(AGRES.NormalUIHfont, 0xffffff, "Deaded Unit:", 200, 260);
             gdi.DrawText(AGRES.NormalUIHfont, 0xeeee22, string.Format("{0}", _result.DeadCount), 380, 260);
         }
-
-        public override void InputEvent(int msg, int lParam, int wParam)
-        {
-            if (msg == 1)
-            {
-                _engine.SwitchSence(new StagesSence(_engine));
-            }
-        }
-
     }
 }

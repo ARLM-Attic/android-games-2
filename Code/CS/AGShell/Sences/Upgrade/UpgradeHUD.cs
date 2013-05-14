@@ -25,10 +25,5 @@ namespace AGShell
         {
             _engine.SwitchSence(new StagesSence(_engine));
         }
-
-        protected override bool OnInputEvent(int msg, int lParam, int wParam)
-        {
-            return false;
-        }
     }
 }

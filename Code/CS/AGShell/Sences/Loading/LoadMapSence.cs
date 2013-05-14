@@ -34,9 +34,5 @@ namespace AGShell
                 gdi.DrawText("地图加载中", 400, 300);
             }
         }
-
-        public override void InputEvent(int msg, int lParam, int wParam)
-        {
-        }
     }
 }

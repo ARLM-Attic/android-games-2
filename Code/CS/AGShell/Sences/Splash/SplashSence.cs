@@ -60,10 +60,5 @@ namespace AGShell
             }
             //_hud.Render(gdi);
         }
-
-        public override void InputEvent(int msg, int lParam, int wParam)
-        {
-            //_engine.SwitchSence(new StagesSence(_engine));
-        }
     }
 }

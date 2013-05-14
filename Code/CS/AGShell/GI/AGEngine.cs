@@ -36,6 +36,7 @@ namespace AGShell
         public IIDI IDI { get { return _idi; } }
         public IGDI GDI { get { return _gdi; } }
 
+        private MouseMessage _mouse;
         public Map2D CurrentMap { get; set; }
 
         public void Init(System.Windows.Forms.Form form)
@@ -101,6 +102,7 @@ namespace AGShell
                 _ticks = DateTime.Now.Ticks;
                 if (_ticks - _lastTicks > _invant)
                 {
+                    #region 计算fps
                     _fpsCounter++;
                     if (_ticks - _fpsTicks > 1000 * 10000)
                     {
@@ -108,13 +110,21 @@ namespace AGShell
                         _fpsCounter = 0;
                         _fpsTicks = _ticks;
                     }
+                    #endregion
                     _lastTicks = _ticks;
 
-                    _gdi.Clear();
-                    Render(_gdi);
-                    _gdi.DrawText(string.Format("fps:{0}", _fps), 0, 0);
-                    //_gdi.DrawText(string.Format("fps:{0} p({1},{2})", _fps, _idi.MousePoint.X, _idi.MousePoint.Y), 0, 0);
-                    _gdi.Flush();
+                    #region 获取鼠标信息
+                    if (_mouse != null)
+                    {
+                        _idi.Mouse.Copy(_mouse);
+                    }
+                    #endregion
+
+                    // 更新数据
+                    Loop();
+
+                    // 渲染画面
+                    Render();
                 }
                 else
                 {
@@ -136,34 +146,35 @@ namespace AGShell
                     continue;
                 }
 
-                MouseMessage mouse = _idi.Update();
+                _mouse = _idi.Update();
 
-                if (mouse == null)
+                if (_mouse == null)
                 {
                     continue;
                 }
-
-                CurrentSence.MouseInput(mouse);
-                
             }
             _waitHanleInput.Set();
             Debug.WriteLine("AGEngine Input Thread Exist!");
         }
 
-        private void Render(AGGDI gdi)
+        private void Loop()
         {
-            if (CurrentSence != null)
+            if (_idi.Mouse != null && CurrentSence != null)
             {
-                CurrentSence.Render(gdi);
+                CurrentSence.Loop(this);
             }
         }
 
-        internal void InputEvent(int msg, int lParam, int wParam)
+        private void Render()
         {
+            _gdi.Clear();
             if (CurrentSence != null)
             {
-                CurrentSence.InputEvent(msg, lParam, wParam);
+                CurrentSence.Render(_gdi);
             }
+
+            _gdi.DrawText(string.Format("fps:{0}", _fps), 0, 50);
+            _gdi.Flush();
         }
 
         public void LoadMap(int mapId)

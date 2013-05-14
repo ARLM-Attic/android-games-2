@@ -75,67 +75,67 @@ namespace AGShell
             }
         }
 
-        public override void InputEvent(int msg, int lParam, int wParam)
-        {
-            if (_camera != null)
-            {
-                if (msg == 1)
-                {
-                    #region key-camera
-                    //if (lParam == 81)
-                    //{
-                    //    _camera.Far();
-                    //}
-                    //else if (lParam == 69)
-                    //{
-                    //    _camera.Near();
-                    //}
-                    //else if (lParam == 87)
-                    //{
-                    //    _camera.MoveUp();
-                    //}
-                    //else if (lParam == 65)
-                    //{
-                    //    _camera.MoveLeft();
-                    //}
-                    //else if (lParam == 83)
-                    //{
-                    //    _camera.MoveDown();
-                    //}
-                    //else if (lParam == 68)
-                    //{
-                    //    _camera.MoveRight();
-                    //}
-                    //else if (lParam == 49)
-                    //{
-                    //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[0], DATUtility.GetUnit(300), "unknown", _map.Camps[0].StartPos, Direction2DDef.South.Id);
-                    //    AGSUtility.MoveTo(obj, _map.Camps[1].StartPos);
-                    //}
-                    //else if (lParam == 50)
-                    //{
-                    //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[1], DATUtility.GetUnit(300), "unknown", _map.Camps[1].StartPos, Direction2DDef.South.Id);
-                    //    AGSUtility.MoveTo(obj, _map.Camps[0].StartPos);
-                    //}
-                    #endregion
-                }
-                else if (msg == 3)
-                {
-                    _storedCameraPos = _camera.CenterTargetPos;
-                    _storedPos = new Point2D(lParam, wParam);
-                    _currentPos = new Point2D(lParam, wParam);
-                    _moveCamera = true;
-                }
-                else if (msg == 4)
-                {
-                    _currentPos = new Point2D(lParam, wParam);
-                    _moveCamera = false;
-                }
-                else if (msg == 5)
-                {
-                    _currentPos = new Point2D(lParam, wParam);
-                }
-            }
-        }
+        //public override void InputEvent(int msg, int lParam, int wParam)
+        //{
+        //    if (_camera != null)
+        //    {
+        //        if (msg == 1)
+        //        {
+        //            #region key-camera
+        //            //if (lParam == 81)
+        //            //{
+        //            //    _camera.Far();
+        //            //}
+        //            //else if (lParam == 69)
+        //            //{
+        //            //    _camera.Near();
+        //            //}
+        //            //else if (lParam == 87)
+        //            //{
+        //            //    _camera.MoveUp();
+        //            //}
+        //            //else if (lParam == 65)
+        //            //{
+        //            //    _camera.MoveLeft();
+        //            //}
+        //            //else if (lParam == 83)
+        //            //{
+        //            //    _camera.MoveDown();
+        //            //}
+        //            //else if (lParam == 68)
+        //            //{
+        //            //    _camera.MoveRight();
+        //            //}
+        //            //else if (lParam == 49)
+        //            //{
+        //            //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[0], DATUtility.GetUnit(300), "unknown", _map.Camps[0].StartPos, Direction2DDef.South.Id);
+        //            //    AGSUtility.MoveTo(obj, _map.Camps[1].StartPos);
+        //            //}
+        //            //else if (lParam == 50)
+        //            //{
+        //            //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[1], DATUtility.GetUnit(300), "unknown", _map.Camps[1].StartPos, Direction2DDef.South.Id);
+        //            //    AGSUtility.MoveTo(obj, _map.Camps[0].StartPos);
+        //            //}
+        //            #endregion
+        //        }
+        //        else if (msg == 3)
+        //        {
+        //            _storedCameraPos = _camera.CenterTargetPos;
+        //            _storedPos = new Point2D(lParam, wParam);
+        //            _currentPos = new Point2D(lParam, wParam);
+        //            _moveCamera = true;
+        //        }
+        //        else if (msg == 4)
+        //        {
+        //            _currentPos = new Point2D(lParam, wParam);
+        //            _moveCamera = false;
+        //        }
+        //        else if (msg == 5)
+        //        {
+        //            _currentPos = new Point2D(lParam, wParam);
+        //        }
+        //    }
+        //}
 
         protected override void OnMouseInput(MouseMessage mouse)
         {
@@ -144,15 +144,26 @@ namespace AGShell
                 return;
             }
 
-            if (_map.PlayerSkill.IsPrepare)
+            //if (_map.PlayerSkill.IsPrepare)
+            //{
+            //    if (mouse.IsLBDown())
+            //    {
+            //        _map.Camps[0].TargetPos = new MapPos(
+            //            mouse.Y / MapCell.Height,
+            //            mouse.X / MapCell.Width);
+            //        _map.PlayerSkill.IsPrepare = false;
+            //        return;
+            //    }
+            //}
+            for (int skillIndex = 0; skillIndex < _map.SkillList2.Count; skillIndex++)
             {
-                if (mouse.IsLBDown())
+                if (!mouse.IsHandled)
                 {
-                    _map.Camps[0].TargetPos = new MapPos(
-                        mouse.Y / MapCell.Height,
-                        mouse.X / MapCell.Width);
-                    _map.PlayerSkill.IsPrepare = false;
-                    return;
+                    _map.SkillList2[skillIndex].Loop(_engine, mouse);
+                }
+                else
+                {
+                    break;
                 }
             }
 

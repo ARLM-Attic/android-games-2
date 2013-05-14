@@ -148,7 +148,7 @@ public class Object2D
         {
             for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
             {
-                Skills[iSkill].Loop(engine);
+                Skills[iSkill].Loop(engine, null);
             }
 
             bool isValidate = false;

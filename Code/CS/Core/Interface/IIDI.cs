@@ -2,4 +2,5 @@
 {
     System.Drawing.Point MousePoint { get; }
     MouseMessage Update();
+    MouseMessage Mouse { get; }
 }

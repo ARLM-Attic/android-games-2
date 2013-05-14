@@ -58,10 +58,5 @@ namespace AGShell
         {
             base.OnRender(gdi);
         }
-
-        protected override bool OnInputEvent(int msg, int lParam, int wParam)
-        {
-            return false;
-        }
     }
 }
