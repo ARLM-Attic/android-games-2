@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AGShell
 {
-    public class MapTestSence : Sence
+    public class RunSence : Sence
     {
         private Map2D _map;
         private Camera _camera;
@@ -16,7 +16,7 @@ namespace AGShell
         private Point2D _currentPos;
         private bool _moveCamera = false;
 
-        public MapTestSence(IEngine engine, Map2D map)
+        public RunSence(IEngine engine, Map2D map)
             : base(engine)
         {
             _map = map;
@@ -31,7 +31,7 @@ namespace AGShell
 
         protected override HUD CreateHUD()
         {
-            return new TestHUD(_engine, _map);
+            return new RunHUD(_engine, _map);
         }
 
         protected override void OnRender(IGDI gdi)
@@ -137,7 +137,7 @@ namespace AGShell
         //    }
         //}
 
-        protected override void OnMouseInput(MouseMessage mouse)
+        protected override void  OnLoop(IEngine engine)
         {
             if (_camera == null)
             {
@@ -157,9 +157,9 @@ namespace AGShell
             //}
             for (int skillIndex = 0; skillIndex < _map.SkillList2.Count; skillIndex++)
             {
-                if (!mouse.IsHandled)
+                if (!engine.IDI.Mouse.IsHandled)
                 {
-                    _map.SkillList2[skillIndex].Loop(_engine, mouse);
+                    _map.SkillList2[skillIndex].Loop(_engine, engine.IDI.Mouse);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace AGShell
                 }
             }
 
-            if (mouse.IsLBDown())
+            if (engine.IDI.Mouse.IsLBDown())
             {
                 _storedCameraPos = _camera.CenterTargetPos;
                 _moveCamera = true;
@@ -180,7 +180,7 @@ namespace AGShell
             if (_moveCamera)
             {
                 _storedCameraPos = _camera.CenterTargetPos;
-                _camera.MoveTo(_storedCameraPos.X + mouse.DeltaX, _storedCameraPos.Y + mouse.DeltaY);
+                _camera.MoveTo(_storedCameraPos.X + engine.IDI.Mouse.DeltaX, _storedCameraPos.Y + engine.IDI.Mouse.DeltaY);
             }
         }
     }

@@ -74,11 +74,11 @@
     <Compile Include="Sences\Result\ResultHUD.cs" />
     <Compile Include="Sences\Result\ResultSence.cs" />
     <Compile Include="Sences\Loading\LoadMapSence.cs" />
-    <Compile Include="Sences\Run\MapTestSence.cs" />
+    <Compile Include="Sences\Run\RunSence.cs" />
     <Compile Include="Sences\Stages\StagesSence.cs" />
     <Compile Include="Sences\Stages\StagesHUD.cs" />
     <Compile Include="Sences\Splash\SplashSence.cs" />
-    <Compile Include="Sences\Run\TestHUD.cs" />
+    <Compile Include="Sences\Run\RunHUD.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

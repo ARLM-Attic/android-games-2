@@ -68,8 +68,4 @@ public abstract class Sence
 
     //    OnMouseInput(mouse);
     //}
-
-    protected virtual void OnMouseInput(MouseMessage mouse)
-    {
-    }
 }

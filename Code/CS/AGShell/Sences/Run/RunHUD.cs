@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AGShell
 {
-    public class TestHUD : HUD
+    public class RunHUD : HUD
     {
         private Map2D _map;
         private Model2D _skillBarModel;
 
-        public TestHUD(IEngine engine, Map2D map)
+        public RunHUD(IEngine engine, Map2D map)
             : base(engine)
         {
             _skillBarModel = DATUtility.GetModel(18);

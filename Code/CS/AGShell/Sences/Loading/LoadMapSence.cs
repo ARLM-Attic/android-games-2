@@ -27,7 +27,7 @@ namespace AGShell
             else if (_engine.CurrentMap != null)
             {
                 _engine.ADI.PlayBGM(_engine.CurrentMap.ID);
-                _engine.SwitchSence(new MapTestSence(_engine, _engine.CurrentMap));
+                _engine.SwitchSence(new RunSence(_engine, _engine.CurrentMap));
             }
             else
             {
