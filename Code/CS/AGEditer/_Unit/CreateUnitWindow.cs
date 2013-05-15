@@ -71,9 +71,24 @@ namespace AGEditer
             Unit.Stirps = (comboBox1.SelectedItem as UnitStirps);
             Unit.Caption = textBox2.Text;
             Unit.Model = (linkLabel1.Tag as Model2D);
+            Unit.IconModel = (_ctlBtnIcon.Tag as Model2D);
             Unit.Scale = Convert.ToSingle(_ctlEditScale.Text);
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void _ctlBtnIcon_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SelectModelWindow dlg = new SelectModelWindow();
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                int modelId = dlg.SelectedModel.Id;
+
+                Model2D model = DATUtility.GetModel(modelId);
+
+                _ctlBtnIcon.Text = model.Caption;
+                _ctlBtnIcon.Tag = model;
+            }
         }
     }
 }

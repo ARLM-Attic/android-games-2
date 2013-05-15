@@ -256,5 +256,11 @@ namespace AGEditer
             UnitWindow window = new UnitWindow();
             window.ShowDialog();
         }
+
+        private void _ctlBtnAutoModeling_Click(object sender, EventArgs e)
+        {
+            AutoModelingWindow window = new AutoModelingWindow();
+            window.ShowDialog();
+        }
     }
 }

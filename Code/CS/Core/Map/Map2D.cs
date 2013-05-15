@@ -54,7 +54,7 @@ public class Map2D
         SkillList = new List<Skill>();
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(302)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
-        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(303)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
 
