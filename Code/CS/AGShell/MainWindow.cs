@@ -11,10 +11,13 @@ namespace AGShell
 {
     public partial class MainWindow : Form
     {
-        public static int Width = 640;
-        public static int Height = 480;
+        //public static int Width = 640;
+        //public static int Height = 480;
         //public static int Width = 960;
         //public static int Height = 600;
+
+        public static int Width = 800;
+        public static int Height = 600;
 
         private AGEngine _engine;
 
