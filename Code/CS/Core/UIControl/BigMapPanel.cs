@@ -7,7 +7,7 @@ public class BigMapPanel : AGControl
 {
     private int[] _xarr = new int[] { 127, 86, 143, 107, 320 };
     private int[] _yarr = new int[] { 530, 458, 366, 294, 220 };
-    private int[] _maparr = new int[] { 100, 101, 100, 100, 100 };
+    private int[] _maparr = new int[] { 100, 101, 102, 100, 100 };
 
     public Model2D Model { get; set; }
     private Model2D FrameModel { get; set; }

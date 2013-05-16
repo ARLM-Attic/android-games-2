@@ -50,6 +50,10 @@ public class Object2D
 
     private IMoveStrategy MoveStrategy { get; set; }
     private IAttackStrategy AttackStrategy { get; set; }
+    public MapPos NextPos { get; set; }
+
+    public int ADSpeed { get; set; }
+    public int ADSpeedCounter { get; set; }
 
     public Object2D()
     {
@@ -82,6 +86,8 @@ public class Object2D
 
         MoveStrategy = new NCDMoveStrategy();
         AttackStrategy = new ActiveAttackStrategy();
+
+        ADSpeed = 1 * 30;
     }
 
     /// <summary>
@@ -144,6 +150,12 @@ public class Object2D
     /// </summary>
     public void Update(IEngine engine)
     {
+        ADSpeedCounter++;
+        if (ADSpeedCounter >= ADSpeed)
+        {
+            ADSpeedCounter = ADSpeed;
+        }
+
         _counter++;
         if (_counter < _updateCounter)
         {
@@ -172,7 +184,7 @@ public class Object2D
             if (!isValidate)
             {
                 // 执行攻击策略
-                if (!AttackStrategy.Attack(Map, this))
+                if (!AttackStrategy.Attack(engine, Map, this))
                 {
                     // 执行移动策略
                     MoveStrategy.Move(Map, this);
@@ -245,4 +257,24 @@ public class Object2D
         }
         return _isDead;
     }
+
+    #region 攻击
+    /// <summary>
+    /// 普通攻击是否重置
+    /// </summary>
+    /// <returns></returns>
+    public bool HasAttackCooldown()
+    {
+        if (ADSpeedCounter >= ADSpeed)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void Attack()
+    {
+        ADSpeedCounter = 0;
+    }
+    #endregion
 }

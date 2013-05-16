@@ -134,15 +134,18 @@ namespace AGShell
                 float curfx = camera.ZeroPoint.X + (item.CurrentPoint.X - frameOffsetX) * camera.Zoom;
                 float curfy = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameOffsetY) * camera.Zoom;
 
-                #region 显示HP条
-                float curfx1 = camera.ZeroPoint.X + (item.CurrentPoint.X - frameHP.OffsetX) * camera.Zoom;
-                float curfy1 = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameHP.offsetY) * camera.Zoom;
-                gdi.Draw(frameHP.Texture,
-                    curfx1,
-                    curfy1,
-                    frameHP.Width * item.Unit.Scale,
-                    frameHP.Height * item.Unit.Scale);
-                #endregion
+                if (item.Unit.Stirps != UnitStirps.Ornamental)
+                {
+                    #region 显示HP条
+                    float curfx1 = camera.ZeroPoint.X + (item.CurrentPoint.X - frameHP.OffsetX) * camera.Zoom;
+                    float curfy1 = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameHP.offsetY) * camera.Zoom;
+                    gdi.Draw(frameHP.Texture,
+                        curfx1,
+                        curfy1,
+                        frameHP.Width * item.Unit.Scale,
+                        frameHP.Height * item.Unit.Scale);
+                    #endregion
+                }
 
                 gdi.Draw(frame.Texture,
                     curfx,

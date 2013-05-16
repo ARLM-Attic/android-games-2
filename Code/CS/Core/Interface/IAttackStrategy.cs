@@ -5,5 +5,5 @@ using System.Text;
 
 public interface IAttackStrategy
 {
-    bool Attack(Map2D map, Object2D obj);
+    bool Attack(IEngine engine, Map2D map, Object2D obj);
 }

@@ -26,7 +26,6 @@ public static class UnitCategoryDef
     public static UnitCategory Other = new UnitCategory(0, "其他");
     public static UnitCategory Unit = new UnitCategory(1, "单位");
     public static UnitCategory Building = new UnitCategory(2, "建筑物");
-    public static UnitCategory Ornamental = new UnitCategory(3, "装饰物");
 
     private static List<UnitCategory> _defs = new List<UnitCategory>();
 
@@ -36,7 +35,6 @@ public static class UnitCategoryDef
         {
             _defs.Add(Unit);
             _defs.Add(Building);
-            _defs.Add(Ornamental);
             _defs.Add(Other);
         }
 

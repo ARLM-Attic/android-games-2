@@ -12,20 +12,46 @@ public class NCDMoveStrategy : IMoveStrategy
     {
         if (obj.TargetPos != null)
         {
-            List<MapPos> path = new AStart2(this).FindWay(new PointAStart(obj.SitePos), new PointAStart(obj.TargetPos), map);
+            MapPos nextPos = null;
 
-            if (path.Count > 0)
+            if (obj.NextPos == null)
             {
-                MapPos nextPos = path[0];
+                List<MapPos> path = new AStart2(this).FindWay(new PointAStart(obj.SitePos), new PointAStart(obj.TargetPos), map);
+                if (path.Count > 0)
+                {
+                    nextPos = path[0];
+                    obj.NextPos = nextPos;
+                    if (path.Count > 1)
+                    {
+                        nextPos = path[1];
+                    }
+                    obj.NextPos = nextPos;
+                }
+            }
+            else if (obj.NextPos.Compare(obj.SitePos))
+            {
+                List<MapPos> path = new AStart2(this).FindWay(new PointAStart(obj.SitePos), new PointAStart(obj.TargetPos), map);
+                if (path.Count > 0)
+                {
+                    nextPos = path[0];
+                    obj.NextPos = nextPos;
+                    if (path.Count > 1)
+                    {
+                        nextPos = path[1];
+                    }
+                    obj.NextPos = nextPos;
+                }
+            }
+            else
+            {
+                nextPos = obj.NextPos;
+            }
+
+            if (nextPos != null)
+            {
                 float deltaX = (nextPos.Center.X - obj.CurrentPoint.X);
                 float deltaY = (nextPos.Center.Y - obj.CurrentPoint.Y);
 
-                if (path.Count > 1)
-                {
-                    nextPos = path[1];
-                    deltaX = (nextPos.Center.X - obj.CurrentPoint.X);
-                    deltaY = (nextPos.Center.Y - obj.CurrentPoint.Y);
-                }
 
                 if (deltaX == 0 && deltaY == 0)
                 {
