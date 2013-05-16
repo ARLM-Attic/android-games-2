@@ -66,6 +66,8 @@
             this._ctlBtnIcon = new System.Windows.Forms.LinkLabel();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this._ctlEditASpeed = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // _ctlEditDefProbability
@@ -387,10 +389,28 @@
             this.label19.TabIndex = 71;
             this.label19.Text = "(s)";
             // 
+            // _ctlEditASpeed
+            // 
+            this._ctlEditASpeed.Location = new System.Drawing.Point(103, 453);
+            this._ctlEditASpeed.Name = "_ctlEditASpeed";
+            this._ctlEditASpeed.Size = new System.Drawing.Size(70, 21);
+            this._ctlEditASpeed.TabIndex = 73;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(32, 456);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(53, 12);
+            this.label20.TabIndex = 72;
+            this.label20.Text = "A-Speed:";
+            // 
             // UnitPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this._ctlEditASpeed);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this._ctlBtnIcon);
             this.Controls.Add(this.label18);
@@ -430,7 +450,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "UnitPanel";
-            this.Size = new System.Drawing.Size(493, 486);
+            this.Size = new System.Drawing.Size(493, 531);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,6 +496,8 @@
         private System.Windows.Forms.LinkLabel _ctlBtnIcon;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox _ctlEditASpeed;
+        private System.Windows.Forms.Label label20;
 
     }
 }

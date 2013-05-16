@@ -174,6 +174,7 @@ namespace AGShell
             }
 
             _gdi.DrawText(string.Format("fps:{0}", _fps), 0, 50);
+            _gdi.DrawText(string.Format("mouse:{0},{1}", _idi.Mouse.X, _idi.Mouse.Y), 0, 70);
             _gdi.Flush();
         }
 
@@ -193,16 +194,29 @@ namespace AGShell
                 DATUtility.GetUnit(unitId);
             }
 
-            CurrentMap = DATUtility.GetMap(mapId);
+            Map2D map = DATUtility.GetMap(mapId);
 
             //CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(300));
-            CurrentMap.Camps[0].TargetPos = CurrentMap.Camps[1].StartPos;
-            CurrentMap.Camps[1].TargetPos = CurrentMap.Camps[0].StartPos;
-            CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(301));
-            CurrentMap.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
+            map.Camps[0].TargetPos = map.Camps[1].StartPos;
+            map.Camps[1].TargetPos = map.Camps[0].StartPos;
+            map.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(301));
+            map.Camps[0].AvailableUnitList.Add(DATUtility.GetUnit(302));
 
 
-            CurrentMap.Camps[1].AvailableUnitList.Add(DATUtility.GetUnit(301));
+            map.Camps[1].AvailableUnitList.Add(DATUtility.GetUnit(301));
+
+            Model2D terrainModel = DATUtility.GetModel(401);
+            Frame2D frame = terrainModel.GetFrame(1, 1, 1);
+            for (int i = 0; i < map.Cells.Length; i++)
+            {
+                Texture2D texture = new Texture2D();
+                texture.Width = frame.Width;
+                texture.Height = frame.Height;
+                texture.Data = _gdi.CraeteSurface(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)), System.Drawing.Color.Black);
+                map.Cells[i].Texture2D = texture;
+            }
+
+            CurrentMap = map;
         }
 
         public void SwitchSence(Sence sence)

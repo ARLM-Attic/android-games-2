@@ -49,6 +49,7 @@ public class Object2D
     public ObjState State { get; set; }
 
     private IMoveStrategy MoveStrategy { get; set; }
+    private IAttackStrategy AttackStrategy { get; set; }
 
     public Object2D()
     {
@@ -75,13 +76,18 @@ public class Object2D
         DefenceCounter = 0;
 
         Skills = new List<Skill>();
-        Skills.Add(new DefSkill());
-        Skills.Add(new CritAttackSkill());
-        Skills.Add(new AttackSkill());
+        //Skills.Add(new DefSkill());
+        //Skills.Add(new CritAttackSkill());
+        //Skills.Add(new AttackSkill());
 
         MoveStrategy = new NCDMoveStrategy();
+        AttackStrategy = new ActiveAttackStrategy();
     }
 
+    /// <summary>
+    /// 更改对象的动作状态
+    /// </summary>
+    /// <param name="state"></param>
     public void SetAction(ObjState state)
     {
         if (State != state)
@@ -146,6 +152,7 @@ public class Object2D
 
         if (!this.IsDead())
         {
+            #region 验证skill的可用性
             for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
             {
                 Skills[iSkill].Loop(engine, null);
@@ -160,10 +167,16 @@ public class Object2D
                     break;
                 }
             }
+            #endregion
 
             if (!isValidate)
             {
-                MoveStrategy.Move(Map, this);
+                // 执行攻击策略
+                if (!AttackStrategy.Attack(Map, this))
+                {
+                    // 执行移动策略
+                    MoveStrategy.Move(Map, this);
+                }
             }
         }
         else

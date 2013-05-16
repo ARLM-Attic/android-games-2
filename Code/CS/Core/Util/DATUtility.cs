@@ -241,10 +241,12 @@ public static class DATUtility
         xUnit.Add(new XAttribute("max-hp", unit.MaxHP));
         xUnit.Add(new XAttribute("max-mp", unit.MaxMP));
         xUnit.Add(new XAttribute("ad", unit.AD));
+        xUnit.Add(new XAttribute("ad-speed", unit.ADSpeed));
         xUnit.Add(new XAttribute("addef", unit.ADDEF));
         xUnit.Add(new XAttribute("cost-m", unit.CostM));
         xUnit.Add(new XAttribute("cost-p", unit.CostP));
         xUnit.Add(new XAttribute("size", unit.Size));
+        xUnit.Add(new XAttribute("m-speed", unit.MSpeed));
         xUnit.Add(new XAttribute("crit-prob", unit.CritProbability));
         xUnit.Add(new XAttribute("def-prob", unit.DefProbability));
         xUnit.Add(new XAttribute("cd-build", unit.BuildCoolDown));
@@ -392,6 +394,16 @@ public static class DATUtility
                 unit.AD = Convert.ToInt32(xUnit.Attribute("ad").Value);
             }
             #endregion
+            #region ad-speed
+            if (xUnit.Attribute("ad-speed") == null)
+            {
+                unit.ADSpeed = 10;
+            }
+            else
+            {
+                unit.ADSpeed = Convert.ToInt32(xUnit.Attribute("ad-speed").Value);
+            }
+            #endregion
             #region addef
             if (xUnit.Attribute("addef") == null)
             {
@@ -430,6 +442,16 @@ public static class DATUtility
             else
             {
                 unit.Size = Convert.ToInt32(xUnit.Attribute("size").Value);
+            }
+            #endregion
+            #region m-speed
+            if (xUnit.Attribute("m-speed") == null)
+            {
+                unit.MSpeed = 5;
+            }
+            else
+            {
+                unit.MSpeed = Convert.ToInt32(xUnit.Attribute("m-speed").Value);
             }
             #endregion
             #region crit-prob

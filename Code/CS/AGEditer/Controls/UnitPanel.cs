@@ -80,6 +80,7 @@ namespace AGEditer
             _ctlEditMP.Text = Unit.MaxMP.ToString();
             _ctlEditMSpeed.Text = Unit.MSpeed.ToString();
             _ctlEditAD.Text = Unit.AD.ToString();
+            this._ctlEditASpeed.Text = Unit.ADSpeed.ToString();
             _ctlEditADDEF.Text = Unit.ADDEF.ToString();
 
             _ctlEditCostM.Text = Unit.CostM.ToString();
@@ -106,6 +107,7 @@ namespace AGEditer
             Unit.MaxMP = Convert.ToInt32(_ctlEditMP.Text);
             Unit.MSpeed = Convert.ToInt32(_ctlEditMSpeed.Text);
             Unit.AD = Convert.ToInt32(_ctlEditAD.Text);
+            Unit.ADSpeed = Convert.ToInt32(_ctlEditASpeed.Text);
             Unit.ADDEF = Convert.ToInt32(_ctlEditADDEF.Text);
 
             Unit.CostM = Convert.ToInt32(_ctlEditCostM.Text);

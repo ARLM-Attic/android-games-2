@@ -6,7 +6,10 @@ using System.Text;
 
 public class Camera
 {
-    public Rect2D Rect
+    /// <summary>
+    /// 摄像机范围顶点在窗口坐标系中的位置
+    /// </summary>
+    public Rect2D RectInWin
     {
         get
         {
@@ -19,9 +22,9 @@ public class Camera
     }
 
     /// <summary>
-    /// 摄像机范围顶点在地图上的坐标信息
+    /// 摄像机范围顶点在地图坐标系上的坐标信息
     /// </summary>
-    public Rect2D ViewRect { get; set; }
+    public Rect2D RectInMap { get; set; }
 
     public float Width { get; set; }
 
@@ -191,7 +194,7 @@ public class Camera
             this.CenterPos.X - this.CenterTargetPos.X,
             this.CenterPos.Y - this.CenterTargetPos.Y);
 
-        ViewRect = new Rect2D(
+        RectInMap = new Rect2D(
             this.CenterTargetPos.X - Width / 2,
             this.CenterTargetPos.Y - Height / 2,
             Width,
@@ -217,5 +220,20 @@ public class Camera
         {
             CenterTargetPos.Y -= Height / 2 - (MapSize.H - CenterTargetPos.Y);
         }
+    }
+
+    /// <summary>
+    /// 将地图坐标转换为位置信息
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
+    public MapPos GetMapPos(float x, float y)
+    {
+        float curW = MapCell.Width * Zoom;
+        float curH = MapCell.Height * Zoom;
+        int row = (int)(y / curH);
+        int col = (int)(x / curW);
+        return new MapPos(row, col);
     }
 }

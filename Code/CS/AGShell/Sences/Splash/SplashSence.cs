@@ -54,7 +54,7 @@ namespace AGShell
                 }
             }
 
-            if (_counter > 8 * 30)
+            if (_counter > 2 * 30)
             {
                 _engine.SwitchSence(new StagesSence(_engine));
             }

@@ -5,8 +5,8 @@ using System.Text;
 
 public class MapCell
 {
-    public const int Width = 20;
-    public const int Height = 20;
+    public const int Width = 40;
+    public const int Height = 40;
     public const int Zoom = 1;
 
     public List<Object2D> ObjList { get; set; }
@@ -14,6 +14,8 @@ public class MapCell
     public MapPos MapPos { get; set; }
 
     public int Value { get; set; }
+
+    public Texture2D Texture2D { get; set; }
 
     public bool HasEnuRange(Point2D pt, int size)
     {

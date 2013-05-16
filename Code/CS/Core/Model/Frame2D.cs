@@ -12,4 +12,6 @@ public class Frame2D
     public int offsetY { get; set; }
 
     public byte[] Data { get; set; }
+
+    public Texture2D Texture { get; set; }
 }

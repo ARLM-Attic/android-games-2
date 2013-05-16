@@ -38,6 +38,22 @@ namespace AGShell
         {
             if(_map.State == GState.Running)
             {
+                MapRender.Render(_engine, gdi, _map, _camera);
+
+                gdi.DrawText(string.Format("map:{0} Time:{1} {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 250, 0);
+            }
+        }
+
+        protected override void OnLoop(IEngine engine)
+        {
+            if (_camera == null)
+            {
+                return;
+            }
+
+            if (_map.State == GState.Running)
+            {
+                #region 计算时间
                 _map.GameTime++;
 
                 if (_map.GameTime % 30 == 0)
@@ -52,13 +68,66 @@ namespace AGShell
                         }
                     }
                 }
+                #endregion
+
+                #region 更新技能
+                for (int skillIndex = 0; skillIndex < _map.SkillList.Count; skillIndex++)
+                {
+                    _map.SkillList[skillIndex].Loop(engine, null);
+                }
+                #endregion
+
+                #region 更新技能状态
+                for (int skillIndex = 0; skillIndex < _map.SkillList2.Count; skillIndex++)
+                {
+                    if (!engine.IDI.Mouse.IsHandled)
+                    {
+                        _map.SkillList2[skillIndex].Loop(_engine, engine.IDI.Mouse);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                #endregion
 
                 AI.Run(_map, _map.Camps[1]);
 
-                MapRender.Render(_engine, gdi, _map, _camera);
+                #region 更新单位信息
+                for (int iObj = 0; iObj < _map.Widgets.Count; iObj++)
+                {
+                    Object2D item = _map.Widgets[iObj];
+                    item.Update(engine);
+                }
 
-                gdi.DrawText(string.Format("map:{0} Time:{1} {2}", _map.ID,  _map.GameTime, _map.GameTime / 30), 250, 0);
+                for (int iObj = 0; iObj < _map.Widgets.Count; )
+                {
+                    Object2D item = _map.Widgets[iObj];
+                    if (item.DeadTime > 10)
+                    {
+                        AGSUtility.RemoveObject(item);
+                    }
+                    else
+                    {
+                        iObj++;
+                    }
+                }
 
+                // 排序
+                for (int iObj = 0; iObj < _map.Widgets.Count - 1; iObj++)
+                {
+                    Object2D nextObj = _map.Widgets[iObj + 1];
+                    Object2D item = _map.Widgets[iObj];
+
+                    if (item.CurrentPoint.Y > nextObj.CurrentPoint.Y)
+                    {
+                        _map.Widgets.Remove(nextObj);
+                        _map.Widgets.Insert(iObj, nextObj);
+                    }
+                }
+                #endregion
+
+                #region 检查结果
                 if (AGSUtility.CheckVictory(_map))
                 {
                     AGSUtility.Victory(_map, _map.Camps[0]);
@@ -67,110 +136,28 @@ namespace AGShell
                 {
                     AGSUtility.Defeat(_map, _map.Camps[0]);
                 }
+                #endregion
             }
             else if (_map.State != GState.Running)
             {
                 _engine.SwitchSence(new ResultSence(_engine, _map, _map.Camps[0].Result));
                 _engine.ADI.PlayBGM(22);
             }
-        }
 
-        //public override void InputEvent(int msg, int lParam, int wParam)
-        //{
-        //    if (_camera != null)
-        //    {
-        //        if (msg == 1)
-        //        {
-        //            #region key-camera
-        //            //if (lParam == 81)
-        //            //{
-        //            //    _camera.Far();
-        //            //}
-        //            //else if (lParam == 69)
-        //            //{
-        //            //    _camera.Near();
-        //            //}
-        //            //else if (lParam == 87)
-        //            //{
-        //            //    _camera.MoveUp();
-        //            //}
-        //            //else if (lParam == 65)
-        //            //{
-        //            //    _camera.MoveLeft();
-        //            //}
-        //            //else if (lParam == 83)
-        //            //{
-        //            //    _camera.MoveDown();
-        //            //}
-        //            //else if (lParam == 68)
-        //            //{
-        //            //    _camera.MoveRight();
-        //            //}
-        //            //else if (lParam == 49)
-        //            //{
-        //            //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[0], DATUtility.GetUnit(300), "unknown", _map.Camps[0].StartPos, Direction2DDef.South.Id);
-        //            //    AGSUtility.MoveTo(obj, _map.Camps[1].StartPos);
-        //            //}
-        //            //else if (lParam == 50)
-        //            //{
-        //            //    Object2D obj = AGSUtility.CreateObject(_map, _map.Camps[1], DATUtility.GetUnit(300), "unknown", _map.Camps[1].StartPos, Direction2DDef.South.Id);
-        //            //    AGSUtility.MoveTo(obj, _map.Camps[0].StartPos);
-        //            //}
-        //            #endregion
-        //        }
-        //        else if (msg == 3)
-        //        {
-        //            _storedCameraPos = _camera.CenterTargetPos;
-        //            _storedPos = new Point2D(lParam, wParam);
-        //            _currentPos = new Point2D(lParam, wParam);
-        //            _moveCamera = true;
-        //        }
-        //        else if (msg == 4)
-        //        {
-        //            _currentPos = new Point2D(lParam, wParam);
-        //            _moveCamera = false;
-        //        }
-        //        else if (msg == 5)
-        //        {
-        //            _currentPos = new Point2D(lParam, wParam);
-        //        }
-        //    }
-        //}
-
-        protected override void  OnLoop(IEngine engine)
-        {
-            if (_camera == null)
-            {
-                return;
-            }
-
-            //if (_map.PlayerSkill.IsPrepare)
+            //if (engine.IDI.Mouse.DeltaZ > 0)
             //{
-            //    if (mouse.IsLBDown())
-            //    {
-            //        _map.Camps[0].TargetPos = new MapPos(
-            //            mouse.Y / MapCell.Height,
-            //            mouse.X / MapCell.Width);
-            //        _map.PlayerSkill.IsPrepare = false;
-            //        return;
-            //    }
+            //    _camera.Far();
             //}
-            for (int skillIndex = 0; skillIndex < _map.SkillList2.Count; skillIndex++)
-            {
-                if (!engine.IDI.Mouse.IsHandled)
-                {
-                    _map.SkillList2[skillIndex].Loop(_engine, engine.IDI.Mouse);
-                }
-                else
-                {
-                    break;
-                }
-            }
 
+            #region 移动camera操作
             if (engine.IDI.Mouse.IsLBDown())
             {
-                _storedCameraPos = _camera.CenterTargetPos;
-                _moveCamera = true;
+                if (!_moveCamera)
+                {
+                    _storedCameraPos = new Point2D(_camera.CenterTargetPos.X, _camera.CenterTargetPos.Y);
+                    _storedPos = new Point2D(engine.IDI.Mouse.X, engine.IDI.Mouse.Y);
+                    _moveCamera = true;
+                }
             }
             else
             {
@@ -179,9 +166,14 @@ namespace AGShell
 
             if (_moveCamera)
             {
+                float deltaX = _storedPos.X - engine.IDI.Mouse.X;
+                float deltaY = _storedPos.Y - engine.IDI.Mouse.Y;
+                _camera.MoveTo(_storedCameraPos.X + deltaX, _storedCameraPos.Y + deltaY);
+
                 _storedCameraPos = _camera.CenterTargetPos;
-                _camera.MoveTo(_storedCameraPos.X + engine.IDI.Mouse.DeltaX, _storedCameraPos.Y + engine.IDI.Mouse.DeltaY);
+                _storedPos = new Point2D(engine.IDI.Mouse.X, engine.IDI.Mouse.Y);
             }
+            #endregion
         }
     }
 }

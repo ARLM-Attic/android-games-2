@@ -47,9 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\AI.cs" />
+    <Compile Include="Interface\IAttackStrategy.cs" />
     <Compile Include="Interface\IIDI.cs" />
     <Compile Include="Interface\IMoveStrategy.cs" />
-    <Compile Include="MoveStrategy\NCDMoveStrategy.cs" />
+    <Compile Include="Map\Texture2D.cs" />
+    <Compile Include="Strategy\ActiveAttackStrategy.cs" />
+    <Compile Include="Strategy\NCDMoveStrategy.cs" />
     <Compile Include="AStart\AStart2.cs" />
     <Compile Include="Interface\HUD.cs" />
     <Compile Include="Interface\IADI.cs" />

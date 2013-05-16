@@ -277,6 +277,14 @@ namespace AGShell
             surface.Dispose();
         }
 
+        public void Draw(Texture2D texture, float x, float y, float width, float height)
+        {
+            Surface surface = texture.Data as Surface;
+            Rectangle destRect = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            Rectangle srcRect = new Rectangle(0, 0, texture.Width, texture.Height);
+            m_bs.Draw(destRect, surface, srcRect, DrawFlags.KeySource | DrawFlags.Wait);
+        }
+
         public void Clear()
         {
             m_bs.ColorFill(Color.Black);
@@ -375,5 +383,16 @@ namespace AGShell
         //}
         #endregion
 
+        public Texture2D CreateTexture(byte[] data)
+        {
+            Bitmap bitmap = new Bitmap(new System.IO.MemoryStream(data));
+
+            Texture2D texture = new Texture2D();
+            texture.Width = bitmap.Width;
+            texture.Height = bitmap.Height;
+
+            texture.Data = CraeteSurface(bitmap, Color.Black);
+            return texture;
+        }
     }
 }

@@ -19,6 +19,8 @@ public class ModelCategory
     public static ModelCategory UI = new ModelCategory(3, "ui");
     public static ModelCategory Design = new ModelCategory(4, "design");
     public static ModelCategory Icon = new ModelCategory(5, "icon");
+    public static ModelCategory Terrain = new ModelCategory(6, "Terrain(地形)");
+    public static ModelCategory Ornamental = new ModelCategory(7, "Ornamental(装饰物)");
 
     public override string ToString()
     {
@@ -36,6 +38,8 @@ public class ModelCategory
             _defs.Add(UI);
             _defs.Add(Design);
             _defs.Add(Icon);
+            _defs.Add(Terrain);
+            _defs.Add(Ornamental);
         }
 
         return _defs;

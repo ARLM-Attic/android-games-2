@@ -42,6 +42,16 @@ public class AGSUtility
         return obj;
     }
 
+    /// <summary>
+    /// 对象死亡，清除占用的人口
+    /// </summary>
+    /// <param name="deadObj"></param>
+    /// <param name="murderer"></param>
+    public static void ObjectDie(Object2D deadObj, Object2D murderer)
+    {
+        deadObj.Camp.Population -= deadObj.Unit.CostP;
+    }
+
     public static void RemoveObject(Object2D obj)
     {
         MapCell cell = obj.Map.GetCell(obj.SitePos);
@@ -92,6 +102,7 @@ public class AGSUtility
         obj2.HP -= demage;
         if (obj2.IsDead())
         {
+            ObjectDie(obj2, obj1);
             if (obj2.Camp.Result != null)
             {
                 obj2.Camp.Result.DeadCount++;
@@ -115,6 +126,8 @@ public class AGSUtility
         obj2.HP -= demage;
         if (obj2.IsDead())
         {
+            ObjectDie(obj2, obj1);
+
             if (obj2.Camp.Result != null)
             {
                 obj2.Camp.Result.DeadCount++;

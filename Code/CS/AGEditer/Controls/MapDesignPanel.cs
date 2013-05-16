@@ -125,7 +125,7 @@ namespace AGEditer
             {
                 _graphics = Graphics.FromHwnd(this.Handle);
 
-                _mGraphics.FillRectangle(Brushes.Gray, 0, 0, 1024, 768);
+                _mGraphics.FillRectangle(Brushes.Gray, 0, 0, _mImage.Width, _mImage.Height);
 
                 if (_map.Background != null)
                 {
@@ -194,7 +194,7 @@ namespace AGEditer
 
                 ImageAttributes ia = new ImageAttributes();
                 ia.SetColorKey(Color.Black, Color.Black);
-                _graphics.DrawImage(_mImage, new Rectangle(0, 0, 1024, 768), 0, 0, 1024, 768, GraphicsUnit.Pixel, ia);
+                _graphics.DrawImage(_mImage, new Rectangle(0, 0, _mImage.Width, _mImage.Height), 0, 0, _mImage.Width, _mImage.Height, GraphicsUnit.Pixel, ia);
             }
         }
     }
