@@ -497,7 +497,7 @@ public static class DATUtility
             }
         }
 
-        string modelFile = string.Format("{0}models.dat", GetResPath());
+        string modelFile = string.Format("{0}models.xml", GetResPath());
 
         XDocument xDoc = XDocument.Load(modelFile);
 
@@ -527,7 +527,7 @@ public static class DATUtility
     {
         List<Model2D> list = new List<Model2D>();
 
-        string modelsDat = string.Format("{0}models.dat", GetResPath());
+        string modelsDat = string.Format("{0}models.xml", GetResPath());
         if (System.IO.File.Exists(modelsDat))
         {
             XDocument xDoc = XDocument.Load(modelsDat);
@@ -547,7 +547,7 @@ public static class DATUtility
     {
         List<Model2D> list = new List<Model2D>();
 
-        string modelsDat = string.Format("{0}models.dat", GetResPath());
+        string modelsDat = string.Format("{0}models.xml", GetResPath());
         if (System.IO.File.Exists(modelsDat))
         {
             XDocument xDoc = XDocument.Load(modelsDat);
@@ -565,7 +565,11 @@ public static class DATUtility
 
     public static bool SaveModel(Model2D model)
     {
-        string modelsDat = string.Format("{0}models.dat", GetResPath());
+        XDocument xDoc = null;
+        XElement xRoot = null;
+        XElement xModel = null;
+
+        string modelsDat = string.Format("{0}models.xml", GetResPath());
         if (!System.IO.File.Exists(modelsDat))
         {
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(modelsDat);
@@ -574,63 +578,17 @@ public static class DATUtility
                 System.IO.Directory.CreateDirectory(fileInfo.Directory.FullName);
             }
 
-            XDocument xDoc = new XDocument();
-
-            XElement xRoot = new XElement("models");
-
-            XElement xModel = new XElement("model");
-            xModel.Add(new XAttribute("id", model.Id));
-            xModel.Add(new XAttribute("caption", model.Caption));
-            xModel.Add(new XAttribute("category-id", model.Category.Id));
-            #region add actions
-            foreach (var action in model.Actions)
-            {
-                XElement xAction = new XElement("action");
-                xAction.Add(new XAttribute("id", action.Id));
-
-                foreach (var direction in action.Directions)
-                {
-                    XElement xDirection = new XElement("direction");
-                    xDirection.Add(new XAttribute("id", direction.Id));
-
-                    foreach (var frame in direction.Frames)
-                    {
-                        XElement xFrame = new XElement("frame");
-                        xFrame.Add(new XAttribute("index", frame.Index));
-                        xFrame.Add(new XAttribute("width", frame.Width));
-                        xFrame.Add(new XAttribute("height", frame.Height));
-                        xFrame.Add(new XAttribute("offset-x", frame.OffsetX));
-                        xFrame.Add(new XAttribute("offset-y", frame.offsetY));
-
-                        xDirection.Add(xFrame);
-                    }
-
-                    xAction.Add(xDirection);
-                }
-
-                xModel.Add(xAction);
-            }
-            #endregion
+            xDoc = new XDocument();
+            xRoot = new XElement("models");
+            xModel = new XElement("model");
             xRoot.Add(xModel);
-
             xDoc.Add(xRoot);
-
-            try
-            {
-                xDoc.Save(modelsDat);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
         else
         {
-            XDocument xDoc = XDocument.Load(modelsDat);
-            XElement xRoot = xDoc.Element("models");
-
-            XElement xModel = xDoc.XPathSelectElement(string.Format("//models/model[@id='{0}']", model.Id));
+            xDoc = XDocument.Load(modelsDat);
+            xRoot = xDoc.Element("models");
+            xModel = xDoc.XPathSelectElement(string.Format("//models/model[@id='{0}']", model.Id));
             if (xModel != null)
             {
                 xModel.RemoveAll();
@@ -640,49 +598,48 @@ public static class DATUtility
                 xModel = new XElement("model");
                 xRoot.Add(xModel);
             }
+        }
+        xModel.Add(new XAttribute("id", model.Id));
+        xModel.Add(new XAttribute("caption", model.Caption));
+        xModel.Add(new XAttribute("category-id", model.Category.Id));
+        #region add actions
+        foreach (var action in model.Actions)
+        {
+            XElement xAction = new XElement("action");
+            xAction.Add(new XAttribute("id", action.Id));
 
-            xModel.Add(new XAttribute("id", model.Id));
-            xModel.Add(new XAttribute("caption", model.Caption));
-            xModel.Add(new XAttribute("category-id", model.Category.Id));
-            #region add actions
-            foreach (var action in model.Actions)
+            foreach (var direction in action.Directions)
             {
-                XElement xAction = new XElement("action");
-                xAction.Add(new XAttribute("id", action.Id));
+                XElement xDirection = new XElement("direction");
+                xDirection.Add(new XAttribute("id", direction.Id));
 
-                foreach (var direction in action.Directions)
+                foreach (var frame in direction.Frames)
                 {
-                    XElement xDirection = new XElement("direction");
-                    xDirection.Add(new XAttribute("id", direction.Id));
+                    XElement xFrame = new XElement("frame");
+                    xFrame.Add(new XAttribute("index", frame.Index));
+                    xFrame.Add(new XAttribute("width", frame.Width));
+                    xFrame.Add(new XAttribute("height", frame.Height));
+                    xFrame.Add(new XAttribute("offset-x", frame.OffsetX));
+                    xFrame.Add(new XAttribute("offset-y", frame.offsetY));
 
-                    foreach (var frame in direction.Frames)
-                    {
-                        XElement xFrame = new XElement("frame");
-                        xFrame.Add(new XAttribute("index", frame.Index));
-                        xFrame.Add(new XAttribute("width", frame.Width));
-                        xFrame.Add(new XAttribute("height", frame.Height));
-                        xFrame.Add(new XAttribute("offset-x", frame.OffsetX));
-                        xFrame.Add(new XAttribute("offset-y", frame.offsetY));
-
-                        xDirection.Add(xFrame);
-                    }
-
-                    xAction.Add(xDirection);
+                    xDirection.Add(xFrame);
                 }
 
-                xModel.Add(xAction);
+                xAction.Add(xDirection);
             }
-            #endregion
 
-            try
-            {
-                xDoc.Save(modelsDat);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            xModel.Add(xAction);
+        }
+        #endregion
+
+        try
+        {
+            xDoc.Save(modelsDat);
+            return true;
+        }
+        catch
+        {
+            return false;
         }
     }
     #endregion

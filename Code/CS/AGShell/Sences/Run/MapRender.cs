@@ -44,11 +44,11 @@ namespace AGShell
                     }
                     else
                     {
-                        gdi.DrawRectangle(
-                            camera.ZeroPoint.X + col * curWidth,
-                            camera.ZeroPoint.Y + row * curHeight,
-                            curWidth,
-                            curHeight);
+                        //gdi.DrawRectangle(
+                        //    camera.ZeroPoint.X + col * curWidth,
+                        //    camera.ZeroPoint.Y + row * curHeight,
+                        //    curWidth,
+                        //    curHeight);
                     }
                 }
             }

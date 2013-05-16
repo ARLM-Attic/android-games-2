@@ -6,13 +6,14 @@ using System.Text;
 public class AGStageMarker : AGControl
 {
     public event EventHandler Click;
-
+    public int MapId { get; private set; }
     public string Text { get; private set; }
     public Model2D Model { get; private set; }
     private int _frameIndex = 1;
 
-    public AGStageMarker(string text, Point2D pt, Size2D size)
+    public AGStageMarker(int mapId, string text, Point2D pt, Size2D size)
     {
+        MapId = mapId;
         Text = text;
         Pos = pt;
         Size = size;

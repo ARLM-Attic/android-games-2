@@ -7,6 +7,7 @@ public class BigMapPanel : AGControl
 {
     private int[] _xarr = new int[] { 127, 86, 143, 107, 320 };
     private int[] _yarr = new int[] { 530, 458, 366, 294, 220 };
+    private int[] _maparr = new int[] { 100, 101, 100, 100, 100 };
 
     public Model2D Model { get; set; }
     private Model2D FrameModel { get; set; }
@@ -31,7 +32,8 @@ public class BigMapPanel : AGControl
         for (int mapIndex = 0; mapIndex < _xarr.Length; mapIndex++)
         {
             AGStageMarker button = new AGStageMarker(
-                maps[0].ToString(),
+                _maparr[mapIndex],
+                _maparr[mapIndex].ToString(),
                 new Point2D(_xarr[mapIndex], _yarr[mapIndex]),
                 new Size2D(50, 150));
             button.Click += new EventHandler(button_Click);
@@ -50,7 +52,8 @@ public class BigMapPanel : AGControl
     {
         if (SelectMap != null)
         {
-            SelectMap(100);
+            AGStageMarker button = sender as AGStageMarker;
+            SelectMap(button.MapId);
         }
     }
 

@@ -5,8 +5,8 @@ using System.Text;
 
 public class MapCell
 {
-    public const int Width = 32;
-    public const int Height = 32;
+    public const int Width = 20;
+    public const int Height = 20;
     public const int Zoom = 1;
 
     public List<Object2D> ObjList { get; set; }

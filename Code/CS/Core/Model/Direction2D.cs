@@ -36,4 +36,13 @@ public class Direction2D
 
         return remainder == 0 ? 8 : remainder;
     }
+
+    public bool HasFrames()
+    {
+        if (Frames.Count > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

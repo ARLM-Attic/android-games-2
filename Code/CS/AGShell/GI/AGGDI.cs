@@ -232,7 +232,7 @@ namespace AGShell
 
         public void DrawEllipse(float x, float y, float w, float h)
         {
-            return;
+            //return;
             m_bs.ForeColor = Color.Red;
             m_bs.FillColor = Color.Transparent;
             m_bs.DrawEllipse((int)x, (int)y, (int)(x + w), (int)(y + h));
@@ -240,7 +240,7 @@ namespace AGShell
 
         public void DrawRectangle(float x, float y, float w, float h)
         {
-            return;
+            //return;
             m_bs.ForeColor = Color.Green;
             m_bs.FillColor = Color.Transparent;
             m_bs.DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h));

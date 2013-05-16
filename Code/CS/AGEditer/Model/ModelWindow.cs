@@ -332,17 +332,14 @@ namespace AGEditer
 
         private void _ctlBtnPublish_Click(object sender, EventArgs e)
         {
-            string publishPath = string.Format("c:\\ag\\data\\models\\{0:d4}.m", _model.Id);
-            
+            string publishPath = string.Format("{1}models\\{0:d4}\\", _model.Id, DATUtility.GetResPath());
             DATUtility.SaveModel(_model);
-
-            System.IO.FileInfo fileInfo = new System.IO.FileInfo(publishPath);
-            if (!System.IO.Directory.Exists(fileInfo.Directory.FullName))
+            System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(publishPath);
+            if (!System.IO.Directory.Exists(dirInfo.FullName))
             {
-                System.IO.Directory.CreateDirectory(fileInfo.Directory.FullName);
+                System.IO.Directory.CreateDirectory(dirInfo.FullName);
             }
-
-            PackagingUtility.CompressM(_model, publishPath);
+            PACKUtility.PublishModel(_model, publishPath);
             MessageBox.Show("发布成功!");
         }
 

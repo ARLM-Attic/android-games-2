@@ -14,4 +14,16 @@ public class Action2D
     {
         Directions = new List<Direction2D>();
     }
+
+    public bool HasFrames()
+    {
+        for (int i = 0; i < Directions.Count; i++)
+        {
+            if (Directions[i].HasFrames())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

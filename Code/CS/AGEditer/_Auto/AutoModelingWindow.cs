@@ -197,14 +197,14 @@ namespace AGEditer
             LoadFrames(model, Action2DDef.Stand.Id, _atkCount + _dieCount + _bhitCount + _defCount, _stdCount);
             LoadFrames(model, Action2DDef.Move.Id, _atkCount + _dieCount + _bhitCount + _defCount + _stdCount, _movCount);
 
-            string publishPath = string.Format("{1}models\\{0:d4}.m", model.Id, DATUtility.GetResPath());
+            string publishPath = string.Format("{1}models\\{0:d4}\\", model.Id, DATUtility.GetResPath());
             DATUtility.SaveModel(model);
-            System.IO.FileInfo fileInfo = new System.IO.FileInfo(publishPath);
-            if (!System.IO.Directory.Exists(fileInfo.Directory.FullName))
+            System.IO.DirectoryInfo dirInfo = new System.IO.DirectoryInfo(publishPath);
+            if (!System.IO.Directory.Exists(dirInfo.FullName))
             {
-                System.IO.Directory.CreateDirectory(fileInfo.Directory.FullName);
+                System.IO.Directory.CreateDirectory(dirInfo.FullName);
             }
-            PACKUtility.CompressM(model, publishPath);
+            PACKUtility.PublishModel(model, publishPath);
             MessageBox.Show("发布成功!");
         }
 

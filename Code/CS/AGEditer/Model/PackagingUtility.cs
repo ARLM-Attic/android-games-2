@@ -10,6 +10,37 @@ namespace AGEditer
 {
     public class PackagingUtility
     {
+        #region 打包模型文件
+        public static void PublishModel(Model2D model, string publishPath)
+        {
+            if (Directory.Exists(publishPath))
+            {
+                Directory.Delete(publishPath, true);
+            }
+            else
+            {
+                Directory.CreateDirectory(publishPath);
+            }
+
+            foreach (var action in model.Actions)
+            {
+                foreach (var direction in action.Directions)
+                {
+                    foreach (var frame in direction.Frames)
+                    {
+                        CompressF2(publishPath, model, action, direction, frame);
+                    }
+                }
+            }
+        }
+
+        private static void CompressF2(string publishPath, Model2D model, Action2D action, Direction2D direction, Frame2D frame)
+        {
+            string fileToAdd = string.Format("{4}{0:d4}-{1:d4}-{2:d4}-{3:d4}.bmp", model.Id, action.Id, direction.Id, frame.Index, publishPath);
+            File.WriteAllBytes(fileToAdd, frame.Data);
+        }
+        #endregion
+
         public static void CompressM(Model2D model, string zipFileName)
         {
             if (File.Exists(zipFileName))
