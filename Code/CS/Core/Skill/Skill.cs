@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 public abstract class Skill
 {
@@ -68,6 +69,10 @@ public abstract class Skill
     }
 
     public virtual void Render(IEngine engine)
+    {
+    }
+
+    public virtual void RenderOnIcon(IGDI gdi, Rectangle rect)
     {
     }
 

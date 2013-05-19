@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 public class AGSkillButton : AGControl
 {
@@ -48,9 +49,10 @@ public class AGSkillButton : AGControl
         }
         else
         {
-            gdi.DrawShadowText("cd", Pos.X + 1, Pos.Y + 1);
-            gdi.DrawShadowText(((int)(Skill.CoolDownConter / 30)).ToString(), Pos.X, Pos.Y + 20);
+            gdi.DrawShadowText(((int)(Skill.CoolDownConter / 30)).ToString(), Pos.X, Pos.Y + 1);
         }
+
+        Skill.RenderOnIcon(gdi, new Rectangle((int)Pos.X, (int)Pos.Y, (int)Size.W, (int)Size.H));
     }
 
     public override bool OnInputEvent(MouseMessage mouse)

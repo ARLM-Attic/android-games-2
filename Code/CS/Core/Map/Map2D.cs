@@ -10,7 +10,7 @@ public class Map2D
     public string Caption { get; set; }
     public int Row { get; set; }
     public int Col { get; set; }
-    public byte[] Background { get; set; }
+    public Model2D Background { get; set; }
     public byte[] BGM { get; set; }
 
     private Size2D _size;

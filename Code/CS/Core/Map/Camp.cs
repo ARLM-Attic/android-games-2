@@ -32,6 +32,8 @@ public class Camp
     /// </summary>
     public MapPos TargetPos { get; set; }
 
+    public CampType Type { get; set; }
+
     public Camp()
     {
         ObjList = new List<Object2D>();

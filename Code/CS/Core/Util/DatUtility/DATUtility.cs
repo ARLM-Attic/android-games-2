@@ -6,196 +6,36 @@ using System.Text;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-public static class DATUtility
+public static partial class DATUtility
 {
     public static List<Model2D> s_models = new List<Model2D>();
     public static List<Unit2D> s_units = new List<Unit2D>();
 
+    public static string GetAppPath()
+    {
+#if DEBUG
+        string datFile = string.Format("c:\\ag\\");
+        return datFile;
+#else
+        string datFile = string.Format("{0}\\", AppDomain.CurrentDomain.BaseDirectory);
+        return datFile;
+#endif
+    }
+
+    /// <summary>
+    /// ...\\data\\
+    /// </summary>
+    /// <returns></returns>
     public static string GetResPath()
     {
-        string datFile = string.Format("{0}\\data\\", AppDomain.CurrentDomain.BaseDirectory);
 #if DEBUG
-        datFile = string.Format("c:\\ag\\data\\");
-#endif
+        string datFile = string.Format("c:\\ag\\data\\");
         return datFile;
+#else
+        string datFile = string.Format("{0}\\data\\", AppDomain.CurrentDomain.BaseDirectory);
+        return datFile;
+#endif
     }
-
-    #region map
-    public static List<int> GetMaps()
-    {
-        List<int> ids = new List<int>();
-        string[] mapFiles =System.IO.Directory.GetFiles(string.Format("{0}maps",GetResPath()), "*.dat");
-        foreach (var mapFile in mapFiles)
-        {
-            if (!mapFile.Contains(".bg"))
-            {
-                System.IO.FileInfo fileInfo = new System.IO.FileInfo(mapFile);
-                ids.Add(Convert.ToInt32(fileInfo.Name.ToLower().Replace(".dat", string.Empty)));
-            }
-        }
-        return ids;
-    }
-    public static bool SaveMap(Map2D map)
-    {
-        string datFile = string.Format("{0}maps\\{1}.dat", GetResPath(), map.ID);
-        string datBGFile = string.Format("{0}maps\\{1}.bg.dat", GetResPath(), map.ID);
-        if (!System.IO.File.Exists(datFile))
-        {
-            System.IO.FileInfo fileInfo = new System.IO.FileInfo(datFile);
-            if (!System.IO.Directory.Exists(fileInfo.Directory.FullName))
-            {
-                System.IO.Directory.CreateDirectory(fileInfo.Directory.FullName);
-            }
-        }
-
-        XDocument xDoc = new XDocument();
-
-        XElement xRoot = new XElement("map");
-
-        xRoot.Add(new XAttribute("id", map.ID));
-        xRoot.Add(new XAttribute("row", map.Row));
-        xRoot.Add(new XAttribute("col", map.Col));
-
-        XElement xCells = new XElement("cells");
-        StringBuilder cellBuilder = new StringBuilder();
-        for (int i = 0; i < map.Cells.Length; i++)
-        {
-            cellBuilder.AppendFormat("{0},", map.Cells[i].Value);
-        }
-        xCells.Value = cellBuilder.ToString();
-        xRoot.Add(xCells);
-
-        XElement xCamps = new XElement("camps");
-        foreach (var camp in map.Camps)
-        {
-            XElement xCamp = new XElement("camp");
-            xCamp.Add(new XAttribute("id", camp.Id));
-            xCamp.Add(new XAttribute("caption", camp.Caption));
-            xCamp.Add(new XAttribute("start-pos", string.Format("{0},{1}", camp.StartPos.Row, camp.StartPos.Col)));
-            xCamps.Add(xCamp);
-        }
-        xRoot.Add(xCamps);
-
-        XElement xWidgets = new XElement("objs");
-        foreach (var widget in map.Widgets)
-        {
-            XElement xWidget = new XElement("obj");
-            xWidget.Add(new XAttribute("id", widget.ID));
-            xWidget.Add(new XAttribute("camp-id", widget.Camp.Id));
-            xWidget.Add(new XAttribute("caption", widget.Caption));
-            xWidget.Add(new XAttribute("unit-id", widget.Unit.Id));
-            xWidget.Add(new XAttribute("site-pos", string.Format("{0},{1}", widget.SitePos.Row, widget.SitePos.Col)));
-            xWidgets.Add(xWidget);
-        }
-        xRoot.Add(xWidgets);
-
-        xDoc.Add(xRoot);
-
-        try
-        {
-            if (map.Background != null)
-            {
-                File.WriteAllBytes(datBGFile, map.Background);
-            }
-            xDoc.Save(datFile);
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    public static Map2D GetMap(int mapId)
-    {
-        string datFile = string.Format("{0}maps\\{1}.dat",GetResPath(), mapId);
-        string datBGFile = string.Format("{0}maps\\{1}.bg.dat", GetResPath(), mapId);
-        string datBGMFile = string.Format("{0}maps\\{1}.bgm.dat", GetResPath(), mapId);
-        if (!System.IO.File.Exists(datFile))
-        {
-            System.IO.FileInfo fileInfo = new System.IO.FileInfo(datFile);
-            if (!System.IO.Directory.Exists(fileInfo.Directory.FullName))
-            {
-                System.IO.Directory.CreateDirectory(fileInfo.Directory.FullName);
-            }
-        }
-
-        XDocument xDoc = XDocument.Load(datFile);
-        
-        XElement xMap = xDoc.Element("map");
-        int row = Convert.ToInt32(xMap.Attribute("row").Value);
-        int col = Convert.ToInt32(xMap.Attribute("col").Value);
-        Map2D map = new Map2D();
-        map.ID = mapId; // Convert.ToInt32(xMap.Attribute("id").Value);
-        map.Row = row;
-        map.Col = col;
-        map.Cells = new MapCell[row * col];
-
-        XElement xCells = xMap.Element("cells");
-        string[] cellValues = xCells.Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-        for (int r = 0; r < row; r++)
-        {
-            for (int c = 0; c < col; c++)
-            {
-                MapCell cell = new MapCell();
-                cell.MapPos = new MapPos(r, c);
-                cell.Value = Convert.ToInt32(cellValues[r * col + c]);
-                map.Cells[r * col + c] = cell;
-            }
-        }
-
-        IEnumerable<XElement> xCamps = xMap.Element("camps").Elements("camp");
-        foreach (var xCamp in xCamps)
-        {
-            int id = Convert.ToInt32(xCamp.Attribute("id").Value);
-            string caption = xCamp.Attribute("caption").Value;
-            string[] sitPosArr = xCamp.Attribute("start-pos").Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            int pRow = Convert.ToInt32(sitPosArr[0]);
-            int pCol = Convert.ToInt32(sitPosArr[1]);
-            Camp camp = new Camp();
-            camp.Id = id;
-            camp.Caption = caption;
-            camp.StartPos = new MapPos(pRow, pCol);
-
-            map.Camps.Add(camp);
-        }
-
-        IEnumerable<XElement> xObjects = xMap.Element("objs").Elements("obj");
-        foreach (var xObj in xObjects)
-        {
-            int id = Convert.ToInt32(xObj.Attribute("id").Value);
-            int campId = Convert.ToInt32(xObj.Attribute("camp-id").Value);
-            string caption = xObj.Attribute("caption").Value;
-            int unitId = Convert.ToInt32(xObj.Attribute("unit-id").Value);
-            string[] sitPosArr = xObj.Attribute("site-pos").Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            int pRow = Convert.ToInt32(sitPosArr[0]);
-            int pCol = Convert.ToInt32(sitPosArr[1]);
-            Object2D obj = new Object2D();
-            obj.ID = id;
-            obj.Camp = map.GetCamp(campId);
-            obj.SitePos = new MapPos(pRow, pCol);
-            obj.CurrentPoint = obj.SitePos.Center;
-            obj.Caption = caption;
-            obj.SetUnit(GetUnit(unitId));
-
-            obj.Camp.ObjList.Add(obj);
-            obj.Map = map;
-            map.Widgets.Add(obj);
-        }
-
-        if (File.Exists(datBGFile))
-        {
-            map.Background = File.ReadAllBytes(datBGFile);
-        }
-
-        if(File.Exists(datBGMFile))
-        {
-            map.BGM = File.ReadAllBytes(datBGMFile);
-        }
-
-        return map;
-    }
-    #endregion
 
     #region Unit
     public static bool SaveUnit(Unit2D unit)

@@ -39,6 +39,7 @@ public class AGSUtility
         camp.Population += unit.CostP;
         camp.ObjList.Add(obj);
         map.Widgets.Add(obj);
+        System.Diagnostics.Debug.WriteLine(string.Format(">{0} createobj:{1} p:{2}", camp.Caption, obj.ID, camp.Population));
         return obj;
     }
 
@@ -50,6 +51,7 @@ public class AGSUtility
     public static void ObjectDie(Object2D deadObj, Object2D murderer)
     {
         deadObj.Camp.Population -= deadObj.Unit.CostP;
+        System.Diagnostics.Debug.WriteLine(string.Format(">{0} dieobj:{1} p:{2}", deadObj.Camp.Caption, deadObj.ID, deadObj.Camp.Population));
     }
 
     public static void RemoveObject(Object2D obj)
@@ -65,7 +67,6 @@ public class AGSUtility
         }
 
         obj.Camp.ObjList.Remove(obj);
-        obj.Camp.Population -= obj.Unit.CostP;
         obj.Map.Widgets.Remove(obj);
     }
 
@@ -87,6 +88,22 @@ public class AGSUtility
     /// <param name="terrain"></param>
     public static void SetTerrain(Map2D map, MapPos pos, Terrain terrain)
     {
+        for (int deltaR = -1; deltaR <= 1; deltaR++)
+        {
+            for (int deltaC = -2; deltaC <= -2; deltaC++)
+            {
+                int row = pos.Row + deltaR;
+                int col = pos.Col + deltaC;
+
+                if (row < 0 || row >= map.Row
+                    || col < 0 || col >= map.Col)
+                {
+                    continue;
+                }
+
+            }
+        }
+
         MapCell cell = map.GetCell(pos);
         cell.Value = terrain.Value;
     }
@@ -166,20 +183,40 @@ public class AGSUtility
     #region 结束条件
     public static bool CheckVictory(Map2D map)
     {
-        if (map.Camps[1].ObjList.Count == 0)
+        for (int iCamps = 0; iCamps < map.Camps.Count; iCamps++)
         {
-            return true;
+            if (map.Camps[iCamps].Type == CampType.Computer)
+            {
+                Camp camp = map.Camps[iCamps];
+                for (int iObj = 0; iObj < camp.ObjList.Count; iObj++)
+                {
+                    if (camp.ObjList[iObj].Unit.Category != UnitCategoryDef.Ornamental && !camp.ObjList[iObj].IsDead())
+                    {
+                        return false;
+                    }
+                }
+            }
         }
-        return false;
+        return true;
     }
 
     public static bool CheckDefeat(Map2D map)
     {
-        if (map.Camps[0].ObjList.Count == 0)
+        for (int iCamps = 0; iCamps < map.Camps.Count; iCamps++)
         {
-            return true;
+            if (map.Camps[iCamps].Type == CampType.Player)
+            {
+                Camp camp = map.Camps[iCamps];
+                for (int iObj = 0; iObj < camp.ObjList.Count; iObj++)
+                {
+                    if (camp.ObjList[iObj].Unit.Category != UnitCategoryDef.Ornamental && !camp.ObjList[iObj].IsDead())
+                    {
+                        return false;
+                    }
+                }
+            }
         }
-        return false;
+        return true;
     }
     #endregion
 }

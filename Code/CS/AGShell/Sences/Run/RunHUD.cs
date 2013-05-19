@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace AGShell
 {
@@ -11,10 +12,18 @@ namespace AGShell
         private Map2D _map;
         private Model2D _skillBarModel;
 
+        private Model2D _populationModel;
+        private Model2D _moneyModel;
+        private Model2D _mapTitleBGModel;
+
         public RunHUD(IEngine engine, Map2D map)
             : base(engine)
         {
             _skillBarModel = DATUtility.GetModel(18);
+            _mapTitleBGModel = DATUtility.GetModel(20);
+
+            _moneyModel = DATUtility.GetModel(151);
+            _populationModel = DATUtility.GetModel(152);
 
             _controls = new List<AGControl>();
             _map = map;
@@ -63,6 +72,26 @@ namespace AGShell
 
         protected override void OnRender(IGDI gdi)
         {
+            Frame2D mapTitleFrame = _mapTitleBGModel.GetFrame(1, 1, 1);
+            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(mapTitleFrame.Data)),
+                5,
+                5,
+                mapTitleFrame.Width,
+                mapTitleFrame.Height,
+                mapTitleFrame.Width,
+                mapTitleFrame.Height);
+
+            Rectangle rect = new Rectangle(
+                (int)5, 
+                (int)5, 
+                (int)mapTitleFrame.Width, 
+                (int)mapTitleFrame.Height);
+            gdi.DrawShadowText(
+                AGRES.GetNormalUIFont(),
+                0xffff00,
+                _map.Caption,
+                rect);
+
             //gdi.DrawRectangle(0, MainWindow.Height - 50, MainWindow.Width, 50);
 
             // 头像区域 100*120
@@ -73,8 +102,41 @@ namespace AGShell
 
             // 资源栏 width*10
             //gdi.DrawRectangle(0, 0, MainWindow.Width, 20);
-            gdi.DrawText(string.Format("M:{0}", _map.Camps[0].Income), MainWindow.Width - 200, 5);
-            gdi.DrawText(string.Format("U:{0}/{1}", _map.Camps[0].Population, _map.Camps[0].PopulationLimit), MainWindow.Width - 100, 5);
+            Frame2D moneyFrame = _moneyModel.GetFrame(1, 1, 1);
+            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(moneyFrame.Data)),
+                MainWindow.Width - 232,
+                5,
+                24,
+                24,
+                moneyFrame.Width,
+                moneyFrame.Height);
+            gdi.DrawShadowText(AGRES.NormalUIHfont,
+                0xffff00, 
+                string.Format("{0}", _map.Camps[0].Income), 
+                MainWindow.Width - 200,
+                5);
+
+            Frame2D popFrame = _populationModel.GetFrame(1, 1, 1);
+            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(popFrame.Data)),
+                MainWindow.Width - 132,
+                5,
+                24,
+                24,
+                popFrame.Width,
+                popFrame.Height);
+            gdi.DrawShadowText(AGRES.NormalUIHfont,
+                0xffff00,
+                string.Format("{0}/{1}", _map.Camps[0].Population, _map.Camps[0].PopulationLimit), 
+                MainWindow.Width - 100,
+                5);
+
+            for (int index = 0; index < _map.Camps.Count; index++)
+            {
+                gdi.DrawShadowText(
+                    string.Format("U:{0}/{1},{2}", _map.Camps[index].Population, _map.Camps[index].PopulationLimit, _map.Camps[index].Caption),
+                    MainWindow.Width - 120,
+                    100 + index * 50);
+            }
 
             Frame2D frame = _skillBarModel.GetFrame(1, 1, 1);
             gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)),

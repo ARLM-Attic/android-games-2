@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\AI.cs" />
+    <Compile Include="Map\CampType.cs" />
+    <Compile Include="Map\MapInfo.cs" />
+    <Compile Include="UIControl\AGContainer.cs" />
+    <Compile Include="Util\DatUtility\DATUtility.WorldMap.cs" />
+    <Compile Include="WorldMap\StagesPos.cs" />
+    <Compile Include="WorldMap\WorldMap.cs" />
     <Compile Include="Interface\IAttackStrategy.cs" />
     <Compile Include="Interface\IIDI.cs" />
     <Compile Include="Interface\IMoveStrategy.cs" />
@@ -86,6 +92,8 @@
     <Compile Include="Skill\Player\SetTargetPosSkill.cs" />
     <Compile Include="UIControl\AGSkillButton.cs" />
     <Compile Include="Util\AGRES.cs" />
+    <Compile Include="Util\DatUtility\DATUtility.Map.cs" />
+    <Compile Include="Util\DatUtility\DATUtility.Terrain.cs" />
     <Compile Include="Util\PACKUtility.cs" />
     <Compile Include="PlayerData\Player.cs" />
     <Compile Include="AbilityLevel\AbilityLevel.cs" />
@@ -104,13 +112,13 @@
     <Compile Include="UIControl\AGLabel.cs" />
     <Compile Include="UIControl\AGStageMarker.cs" />
     <Compile Include="UIControl\AGTextButton.cs" />
-    <Compile Include="UIControl\BigMapPanel.cs" />
+    <Compile Include="UIControl\AGWorldMapPanel.cs" />
     <Compile Include="UIControl\UnitPanel.cs" />
     <Compile Include="Unit\Unit2D.cs" />
     <Compile Include="Unit\UnitCategory.cs" />
     <Compile Include="Unit\UnitStirps.cs" />
     <Compile Include="Util\AGSUtility.cs" />
-    <Compile Include="Util\DATUtility.cs" />
+    <Compile Include="Util\DatUtility\DATUtility.cs" />
     <Compile Include="Util\ObjectUtil.cs" />
     <Compile Include="Util\PlayerDataUtil.cs" />
   </ItemGroup>

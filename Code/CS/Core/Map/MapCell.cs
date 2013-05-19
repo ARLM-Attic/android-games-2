@@ -13,7 +13,17 @@ public class MapCell
 
     public MapPos MapPos { get; set; }
 
+    #region 属性
     public int Value { get; set; }
+    /// <summary>
+    /// 地形编号
+    /// </summary>
+    public int TerrainId { get; set; }
+    /// <summary>
+    /// 该地形中具体的切片编号
+    /// </summary>
+    public int TerrainIndex { get; set; }
+    #endregion
 
     public Texture2D Texture2D { get; set; }
 

@@ -13,7 +13,7 @@ public class ActiveAttackStrategy : IAttackStrategy
             {
                 foreach (var opponentObj in camp.ObjList)
                 {
-                    if (opponentObj.Unit.Stirps != UnitStirps.Ornamental &&!opponentObj.IsDead() && ObjectUtil.CheckAttackDistance(obj, opponentObj))
+                    if (opponentObj.Unit.Category != UnitCategoryDef.Ornamental &&!opponentObj.IsDead() && ObjectUtil.CheckAttackDistance(obj, opponentObj))
                     {
                         if (obj.HasAttackCooldown())
                         {

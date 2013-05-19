@@ -11,4 +11,5 @@ public interface IEngine
     Map2D CurrentMap { get; set; }
     void SwitchSence(Sence sence);
     void LoadMap(int mapId);
+    void Exit();
 }

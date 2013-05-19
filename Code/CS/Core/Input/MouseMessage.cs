@@ -15,7 +15,11 @@ public class MouseMessage
 
     public bool IsLBDown()
     {
-        if (Buttons[0] == 0)
+        if (Buttons == null)
+        {
+            return false;
+        }
+        else if (Buttons[0] == 0)
         {
             return false;
         }

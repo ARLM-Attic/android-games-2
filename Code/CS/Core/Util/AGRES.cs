@@ -12,7 +12,7 @@ public class AGRES
     public static Font NormalFont;
     public static Font TITLEFONT;
 
-    private static Font SmallUIFont;
+    public static Font SmallUIFont;
     private static Font NormalUIFont;
     private static Font LargeUIFont;
 
@@ -23,7 +23,7 @@ public class AGRES
     public static IntPtr NormalUIHfont;
     public static IntPtr LargeUIFontHandle;
 
-    static AGRES()
+    public static void Load()
     {
         PrivateFontCollection font = new PrivateFontCollection();
         font.AddFontFile(string.Format("{0}Fonts\\DEFAULT.TTF", DATUtility.GetResPath()));
@@ -37,9 +37,21 @@ public class AGRES
         FontFamily uiFontFamily = new FontFamily(font.Families[1].Name, font);
         LargeUIFont = new Font(uiFontFamily, 32F, FontStyle.Regular);
         LargeUIFontHandle = LargeUIFont.ToHfont();
-        NormalUIFont = new Font(uiFontFamily, 16F, FontStyle.Regular);
+        NormalUIFont = new Font(uiFontFamily, 12F, FontStyle.Regular);
         NormalUIHfont = NormalUIFont.ToHfont();
         SmallUIFont = new Font(uiFontFamily, 9F, FontStyle.Regular);
         SmallUIHfont = SmallUIFont.ToHfont();
+    }
+
+    private static PrivateFontCollection s_font;
+    public static Font GetNormalUIFont()
+    {
+        if (s_font == null)
+        {
+            s_font = new PrivateFontCollection();
+            s_font.AddFontFile(string.Format("{0}Fonts\\UI.TTF", DATUtility.GetResPath()));
+        }
+        FontFamily myFontFamily = new FontFamily(s_font.Families[0].Name, s_font);
+        return new Font(myFontFamily, 12F, FontStyle.Regular);
     }
 }

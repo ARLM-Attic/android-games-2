@@ -44,7 +44,7 @@ namespace AGShell
 
         private bool m_isWindowDisplay = false;
         private Form m_form;
-
+        private Graphics _graphics;
 
         Surface vOffSurface;
 
@@ -112,6 +112,8 @@ namespace AGShell
             try
             {
                 m_form = form;
+                _graphics = m_form.CreateGraphics();
+
                 _startPos = m_form.PointToScreen(new Point(0, 0));
 
                 m_widthPix = MainWindow.Width;
@@ -207,6 +209,33 @@ namespace AGShell
             m_bs.DrawText((int)x, (int)y, text, false);
         }
 
+        public void DrawText(Font font, int color, string text, Rectangle rect)
+        {
+            SizeF size = _graphics.MeasureString(text, font);
+
+            float x = rect.X + (rect.Width - size.Width) / 2;
+            float y = rect.Y + (rect.Height - size.Height) / 2;
+
+            m_bs.FontHandle = font.ToHfont();
+            m_bs.ForeColor = Color.FromArgb(color);
+            m_bs.DrawText((int)x, (int)y, text, false);
+        }
+
+        public void DrawShadowText(Font font, int color, string text, Rectangle rect)
+        {
+            SizeF size = _graphics.MeasureString(text, font);
+
+            float x = rect.X + (rect.Width - size.Width) / 2;
+            float y = rect.Y + (rect.Height - size.Height) / 2;
+
+            m_bs.FontHandle = font.ToHfont();
+            m_bs.ForeColor = Color.FromArgb(0x000000);
+            m_bs.DrawText((int)(x + 1), (int)(y + 1), text, false);
+
+            m_bs.ForeColor = Color.FromArgb(color);
+            m_bs.DrawText((int)x, (int)y, text, false);
+        }
+
         public void DrawText(IntPtr font, int color, string text, int x, int y)
         {
             m_bs.FontHandle = font;
@@ -222,6 +251,16 @@ namespace AGShell
 
             m_bs.ForeColor = Color.FromArgb(0x01, 0x01, 0x01);
             m_bs.DrawText((int)x + 1, (int)y + 1, text, false);
+        }
+
+        public void DrawShadowText(IntPtr font, int color, string text, float x, float y)
+        {
+            m_bs.FontHandle = font;
+            m_bs.ForeColor = Color.FromArgb(0x01, 0x01, 0x01);
+            m_bs.DrawText((int)x + 1, (int)y + 1, text, false);
+
+            m_bs.ForeColor = Color.FromArgb(color);
+            m_bs.DrawText((int)x, (int)y, text, false);
         }
 
         public void DrawLine(float x1, float y1, float x2, float y2)
@@ -393,6 +432,12 @@ namespace AGShell
 
             texture.Data = CraeteSurface(bitmap, Color.Black);
             return texture;
+        }
+
+        public Size2D MeasureStringSize(string text, Font font)
+        {
+            SizeF size = _graphics.MeasureString(text, font);
+            return new Size2D(size.Width, size.Height);
         }
     }
 }

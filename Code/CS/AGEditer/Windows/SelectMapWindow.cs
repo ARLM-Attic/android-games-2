@@ -21,7 +21,7 @@ namespace AGEditer
 
         protected override void OnShown(EventArgs e)
         {
-            List<int> maps = DATUtility.GetMaps();
+            List<MapInfo> maps = DATUtility.GetMaps();
             foreach (var item in maps)
             {
                 TreeNode tnModel = new TreeNode();
@@ -38,7 +38,7 @@ namespace AGEditer
             TreeNode selNode = treeView1.SelectedNode;
             if (selNode != null)
             {
-                SelectedMapId = Convert.ToInt32(selNode.Tag);
+                SelectedMapId = (selNode.Tag as MapInfo).Id;
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }
@@ -48,7 +48,7 @@ namespace AGEditer
             TreeViewHitTestInfo tvHit = treeView1.HitTest(e.X, e.Y);
             if (tvHit.Node != null)
             {
-                SelectedMapId = Convert.ToInt32(tvHit.Node.Tag);
+                SelectedMapId = (tvHit.Node.Tag as MapInfo).Id;
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }

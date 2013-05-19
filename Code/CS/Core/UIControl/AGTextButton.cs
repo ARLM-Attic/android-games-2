@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 public class AGTextButton : AGControl
 {
@@ -14,6 +15,9 @@ public class AGTextButton : AGControl
     public Model2D Model { get; private set; }
     private int _frameIndex = 1;
 
+    private float _offsetX;
+    private float _offsetY;
+
     public AGTextButton(string text, Point2D pt, Size2D size)
     {
         Text = text;
@@ -23,6 +27,7 @@ public class AGTextButton : AGControl
         Model = DATUtility.GetModel(11);
         Size.W = Model.GetFrame(1, 1, 1).Width;
         Size.H = Model.GetFrame(1, 1, 1).Height;
+
     }
 
     protected override void OnRender(IGDI gdi)
@@ -35,7 +40,13 @@ public class AGTextButton : AGControl
             Size.H,
             frame.Width,
             frame.Height);
-        gdi.DrawShadowText(Text, ClientPos.X + 20, ClientPos.Y + 5);
+
+        Rectangle rect = new Rectangle((int)ClientPos.X, (int)ClientPos.Y, (int)Size.W, (int)Size.H);
+        gdi.DrawText(
+            AGRES.GetNormalUIFont(),
+            0x222222,
+            Text,
+            rect);
     }
 
     public override bool OnInputEvent(MouseMessage mouse)

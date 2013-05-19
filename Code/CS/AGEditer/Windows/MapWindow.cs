@@ -16,11 +16,27 @@ namespace AGEditer
         public int MapCol { get; set; }
         public int MapId { get; set; }
         public string MapCaption { get; set; }
-        public byte[] Data { get; set; }
+        public Model2D Data { get; set; }
+        public int TerrainId { get; set; }
 
         public MapWindow()
         {
             InitializeComponent();
+
+            BindTerrains();
+
+            textBox1.Text = (600 / 40).ToString();
+            textBox2.Text = (800 / 40).ToString();
+        }
+
+        private void BindTerrains()
+        {
+            List<Terrain> terrainList = DATUtility.GetTerrains();
+            for (int index = 0; index < terrainList.Count; index++)
+            {
+                _ctlListTerrain.Items.Add(terrainList[index]);
+            }
+            _ctlListTerrain.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,6 +49,8 @@ namespace AGEditer
                 MapId = Convert.ToInt32(textBox3.Text);
                 MapCaption = textBox4.Text;
 
+                TerrainId = (_ctlListTerrain.SelectedItem as Terrain).Id;
+
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             catch
@@ -42,12 +60,12 @@ namespace AGEditer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "*.bmp|*.bmp";
-            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            SelectModelWindow window = new SelectModelWindow();
+            if (window.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Data = System.IO.File.ReadAllBytes(dlg.FileName);
-                linkLabel1.Text = dlg.FileName;
+                Data = window.SelectedModel;
+                linkLabel1.Text = window.SelectedModel.Caption;
+                linkLabel1.Tag = window.SelectedModel;
             }
         }
     }

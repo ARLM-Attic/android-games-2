@@ -11,7 +11,7 @@ namespace AGShell
             : base(engine)
         {
             AGTextButton button = new AGTextButton(
-                "exist",
+                "退出",
                 new Point2D(MainWindow.Width - 200, MainWindow.Height - 100),
                 new Size2D(50, 150));
             button.Click += new EventHandler(button_Click);

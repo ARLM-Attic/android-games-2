@@ -21,6 +21,7 @@ public class ModelCategory
     public static ModelCategory Icon = new ModelCategory(5, "icon");
     public static ModelCategory Terrain = new ModelCategory(6, "Terrain(地形)");
     public static ModelCategory Ornamental = new ModelCategory(7, "Ornamental(装饰物)");
+    public static ModelCategory Building = new ModelCategory(8, "Building(建筑物)");
 
     public override string ToString()
     {
@@ -40,6 +41,7 @@ public class ModelCategory
             _defs.Add(Icon);
             _defs.Add(Terrain);
             _defs.Add(Ornamental);
+            _defs.Add(Building);
         }
 
         return _defs;

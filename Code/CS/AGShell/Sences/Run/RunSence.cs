@@ -91,7 +91,14 @@ namespace AGShell
                 }
                 #endregion
 
-                AI.Run(_map, _map.Camps[1]);
+                for (int index = 0; index < _map.Camps.Count; index++)
+                {
+                    if (_map.Camps[index].Type == CampType.Computer)
+                    {
+                        System.Diagnostics.Debug.WriteLine(string.Format("ai>> c:{0}  p:{1}", _map.Camps[index].Caption, _map.Camps[index].Population));
+                        AI.Run(_map, _map.Camps[index]);
+                    }
+                }
 
                 #region 更新单位信息
                 for (int iObj = 0; iObj < _map.Widgets.Count; iObj++)

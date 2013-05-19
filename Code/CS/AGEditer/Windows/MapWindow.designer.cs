@@ -35,7 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this._ctlListTerrain = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -100,20 +100,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 142);
+            this.label3.Location = new System.Drawing.Point(22, 142);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 6;
-            this.label3.Text = "地表类型:";
+            this.label3.Text = "terrain:";
             // 
-            // comboBox1
+            // _ctlListTerrain
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 139);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(208, 20);
-            this.comboBox1.TabIndex = 7;
+            this._ctlListTerrain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._ctlListTerrain.FormattingEnabled = true;
+            this._ctlListTerrain.Location = new System.Drawing.Point(81, 139);
+            this._ctlListTerrain.Name = "_ctlListTerrain";
+            this._ctlListTerrain.Size = new System.Drawing.Size(208, 20);
+            this._ctlListTerrain.TabIndex = 7;
             // 
             // label4
             // 
@@ -178,7 +178,7 @@
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this._ctlListTerrain);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -205,7 +205,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox _ctlListTerrain;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;

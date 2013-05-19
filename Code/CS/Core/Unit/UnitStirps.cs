@@ -16,7 +16,7 @@ public class UnitStirps
 
     public static UnitStirps Unit = new UnitStirps(1, "人类");
     public static UnitStirps Building = new UnitStirps(2, "怪兽");
-    public static UnitStirps Ornamental = new UnitStirps(3, "装饰物");
+    public static UnitStirps Ornamental = new UnitStirps(3, "其他");
 
     public override string ToString()
     {

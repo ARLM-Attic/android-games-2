@@ -7,8 +7,8 @@ public class ObjectUtil
 {
     public static bool CheckAttackDistance(Object2D obj1, Object2D obj2)
     {
-        float distance = CalcDistance(obj1.CurrentPoint,obj2.CurrentPoint);
-        if (distance <= obj1.Unit.Size + obj1.Unit.ADDistance + obj2.Unit.Size)
+        float distance = CalcDistance(obj1.CurrentPoint, obj2.CurrentPoint);
+        if (distance <= obj1.Unit.Size / 2 + obj1.Unit.ADDistance + obj2.Unit.Size / 2)
         {
             return true;
         }

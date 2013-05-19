@@ -24,7 +24,7 @@ public class Object2D
     public int DirectionId { get; internal set; }
 
     private int _counter;
-    private int _updateCounter = 3;
+    private int _updateCounter = 6;
 
     #region 属性
     public long HP { get; set; }
@@ -54,6 +54,11 @@ public class Object2D
 
     public int ADSpeed { get; set; }
     public int ADSpeedCounter { get; set; }
+
+    #region frame counter
+    private int _moveFCounter;
+    private int _standFCounter;
+    #endregion
 
     public Object2D()
     {
@@ -115,11 +120,22 @@ public class Object2D
             }
             else if (state == ObjState.Move)
             {
-                if (FrameIndex >= Unit.Model.GetFrames(ActionId, DirectionId).Count)
+                if (State == ObjState.Attack)
+                {
+                    if (FrameIndex >= Unit.Model.GetFrames(ActionId, DirectionId).Count)
+                    {
+                        State = state;
+                        ActionId = Action2DDef.Move.Id;
+                        FrameIndex = 0x01;
+                        _moveFCounter = 0;
+                    }
+                }
+                else
                 {
                     State = state;
                     ActionId = Action2DDef.Move.Id;
                     FrameIndex = 0x01;
+                    _moveFCounter = 0;
                 }
             }
             else if (state == ObjState.Stand)
@@ -161,45 +177,51 @@ public class Object2D
         {
             return;
         }
-
-        if (!this.IsDead())
-        {
-            #region 验证skill的可用性
-            for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
-            {
-                Skills[iSkill].Loop(engine, null);
-            }
-
-            bool isValidate = false;
-            for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
-            {
-                if (Skills[iSkill].Check(engine, this))
-                {
-                    isValidate = true;
-                    break;
-                }
-            }
-            #endregion
-
-            if (!isValidate)
-            {
-                // 执行攻击策略
-                if (!AttackStrategy.Attack(engine, Map, this))
-                {
-                    // 执行移动策略
-                    MoveStrategy.Move(Map, this);
-                }
-            }
-        }
-        else
-        {
-            SetAction(ObjState.Die);
-        }
-
         _counter = 0;
+
+        if (this.Unit.Category != UnitCategoryDef.Ornamental)
+        {
+            if (!this.IsDead())
+            {
+                #region 验证skill的可用性
+                for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
+                {
+                    Skills[iSkill].Loop(engine, null);
+                }
+
+                bool isValidate = false;
+                for (int iSkill = 0; iSkill < Skills.Count; iSkill++)
+                {
+                    if (Skills[iSkill].Check(engine, this))
+                    {
+                        isValidate = true;
+                        break;
+                    }
+                }
+                #endregion
+
+                if (!isValidate)
+                {
+                    // 执行攻击策略
+                    if (!AttackStrategy.Attack(engine, Map, this))
+                    {
+                        // 执行移动策略
+                        MoveStrategy.Move(Map, this);
+                    }
+                }
+            }
+            else
+            {
+                SetAction(ObjState.Die);
+            }
+        }
+
+        UpdateFrameIndex();
+
+        //_counter = 0;
         List<Frame2D> frames = Unit.Model.GetFrames(ActionId, DirectionId);
 
-        FrameIndex++;
+        //FrameIndex++;
         if (FrameIndex > frames.Count)
         {
             if (this.State == ObjState.Die)
@@ -277,4 +299,9 @@ public class Object2D
         ADSpeedCounter = 0;
     }
     #endregion
+
+    public void UpdateFrameIndex()
+    {
+        FrameIndex++;
+    }
 }

@@ -389,6 +389,34 @@ namespace AGEditer
                 BindToTree(treeView1, _model);
             }
         }
+
+        private void _ctlBtnDeleteFrame_Click(object sender, EventArgs e)
+        {
+            TreeNode selNode = treeView1.SelectedNode;
+            if (selNode != null)
+            {
+                if (selNode.Tag.GetType() == typeof(Frame2D))
+                {
+                    Frame2D frame = selNode.Tag as Frame2D;
+                    for (int actionIndex = 0; actionIndex < _model.Actions.Count; actionIndex++)
+                    {
+                        for (int dirIndex = 0; dirIndex < _model.Actions[actionIndex].Directions.Count; dirIndex++)
+                        {
+                            for (int frameIndex = 0; frameIndex < _model.Actions[actionIndex].Directions[dirIndex].Frames.Count; frameIndex++)
+                            {
+                                if (_model.Actions[actionIndex].Directions[dirIndex].Frames[frameIndex] == frame)
+                                {
+                                    _model.Actions[actionIndex].Directions[dirIndex].Frames.Remove(frame);
+
+                                    BindToTree(selNode.Parent, _model.Actions[actionIndex].Directions[dirIndex]);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

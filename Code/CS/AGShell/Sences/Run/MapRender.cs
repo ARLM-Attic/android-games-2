@@ -18,7 +18,7 @@ namespace AGShell
             #region 渲染地图背景或者地图地形
             if (map.Background != null)
             {
-                Bitmap bgImage = new Bitmap(new MemoryStream(map.Background));
+                Bitmap bgImage = new Bitmap(new MemoryStream(map.Background.GetFrame(1,1,1).Data));
                 gdi.DrawImage(bgImage, 0, 0, camera.Width, camera.Height, camera.RectInMap.X, camera.RectInMap.Y, camera.RectInMap.W, camera.RectInMap.H);
             }
             else
@@ -134,16 +134,17 @@ namespace AGShell
                 float curfx = camera.ZeroPoint.X + (item.CurrentPoint.X - frameOffsetX) * camera.Zoom;
                 float curfy = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameOffsetY) * camera.Zoom;
 
-                if (item.Unit.Stirps != UnitStirps.Ornamental)
+                if (item.Unit.Category != UnitCategoryDef.Ornamental)
                 {
                     #region 显示HP条
-                    float curfx1 = camera.ZeroPoint.X + (item.CurrentPoint.X - frameHP.OffsetX) * camera.Zoom;
-                    float curfy1 = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameHP.offsetY) * camera.Zoom;
+                    float sizeScale = (float)item.Unit.Size / MapCell.Width;
+                    float curfx1 = camera.ZeroPoint.X + (item.CurrentPoint.X - frameHP.OffsetX * sizeScale) * camera.Zoom;
+                    float curfy1 = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameHP.offsetY * sizeScale) * camera.Zoom;
                     gdi.Draw(frameHP.Texture,
                         curfx1,
                         curfy1,
-                        frameHP.Width * item.Unit.Scale,
-                        frameHP.Height * item.Unit.Scale);
+                        frameHP.Width * sizeScale * item.Unit.Scale,
+                        frameHP.Height * sizeScale * item.Unit.Scale);
                     #endregion
                 }
 
@@ -153,10 +154,13 @@ namespace AGShell
                     curfw,
                     curfh);
 
-                gdi.DrawShadowText(
-                    item.HP.ToString(),
-                    (int)camera.ZeroPoint.X + (int)(item.CurrentPoint.X * camera.Zoom) - 20,
-                    (int)camera.ZeroPoint.Y + (int)(item.CurrentPoint.Y * camera.Zoom));
+                if (item.Unit.Category != UnitCategoryDef.Ornamental)
+                {
+                    gdi.DrawShadowText(
+                        item.HP.ToString(),
+                        (int)camera.ZeroPoint.X + (int)(item.CurrentPoint.X * camera.Zoom) - 20,
+                        (int)camera.ZeroPoint.Y + (int)(item.CurrentPoint.Y * camera.Zoom));
+                }
             }
 
             for (int iAnimation = 0; iAnimation < map.AnimationList.Count; iAnimation++)

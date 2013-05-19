@@ -12,10 +12,10 @@ public class AI
         {
             //if (camp.Income >= camp.AvailableUnitList[iUnit].CostM && camp.Population < camp.PopulationLimit)
             //{
-            if (camp.Income >= camp.AvailableUnitList[iUnit].CostM && camp.Population < 2)
+            if (camp.Income >= camp.AvailableUnitList[iUnit].CostM && camp.Population <2)
             {
                 Object2D obj = AGSUtility.CreateObject(map, camp, DATUtility.GetUnit(camp.AvailableUnitList[iUnit].Id), "unknown", camp.StartPos, Direction2DDef.South.Id);
-                AGSUtility.MoveTo(obj, map.Camps[0].StartPos);
+                AGSUtility.MoveTo(obj, camp.TargetPos);
             }
         }
     }

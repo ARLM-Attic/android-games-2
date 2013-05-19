@@ -11,6 +11,8 @@ public abstract class AGControl
 
     public AGControl Parent { get; set; }
 
+    public bool IsVisible { get; set; }
+
     public Point2D ClientPos
     {
         get
@@ -19,13 +21,21 @@ public abstract class AGControl
             {
                 return new Point2D(Parent.ClientPos.X + Pos.X, Parent.ClientPos.Y + Pos.Y);
             }
-            return Pos;
+            return new Point2D(Pos.X, Pos.Y);
         }
+    }
+
+    public AGControl()
+    {
+        IsVisible = true;
     }
 
     public void Render(IGDI gdi)
     {
-        OnRender(gdi);
+        if (IsVisible)
+        {
+            OnRender(gdi);
+        }
     }
 
     protected abstract void OnRender(IGDI gdi);

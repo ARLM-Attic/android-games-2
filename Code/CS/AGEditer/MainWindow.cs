@@ -81,6 +81,7 @@ namespace AGEditer
         private void BindCampTree()
         {
             _treeCamp.Nodes.Clear();
+            _listCurrentCamp.Items.Clear();
 
             foreach (var camp in _map.Camps)
             {
@@ -122,8 +123,9 @@ namespace AGEditer
                 _map.Row = dlg.MapRow;
                 _map.Col = dlg.MapCol;
                 _map.Background = dlg.Data;
-
                 _map.Cells = new MapCell[dlg.MapRow * dlg.MapCol];
+
+                Terrain selectedTerrain = DATUtility.GetTerrain(dlg.TerrainId);
 
                 for (int row = 0; row < dlg.MapRow; row++)
                 {
@@ -131,6 +133,12 @@ namespace AGEditer
                     {
                         MapCell cell = new MapCell();
                         cell.MapPos = new MapPos(row, col);
+
+                        #region 设置地图单元的地形信息
+                        cell.TerrainId = selectedTerrain.Id;
+                        cell.TerrainIndex = 1;
+                        #endregion
+
                         _map.Cells[row * dlg.MapCol + col] = cell;
                     }
                 }
@@ -197,7 +205,9 @@ namespace AGEditer
 
         private void _btnSetCamp_Click(object sender, EventArgs e)
         {
-
+            CampWindow window = new CampWindow(_map);
+            window.ShowDialog();
+            BindCampTree();
         }
 
         void _treeCamp_AfterSelect(object sender, TreeViewEventArgs e)
@@ -207,7 +217,12 @@ namespace AGEditer
                 Camp camp = e.Node.Parent.Tag as Camp;
                 _listCurrentCamp.SelectedItem = camp;
 
-                Model2D model = DATUtility.GetModel(camp.Id);
+                int startPosId = camp.Id;
+                if (startPosId > 2)
+                {
+                    startPosId = 2;
+                }
+                Model2D model = DATUtility.GetModel(startPosId);
                 _panel.SelectUnit(DesignState.ADD_CAMP_STARTPOS, model, camp);
             }
             else if (e.Node.Tag != null && e.Node.Tag is Object2D)
@@ -261,6 +276,26 @@ namespace AGEditer
         {
             AutoModelingWindow window = new AutoModelingWindow();
             window.ShowDialog();
+        }
+
+        private void 设置ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            WorldMapWindow window = new WorldMapWindow();
+            window.ShowDialog();
+        }
+
+        private void _ctlBtnPackage_Click(object sender, EventArgs e)
+        {
+            string appPath = DATUtility.GetAppPath();
+            string path = DATUtility.GetResPath();
+            string[] files = System.IO.Directory.GetFiles(path, "*.*", System.IO.SearchOption.AllDirectories);
+            Dictionary<string, string> srcFiles = new Dictionary<string, string>();
+            for (int index = 0; index < files.Length; index++)
+            {
+                srcFiles.Add(files[index].Replace(path, string.Empty), files[index]);
+            }
+            PACKUtility.CompressFiles(srcFiles, appPath + "data.dat");
+            MessageBox.Show("打包成功!");
         }
     }
 }

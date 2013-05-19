@@ -129,7 +129,7 @@ namespace AGEditer
 
                 if (_map.Background != null)
                 {
-                    Bitmap bgImage = new Bitmap(new MemoryStream(_map.Background));
+                    Bitmap bgImage = new Bitmap(new MemoryStream(_map.Background.GetFrame(1,1,1).Data));
                     _mGraphics.DrawImage(bgImage, 0, 0, bgImage.Width, bgImage.Height);
                 }
 
@@ -138,6 +138,14 @@ namespace AGEditer
                     for (int col = 0; col < _map.Col; col++)
                     {
                         MapCell cell = _map.GetCell(new MapPos(row, col));
+                        if (_map.Background == null)
+                        {
+                            Terrain terrain = DATUtility.GetTerrain(cell.TerrainId);
+                            Frame2D frame = terrain.Model.GetFrame(1, 1, cell.TerrainIndex);
+                            Bitmap terrainImage = new Bitmap(new MemoryStream(frame.Data));
+                            _mGraphics.DrawImage(terrainImage, col * MapCell.Width, row * MapCell.Height, MapCell.Width, MapCell.Height);
+                        }
+
                         if (cell.Value == 0)
                         {
                             _mGraphics.DrawRectangle(Pens.Green, col * MapCell.Width, row * MapCell.Height, MapCell.Width, MapCell.Height);

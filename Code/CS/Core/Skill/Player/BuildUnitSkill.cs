@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 public class BuildUnitSkill : Skill
 {
@@ -51,6 +52,12 @@ public class BuildUnitSkill : Skill
         //    frame.Height,
         //    frame.Width,
         //    frame.Height);
+    }
+
+    public override void RenderOnIcon(IGDI gdi, Rectangle rect)
+    {
+        gdi.DrawShadowText(_unit.CostP.ToString(), rect.X + 1, rect.Y + 15);
+        gdi.DrawShadowText(_unit.CostM.ToString(), rect.X + 20, rect.Y + 15);
     }
 
     protected override void OnUpdate(IEngine engine, MouseMessage mouse)
