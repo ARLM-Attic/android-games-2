@@ -19,11 +19,11 @@ namespace AGShell
         public RunHUD(IEngine engine, Map2D map)
             : base(engine)
         {
-            _skillBarModel = DATUtility.GetModel(18);
-            _mapTitleBGModel = DATUtility.GetModel(20);
+            _skillBarModel = DATUtility.GetModel(engine, 18);
+            _mapTitleBGModel = DATUtility.GetModel(engine, 20);
 
-            _moneyModel = DATUtility.GetModel(151);
-            _populationModel = DATUtility.GetModel(152);
+            _moneyModel = DATUtility.GetModel(engine, 151);
+            _populationModel = DATUtility.GetModel(engine, 152);
 
             _controls = new List<AGControl>();
             _map = map;
@@ -73,11 +73,9 @@ namespace AGShell
         protected override void OnRender(IGDI gdi)
         {
             Frame2D mapTitleFrame = _mapTitleBGModel.GetFrame(1, 1, 1);
-            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(mapTitleFrame.Data)),
+            gdi.Draw(mapTitleFrame.Texture,
                 5,
                 5,
-                mapTitleFrame.Width,
-                mapTitleFrame.Height,
                 mapTitleFrame.Width,
                 mapTitleFrame.Height);
 
@@ -103,13 +101,11 @@ namespace AGShell
             // 资源栏 width*10
             //gdi.DrawRectangle(0, 0, MainWindow.Width, 20);
             Frame2D moneyFrame = _moneyModel.GetFrame(1, 1, 1);
-            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(moneyFrame.Data)),
+            gdi.Draw(moneyFrame.Texture,
                 MainWindow.Width - 232,
                 5,
                 24,
-                24,
-                moneyFrame.Width,
-                moneyFrame.Height);
+                24);
             gdi.DrawShadowText(AGRES.NormalUIHfont,
                 0xffff00, 
                 string.Format("{0}", _map.Camps[0].Income), 
@@ -117,13 +113,11 @@ namespace AGShell
                 5);
 
             Frame2D popFrame = _populationModel.GetFrame(1, 1, 1);
-            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(popFrame.Data)),
+            gdi.Draw(popFrame.Texture,
                 MainWindow.Width - 132,
                 5,
                 24,
-                24,
-                popFrame.Width,
-                popFrame.Height);
+                24);
             gdi.DrawShadowText(AGRES.NormalUIHfont,
                 0xffff00,
                 string.Format("{0}/{1}", _map.Camps[0].Population, _map.Camps[0].PopulationLimit), 
@@ -139,11 +133,9 @@ namespace AGShell
             }
 
             Frame2D frame = _skillBarModel.GetFrame(1, 1, 1);
-            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)),
+            gdi.Draw(frame.Texture,
                 (MainWindow.Width - frame.Width) / 2,
                 (MainWindow.Height - frame.Height),
-                frame.Width,
-                frame.Height,
                 frame.Width,
                 frame.Height);
         }

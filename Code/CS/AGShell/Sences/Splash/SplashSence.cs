@@ -21,7 +21,7 @@ namespace AGShell
         public SplashSence(IEngine engine)
             : base(engine)
         {
-            _model = DATUtility.GetModel(12);
+            _model = DATUtility.GetModel(engine, 12);
 
             _frameIndex = 1;
             _x = (MainWindow.Width - _model.GetFrame(1, 1, 1).Width) / 2;
@@ -49,11 +49,9 @@ namespace AGShell
             }
 
             Frame2D frame = _model.GetFrame(0x01, 0x01, _frameIndex);
-            gdi.DrawImage(new System.Drawing.Bitmap(new System.IO.MemoryStream(frame.Data)),
+            gdi.Draw(frame.Texture,
                 _x,
                 100,
-                frame.Width,
-                frame.Height,
                 frame.Width,
                 frame.Height);
 

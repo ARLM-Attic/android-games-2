@@ -395,6 +395,42 @@ public static partial class DATUtility
         }
         return null;
     }
+    public static Model2D GetModel(IEngine engine, int modelId)
+    {
+        foreach (var item in s_models)
+        {
+            if (item.Id == modelId)
+            {
+                return item;
+            }
+        }
+
+        string modelFile = string.Format("{0}models.xml", GetResPath());
+
+        XDocument xDoc = XDocument.Load(modelFile);
+
+        XElement xModel = xDoc.XPathSelectElement(string.Format("//models/model[@id='{0}']", modelId));
+        if (xModel != null)
+        {
+            Model2D model = ModelXML.FromXML(xModel);
+            foreach (var action in model.Actions)
+            {
+                foreach (var direction in action.Directions)
+                {
+                    foreach (var frame in direction.Frames)
+                    {
+                        frame.Data = ResourceLoader.GetFrameData(model.Id, action.Id, direction.Id, frame.Index);
+                        frame.Texture = engine.GDI.CreateTexture(frame.Data);
+                    }
+                }
+            }
+
+            s_models.Add(model);
+
+            return model;
+        }
+        return null;
+    }
 
     public static List<Model2D> GetModels()
     {

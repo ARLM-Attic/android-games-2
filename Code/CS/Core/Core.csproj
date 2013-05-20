@@ -50,6 +50,7 @@
     <Compile Include="Map\CampType.cs" />
     <Compile Include="Map\MapInfo.cs" />
     <Compile Include="Sound\AttackSound.cs" />
+    <Compile Include="UIControl\AGCheckableBase.cs" />
     <Compile Include="UIControl\AGContainer.cs" />
     <Compile Include="Util\DatUtility\DATUtility.WorldMap.cs" />
     <Compile Include="WorldMap\StagesPos.cs" />
