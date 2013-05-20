@@ -24,7 +24,7 @@ public class Object2D
     public int DirectionId { get; internal set; }
 
     private int _counter;
-    private int _updateCounter = 6;
+    private int _updateCounter = 3;
 
     #region 属性
     public long HP { get; set; }
@@ -167,9 +167,9 @@ public class Object2D
     public void Update(IEngine engine)
     {
         ADSpeedCounter++;
-        if (ADSpeedCounter >= ADSpeed)
+        if (ADSpeedCounter >= ADSpeed * 2)
         {
-            ADSpeedCounter = ADSpeed;
+            ADSpeedCounter = ADSpeed * 2;
         }
 
         _counter++;
@@ -287,7 +287,7 @@ public class Object2D
     /// <returns></returns>
     public bool HasAttackCooldown()
     {
-        if (ADSpeedCounter >= ADSpeed)
+        if (ADSpeedCounter >= ADSpeed * 2)
         {
             return true;
         }

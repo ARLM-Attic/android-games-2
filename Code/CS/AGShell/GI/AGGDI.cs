@@ -246,11 +246,10 @@ namespace AGShell
         public void DrawShadowText(string text, float x, float y)
         {
             m_bs.FontHandle = AGRES.SmallFontHandle;
-            m_bs.ForeColor = Color.FromArgb(0xee, 0xee, 0xee);
-            m_bs.DrawText((int)x, (int)y, text, false);
-
             m_bs.ForeColor = Color.FromArgb(0x01, 0x01, 0x01);
             m_bs.DrawText((int)x + 1, (int)y + 1, text, false);
+            m_bs.ForeColor = Color.FromArgb(0xff, 0xff, 0x00);
+            m_bs.DrawText((int)x, (int)y, text, false);
         }
 
         public void DrawShadowText(IntPtr font, int color, string text, float x, float y)

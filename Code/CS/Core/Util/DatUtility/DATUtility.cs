@@ -77,6 +77,7 @@ public static partial class DATUtility
         xUnit.Add(new XAttribute("stirps-id", unit.Stirps.Id));
         xUnit.Add(new XAttribute("model-id", unit.Model.Id));
         xUnit.Add(new XAttribute("icon-id", unit.IconModel.Id));
+        xUnit.Add(new XAttribute("attack-sound-id", unit.AttackSound.Id));
         xUnit.Add(new XAttribute("scale", unit.Scale));
         xUnit.Add(new XAttribute("max-hp", unit.MaxHP));
         xUnit.Add(new XAttribute("max-mp", unit.MaxMP));
@@ -192,6 +193,16 @@ public static partial class DATUtility
             else
             {
                 unit.IconModel = DATUtility.GetModel(Convert.ToInt32(xUnit.Attribute("icon-id").Value));
+            }
+            #endregion
+            #region attack-sound-id
+            if (xUnit.Attribute("attack-sound-id") == null)
+            {
+                unit.AttackSound = AttackSound.AtkSound1;
+            }
+            else
+            {
+                unit.AttackSound = AttackSound.Get(Convert.ToInt32(xUnit.Attribute("attack-sound-id").Value));
             }
             #endregion
             #region scale

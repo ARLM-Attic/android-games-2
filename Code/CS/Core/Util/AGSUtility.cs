@@ -190,7 +190,7 @@ public class AGSUtility
                 Camp camp = map.Camps[iCamps];
                 for (int iObj = 0; iObj < camp.ObjList.Count; iObj++)
                 {
-                    if (camp.ObjList[iObj].Unit.Category != UnitCategoryDef.Ornamental && !camp.ObjList[iObj].IsDead())
+                    if (camp.ObjList[iObj].Unit.Category == UnitCategoryDef.Building && !camp.ObjList[iObj].IsDead())
                     {
                         return false;
                     }
@@ -209,7 +209,7 @@ public class AGSUtility
                 Camp camp = map.Camps[iCamps];
                 for (int iObj = 0; iObj < camp.ObjList.Count; iObj++)
                 {
-                    if (camp.ObjList[iObj].Unit.Category != UnitCategoryDef.Ornamental && !camp.ObjList[iObj].IsDead())
+                    if (camp.ObjList[iObj].Unit.Category == UnitCategoryDef.Building && !camp.ObjList[iObj].IsDead())
                     {
                         return false;
                     }

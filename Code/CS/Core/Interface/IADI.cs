@@ -15,4 +15,9 @@ public interface IADI
     /// </summary>
     /// <param name="id"></param>
     void PlayBGM(int id);
+
+    /// <summary>
+    /// 播放声音
+    /// </summary>
+    void PlayAttackSound(AttackSound sound);
 }

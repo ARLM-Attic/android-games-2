@@ -61,6 +61,20 @@ namespace AGShell
                     for (int iCamp = 0; iCamp < _map.Camps.Count; iCamp++)
                     {
                         _map.Camps[iCamp].Income += _map.Camps[iCamp].IncomePreSec;
+                        if (_map.Camps[iCamp].Type == CampType.Player)
+                        {
+                            if (_map.Camps[iCamp].Income > 500)
+                            {
+                                _map.Camps[iCamp].Income = 500;
+                            }
+                        }
+                        else
+                        {
+                            if (_map.Camps[iCamp].Income > 5000)
+                            {
+                                _map.Camps[iCamp].Income = 5000;
+                            }
+                        }
 
                         if (_map.Camps[iCamp].Result != null)
                         {

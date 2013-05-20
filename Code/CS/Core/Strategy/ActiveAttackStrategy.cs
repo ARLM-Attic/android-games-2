@@ -18,7 +18,7 @@ public class ActiveAttackStrategy : IAttackStrategy
                         if (obj.HasAttackCooldown())
                         {
                             obj.TargetObj = opponentObj;
-                            engine.ADI.Play();
+                            engine.ADI.PlayAttackSound(obj.Unit.AttackSound);
                             int random = new Random().Next(0, 100);
                             if (random < obj.Unit.CritProbability)
                             {

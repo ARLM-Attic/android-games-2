@@ -52,10 +52,10 @@ public class Map2D
 
         PlayerSkill = new global::PlayerSkill();
         SkillList = new List<Skill>();
-        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(306)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(301)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(303)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(304)));
+        SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(306)));
         SkillList.Add(new BuildUnitSkill(DATUtility.GetUnit(305)));
 
         SkillList2 = new List<Skill>();

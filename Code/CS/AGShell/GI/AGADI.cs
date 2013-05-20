@@ -72,5 +72,13 @@ namespace AGShell
                 BGMBuffer = ApplicationBuffer;
             }
         }
+
+        public void PlayAttackSound(AttackSound sound)
+        {
+            BufferDescription bufferDesc = new BufferDescription();
+            bufferDesc.Flags = BufferDescriptionFlags.GlobalFocus;
+            SecondaryBuffer ApplicationBuffer = new SecondaryBuffer(string.Format("{0}wav\\{1}", DATUtility.GetResPath(), sound.File), bufferDesc, _device);
+            ApplicationBuffer.Play(0, BufferPlayFlags.Default);
+        }
     }
 }

@@ -231,6 +231,10 @@ namespace AGShell
                     playerCamp.TargetPos = camp.StartPos;
                     camp.TargetPos = playerCamp.StartPos;
                     camp.AvailableUnitList.Add(DATUtility.GetUnit(301));
+                    camp.AvailableUnitList.Add(DATUtility.GetUnit(306));
+                    camp.AvailableUnitList.Add(DATUtility.GetUnit(303));
+                    camp.AvailableUnitList.Add(DATUtility.GetUnit(304));
+                    camp.AvailableUnitList.Add(DATUtility.GetUnit(305));
                 }
             }
 

@@ -23,6 +23,7 @@ namespace AGEditer
             Unit = unit;
             BindCategoryList();
             BindStirpsList();
+            BindAttackSoundList();
             BindUnit();
         }
 
@@ -48,6 +49,17 @@ namespace AGEditer
             comboBox1.SelectedIndex = 0;
         }
 
+        private void BindAttackSoundList()
+        {
+            this._ctlListAttackSound.Items.Clear();
+            List<AttackSound> list = AttackSound.GetDefs();
+            foreach (var item in list)
+            {
+                _ctlListAttackSound.Items.Add(item);
+            }
+            _ctlListAttackSound.SelectedIndex = 0;
+        }
+
         private void BindUnit()
         {
             _ctlEditId.Text = Unit.Id.ToString();
@@ -65,6 +77,14 @@ namespace AGEditer
                 if ((item as UnitStirps).Id == Unit.Stirps.Id)
                 {
                     comboBox1.SelectedItem = item;
+                    break;
+                }
+            }
+            foreach (var item in this._ctlListAttackSound.Items)
+            {
+                if ((item as AttackSound).Id == Unit.AttackSound.Id)
+                {
+                    _ctlListAttackSound.SelectedItem = item;
                     break;
                 }
             }
@@ -101,6 +121,7 @@ namespace AGEditer
             Unit.Stirps = (comboBox1.SelectedItem as UnitStirps);
             Unit.Model = (_ctlBtnModel.Tag as Model2D);
             Unit.IconModel = (this._ctlBtnIcon.Tag as Model2D);
+            Unit.AttackSound = (this._ctlListAttackSound.SelectedItem as AttackSound);
             Unit.Scale = Convert.ToSingle(_ctlEditScale.Text);
 
             Unit.MaxHP = Convert.ToInt32(_ctlEditHP.Text);

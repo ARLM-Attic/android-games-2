@@ -12,7 +12,11 @@ public class Unit2D
     public string Caption { get; set; }
 
     public Model2D Model { get; set; }
-
+    public Model2D IconModel { get; set; }
+    /// <summary>
+    /// 攻击音效
+    /// </summary>
+    public AttackSound AttackSound { get; set; }
 
     public int MaxHP { get; set; }
     public int MaxMP { get; set; }
