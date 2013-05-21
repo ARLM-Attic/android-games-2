@@ -1,10 +1,27 @@
-﻿function AGIDI(engine) {
+﻿// user input device interface
+function AGIDI(engine) {
 
-    this._mouse = null;
+    this._mouse = new MouseState();
 
-    this.update = function () {
-        
+    this.regEvent = function (engine) {
+        var that = this;
+        engine._canvas.addEventListener("mousedown", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+            that._mouse.setLBDown(1);
+        });
+        engine._canvas.addEventListener("mousemove", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+        });
+        engine._canvas.addEventListener("mouseup", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+            that._mouse.setLBDown(0);
+        });
     }
+
+    this.regEvent(engine);
 }
 
 function MouseState() {
@@ -27,4 +44,12 @@ function MouseState() {
         }
         return false;
     }
+
+    this.setLBDown = function (state) {
+        this._buttons[0] = state;
+    }
+    this.setRBDown = function (state) {
+        this._buttons[1] = state;
+    }
+
 }

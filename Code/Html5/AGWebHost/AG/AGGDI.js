@@ -14,7 +14,7 @@ function AGGDI(engine) {
         this._context.fillStyle = '#00f';
         //this._context.font = "italic 30px sans-serif";
         this._context.textBaseline = 'top'
-        this._context.fillText(text, x, y)
+        this._context.fillText(text, x, y);
     }
 
     this.drawDiamond = function (x, y, w, h) {

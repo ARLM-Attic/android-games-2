@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="AG/AGEngine.js"></script>
+    <script src="AG/AGGDI.js"></script>
+    <script src="AG/AGIDI.js"></script>
+    <script src="AG/utility/AGResLoader.js"></script>
+    <script src="AG/screens/AGTestMouseScreen.js"></script>
+</head>
+<body>
+    <canvas id="mycanvas" style="background-color:white;border:1px solid red;" width="800" height="600"></canvas>
+</body>
+</html>
+<script type="text/javascript">
+    var ag = { version: '1.0' };
+    window.onload = function () {
+        ag.engine = new AGEngine();
+        ag.engine.init(document.getElementById("mycanvas"), 800, 600)
+        ag.engine.switchScreen(new AGTestMouseScreen());
+    }
+</script>
