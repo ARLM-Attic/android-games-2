@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script src="AG/engine.js" type="text/javascript"></script>
+    <script src="AG/gdi.js" type="text/javascript"></script>
+</head>
+<body style="margin:0px; padding:0px; cursor:default;">
+    <form id="form1" runat="server">
+    <canvas id="mycanvas" style="border: 1px solid black; cursor:default; text-align:center;" width="800px" height="600px">
+    </canvas>
+    </form>
+</body>
+</html>
+<script type="text/javascript">
+
+    // var xshape = function{ this.onRender(){} } 这个是父类。自己去写，然后后面的继承他
+//    var xline = function (x1, y1, x2, y2) {
+
+//        // 自己的属性和方法
+//        this._startPos = { x: x1, y: y1 };
+//        this._endPos = { x: x2, y: y2 };
+
+//        // 设置结束位置
+//        this.to = function (toX, toY) {
+//            this._endPos = { x: toX, y: toY };
+//        }
+
+//        // 重写父类方法
+//        this.onRender = function (content) {
+
+//            content.beginPath();
+
+//            content.moveTo(this._startPos.x, this._startPos.y);
+//            content.lineTo(this._endPos.x, this._endPos.y);
+//            content.strokeStyle = "red";
+//            content.lineWidth = 1;
+//            content.lineCap = "butt";
+
+//            content.closePath();
+//            content.stroke();
+//        }
+//    }
+
+//    var shapeEngine = function (canvas, width, height) {
+//        this._canvas = canvas;
+//        this._content = this._canvas.getContext("2d");
+//        this._width = width;
+//        this._height = height;
+
+//        this._items = new Array();
+
+//        this.add = function (item) {
+//            this._items.push(item);
+//        }
+
+//        this.init = function () {
+//            setInterval(this.onTick, 10);
+//        }
+
+//        this.onRender = function () {
+//            this._content.fillRect(0, 0, this._width, this._height);
+//            for (var i = 0; i < this._items.length; i++) {
+//                this._items[i].onRender(this._content);
+//            }
+//        }
+
+//        this.onTick = function () {
+//            engine.onRender();
+//        }
+//    }
+
+//    // 使用方法
+//    var engine = new shapeEngine(document.getElementById("mycanvas"), 800, 600);
+//    engine.init()
+
+//    engine.add(new xline(10, 10, 20, 400));
+//    engine.add(new xline(100, 20, 200, 400));
+
+//    var _movetag = false;
+
+//    var _currentElement = null;
+//    $("#mycanvas").mousedown(function (e) {
+//        _movetag = true;
+//        _currentElement = new xline(e.pageX, e.pageY, e.pageX, e.pageY);
+//        engine.add(_currentElement);
+//    })
+
+//    $("#mycanvas").mousemove(function (e) {
+//        if (_movetag == false) {
+//            return;
+//        }
+//        _currentElement.to(e.pageX, e.pageY);
+//    })
+
+//    $("#mycanvas").mouseup(function (e) {
+//        _movetag = false;
+//        _currentElement = null;
+    //    })
+    ag.engine = new AGEngine();
+    ag.engine.init(document.getElementById("mycanvas"), 800, 600)
+
+</script>
