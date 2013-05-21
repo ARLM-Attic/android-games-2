@@ -3,6 +3,10 @@
     <title>ag html5 - fps</title>
     <script src="AG/AGEngine.js" type="text/javascript"></script>
     <script src="AG/AGGDI.js" type="text/javascript"></script>
+    <script src="AG/AGIDI.js" type="text/javascript"></script>
+    <script src="AG/screens/AGTestModelScreen.js" type="text/javascript"></script>
+    <script src="AG/stucture/AGModel.js" type="text/javascript"></script>
+    <script src="AG/utility/AGResLoader.js" type="text/javascript"></script>
 </head>
 <body style="margin:0px; padding:0px; cursor:default;">
     <form id="form1" runat="server">
@@ -16,5 +20,6 @@
     window.onload = function () {
         ag.engine = new AGEngine();
         ag.engine.init(document.getElementById("mycanvas"), 800, 600)
+        ag.engine.switchScreen(new AGTestModelScreen());
     }
 </script>

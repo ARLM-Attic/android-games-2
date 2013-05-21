@@ -5,7 +5,12 @@ function AGEngine() {
     this._lastTick = 0;
     this._intervalTick = 20;
 
+    // graphics interface
     this._gdi = null;
+    // user input interface
+    this._idi = null;
+    this._resLoader = null;
+
     this._items = new Array();
 
     this._curScreen = null;
@@ -23,7 +28,11 @@ function AGEngine() {
         this._context = this._canvas.getContext("2d");
         this._width = width;
         this._height = height;
-        this._gdi = new AGGDI(this._context);
+
+        this._resLoader = new AGResLoader(this);
+
+        this._idi = new AGIDI(this);
+        this._gdi = new AGGDI(this);
         setInterval(this.onTick, 10);
     }
 
@@ -47,12 +56,8 @@ function AGEngine() {
             this._context.fillRect(0, 0, this._width, this._height);
 
             if (this._curScreen != null) {
+                this._curScreen.loop(this);
                 this._curScreen.render(this);
-
-//                for (var i = 0; i < 900; i++) {
-//                    this._gdi.draw(this._images[0], i * 10, i * 10);
-//                    this._gdi.draw(this._images[1], i * 20, i * 20);
-//                }
             }
 
             this._gdi.drawString("fps:" + this._fps, 0, 0);

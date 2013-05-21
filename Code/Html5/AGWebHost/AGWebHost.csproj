@@ -55,13 +55,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AG\engine.js" />
-    <Content Include="AG\gdi.js" />
+    <Content Include="AG\AGEngine.js" />
+    <Content Include="AG\AGGDI.js" />
+    <Content Include="AG\AGIDI.js" />
+    <Content Include="AG\screens\AGTestModelScreen.js" />
+    <Content Include="AG\stucture\AGModel.js" />
     <Content Include="AG\screen.js" />
     <Content Include="AG\screens\mapgrid.js" />
+    <Content Include="AG\utility\AGResLoader.js" />
+    <Content Include="TestModel.html" />
     <Content Include="MapGrid.html" />
     <Content Include="fps.html" />
     <Content Include="Index.html" />
+    <Content Include="Res\1004-0001-0001-0001.bmp" />
+    <Content Include="Res\1004-0001-0001-0002.bmp" />
+    <Content Include="Res\1004-0001-0001-0003.bmp" />
+    <Content Include="Res\1004-0001-0001-0004.bmp" />
     <Content Include="Res\4588.bmp" />
     <Content Include="Res\4588.png" />
     <Content Include="Res\4589.bmp" />
@@ -83,6 +92,7 @@
   <ItemGroup>
     <Content Include="Actions\GetImage.ashx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

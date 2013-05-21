@@ -1,6 +1,6 @@
 ﻿
-function AGGDI(context) {
-    this._context = context;
+function AGGDI(engine) {
+    this._context = engine._context;
     this.draw = function (image, x, y, w, h) {
         //在左上角画一幅图片
         this._context.drawImage(image, x, y, w, h);
