@@ -134,33 +134,21 @@ namespace AGShell
                 float curfx = camera.ZeroPoint.X + (item.CurrentPoint.X - frameOffsetX) * camera.Zoom;
                 float curfy = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameOffsetY) * camera.Zoom;
 
-                if (item.Unit.Category != UnitCategoryDef.Ornamental)
-                {
-                    #region 显示HP条
-                    float sizeScale = (float)item.Unit.Size / MapCell.Width;
-                    float curfx1 = camera.ZeroPoint.X + (item.CurrentPoint.X - frameHP.OffsetX * sizeScale) * camera.Zoom;
-                    float curfy1 = camera.ZeroPoint.Y + (item.CurrentPoint.Y - frameHP.offsetY * sizeScale) * camera.Zoom;
-                    gdi.Draw(frameHP.Texture,
-                        curfx1,
-                        curfy1,
-                        frameHP.Width * sizeScale * item.Unit.Scale,
-                        frameHP.Height * sizeScale * item.Unit.Scale);
-                    #endregion
-                }
-
                 gdi.Draw(frame.Texture,
                     curfx,
                     curfy,
                     curfw,
                     curfh);
 
-                if (item.Unit.Category != UnitCategoryDef.Ornamental)
-                {
-                    gdi.DrawShadowText(
-                        item.HP.ToString(),
-                        (int)camera.ZeroPoint.X + (int)(item.CurrentPoint.X * camera.Zoom) - 20,
-                        (int)camera.ZeroPoint.Y + (int)(item.CurrentPoint.Y * camera.Zoom));
-                }
+                HPBar.Render(engine, camera, item, frame);
+
+                //if (item.Unit.Category != UnitCategoryDef.Ornamental)
+                //{
+                //    gdi.DrawShadowText(
+                //        item.HP.ToString(),
+                //        (int)camera.ZeroPoint.X + (int)(item.CurrentPoint.X * camera.Zoom) - 20,
+                //        (int)camera.ZeroPoint.Y + (int)(item.CurrentPoint.Y * camera.Zoom));
+                //}
             }
 
             for (int iAnimation = 0; iAnimation < map.AnimationList.Count; iAnimation++)

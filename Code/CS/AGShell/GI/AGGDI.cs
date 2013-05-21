@@ -283,6 +283,13 @@ namespace AGShell
             m_bs.FillColor = Color.Transparent;
             m_bs.DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h));
         }
+        
+        public void DrawRectangle(int color, float x, float y, float w, float h)
+        {
+            m_bs.ForeColor = Color.FromArgb(color);
+            m_bs.FillColor = Color.FromArgb(color);
+            m_bs.DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h));
+        }
 
         public void DrawBlock(float x, float y, float w, float h)
         {
