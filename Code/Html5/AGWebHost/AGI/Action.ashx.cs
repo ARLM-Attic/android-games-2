@@ -47,6 +47,12 @@ namespace AGWebHost.AGI
             {
                 // 登陆之后获取信息
             }
+            else if (cmd == "1003")
+            {
+                int modelId = Convert.ToInt32(context.Request["model"]);
+                // 获取模型信息
+                Model2D model = DATUtility.GetModel(modelId);
+            }
             else
             {
                 context.Response.ContentType = "text/plain";

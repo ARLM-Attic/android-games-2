@@ -75,13 +75,6 @@
     <Content Include="AG\screens\mapgrid.js" />
     <Content Include="Common\Ajax.js" />
     <Content Include="Common\Common.js" />
-    <Content Include="data\models\1005\1005-0001-0001-0001.bmp" />
-    <Content Include="data\models\1005\1005-0001-0001-0002.bmp" />
-    <Content Include="data\models\1005\1005-0001-0001-0003.bmp" />
-    <Content Include="data\models\1005\1005-0001-0001-0004.bmp" />
-    <Content Include="data\models\1005\1005-0001-0001-0005.bmp" />
-    <Content Include="data\models\1005\1005-0001-0001-0006.bmp" />
-    <Content Include="data\models\4688\4688.bmp" />
     <Content Include="Res\5342.bmp" />
     <Content Include="TestAjax.html" />
     <Content Include="TestCamera.html" />
@@ -120,12 +113,17 @@
     <Content Include="Actions\GetImage.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="data\models\" />
     <Folder Include="Demo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AGI\Action.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AG.Core\AG.Core.csproj">
+      <Project>{40289A74-734D-4131-9B5F-628CFC6FBEB1}</Project>
+      <Name>AG.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AGWeb\AGWeb.csproj">
       <Project>{54407C5F-0A6B-4BBC-8FA9-8219E592E30A}</Project>
       <Name>AGWeb</Name>
