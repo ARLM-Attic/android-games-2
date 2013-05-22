@@ -73,6 +73,8 @@
     <Content Include="AG\temp\MousePosition.js" />
     <Content Include="AG\screen.js" />
     <Content Include="AG\screens\mapgrid.js" />
+    <Content Include="Common\Ajax.js" />
+    <Content Include="Common\Common.js" />
     <Content Include="data\models\1005\1005-0001-0001-0001.bmp" />
     <Content Include="data\models\1005\1005-0001-0001-0002.bmp" />
     <Content Include="data\models\1005\1005-0001-0001-0003.bmp" />
@@ -80,6 +82,7 @@
     <Content Include="data\models\1005\1005-0001-0001-0005.bmp" />
     <Content Include="data\models\1005\1005-0001-0001-0006.bmp" />
     <Content Include="Res\5342.bmp" />
+    <Content Include="TestAjax.html" />
     <Content Include="TestCamera.html" />
     <Content Include="MouseLocation.html" />
     <Content Include="Res\mapcell.bmp" />

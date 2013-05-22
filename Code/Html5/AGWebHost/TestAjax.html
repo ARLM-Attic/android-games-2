@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Common/Ajax.js"></script>
+    <script src="Common/Common.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    function strToJson(str) {
+        if (str == "") {
+            return null;
+        }
+        var json = eval('(' + str + ')');
+        return json;
+    }
+
+    Ajax.request({
+        url: "http://localhost:3003/AGI/Action.ashx?cmd=1001&cr=1&cc=998",
+        params: { name: 'aa', id: 20 },
+        callback: function (response) {
+            response = strToJson(response);
+            alert(isJson(response));
+        }
+    });
+</script>
