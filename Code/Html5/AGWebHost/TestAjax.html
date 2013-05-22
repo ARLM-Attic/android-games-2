@@ -15,11 +15,12 @@
             return null;
         }
         var json = eval('(' + str + ')');
+        alert(json.data.cells);
         return json;
     }
 
     Ajax.request({
-        url: "http://localhost:3003/AGI/Action.ashx?cmd=1001&cr=1&cc=998",
+        url: "http://localhost:3003/AGI/Action.ashx?cmd=1002&cr=1&cc=998",
         params: { name: 'aa', id: 20 },
         callback: function (response) {
             response = strToJson(response);

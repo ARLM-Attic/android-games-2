@@ -81,6 +81,7 @@
     <Content Include="data\models\1005\1005-0001-0001-0004.bmp" />
     <Content Include="data\models\1005\1005-0001-0001-0005.bmp" />
     <Content Include="data\models\1005\1005-0001-0001-0006.bmp" />
+    <Content Include="data\models\4688\4688.bmp" />
     <Content Include="Res\5342.bmp" />
     <Content Include="TestAjax.html" />
     <Content Include="TestCamera.html" />

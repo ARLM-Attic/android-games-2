@@ -16,7 +16,7 @@ namespace AGWebHost.AGI
         {
             string cmd = context.Request["cmd"];
 
-            if (cmd == "1001")
+            if (cmd == "1002")
             {
                 int curRow = Convert.ToInt32(context.Request["cr"]);
                 int curCol = Convert.ToInt32(context.Request["cc"]);
@@ -42,6 +42,10 @@ namespace AGWebHost.AGI
                     cellBuilder);
                 context.Response.ContentType = "text/plain";
                 context.Response.Write("{state:'ok', data:{" + dataString + "}}");
+            }
+            else if (cmd == "1000")
+            {
+                // 登陆之后获取信息
             }
             else
             {

@@ -1,19 +1,22 @@
 ﻿function AGTestCameraScreen() {
     this._model = null;
     this._model2 = null;
+    this._model3 = null;
     this._camera = null;
     this._map = null;
 
     this.init = function (engine) {
         this._model = engine._resLoader.loadModel(1);
         this._model2 = engine._resLoader.loadModel(2);
+        this._model3 = engine._resLoader.loadModel(4688);
 
         this._map = this.createMockMap();
 
         this._camera = new AGCamera(engine);
-        this._camera.attach(this._map, 7, 7);
+        this._camera.attach(this._map, 9, 9);
 
-        this._map.createObj(this._model2, new AGMapPos(9, 9));
+        this._map.createObj(this._model2, new AGMapPos(14, 9));
+        this._map.createObj(this._model3, new AGMapPos(0, 13));
     }
 
     this.render = function (engine) {
@@ -27,7 +30,7 @@
                 var y = (r - c) * halfH - halfH;
                 x = zeroPt._x + x;
                 y = zeroPt._y + y;
-                engine._gdi.draw2(this._model.getFrame(0, 0, 0)._image, x, y, MAPCELL_WIDTH, MAPCELL_HEIGHT); //, 0, 0, this._model.getFrame(0, 0, 0)._width, this._model.getFrame(0, 0, 0)._height);
+                engine._gdi.draw(this._model.getFrame(0, 0, 0)._image, x, y, MAPCELL_WIDTH, MAPCELL_HEIGHT); //, 0, 0, this._model.getFrame(0, 0, 0)._width, this._model.getFrame(0, 0, 0)._height);
                 //engine._gdi.drawString("(" + r + "," + c + ")", x + 10, y + 10);
             }
         }
@@ -37,7 +40,7 @@
             var y = (this._map._objList[objIndex]._pos._row - this._map._objList[objIndex]._pos._col) * halfH - halfH;
             x = zeroPt._x + x;
             y = zeroPt._y + y;
-            engine._gdi.draw1(this._map._objList[objIndex]._model.getFrame(0, 0, 0)._image, x, y);
+            engine._gdi.draw(this._map._objList[objIndex]._model.getFrame(0, 0, 0)._image, x, y);
         }
 
         engine._gdi.drawString("zeroPt:(" + zeroPt._x + "," + zeroPt._y + ")", 10, 500);
@@ -67,8 +70,8 @@
 
     this.createMockMap = function () {
         var map = new AGMap();
-        map._row = 15;
-        map._col = 15;
+        map._row = 19;
+        map._col = 19;
 
         return map;
     }

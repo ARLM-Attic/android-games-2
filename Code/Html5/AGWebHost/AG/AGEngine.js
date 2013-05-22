@@ -83,11 +83,11 @@ function AGEngine() {
 
     this.loadData = function(){
         var image1 = new Image();
-        image1.src = "Actions/getimage.ashx?file=4588";
+        image1.src = "Actions/getimage.ashx?file=/res/4588";
         this._images.push(image1);
 
         var image2 = new Image();
-        image2.src = "Actions/getimage.ashx?file=4589";
+        image2.src = "Actions/getimage.ashx?file=/res/4589";
         this._images.push(image2);
     }
 }
@@ -98,15 +98,16 @@ function AGEngine() {
 function AGGDI(engine) {
     this._context = engine._context;
 
-    this.draw1 = function (image, x, y) {
-        this._context.drawImage(image, x, y);
-    }
-
-    this.draw2 = function (image, x, y, w, h) {
-        this._context.drawImage(image, x, y, w, h);
-    }
-    this.draw3 = function (image, x, y, w, h, srcX, srcY, srcW, srcH) {
-        this._context.drawImage(image, srcX, srcY, srcW, srcH, x, y, w, h);
+    this.draw = function (image, destX, destY, destW, destH, srcX, srcY, srcW, srcH) {
+        if (arguments.length == 3) {
+            this._context.drawImage(image, destX, destY);
+        }
+        else if (arguments.length == 5) {
+            this._context.drawImage(image, destX, destY, destW, destH);
+        } 
+        else if (arguments.length == 9) {
+            this._context.drawImage(image, srcX, srcY, srcW, srcH, destX, destY, destW, destH);
+        }
     }
 
     this.drawString = function (text, x, y) {
