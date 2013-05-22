@@ -65,16 +65,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AG\AGEngine.js" />
-    <Content Include="AG\AGGDI.js" />
-    <Content Include="AG\AGIDI.js" />
+    <Content Include="AG\AGStructure.js" />
+    <Content Include="AG\AGUtility.js" />
     <Content Include="AG\screens\AGTestModelScreen.js" />
     <Content Include="AG\screens\AGTestMouseScreen.js" />
+    <Content Include="AG\screens\AGTestCameraScreen.js" />
     <Content Include="AG\temp\MousePosition.js" />
-    <Content Include="AG\stucture\AGModel.js" />
     <Content Include="AG\screen.js" />
     <Content Include="AG\screens\mapgrid.js" />
-    <Content Include="AG\utility\AGResLoader.js" />
+    <Content Include="data\models\1005\1005-0001-0001-0001.bmp" />
+    <Content Include="data\models\1005\1005-0001-0001-0002.bmp" />
+    <Content Include="data\models\1005\1005-0001-0001-0003.bmp" />
+    <Content Include="data\models\1005\1005-0001-0001-0004.bmp" />
+    <Content Include="data\models\1005\1005-0001-0001-0005.bmp" />
+    <Content Include="data\models\1005\1005-0001-0001-0006.bmp" />
+    <Content Include="Res\5342.bmp" />
+    <Content Include="TestCamera.html" />
     <Content Include="MouseLocation.html" />
+    <Content Include="Res\mapcell.bmp" />
     <Content Include="TestModel.html" />
     <Content Include="MapGrid.html" />
     <Content Include="fps.html" />
@@ -99,12 +107,26 @@
     <Compile Include="Actions\GetImage.ashx.cs">
       <DependentUpon>GetImage.ashx</DependentUpon>
     </Compile>
+    <Compile Include="AGI\Action.ashx.cs">
+      <DependentUpon>Action.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Actions\GetImage.ashx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Demo\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AGI\Action.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AGWeb\AGWeb.csproj">
+      <Project>{54407C5F-0A6B-4BBC-8FA9-8219E592E30A}</Project>
+      <Name>AGWeb</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

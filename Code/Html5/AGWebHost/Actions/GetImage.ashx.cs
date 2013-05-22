@@ -15,8 +15,8 @@ namespace AGWebHost.Actions
         public void ProcessRequest(HttpContext context)
         {
             string imageFile = context.Request["file"];
-            string bmpFile = context.Server.MapPath(string.Format("~/res/{0}.bmp", imageFile));
-            string pngFile = context.Server.MapPath(string.Format("~/res/{0}.png", imageFile));
+            string bmpFile = context.Server.MapPath(string.Format("~/{0}.bmp", imageFile));
+            string pngFile = context.Server.MapPath(string.Format("~/{0}.png", imageFile));
 
             if (!System.IO.File.Exists(pngFile))
             {

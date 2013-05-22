@@ -1,4 +1,9 @@
+//* --------------------------------------------------
+// engine
+// -------------------------------------------------- */
 function AGEngine() {
+    this._settings = { screen: { w: 0, h: 0} };
+
     this._fps = 0;
     this._fpsCounter = 0;
     this._fpsTick = 0;
@@ -10,6 +15,7 @@ function AGEngine() {
     // user input interface
     this._idi = null;
     this._resLoader = null;
+    this._net = null;
 
     this._items = new Array();
 
@@ -29,14 +35,21 @@ function AGEngine() {
         this._width = width;
         this._height = height;
 
+        this._settings.screen.w = width;
+        this._settings.screen.h = height;
+        this._canvas.style.width = width;
+        this._canvas.style.height = height;
+
         this._resLoader = new AGResLoader(this);
+        this._net = new AGNet(this);
 
         this._idi = new AGIDI(this);
         this._gdi = new AGGDI(this);
         setInterval(this.onTick, 10);
     }
 
-    this.switchScreen = function(screen){
+    this.switchScreen = function (screen) {
+        screen.init(this);
         this._curScreen = screen;
     }
 
@@ -76,5 +89,103 @@ function AGEngine() {
         var image2 = new Image();
         image2.src = "Actions/getimage.ashx?file=4589";
         this._images.push(image2);
+    }
+}
+
+//* --------------------------------------------------
+// graphics device interface
+// -------------------------------------------------- */
+function AGGDI(engine) {
+    this._context = engine._context;
+
+    this.draw1 = function (image, x, y) {
+        this._context.drawImage(image, x, y);
+    }
+
+    this.draw2 = function (image, x, y, w, h) {
+        this._context.drawImage(image, x, y, w, h);
+    }
+    this.draw3 = function (image, x, y, w, h, srcX, srcY, srcW, srcH) {
+        this._context.drawImage(image, srcX, srcY, srcW, srcH, x, y, w, h);
+    }
+
+    this.drawString = function (text, x, y) {
+        this._context.fillStyle = '#00f';
+        //this._context.font = "italic 30px sans-serif";
+        this._context.textBaseline = 'top'
+        this._context.fillText(text, x, y);
+    }
+
+    this.drawDiamond = function (x, y, w, h) {
+        this._context.strokeStyle = '#00cc00';
+        this._context.moveTo(x + w / 2, y);
+        this._context.lineTo(x + w, y + h / 2);
+        this._context.lineTo(x + w / 2, y + h);
+        this._context.lineTo(x, y + h / 2);
+        this._context.lineTo(x + w / 2, y);
+        this._context.stroke();
+    }
+}
+
+//* --------------------------------------------------
+// user input device interface
+// -------------------------------------------------- */
+function AGIDI(engine) {
+
+    this._mouse = new MouseState();
+
+    this.regEvent = function (engine) {
+        var that = this;
+        engine._canvas.addEventListener("mousedown", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+            that._mouse.setLBDown(1);
+        });
+        engine._canvas.addEventListener("mousemove", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+        });
+        engine._canvas.addEventListener("mouseup", function (e) {
+            that._mouse._x = e.layerX;
+            that._mouse._y = e.layerY;
+            that._mouse.setLBDown(0);
+        });
+    }
+
+    this.regEvent(engine);
+}
+
+//* --------------------------------------------------
+// 鼠标信息定义
+// -------------------------------------------------- */
+function MouseState() {
+    this._x = 0;
+    this._y = 0;
+    this._buttons = [0, 0];
+
+    // 判断鼠标左键是否按下
+    this.isLBDown = function () {
+        if (this._buttons[0] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    // 判断鼠标右键是否按下
+    this.isRBDown = function () {
+        if (this._buttons[1] == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    // 设置鼠标左键状态
+    this.setLBDown = function (state) {
+        this._buttons[0] = state;
+    }
+
+    // 设置鼠标右键状态
+    this.setRBDown = function (state) {
+        this._buttons[1] = state;
     }
 }

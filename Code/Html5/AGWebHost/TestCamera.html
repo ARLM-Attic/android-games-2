@@ -1,13 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>ag html5 - fps</title>
+    <title>ag html5 - test camera</title>
     <script src="AG/AGEngine.js" type="text/javascript"></script>
+    <script src="AG/AGStructure.js" type="text/javascript"></script>
     <script src="AG/AGUtility.js" type="text/javascript"></script>
-    <script src="AG/screens/mapgrid.js" type="text/javascript"></script>
+
+    <script src="AG/screens/AGTestCameraScreen.js" type="text/javascript"></script>
 </head>
 <body style="margin:0px; padding:0px; cursor:default;">
     <form id="form1" runat="server">
-    <canvas id="mycanvas" style="border: 1px solid black; cursor:default; text-align:center;" width="800" height="600">
+    <canvas id="mycanvas" style="border: 1px solid black; cursor:default; text-align:center;" width="640px" height="480px">
     </canvas>
     </form>
 </body>
@@ -16,7 +18,7 @@
     var ag = { version: '1.0' };
     window.onload = function () {
         ag.engine = new AGEngine();
-        ag.engine.init(document.getElementById("mycanvas"), 800, 600)
-        ag.engine.switchScreen(new AGMapGridScreen());
+        ag.engine.init(document.getElementById("mycanvas"), 640, 480)
+        ag.engine.switchScreen(new AGTestCameraScreen());
     }
 </script>
