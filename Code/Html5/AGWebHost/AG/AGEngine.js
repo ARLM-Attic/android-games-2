@@ -30,7 +30,7 @@ function AGEngine() {
     this.init = function (el, width, height) {
         var that = this;
 
-        this.loadData();
+        //this.loadData();
 
         this._canvas = el;
         this._context = this._canvas.getContext("2d");

@@ -7,6 +7,7 @@
     this._map = null;
 
     this._playerPos = null;
+    this._player = null;
 
     this._newRange = null;
 
@@ -36,6 +37,14 @@
             this._newRange = null;
         }
 
+        // 创建玩家的单位
+        if (this._playerPos != null) {
+            this._player = new AGObj();
+            this._player._sitePos = new AGMapPos(this._playerPos.pr, this._playerPos.pc);
+            this._player._sitePt = new AGPt(this._playerPos.px, this._playerPos.py);
+            this._playerPos = null;
+        }
+
         if (this._map._range != null) {
             for (var r = 0; r < this._map._range.r; r++) {
                 for (var c = 0; c < this._map._range.c; c++) {
@@ -59,10 +68,19 @@
                 y = zeroPt._y + y;
                 engine._gdi.draw(this._map._objList[objIndex]._model.getFrame(0, 0, 0)._image, x, y);
             }
+
+            if (this._player != null) {
+                // 渲染玩家的单位
+                var x = this._player._sitePt._x;
+                var y = this._player._sitePt._y;
+                x = zeroPt._x + x;
+                y = zeroPt._y + y;
+                engine._gdi.drawString("■", x, y);
+            }
         }
 
         engine._gdi.drawString("zeroPt:(" + zeroPt._x + "," + zeroPt._y + ")", 10, 500);
-        engine._gdi.drawString("target pos:(" + this._camera._targetPos._row + "," + this._camera._targetPos._col + ")", 10, 520);
+        engine._gdi.drawString("targetPt:(" + this._camera._targetPt._row + "," + this._camera._targetPt._col + ")", 10, 520);
 
         var mapPt = this._camera.convertWinPtToMapPt(new AGPt(engine._idi._mouse._x, engine._idi._mouse._y));
         engine._gdi.drawString("mapPt:(" + mapPt._x + "," + mapPt._y + ")", 10, 540);
@@ -79,10 +97,16 @@
         else {
             if (this._isMouseDown) {
                 this._isMouseDown = false;
-                var pos = this._camera.convertWinPtToPos(new AGPt(engine._idi._mouse._x, engine._idi._mouse._y));
-                this._camera.targetTo(pos._row, pos._col);
-                engine._net.getMapRange(100, pos);
+                var pt = this._camera.convertWinPtToMapPt(new AGPt(engine._idi._mouse._x, engine._idi._mouse._y));
+                this._player._targetPt = pt;
+                //                this._camera.targetTo(pos._row, pos._col);
+                //                engine._net.getMapRange(100, pos);
             }
+        }
+
+        if (this._player != null) {
+            this._player.update();
+            this._camera.targetToPt(this._player._sitePt);
         }
     }
 

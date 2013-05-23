@@ -34,27 +34,32 @@ function AGCamera(engine) {
     this._width = engine._settings.screen.w;
     this._height = engine._settings.screen.h;
     this._map = null;
-    this._targetPos = new AGMapPos();
+    this._targetPt = new AGPt();
 
     this._zeroPt = new AGPt();
 
     // 附加到地图上
     this.attach = function (map, targetRow, targetCol) {
         this._map = map;
-        this._targetPos._row = targetRow;
-        this._targetPos._col = targetCol;
+        this.targetTo(targetRow, targetCol);
     }
 
     // 更改摄像机所观察的位置
     this.targetTo = function (targetRow, targetCol) {
-        this._targetPos._row = targetRow;
-        this._targetPos._col = targetCol;
+        var cpt = this.convertCenterPt(new AGMapPos(targetRow, targetCol));
+        this._targetPt._x = cpt._x;
+        this._targetPt._y = cpt._y;
+    }
+
+    // 附加到地图的坐标点
+    this.targetToPt = function (pt) {
+        this._targetPt._x = pt._x;
+        this._targetPt._y = pt._y;
     }
 
     this.getZeroPt = function () {
-        var centerPt = this.convertCenterPt(this._targetPos);
-        this._zeroPt._x = this._width / 2 - centerPt._x;
-        this._zeroPt._y = (this._height / 2) - centerPt._y;
+        this._zeroPt._x = this._width / 2 - this._targetPt._x;
+        this._zeroPt._y = (this._height / 2) - this._targetPt._y;
         return this._zeroPt;
     }
 
@@ -74,6 +79,7 @@ function AGCamera(engine) {
         return pt;
     }
 
+    // 将窗口坐标转换为世界坐标
     this.convertWinPtToMapPt = function (winPt) {
         var zeroPt = this.getZeroPt();
         var mapX = winPt._x - zeroPt._x;
@@ -149,7 +155,49 @@ function AGFrame(id, src, width, height, offsetX, offsetY) {
     this._offsetY = offsetY;
 }
 
+/// 这个要去掉
 function AGObject(model, pos) {
     this._model = model;
     this._pos = pos;
+}
+
+function AGObj() {
+    this._frameCounter = 0;
+    this._frameIndex = 1;
+
+    this._model = null;
+
+    // 当前所在的地图格子
+    this._sitePos = null;
+    // 当前的地图坐标
+    this._sitePt = null;
+
+    // 目标坐标
+    this._targetPt = null;
+
+    this.update = function () {
+        this._frameCounter++;
+        if (this._frameCounter < this._frameIndex) {
+            return;
+        }
+
+        this._frameCounter = 0;
+
+        if (this._targetPt != null
+            && this._targetPt._x != this._sitePt._x
+            && this._targetPt._y != this._sitePt._x) {
+
+            if (this._targetPt._x > this._sitePt._x) {
+                this._sitePt._x += 1;
+            } else if (this._targetPt._x < this._sitePt._x) {
+                this._sitePt._x -= 1;
+            }
+
+            if (this._targetPt._y > this._sitePt._y) {
+                this._sitePt._y += 1;
+            } else if (this._targetPt._y < this._sitePt._y) {
+                this._sitePt._y -= 1;
+            }
+        }
+    }
 }
