@@ -134,8 +134,18 @@ public static partial class DATUtility
         }
     }
 
+    private static List<Map2D> s_maps = new List<Map2D>();
+
     public static Map2D GetMap(int mapId)
     {
+        for (int index = 0; index < s_maps.Count; index++)
+        {
+            if (s_maps[index].ID == mapId)
+            {
+                return s_maps[index];
+            }
+        }
+
         string datFile = string.Format("{0}maps\\{1}.xml", GetResPath(), mapId);
         if (!System.IO.File.Exists(datFile))
         {
@@ -234,6 +244,8 @@ public static partial class DATUtility
             obj.Map = map;
             map.Widgets.Add(obj);
         }
+
+        s_maps.Add(map);
         return map;
     }
     #endregion

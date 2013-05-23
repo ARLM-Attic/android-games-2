@@ -65,7 +65,7 @@ namespace AGWeb
             {
                 Object2D obj = map.Widgets[index];
 
-                if (obj.SitePos.Row > range.StartRow && obj.SitePos.Col > range.StartCol
+                if (obj.SitePos.Row >= range.StartRow && obj.SitePos.Col >= range.StartCol
                     && obj.SitePos.Row < range.StartRow + range.Row
                     && obj.SitePos.Col < range.StartCol + range.Col)
                 {

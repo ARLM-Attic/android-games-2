@@ -1,18 +1,28 @@
 ﻿function AGNet(onReceiveData) {
+    this._actionUrl = 'http://localhost:3003/AGI/Action.ashx?t=';
     this._onReceiveDataCallback = onReceiveData;
 
     this.getMapRange = function (mapId, pos) {
         var that = this;
         Ajax.request({
-            url: "http://localhost:3003/AGI/Action.ashx?t=" + Date.now(),
+            url: this._actionUrl + Date.now(),
             params: { cmd: 1002, map: mapId, cr: pos._row, cc: pos._col },
+            callback: function (response) { that.onReceiveData(response); }
+        });
+    }
+
+    this.getPlayerPos = function (mapId, player) {
+        var that = this;
+        Ajax.request({
+            url: this._actionUrl + Date.now(),
+            params: { cmd: 1000, map: mapId, player: player },
             callback: function (response) { that.onReceiveData(response); }
         });
     }
 
     this.onReceiveData = function (response) {
         var json = this.strToJson(response);
-        this._onReceiveDataCallback(1002, json.data);
+        this._onReceiveDataCallback(json.cmd, json.data);
     }
 
     this.strToJson = function(str) {

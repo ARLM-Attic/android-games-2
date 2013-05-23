@@ -1,13 +1,17 @@
 ﻿function AGTestMapScreen() {
+    this._engine = null;
     this._model = null;
     this._model2 = null;
     this._model3 = null;
     this._camera = null;
     this._map = null;
 
+    this._playerPos = null;
+
     this._newRange = null;
 
     this.init = function (engine) {
+        this._engine = engine;
         this._model = engine._resLoader.loadModel(1);
         this._model2 = engine._resLoader.loadModel(2);
         this._model3 = engine._resLoader.loadModel(4688);
@@ -15,8 +19,7 @@
         this._map = this.createMockMap();
 
         this._camera = new AGCamera(engine);
-        this._camera.attach(this._map, 0, 0);
-        engine._net.getMapRange(100, new AGMapPos(0, 0));
+        engine._net.getPlayerPos(100, 'p1');
 
         this._map.createObj(this._model2, new AGMapPos(14, 9));
         this._map.createObj(this._model3, new AGMapPos(0, 13));
@@ -97,6 +100,11 @@
             this._newRange = data;
 
             //alert(data.data.cells);
+        }
+        else if (cmd == 1000) {
+            this._playerPos = data;
+            this._camera.attach(this._map, this._playerPos.pr, this._playerPos.pc);
+            this._engine._net.getMapRange(100, new AGMapPos(this._playerPos.pr, this._playerPos.pc));
         }
     }
 }

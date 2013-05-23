@@ -360,6 +360,7 @@ public static partial class DATUtility
         return model;
     }
 
+    private static object s_lock = new object();
     public static Model2D GetModel(int modelId)
     {
         foreach (var item in s_models)
@@ -370,32 +371,35 @@ public static partial class DATUtility
             }
         }
 
-        string modelFile = string.Format("{0}models.xml", GetResPath());
-        if (!File.Exists(modelFile))
+        lock (s_lock)
         {
-            return null;
-        }
-
-        XDocument xDoc = XDocument.Load(modelFile);
-
-        XElement xModel = xDoc.XPathSelectElement(string.Format("//models/model[@id='{0}']", modelId));
-        if (xModel != null)
-        {
-            Model2D model = ModelXML.FromXML(xModel);
-            foreach (var action in model.Actions)
+            string modelFile = string.Format("{0}models.xml", GetResPath());
+            if (!File.Exists(modelFile))
             {
-                foreach (var direction in action.Directions)
-                {
-                    foreach (var frame in direction.Frames)
-                    {
-                        frame.Data = ResourceLoader.GetFrameData(model.Id, action.Id, direction.Id, frame.Index);
-                    }
-                }
+                return null;
             }
 
-            s_models.Add(model);
+            XDocument xDoc = XDocument.Load(modelFile);
 
-            return model;
+            XElement xModel = xDoc.XPathSelectElement(string.Format("//models/model[@id='{0}']", modelId));
+            if (xModel != null)
+            {
+                Model2D model = ModelXML.FromXML(xModel);
+                foreach (var action in model.Actions)
+                {
+                    foreach (var direction in action.Directions)
+                    {
+                        foreach (var frame in direction.Frames)
+                        {
+                            frame.Data = ResourceLoader.GetFrameData(model.Id, action.Id, direction.Id, frame.Index);
+                        }
+                    }
+                }
+
+                s_models.Add(model);
+
+                return model;
+            }
         }
         return null;
     }

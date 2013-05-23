@@ -26,7 +26,7 @@ namespace AGWebHost.AGI
                 Map2D map = DATUtility.GetMap(mapId);
                 if (map == null)
                 {
-                    context.Response.Write("{result:1}");
+                    context.Response.Write("{result:1,cmd:" + cmd + "}");
                     return;
                 }
 
@@ -73,11 +73,25 @@ namespace AGWebHost.AGI
                     range.Col,
                     cellBuilder,
                     objBuilder);
-                context.Response.Write("{result:0, data:{" + dataString + "}}");
+                context.Response.Write("{result:0,cmd:" + cmd + ", data:{" + dataString + "}}");
             }
             else if (cmd == "1000")
             {
                 // 登陆之后获取信息
+                int mapId = Convert.ToInt32(context.Request.Form["map"]);
+                Map2D map = DATUtility.GetMap(mapId);
+                int row = new Random().Next(0, map.Row);
+                int col = new Random().Next(0, map.Col);
+
+                Object2D obj = AGSUtility.CreateObject(map, map.Camps[0], DATUtility.GetUnit(101), "角色", new MapPos(row, col), 1);
+                string dataString = string.Format("id:{0},pr:{1},pc:{2},px:{3},py:{4}",
+                    obj.ID,
+                    obj.SitePos.Row,
+                    obj.SitePos.Col,
+                    obj.CurrentPoint.X,
+                    obj.CurrentPoint.Y);
+                context.Response.Write("{result:0,cmd:" + cmd + ",data:{" + dataString + "}}");
+
             }
             else if (cmd == "1003")
             {
@@ -85,10 +99,21 @@ namespace AGWebHost.AGI
                 // 获取模型信息
                 Model2D model = DATUtility.GetModel(modelId);
             }
+            else if (cmd == "")
+            {
+                // cr,cc,tr,tc
+                int id = Convert.ToInt32(context.Request.Form["id"]);
+                int act = Convert.ToInt32(context.Request.Form["act"]);
+                int cr = Convert.ToInt32(context.Request.Form["cr"]);
+                int cc = Convert.ToInt32(context.Request.Form["cc"]);
+                int tr = Convert.ToInt32(context.Request.Form["tr"]);
+                int tc = Convert.ToInt32(context.Request.Form["tc"]);
+
+            }
             else
             {
                 context.Response.ContentType = "text/plain";
-                context.Response.Write("{result:0}");
+                context.Response.Write("{result:0,cmd:" + cmd + "}");
             }
         }
 

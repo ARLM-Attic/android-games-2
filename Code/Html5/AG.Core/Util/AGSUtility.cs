@@ -24,9 +24,7 @@ public class AGSUtility
         obj.Caption = caption;
         obj.SetUnit(unit);
         obj.SitePos = pos;
-        obj.CurrentPoint = new Point2D(
-            pos.Center.X - MapCell.Width / 2 + rd.Next(0, MapCell.Width / 2),
-            pos.Center.Y - MapCell.Height / 2 + rd.Next(0, MapCell.Height / 2));
+        obj.CurrentPoint = MapCoordinate.PosCenterToMapPt(pos);
         obj.Map = map;
         obj.Camp = camp;
 
