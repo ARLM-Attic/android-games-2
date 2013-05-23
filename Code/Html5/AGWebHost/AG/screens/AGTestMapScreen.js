@@ -107,6 +107,7 @@
         if (this._player != null) {
             this._player.update();
             this._camera.targetToPt(this._player._sitePt);
+            this._engine._net.getMapRange(100, this._camera.getTargetPos());
         }
     }
 

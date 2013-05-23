@@ -63,6 +63,9 @@ function AGCamera(engine) {
         return this._zeroPt;
     }
 
+    this.getTargetPos = function () {
+        return this.convertMapPtToPos(this._targetPt);
+    }
 
     this.convertLTPt = function (pos) {
         var pt = new AGPt();
@@ -184,9 +187,7 @@ function AGObj() {
         this._frameCounter = 0;
 
         if (this._targetPt != null
-            && this._targetPt._x != this._sitePt._x
-            && this._targetPt._y != this._sitePt._x) {
-
+            && (this._targetPt._x != this._sitePt._x || this._targetPt._y != this._sitePt._x)) {
             if (this._targetPt._x > this._sitePt._x) {
                 this._sitePt._x += 1;
             } else if (this._targetPt._x < this._sitePt._x) {
