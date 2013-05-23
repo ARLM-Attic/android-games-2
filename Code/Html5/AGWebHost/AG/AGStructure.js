@@ -35,8 +35,8 @@ function AGCamera(engine) {
     this._height = engine._settings.screen.h;
     this._map = null;
     this._targetPt = new AGPt();
-
     this._zeroPt = new AGPt();
+    this._isNeedUpdate = false;
 
     // 附加到地图上
     this.attach = function (map, targetRow, targetCol) {
@@ -53,8 +53,14 @@ function AGCamera(engine) {
 
     // 附加到地图的坐标点
     this.targetToPt = function (pt) {
-        this._targetPt._x = pt._x;
-        this._targetPt._y = pt._y;
+        if (this._targetPt._x != pt._x
+            || this._targetPt._y != pt._x) {
+            this._targetPt._x = pt._x;
+            this._targetPt._y = pt._y;
+            this._isNeedUpdate = true;
+        } else {
+            this._isNeedUpdate = false;
+        }
     }
 
     this.getZeroPt = function () {

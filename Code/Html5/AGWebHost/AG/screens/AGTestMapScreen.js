@@ -57,7 +57,7 @@
                     y = zeroPt._y + y;
 
                     engine._gdi.draw(this._model.getFrame(0, 0, 0)._image, x, y, MAPCELL_WIDTH, MAPCELL_HEIGHT); //, 0, 0, this._model.getFrame(0, 0, 0)._width, this._model.getFrame(0, 0, 0)._height);
-                    engine._gdi.drawString("(" + row + "," + col + ")", x + 20, y + 20);
+                    //engine._gdi.drawString("(" + row + "," + col + ")", x + 20, y + 20);
                 }
             }
 
@@ -107,7 +107,10 @@
         if (this._player != null) {
             this._player.update();
             this._camera.targetToPt(this._player._sitePt);
-            this._engine._net.getMapRange(100, this._camera.getTargetPos());
+
+            if (this._camera._isNeedUpdate) {
+                this._engine._net.getMapRange(100, this._camera.getTargetPos());
+            }
         }
     }
 
