@@ -28,20 +28,29 @@ namespace AGEditer
 
         private DesignState _state;
 
+        private float _zeroY;
+
         public MapDesignPanel()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
+
+           
         }
 
         public void SetMap(Map2D map)
         {
             _map = map;
 
-            _mImage = new Bitmap(map.Col * MapCell.Width, map.Row * MapCell.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            this.Width = (int)MapCoordinate.CalculateSize(_map.Row, _map.Col).Width;
+            this.Height = (int)MapCoordinate.CalculateSize(_map.Row, _map.Col).Height;
+
+            _mImage = new Bitmap(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             _mGraphics = Graphics.FromImage(_mImage);
 
-            this.Width = map.Col * MapCell.Width;
-            this.Height = map.Row * MapCell.Height;
+            _zeroY = _map.Col * MapCell.Height / 2;
         }
 
         public void SelectCamp(Camp camp)
@@ -99,12 +108,20 @@ namespace AGEditer
 
         protected override void OnMouseClick(MouseEventArgs e)
         {
-            MapCell cell = _map.GetCell(new MapPos(e.Location.Y / MapCell.Height, e.Location.X / MapCell.Width));
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                return;
+            }
+
+            Point2D pt = new Point2D(e.Location.X, e.Location.Y);
+            pt.Y -= this._zeroY;
+            MapPos pos = MapCoordinate.MapPtToPos(pt);
+            MapCell cell = _map.GetCell(pos);
             if (cell != null)
             {
                 if (_state == DesignState.ADD_OBJECT)
                 {
-                    AGSUtility.CreateObject(_map, _camp, _unit, "unknown", cell.MapPos, Direction2DDef.South.Id);
+                    AGSUtility.CreateObject(_map, _camp, _unit, "unknown", new Point2D(pt.X, pt.Y), cell.MapPos, Direction2DDef.South.Id);
                 }
                 else if (_state == DesignState.ADD_CAMP_STARTPOS)
                 {
@@ -116,13 +133,16 @@ namespace AGEditer
                 }
             }
 
-            base.OnMouseClick(e);
+            //base.OnMouseClick(e);
         }
 
         void _timer_Tick(object sender, EventArgs e)
         {
             if(_map!=null)
             {
+                int offsetX = (this.Parent as Panel).HorizontalScroll.Value;
+                int offsetY = (this.Parent as Panel).VerticalScroll.Value;
+
                 _graphics = Graphics.FromHwnd(this.Handle);
 
                 _mGraphics.FillRectangle(Brushes.Gray, 0, 0, _mImage.Width, _mImage.Height);
@@ -146,13 +166,28 @@ namespace AGEditer
                             //_mGraphics.DrawImage(terrainImage, col * MapCell.Width, row * MapCell.Height, MapCell.Width, MapCell.Height);
                         }
 
-                        if (cell.Value == 0)
+                        Point2D pt = MapCoordinate.PosToMapPt(new MapPos(row, col));
+                        pt.Y = pt.Y + this._zeroY;
+
+                        pt.X -= offsetX;
+                        pt.Y -= offsetY;
+                        if (cell.Type == 0)
                         {
-                            _mGraphics.DrawRectangle(Pens.Green, col * MapCell.Width, row * MapCell.Height, MapCell.Width, MapCell.Height);
+                            Point[] pts = new Point[4];
+                            pts[0] = new Point((int)pt.X, (int)pt.Y);
+                            pts[1] = new Point((int)pt.X + MapCell.Width / 2, (int)pt.Y - MapCell.Height / 2);
+                            pts[2] = new Point((int)pt.X + MapCell.Width, (int)pt.Y);
+                            pts[3] = new Point((int)pt.X + MapCell.Width/2, (int)pt.Y + MapCell.Height / 2);
+                            _mGraphics.DrawPolygon(Pens.Green, pts);
                         }
                         else
                         {
-                            _mGraphics.FillRectangle(Brushes.Red, col * MapCell.Width, row * MapCell.Height, MapCell.Width, MapCell.Height);
+                            Point[] pts = new Point[4];
+                            pts[0] = new Point((int)pt.X, (int)pt.Y);
+                            pts[1] = new Point((int)pt.X + MapCell.Width / 2, (int)pt.Y - MapCell.Height / 2);
+                            pts[2] = new Point((int)pt.X + MapCell.Width, (int)pt.Y);
+                            pts[3] = new Point((int)pt.X + MapCell.Width / 2, (int)pt.Y + MapCell.Height / 2);
+                            _mGraphics.DrawPolygon(Pens.Red, pts);
                         }
                     }
                 }
@@ -163,10 +198,17 @@ namespace AGEditer
                     Model2D model = item.Unit.Model;
                     Frame2D frame = item.Unit.Model.GetFrame(item.ActionId, item.DirectionId, item.FrameIndex);
 
+                    int x = (int)(item.CurrentPoint.X - offsetX);
+                    int y = (int)(item.CurrentPoint.Y + this._zeroY - offsetY);
+
                     Bitmap image = new Bitmap(new MemoryStream(frame.Data));
                     ImageAttributes ImgAttr = new ImageAttributes();
                     ImgAttr.SetColorKey(image.GetPixel(0, 0), image.GetPixel(0, 0));
-                    Rectangle rect = new Rectangle((int)(item.SitePos.Center.X - frame.OffsetX), (int)(item.SitePos.Center.Y - frame.offsetY), frame.Width, frame.Height);
+                    Rectangle rect = new Rectangle(
+                        (int)(x - frame.OffsetX),
+                        (int)(y - frame.offsetY),
+                        frame.Width, 
+                        frame.Height);
                     _mGraphics.DrawImage(image, rect, 0, 0, frame.Width, frame.Height, GraphicsUnit.Pixel, ImgAttr);
                 }
 
@@ -187,7 +229,12 @@ namespace AGEditer
 
                 if (_model != null)
                 {
-                    MapCell cell = _map.GetCell(new MapPos(_curPoint.Y / MapCell.Height, _curPoint.X / MapCell.Width));
+
+                    Point2D pt = new Point2D(_curPoint.X, _curPoint.Y);
+                    pt.Y -= this._zeroY;
+
+                    MapPos pos = MapCoordinate.MapPtToPos(pt);
+                    MapCell cell = _map.GetCell(pos);
                     if (cell != null)
                     {
                         Frame2D frame = _model.GetFrame(0x01, 0x01, 1);
@@ -195,14 +242,27 @@ namespace AGEditer
                         Bitmap image = new Bitmap(new MemoryStream(frame.Data));
                         ImageAttributes ImgAttr = new ImageAttributes();
                         ImgAttr.SetColorKey(image.GetPixel(0,0), image.GetPixel(0,0));
-                        Rectangle rect = new Rectangle((int)(cell.Center.X - frame.OffsetX), (int)(cell.Center.Y - frame.offsetY), frame.Width, frame.Height);
+
+                        pt.X -= offsetX;
+                        pt.Y += this._zeroY;
+                        pt.Y -= offsetY;
+                        Rectangle rect = new Rectangle(
+                            (int)(pt.X - frame.OffsetX),
+                            (int)(pt.Y - frame.offsetY),
+                            frame.Width, 
+                            frame.Height);
                         _mGraphics.DrawImage(image, rect, 0, 0, frame.Width, frame.Height, GraphicsUnit.Pixel, ImgAttr);
                     }
                 }
 
+                _mGraphics.DrawString((this.Parent as Panel).VerticalScroll.Value.ToString(), DefaultFont, Brushes.Red, 800, 440);
+                _mGraphics.DrawString((this.Parent as Panel).HorizontalScroll.Value.ToString(), DefaultFont, Brushes.Red, 800, 480);
+
                 ImageAttributes ia = new ImageAttributes();
                 ia.SetColorKey(Color.Black, Color.Black);
-                _graphics.DrawImage(_mImage, new Rectangle(0, 0, _mImage.Width, _mImage.Height), 0, 0, _mImage.Width, _mImage.Height, GraphicsUnit.Pixel, ia);
+                _graphics.DrawImage(_mImage,
+                    new Rectangle((this.Parent as Panel).HorizontalScroll.Value, (this.Parent as Panel).VerticalScroll.Value, _mImage.Width, _mImage.Height),
+                    0, 0, _mImage.Width, _mImage.Height, GraphicsUnit.Pixel, ia);
             }
         }
     }

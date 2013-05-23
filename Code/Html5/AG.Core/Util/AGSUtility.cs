@@ -42,6 +42,31 @@ public class AGSUtility
         System.Diagnostics.Debug.WriteLine(string.Format(">{0} createobj:{1} p:{2}", camp.Caption, obj.ID, camp.Population));
         return obj;
     }
+    public static Object2D CreateObject(Map2D map, Camp camp, Unit2D unit, string caption, Point2D pt, MapPos pos, int direction)
+    {
+        Random rd = new Random();
+
+        Object2D obj = new Object2D(Action2DDef.Stand.Id, direction);
+        obj.ID = ++map.ObjectIdIndex;
+        obj.Caption = caption;
+        obj.SetUnit(unit);
+        obj.SitePos = pos;
+        obj.CurrentPoint = new Point2D(pt.X, pt.Y);
+        obj.Map = map;
+        obj.Camp = camp;
+
+        if (obj.Camp.Result != null)
+        {
+            obj.Camp.Result.BuildCount++;
+        }
+
+        camp.Income -= unit.CostM;
+        camp.Population += unit.CostP;
+        camp.ObjList.Add(obj);
+        map.Widgets.Add(obj);
+        System.Diagnostics.Debug.WriteLine(string.Format(">{0} createobj:{1} p:{2}", camp.Caption, obj.ID, camp.Population));
+        return obj;
+    }
 
     /// <summary>
     /// 对象死亡，清除占用的人口
@@ -105,7 +130,7 @@ public class AGSUtility
         }
 
         MapCell cell = map.GetCell(pos);
-        cell.Value = terrain.Value;
+        cell.Type = terrain.Value;
     }
 
     /// <summary>

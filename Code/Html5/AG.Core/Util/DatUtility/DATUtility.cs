@@ -371,6 +371,10 @@ public static partial class DATUtility
         }
 
         string modelFile = string.Format("{0}models.xml", GetResPath());
+        if (!File.Exists(modelFile))
+        {
+            return null;
+        }
 
         XDocument xDoc = XDocument.Load(modelFile);
 

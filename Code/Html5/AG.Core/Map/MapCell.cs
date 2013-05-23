@@ -5,8 +5,10 @@ using System.Text;
 
 public class MapCell
 {
-    public const int Width = 40;
-    public const int Height = 40;
+    //public const int Width = 40;
+    //public const int Height = 40;
+    public const int Width = 64;
+    public const int Height = 48;
     public const int Zoom = 1;
 
     public List<Object2D> ObjList { get; set; }
@@ -14,11 +16,12 @@ public class MapCell
     public MapPos MapPos { get; set; }
 
     #region 属性
-    public int Value { get; set; }
+    public int Type { get; set; }
     /// <summary>
     /// 地形编号
     /// </summary>
     public int TerrainId { get; set; }
+    public int TerrainDir { get; set; }
     /// <summary>
     /// 该地形中具体的切片编号
     /// </summary>
@@ -29,7 +32,7 @@ public class MapCell
 
     public bool HasEnuRange(Point2D pt, int size)
     {
-        if (Value != 0)
+        if (Type != 0)
         {
             return false;
         }

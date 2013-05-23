@@ -13,5 +13,11 @@ namespace AGWeb
         public int Row { get; set; }
         public int Col { get; set; }
         public int[] Cells { get; set; }
+        public List<Object2D> Objs { get; set; }
+
+        public MapRange()
+        {
+            Objs = new List<Object2D>();
+        }
     }
 }

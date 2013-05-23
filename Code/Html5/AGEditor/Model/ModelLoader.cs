@@ -36,15 +36,15 @@
 //            XDocument xDoc = XDocument.Load(mxFile);
 
 //            XElement xRoot = xDoc.Element("model");
-//            model.Id = Convert.ToInt32(xRoot.Attribute("id").Value);
-//            model.Caption = xRoot.Attribute("caption").Value;
+//            model.Id = Convert.ToInt32(xRoot.Attribute("id").Type);
+//            model.Caption = xRoot.Attribute("caption").Type;
 
 //            IEnumerable<XElement> xActions = xRoot.Elements("action");
 //            foreach (var xAction in xActions)
 //            {
 //                Action2D action = new Action2D();
 
-//                action.Id = Convert.ToInt32(xAction.Attribute("id").Value);
+//                action.Id = Convert.ToInt32(xAction.Attribute("id").Type);
 
 //                foreach (var actionDef in actionDefs)
 //                {
@@ -59,7 +59,7 @@
 //                foreach (var xDirection in xDirections)
 //                {
 //                    Direction2D direction = new Direction2D();
-//                    direction.Id = Convert.ToInt32(xDirection.Attribute("id").Value);
+//                    direction.Id = Convert.ToInt32(xDirection.Attribute("id").Type);
 
 
 //                    foreach (var directionDef in directionDefs)
@@ -75,11 +75,11 @@
 //                    foreach (var xFrame in xFrames)
 //                    {
 //                        Frame2D frame = new Frame2D();
-//                        frame.Index = Convert.ToInt32(xFrame.Attribute("index").Value);
-//                        frame.Width = Convert.ToInt32(xFrame.Attribute("width").Value);
-//                        frame.Height = Convert.ToInt32(xFrame.Attribute("height").Value);
-//                        frame.OffsetX = Convert.ToInt32(xFrame.Attribute("offset-x").Value);
-//                        frame.offsetY = Convert.ToInt32(xFrame.Attribute("offset-y").Value);
+//                        frame.Index = Convert.ToInt32(xFrame.Attribute("index").Type);
+//                        frame.Width = Convert.ToInt32(xFrame.Attribute("width").Type);
+//                        frame.Height = Convert.ToInt32(xFrame.Attribute("height").Type);
+//                        frame.OffsetX = Convert.ToInt32(xFrame.Attribute("offset-x").Type);
+//                        frame.offsetY = Convert.ToInt32(xFrame.Attribute("offset-y").Type);
 //                        frame.FileName = string.Format("{0:d4}-{1:d4}-{2:d4}-{3:d4}", model.Id, action.Id, direction.Id, frame.Index);
 //                        frame.OrginalFile = string.Format("{0}\\{1}", fileInfo.Directory.FullName, frame.FileName);
 

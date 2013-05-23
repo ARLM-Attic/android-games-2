@@ -22,7 +22,7 @@ public class ResourceLoader
         byte[] data = null;
 
         string modelPath = string.Format("{0}models\\{1:d4}\\", DATUtility.GetResPath(), modelId);
-        string frameFile = string.Format("{4}{0:d4}-{1:d4}-{2:d4}-{3:d4}.bmp", modelId, actionId, directionId, frameIndex, modelPath);
+        string frameFile = string.Format("{4}{0:d4}-{1:d4}-{2:d4}-{3:d4}.png", modelId, actionId, directionId, frameIndex, modelPath);
         if (System.IO.File.Exists(frameFile))
         {
             using (Stream inFileStream = new System.IO.FileStream(frameFile, FileMode.Open))

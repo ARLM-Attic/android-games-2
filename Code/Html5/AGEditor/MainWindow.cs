@@ -144,9 +144,13 @@ namespace AGEditer
                 }
 
                 Camp player = new Camp(1,"player");
+                player.StartPos = new MapPos(0, 0);
+                player.Type = CampType.Player;
                 _map.Camps.Add(player);
 
-                Camp computer = new Camp(2,"computer");
+                Camp computer = new Camp(2, "computer");
+                computer.StartPos = new MapPos(0, 0);
+                computer.Type = CampType.Computer;
                 _map.Camps.Add(computer);
 
                 _panel.SetMap(_map);
@@ -237,7 +241,7 @@ namespace AGEditer
             {
                 Terrain terrain = e.Node.Tag as Terrain;
 
-                Unit2D unit = DATUtility.GetUnit(1);
+                Unit2D unit = null;// DATUtility.GetUnit(1);
                 _panel.SelectTerrain(DesignState.SET_TERRAIN, unit, terrain);
             }
         }

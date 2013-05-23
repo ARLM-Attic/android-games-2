@@ -26,7 +26,7 @@
 //    {
 //        MapCell cell = map.GetCell(pos);
 
-//        if (cell.Value != 0)
+//        if (cell.Type != 0)
 //        {
 //            return true;
 //        }

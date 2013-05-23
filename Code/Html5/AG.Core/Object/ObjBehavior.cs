@@ -175,7 +175,7 @@
 //                {
 //                    MapCell cell = map.GetCell(new MapPos((int)(nextPointY / MapCell.Height), (int)(nextPointX / MapCell.Width)));
 
-//                    if (cell != null && cell.Value == 0
+//                    if (cell != null && cell.Type == 0
 //                        && ObjectUtil.CalcDistance(new Point2D(nextPointX, nextPointY), objInstance.CurrentPoint) <= obj.Unit.Size + objInstance.Unit.Size)
 //                    {
 //                        bcm = false;

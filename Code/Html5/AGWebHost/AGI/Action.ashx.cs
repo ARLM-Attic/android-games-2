@@ -14,16 +14,25 @@ namespace AGWebHost.AGI
     {
         public void ProcessRequest(HttpContext context)
         {
-            string cmd = context.Request["cmd"];
+            context.Response.ContentType = "text/plain";
+            string cmd = context.Request.Form["cmd"];
 
             if (cmd == "1002")
             {
-                int curRow = Convert.ToInt32(context.Request["cr"]);
-                int curCol = Convert.ToInt32(context.Request["cc"]);
+                int mapId = Convert.ToInt32(context.Request.Form["map"]);
+                int curRow = Convert.ToInt32(context.Request.Form["cr"]);
+                int curCol = Convert.ToInt32(context.Request.Form["cc"]);
 
-                int radius = 10;
+                Map2D map = DATUtility.GetMap(mapId);
+                if (map == null)
+                {
+                    context.Response.Write("{result:1}");
+                    return;
+                }
 
-                MapRange range = ServerData.Instance.Map.GetRange(curRow, curCol, radius);
+                int radius = 20;
+
+                MapRange range = Map.GetRange(map, curRow, curCol, radius);
 
                 StringBuilder cellBuilder = new StringBuilder();
                 for (int row = 0; row < range.Row; row++)
@@ -34,14 +43,37 @@ namespace AGWebHost.AGI
                     }
                 }
 
-                string dataString = string.Format("sr:{0},sc:{1},r:{2},c:{3},cells:'{4}'",
+                StringBuilder objBuilder = new StringBuilder();
+                for (int index = 0; index < range.Objs.Count; index++)
+                {
+                    Object2D obj = range.Objs[index];
+                    if (index > 0)
+                    {
+                        objBuilder.Append(",{");
+                    }
+                    else
+                    {
+                        objBuilder.Append("{");
+                    }
+                    objBuilder.AppendFormat("id:{0},model:{1},caption:'{2}',pr:{3},pc:{4},px:{5},py:{6}",
+                        obj.ID,
+                        obj.Unit.Model.Id,
+                        obj.Caption,
+                        obj.SitePos.Row,
+                        obj.SitePos.Col,
+                        obj.CurrentPoint.X,
+                        obj.CurrentPoint.Y);
+                    objBuilder.Append("}");
+                }
+
+                string dataString = string.Format("sr:{0},sc:{1},r:{2},c:{3},cells:'{4}',objs:[{5}]",
                     range.StartRow,
                     range.StartCol,
                     range.Row,
                     range.Col,
-                    cellBuilder);
-                context.Response.ContentType = "text/plain";
-                context.Response.Write("{state:'ok', data:{" + dataString + "}}");
+                    cellBuilder,
+                    objBuilder);
+                context.Response.Write("{result:0, data:{" + dataString + "}}");
             }
             else if (cmd == "1000")
             {
@@ -56,7 +88,7 @@ namespace AGWebHost.AGI
             else
             {
                 context.Response.ContentType = "text/plain";
-                context.Response.Write("{state:'ok'}");
+                context.Response.Write("{result:0}");
             }
         }
 

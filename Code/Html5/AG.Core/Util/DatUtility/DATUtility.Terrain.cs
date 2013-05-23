@@ -49,7 +49,7 @@ public static partial class DATUtility
             //    BackTerrainId = 2,
             //    ForeTerrainId = 3,
             //    Caption = "沙地上的草地",
-            //    Value = 0,
+            //    Type = 0,
             //    Model = DATUtility.GetModel(403)
             //});
         }

@@ -20,9 +20,9 @@ public static partial class DATUtility
             XElement xMap = xDoc.Element("map");
             int id = Convert.ToInt32(xMap.Attribute("id").Value);
             string mapCaption = xMap.Attribute("caption").Value;
-            //int row = Convert.ToInt32(xMap.Attribute("row").Value);
-            //int col = Convert.ToInt32(xMap.Attribute("col").Value);
-            //int bgModelId = Convert.ToInt32(xMap.Attribute("bg-model-id").Value);
+            //int row = Convert.ToInt32(xMap.Attribute("row").Type);
+            //int col = Convert.ToInt32(xMap.Attribute("col").Type);
+            //int bgModelId = Convert.ToInt32(xMap.Attribute("bg-model-id").Type);
 
             MapInfo mapInfo = new MapInfo();
             mapInfo.Id = id;
@@ -88,7 +88,7 @@ public static partial class DATUtility
         for (int i = 0; i < map.Cells.Length; i++)
         {
             cellBuilder.AppendFormat("{0}|{1}|{2},",
-                map.Cells[i].Value,
+                map.Cells[i].Type,
                 map.Cells[i].TerrainId,
                 map.Cells[i].TerrainIndex);
         }
@@ -115,6 +115,7 @@ public static partial class DATUtility
             xWidget.Add(new XAttribute("camp-id", widget.Camp.Id));
             xWidget.Add(new XAttribute("caption", widget.Caption));
             xWidget.Add(new XAttribute("unit-id", widget.Unit.Id));
+            xWidget.Add(new XAttribute("site-pt", string.Format("{0},{1}", widget.CurrentPoint.X, widget.CurrentPoint.Y)));
             xWidget.Add(new XAttribute("site-pos", string.Format("{0},{1}", widget.SitePos.Row, widget.SitePos.Col)));
             xWidgets.Add(xWidget);
         }
@@ -150,7 +151,7 @@ public static partial class DATUtility
         int bgModelId = Convert.ToInt32(xMap.Attribute("bg-model-id").Value);
 
         Map2D map = new Map2D();
-        map.ID = mapId; // Convert.ToInt32(xMap.Attribute("id").Value);
+        map.ID = mapId; // Convert.ToInt32(xMap.Attribute("id").Type);
         map.Caption = mapCaption;
         map.Row = row;
         map.Col = col;
@@ -173,13 +174,13 @@ public static partial class DATUtility
                 string[] cellValueArr = cellValues[r * col + c].Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 if (cellValueArr.Length == 3)
                 {
-                    cell.Value = Convert.ToInt32(cellValueArr[0]);
+                    cell.Type = Convert.ToInt32(cellValueArr[0]);
                     cell.TerrainId = Convert.ToInt32(cellValueArr[1]);
                     cell.TerrainIndex = Convert.ToInt32(cellValueArr[2]);
                 }
                 else
                 {
-                    cell.Value = Convert.ToInt32(cellValues[r * col + c]);
+                    cell.Type = Convert.ToInt32(cellValues[r * col + c]);
                     cell.TerrainId = DATUtility.GetTerrain(1).Id;
                     cell.TerrainIndex = 1;
                 }
@@ -216,11 +217,16 @@ public static partial class DATUtility
             string[] sitPosArr = xObj.Attribute("site-pos").Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             int pRow = Convert.ToInt32(sitPosArr[0]);
             int pCol = Convert.ToInt32(sitPosArr[1]);
+
+            string[] sitePtArr = xObj.Attribute("site-pt").Value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            float pX = Convert.ToSingle(sitePtArr[0]);
+            float pY = Convert.ToSingle(sitePtArr[1]);
+
             Object2D obj = new Object2D();
             obj.ID = id;
             obj.Camp = map.GetCamp(campId);
             obj.SitePos = new MapPos(pRow, pCol);
-            obj.CurrentPoint = obj.SitePos.Center;
+            obj.CurrentPoint = new Point2D(pX, pY);
             obj.Caption = caption;
             obj.SetUnit(GetUnit(unitId));
 

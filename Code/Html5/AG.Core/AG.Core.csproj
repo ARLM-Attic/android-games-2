@@ -69,6 +69,7 @@
     <Compile Include="Map\GState.cs" />
     <Compile Include="Map\Map2D.cs" />
     <Compile Include="Map\MapCell.cs" />
+    <Compile Include="Map\MapCoordinate.cs" />
     <Compile Include="Map\MapInfo.cs" />
     <Compile Include="Map\Terrain.cs" />
     <Compile Include="Map\Texture2D.cs" />

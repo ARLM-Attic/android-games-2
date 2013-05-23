@@ -5,6 +5,7 @@ function AGMap() {
     this._id = 0;
     this._caption = 'unknown';
     this._cells = new Array();
+    this._range = null;
     this._row = 0;
     this._col = 0;
 

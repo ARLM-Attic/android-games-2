@@ -1,9 +1,26 @@
 ﻿function AGNet(onReceiveData) {
     this._onReceiveDataCallback = onReceiveData;
 
-    this.getMapCells = function (mapId, pos) {
+    this.getMapRange = function (mapId, pos) {
+        var that = this;
+        Ajax.request({
+            url: "http://localhost:3003/AGI/Action.ashx?t=" + Date.now(),
+            params: { cmd: 1002, map: mapId, cr: pos._row, cc: pos._col },
+            callback: function (response) { that.onReceiveData(response); }
+        });
+    }
 
-        this._onReceiveDataCallback();
+    this.onReceiveData = function (response) {
+        var json = this.strToJson(response);
+        this._onReceiveDataCallback(1002, json.data);
+    }
+
+    this.strToJson = function(str) {
+        if (str == "") {
+            return null;
+        }
+        var json = eval('(' + str + ')');
+        return json;
     }
 } 
 

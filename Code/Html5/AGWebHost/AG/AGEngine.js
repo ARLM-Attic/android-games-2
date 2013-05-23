@@ -28,6 +28,8 @@ function AGEngine() {
     }
 
     this.init = function (el, width, height) {
+        var that = this;
+
         this.loadData();
 
         this._canvas = el;
@@ -41,7 +43,7 @@ function AGEngine() {
         this._canvas.style.height = height;
 
         this._resLoader = new AGResLoader(this);
-        this._net = new AGNet(this);
+        this._net = new AGNet(function (cmd, data) { that.onReceiveNetData(cmd, data); });
 
         this._idi = new AGIDI(this);
         this._gdi = new AGGDI(this);
@@ -89,6 +91,12 @@ function AGEngine() {
         var image2 = new Image();
         image2.src = "Actions/getimage.ashx?file=/res/4589";
         this._images.push(image2);
+    }
+
+    this.onReceiveNetData = function (cmd, data) {
+        if (this._curScreen != null) {
+            this._curScreen.onReceiveNetData(cmd, data);
+        }
     }
 }
 
