@@ -54,7 +54,7 @@ function AGCamera(engine) {
     // 附加到地图的坐标点
     this.targetToPt = function (pt) {
         if (this._targetPt._x != pt._x
-            || this._targetPt._y != pt._x) {
+            || this._targetPt._y != pt._y) {
             this._targetPt._x = pt._x;
             this._targetPt._y = pt._y;
             this._isNeedUpdate = true;
@@ -124,44 +124,94 @@ function AGPt(x, y) {
     this._y = y;
 }
 
-function AGModel() {
+function AGModel(id) {
+    this._id = id;
     this._actions = new Array();
 
     this.addAction = function (action) {
+        var that = this;
+        action._model = that;
         this._actions.push(action);
     }
 
     this.getFrame = function (actionId, directionId, frameId) {
-        return this._actions[actionId]._directions[directionId]._frames[frameId];
+        for (var actIndex = 0; actIndex < this._actions.length; actIndex++) {
+            var action = this._actions[actIndex];
+            if (action._id == actionId) {
+                for (var dirIndex = 0; dirIndex < action._directions.length; dirIndex++) {
+                    var direction = action._directions[dirIndex];
+                    if (direction._id == directionId) {
+                        for (var frameIndex = 0; frameIndex < direction._frames.length; frameIndex++) {
+                            var frame = direction._frames[frameIndex];
+                            if (frame._index == frameId) {
+                                return frame;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return this._actions[0]._directions[0]._frames[0];
+    }
+
+    this.getFrameCount = function (actionId, directionId) {
+        for (var actIndex = 0; actIndex < this._actions.length; actIndex++) {
+            var action = this._actions[actIndex];
+            if (action._id == actionId) {
+                for (var dirIndex = 0; dirIndex < action._directions.length; dirIndex++) {
+                    var direction = action._directions[dirIndex];
+                    if (direction._id == directionId) {
+                        return direction._frames.length;
+                    }
+                }
+            }
+        }
+        return this._actions[0]._directions[0]._frames.length;
     }
 }
 
-function AGAction() {
+//* --------------------------------------------------
+// Model action structure
+// -------------------------------------------------- */
+function AGAction(id) {
+    this._model = null;
+    this._id = id;
     this._directions = new Array();
 
     this.addDirection = function (direction) {
+        var that = this;
+        direction._action = that;
         this._directions.push(direction);
     }
 }
 
-function AGDirection() {
+function AGDirection(id) {
+    this._action = null;
+    this._id = id;
     this._frames = new Array();
 
     this.addFrame = function (frame) {
+        var that = this;
+        frame._direction = that;
         this._frames.push(frame);
     }
 }
 
-function AGFrame(id, src, width, height, offsetX, offsetY) {
-    this._id = id;
-    this._image = new Image();
-    this._image.src = "Actions/getimage.ashx?file=" + src;
-
+function AGFrame(index, width, height, offsetX, offsetY) {
+    this._direction = null;
+    this._index = index;
+    this._image = null;
     this._width = width;
     this._height = height;
 
     this._offsetX = offsetX;
     this._offsetY = offsetY;
+
+    this.loadImage = function () {
+        this._image = new Image();
+        this._image.src = "Actions/GetFrameImage.ashx?m=" + this._direction._action._model._id + "&a=" + this._direction._action._id + "&d=" + this._direction._id + "&f=" + this._index;
+
+    }
 }
 
 /// 这个要去掉
@@ -170,11 +220,15 @@ function AGObject(model, pos) {
     this._pos = pos;
 }
 
-function AGObj() {
-    this._frameCounter = 0;
-    this._frameIndex = 1;
+function AGObj(model) {
+    this._model = model;
 
-    this._model = null;
+    this._updateCounter = 5;
+    this._updateTick = 1;
+
+    this._actionId = 1;
+    this._directionId = 1;
+    this._frameIndex = 1;
 
     // 当前所在的地图格子
     this._sitePos = null;
@@ -184,27 +238,47 @@ function AGObj() {
     // 目标坐标
     this._targetPt = null;
 
+    this.setAction = function (action) {
+        if (this._actionId != action) {
+            this._actionId = action;
+            this._frameIndex = 1;
+        }
+    }
+
     this.update = function () {
-        this._frameCounter++;
-        if (this._frameCounter < this._frameIndex) {
+        this._updateTick++;
+        if (this._updateTick < this._updateCounter) {
             return;
         }
+        this._updateTick = 0;
 
-        this._frameCounter = 0;
+        this._frameIndex++;
+        var frameCount = this._model.getFrameCount(this._actionId, this._directionId);
+        if (this._frameIndex > frameCount) {
+            this._frameIndex = 1;
+        }
+        //alert(this._actionId +","+ this._directionId +"|"+this._frameIndex + "," + frameCount);
 
-        if (this._targetPt != null
-            && (this._targetPt._x != this._sitePt._x || this._targetPt._y != this._sitePt._x)) {
+        if (this._targetPt != null && (this._targetPt._x != this._sitePt._x || this._targetPt._y != this._sitePt._x)) {
+
+            var destAction = 1;
             if (this._targetPt._x > this._sitePt._x) {
                 this._sitePt._x += 1;
+                destAction = 2;
             } else if (this._targetPt._x < this._sitePt._x) {
                 this._sitePt._x -= 1;
+                destAction = 2;
             }
 
             if (this._targetPt._y > this._sitePt._y) {
                 this._sitePt._y += 1;
+                destAction = 2;
             } else if (this._targetPt._y < this._sitePt._y) {
                 this._sitePt._y -= 1;
+                destAction = 2;
             }
+
+            this.setAction(destAction);
         }
     }
 }

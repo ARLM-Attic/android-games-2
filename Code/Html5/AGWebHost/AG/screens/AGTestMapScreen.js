@@ -1,6 +1,9 @@
 ﻿function AGTestMapScreen() {
     this._engine = null;
+
     this._model = null;
+    this._terrainModel = null;
+
     this._model2 = null;
     this._model3 = null;
     this._camera = null;
@@ -13,7 +16,7 @@
 
     this.init = function (engine) {
         this._engine = engine;
-        this._model = engine._resLoader.loadModel(1);
+        //this._model = engine._resLoader.loadModel(1);
         this._model2 = engine._resLoader.loadModel(2);
         this._model3 = engine._resLoader.loadModel(4688);
 
@@ -38,8 +41,8 @@
         }
 
         // 创建玩家的单位
-        if (this._playerPos != null) {
-            this._player = new AGObj();
+        if (this._playerPos != null && this._model != null) {
+            this._player = new AGObj(this._model);
             this._player._sitePos = new AGMapPos(this._playerPos.pr, this._playerPos.pc);
             this._player._sitePt = new AGPt(this._playerPos.px, this._playerPos.py);
             this._playerPos = null;
@@ -56,26 +59,36 @@
                     x = zeroPt._x + x;
                     y = zeroPt._y + y;
 
-                    engine._gdi.draw(this._model.getFrame(0, 0, 0)._image, x, y, MAPCELL_WIDTH, MAPCELL_HEIGHT); //, 0, 0, this._model.getFrame(0, 0, 0)._width, this._model.getFrame(0, 0, 0)._height);
-                    //engine._gdi.drawString("(" + row + "," + col + ")", x + 20, y + 20);
+                    if (this._terrainModel != null) {
+                        engine._gdi.draw(this._terrainModel.getFrame(1, 1, 1)._image, x, y, MAPCELL_WIDTH, MAPCELL_HEIGHT); //, 0, 0, this._model.getFrame(0, 0, 0)._width, this._model.getFrame(0, 0, 0)._height);
+                        //engine._gdi.drawString("(" + row + "," + col + ")", x + 20, y + 20);
+                    }
                 }
             }
 
-            for (var objIndex = 0; objIndex < this._map._range.objs.length; objIndex++) {
-                var x = this._map._range.objs[objIndex].px;
-                var y = this._map._range.objs[objIndex].py;
-                x = zeroPt._x + x;
-                y = zeroPt._y + y;
-                engine._gdi.draw(this._map._objList[objIndex]._model.getFrame(0, 0, 0)._image, x, y);
-            }
+            //            for (var objIndex = 0; objIndex < this._map._range.objs.length; objIndex++) {
+            //                var x = this._map._range.objs[objIndex].px;
+            //                var y = this._map._range.objs[objIndex].py;
+            //                x = zeroPt._x + x;
+            //                y = zeroPt._y + y;
+            //                engine._gdi.draw(this._map._objList[objIndex]._model.getFrame(0, 0, 0)._image, x, y);
+            //            }
 
-            if (this._player != null) {
+            if (this._player != null && this._model != null) {
                 // 渲染玩家的单位
                 var x = this._player._sitePt._x;
                 var y = this._player._sitePt._y;
                 x = zeroPt._x + x;
                 y = zeroPt._y + y;
-                engine._gdi.drawString("■", x, y);
+
+                var frame = this._model.getFrame(this._player._actionId, this._player._directionId, this._player._frameIndex);
+                x = x - frame._offsetX;
+                y = y - frame._offsetY;
+                engine._gdi.draw(frame._image, x, y);
+                engine._gdi.drawString("[" + this._player._actionId + "-" + this._player._directionId + "-" + this._player._frameIndex + "]",
+                this._player._sitePt._x,
+                     this._player._sitePt._y);
+                //engine._gdi.drawString("this._player._frameIndex:" + this._player._frameIndex, x, y);
             }
         }
 
@@ -104,7 +117,7 @@
             }
         }
 
-        if (this._player != null) {
+        if (this._player != null && this._model != null) {
             this._player.update();
             this._camera.targetToPt(this._player._sitePt);
 
@@ -123,6 +136,7 @@
     }
 
     this.onReceiveNetData = function (cmd, data) {
+
         if (cmd == 1002) {
             //alert(data.sr + "," + data.sc);
             this._newRange = data;
@@ -132,7 +146,36 @@
         else if (cmd == 1000) {
             this._playerPos = data;
             this._camera.attach(this._map, this._playerPos.pr, this._playerPos.pc);
-            this._engine._net.getMapRange(100, new AGMapPos(this._playerPos.pr, this._playerPos.pc));
+            //this._engine._net.getMapRange(100, new AGMapPos(this._playerPos.pr, this._playerPos.pc));
+
+            this._engine._net.getModel(this._playerPos.model);
+            this._engine._net.getModel(40);
+        }
+        else if (cmd == 1003) {
+            var model = new AGModel(data.id);
+            for (var actIndex = 0; actIndex < data.actions.length; actIndex++) {
+                var srcAct = data.actions[actIndex];
+                var action = new AGAction(srcAct.id);
+                model.addAction(action);
+                for (var dirIndex = 0; dirIndex < srcAct.dirs.length; dirIndex++) {
+                    var srcDir = srcAct.dirs[dirIndex];
+                    var direction = new AGDirection(srcDir.id);
+                    action.addDirection(direction);
+                    for (var frameIndex = 0; frameIndex < srcDir.frames.length; frameIndex++) {
+                        var srcFrame = srcDir.frames[frameIndex];
+                        var frame = new AGFrame(srcFrame.index, srcFrame.w, srcFrame.h, srcFrame.ox, srcFrame.oy);
+                        direction.addFrame(frame);
+                        frame.loadImage();
+                    }
+                }
+            }
+
+            if (model._id == 40) {
+                this._terrainModel = model;
+            } else {
+                this._model = model;
+                //alert(this._model._id+","+ this._model._actions[0]._directions[0]._frames.length);
+            }
         }
     }
 }

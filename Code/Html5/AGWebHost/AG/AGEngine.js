@@ -107,19 +107,23 @@ function AGGDI(engine) {
     this._context = engine._context;
 
     this.draw = function (image, destX, destY, destW, destH, srcX, srcY, srcW, srcH) {
+        if (image == null) {
+            return;
+        }
+
         if (arguments.length == 3) {
             this._context.drawImage(image, destX, destY);
         }
         else if (arguments.length == 5) {
             this._context.drawImage(image, destX, destY, destW, destH);
-        } 
+        }
         else if (arguments.length == 9) {
             this._context.drawImage(image, srcX, srcY, srcW, srcH, destX, destY, destW, destH);
         }
     }
 
     this.drawString = function (text, x, y) {
-        this._context.fillStyle = '#00f';
+        this._context.fillStyle = '#FFF';
         //this._context.font = "italic 30px sans-serif";
         this._context.textBaseline = 'top'
         this._context.fillText(text, x, y);

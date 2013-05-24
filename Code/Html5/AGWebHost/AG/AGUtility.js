@@ -2,6 +2,7 @@
     this._actionUrl = 'http://localhost:3003/AGI/Action.ashx?t=';
     this._onReceiveDataCallback = onReceiveData;
 
+    // 获得可以看见的地图范围
     this.getMapRange = function (mapId, pos) {
         var that = this;
         Ajax.request({
@@ -11,6 +12,7 @@
         });
     }
 
+    // 获取玩家的位置信息
     this.getPlayerPos = function (mapId, player) {
         var that = this;
         Ajax.request({
@@ -20,8 +22,20 @@
         });
     }
 
+    // 获取模型信息
+    this.getModel = function (modelId) {
+        var that = this;
+        Ajax.request({
+            url: this._actionUrl + Date.now(),
+            params: { cmd: 1003, model: modelId },
+            callback: function (response) { that.onReceiveData(response); }
+        });
+    }
+
     this.onReceiveData = function (response) {
+        //alert(response);
         var json = this.strToJson(response);
+        //alert(json);
         this._onReceiveDataCallback(json.cmd, json.data);
     }
 
