@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace AGEditer
+namespace AGEditor
 {
     public partial class PreviewWindow : Form
     {

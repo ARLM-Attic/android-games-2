@@ -11,8 +11,22 @@ public static partial class DATUtility
     public static List<Model2D> s_models = new List<Model2D>();
     public static List<Unit2D> s_units = new List<Unit2D>();
 
+
+    private static string s_app_path;
+    private static string s_res_path;
+
+    public static void SetAppPath(string appPath)
+    {
+        s_app_path = appPath;
+        s_res_path = System.IO.Path.Combine(appPath, "data\\");
+    }
+
     public static string GetAppPath()
     {
+        if (!string.IsNullOrEmpty(s_app_path))
+        {
+            return s_app_path;
+        }
 #if DEBUG
         string datFile = string.Format("c:\\ag-web\\");
         return datFile;
@@ -28,6 +42,11 @@ public static partial class DATUtility
     /// <returns></returns>
     public static string GetResPath()
     {
+        if (!string.IsNullOrEmpty(s_res_path))
+        {
+            return s_res_path;
+        }
+
 #if DEBUG
         string datFile = string.Format("c:\\ag-web\\data\\");
         return datFile;

@@ -14,11 +14,11 @@ public class ModelCategory
         Caption = caption;
     }
 
-    public static ModelCategory Unit = new ModelCategory(1, "unit");
-    public static ModelCategory Head = new ModelCategory(2, "head");
-    public static ModelCategory UI = new ModelCategory(3, "ui");
-    public static ModelCategory Design = new ModelCategory(4, "design");
-    public static ModelCategory Icon = new ModelCategory(5, "icon");
+    public static ModelCategory Unit = new ModelCategory(1, "unit(单位)");
+    public static ModelCategory Head = new ModelCategory(2, "head(头像)");
+    public static ModelCategory UI = new ModelCategory(3, "ui(UI)");
+    public static ModelCategory Design = new ModelCategory(4, "design(设计模式)");
+    public static ModelCategory Icon = new ModelCategory(5, "icon(图标)");
     public static ModelCategory Terrain = new ModelCategory(6, "Terrain(地形)");
     public static ModelCategory Ornamental = new ModelCategory(7, "Ornamental(装饰物)");
     public static ModelCategory Building = new ModelCategory(8, "Building(建筑物)");

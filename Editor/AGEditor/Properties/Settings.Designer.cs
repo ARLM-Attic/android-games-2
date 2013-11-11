@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AGEditer.Properties
+namespace AGEditor.Properties
 {
 
 

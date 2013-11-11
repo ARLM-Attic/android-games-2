@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
 
-namespace AGEditer
+namespace AGEditor
 {
     public partial class MapDesignPanel : UserControl
     {

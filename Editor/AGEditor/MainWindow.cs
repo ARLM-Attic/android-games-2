@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AGEditor.Windows.Workspace;
 
-namespace AGEditer
+namespace AGEditor
 {
     public partial class MainWindow : Form
     {
@@ -21,6 +22,8 @@ namespace AGEditer
         {
             InitializeComponent();
 
+            InitStatusbar();
+
             _panel = new MapDesignPanel();
             //_panel.Dock = DockStyle.Fill;
 
@@ -29,6 +32,13 @@ namespace AGEditer
 
             _treeCamp.AfterSelect += _treeCamp_AfterSelect;
             _ctlTreeTerrain.AfterSelect += _ctlTreeTerrain_AfterSelect;
+        }
+
+        private void InitStatusbar()
+        {
+            this._ctlLabelWS.Text = AGEContext.Current.Config.Workspace.Name;
+            this._ctlLabelWS.ToolTipText = AGEContext.Current.Config.Workspace.Path;
+            this._ctlLabelWS.AutoToolTip = true;
         }
 
         private void BindUnitTree()

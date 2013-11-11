@@ -93,12 +93,19 @@
     <Compile Include="Controls\WorldMapDesignPanel.Designer.cs">
       <DependentUpon>WorldMapDesignPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\AGEContext.cs" />
     <Compile Include="DesignState.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow2.Designer.cs">
+      <DependentUpon>MainWindow2.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\CreateModelWindow.cs">
       <SubType>Form</SubType>
@@ -140,11 +147,44 @@
     <Compile Include="Unit\UnitForm.designer.cs">
       <DependentUpon>UnitForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\AGEConfigUtil.cs" />
+    <Compile Include="Utilities\AGEditorConfig.cs" />
+    <Compile Include="Windows\Common\AGEInputIntegerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Common\AGEInputIntegerWindow.Designer.cs">
+      <DependentUpon>AGEInputIntegerWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MapWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\MapWindow.designer.cs">
       <DependentUpon>MapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\IFrameEditObserver.cs" />
+    <Compile Include="Windows\Model\ModelFrameEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditPanel.Designer.cs">
+      <DependentUpon>ModelFrameEditPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditWrapper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditWrapper.Designer.cs">
+      <DependentUpon>ModelFrameEditWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelListWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelListWindow.Designer.cs">
+      <DependentUpon>ModelListWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelEditWindow.designer.cs">
+      <DependentUpon>ModelEditWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\SelectMapWindow.cs">
       <SubType>Form</SubType>
@@ -158,11 +198,29 @@
     <Compile Include="Windows\SelectModelWindow.designer.cs">
       <DependentUpon>SelectModelWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\SelectWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectWorkspaceWindow.Designer.cs">
+      <DependentUpon>SelectWorkspaceWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Windows\SelectWorldMapWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Windows\SelectWorldMapWindow.Designer.cs">
       <DependentUpon>SelectWorldMapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Workspace\ConfirmWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Workspace\ConfirmWorkspaceWindow.Designer.cs">
+      <DependentUpon>ConfirmWorkspaceWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Workspace\CreateWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Workspace\CreateWorkspaceWindow.Designer.cs">
+      <DependentUpon>CreateWorkspaceWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="WorldMap\CreateWorldMapWindow.cs">
       <SubType>Form</SubType>
@@ -197,6 +255,9 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow2.resx">
+      <DependentUpon>MainWindow2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model\CreateModelWindow.resx">
       <DependentUpon>CreateModelWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,8 +285,23 @@
     <EmbeddedResource Include="Unit\UnitForm.resx">
       <DependentUpon>UnitForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Common\AGEInputIntegerWindow.resx">
+      <DependentUpon>AGEInputIntegerWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\MapWindow.resx">
       <DependentUpon>MapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelFrameEditPanel.resx">
+      <DependentUpon>ModelFrameEditPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelFrameEditWrapper.resx">
+      <DependentUpon>ModelFrameEditWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelListWindow.resx">
+      <DependentUpon>ModelListWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelEditWindow.resx">
+      <DependentUpon>ModelEditWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\SelectMapWindow.resx">
       <DependentUpon>SelectMapWindow.cs</DependentUpon>
@@ -233,8 +309,17 @@
     <EmbeddedResource Include="Windows\SelectModelWindow.resx">
       <DependentUpon>SelectModelWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectWorkspaceWindow.resx">
+      <DependentUpon>SelectWorkspaceWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\SelectWorldMapWindow.resx">
       <DependentUpon>SelectWorldMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Workspace\ConfirmWorkspaceWindow.resx">
+      <DependentUpon>ConfirmWorkspaceWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Workspace\CreateWorkspaceWindow.resx">
+      <DependentUpon>CreateWorkspaceWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WorldMap\CreateWorldMapWindow.resx">
       <DependentUpon>CreateWorldMapWindow.cs</DependentUpon>
@@ -252,12 +337,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Configs\config.xml.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AG.Core\AG.Core.csproj">
       <Project>{40289A74-734D-4131-9B5F-628CFC6FBEB1}</Project>
       <Name>AG.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

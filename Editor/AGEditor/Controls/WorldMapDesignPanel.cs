@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace AGEditer
+namespace AGEditor
 {
     public partial class WorldMapDesignPanel : UserControl
     {

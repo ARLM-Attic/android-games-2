@@ -14,4 +14,9 @@ public class Frame2D
     public byte[] Data { get; set; }
 
     public Texture2D Texture { get; set; }
+
+    public override string ToString()
+    {
+        return string.Format("frame{0}", Index);
+    }
 }

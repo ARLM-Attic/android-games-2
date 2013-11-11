@@ -1,4 +1,4 @@
-﻿namespace AGEditer
+﻿namespace AGEditor
 {
     partial class MapDesignPanel
     {

@@ -11,7 +11,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using System.IO;
 
-namespace AGEditer
+namespace AGEditor
 {
     public partial class ModelWindow : Form
     {
