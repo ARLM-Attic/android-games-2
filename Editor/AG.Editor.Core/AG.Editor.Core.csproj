@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AG.Editor.Core</RootNamespace>
+    <AssemblyName>AG.Editor.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AGECache.cs" />
+    <Compile Include="AGEContext.cs" />
+    <Compile Include="Data\AGAction.cs" />
+    <Compile Include="Data\AGDirection.cs" />
+    <Compile Include="Data\AGFrame.cs" />
+    <Compile Include="Data\AGModel.cs" />
+    <Compile Include="Data\AGModelRef.cs" />
+    <Compile Include="Data\AGModelSummary.cs" />
+    <Compile Include="Stores\AGEProjectStore.cs" />
+    <Compile Include="Stores\AGMetadataStore.cs" />
+    <Compile Include="Stores\AGModelStore.cs" />
+    <Compile Include="Stores\AGTProjectStore.cs" />
+    <Compile Include="Data\AGEProject.cs" />
+    <Compile Include="Data\AGEProjectSummary.cs" />
+    <Compile Include="Metadata\AGDirectionMode.cs" />
+    <Compile Include="Metadata\AGModelCategory.cs" />
+    <Compile Include="Metadata\AGTProjectSummary.cs" />
+    <Compile Include="Metadata\AGTProject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\AGESettings.cs" />
+    <Compile Include="Stores\AGESettingsStore.cs" />
+    <Compile Include="Stores\XDocumentExtension.cs" />
+    <Compile Include="V1_0\AGTProjectXML1_0.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Samples\model.xml" />
+    <Content Include="Samples\project.xml" />
+    <Content Include="Samples\settings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

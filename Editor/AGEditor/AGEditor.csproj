@@ -107,6 +107,12 @@
     <Compile Include="MainWindow2.Designer.cs">
       <DependentUpon>MainWindow2.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainWindow3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow3.Designer.cs">
+      <DependentUpon>MainWindow3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\CreateModelWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +264,9 @@
     <EmbeddedResource Include="MainWindow2.resx">
       <DependentUpon>MainWindow2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow3.resx">
+      <DependentUpon>MainWindow3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Model\CreateModelWindow.resx">
       <DependentUpon>CreateModelWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -341,15 +350,31 @@
     <Content Include="Configs\config.xml.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Metadata\Projects\gravity.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AG.Core\AG.Core.csproj">
       <Project>{40289A74-734D-4131-9B5F-628CFC6FBEB1}</Project>
       <Name>AG.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
+      <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
+      <Name>AG.Editor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Panels\AG.Editor.Panels.csproj">
+      <Project>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</Project>
+      <Name>AG.Editor.Panels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
+      <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>
+      <Name>AG.Editor.Windows</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="NewFolder1\" />
+    <Folder Include="Windows\Metadata\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

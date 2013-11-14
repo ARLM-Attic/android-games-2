@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pt n="gravity" c="重力类型" ver="1.0" fver="1.0" >
+  <!-- model category definition -->
+  <mc>
+    <!-- 
+    dir:方向模式: 2,4,8,16
+    -->
+    <mci i="1" c="object(物体)" dir="8">
+      <act i="1" c="stand(站立)"/>
+      <act i="2" c="fly(飞行)"/>
+    </mci>
+    <mci i="2" c="effect(效果)" dir="4">
+      <act i="1" c="爆炸"/>
+    </mci>
+  </mc>
+</pt>

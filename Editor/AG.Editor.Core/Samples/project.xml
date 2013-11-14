@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+p:project
+ver:version
+tpn:tpname
+tpver:tpVersion
+-->
+<p ver="" tpn="" tpver="">
+  <m>
+    <!--
+    mi:mode item
+    i:id
+    n:name
+    c:modelcategory id
+    -->
+    <mi i="" n="" mci="1">
+      <!--
+      a:action list
+      -->
+      <a>
+        <!--
+        ai:action item
+        i:id
+        -->
+        <ai i="0">
+          <!--
+          d: direction
+          i:id
+          ref: reference direction id
+          -->
+          <d i="0">
+            <f ref="0" />
+            <f ref="1" />
+          </d>
+          <d i="1" ref="0"/>
+          <d i="2" ref="0"/>
+          <d i="3" ref="0"/>
+        </ai>
+      </a>
+      <f>
+        <fi i="0" img="" w="" h="" ax="" ay=""/>
+        <fi i="1" img="" w="" h="" ax="" ay=""/>
+      </f>
+    </mi>
+  </m>
+</p>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using AGEditor.Windows.Workspace;
+using AG.Editor.Core;
+using AG.Editor.Windows;
 
 namespace AGEditor
 {
@@ -16,8 +18,31 @@ namespace AGEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AGEConfigUtil.Init(AppDomain.CurrentDomain);
+            AGECache.Init(AppDomain.CurrentDomain);
+            AG.Editor.Core.AGEContext.Current.Settings = AGECache.Current.SettingsStore.GetSettings();
+            if (AG.Editor.Core.AGEContext.Current.Settings == null)
+            {
+                AG.Editor.Core.AGEContext.Current.Settings = new AG.Editor.Core.Settings.AGESettings();
+            }
 
+            AGELaunchWindow launchWindow = new AGELaunchWindow(AG.Editor.Core.AGEContext.Current.Settings);
+            if (launchWindow.ShowDialog() == DialogResult.OK)
+            {
+                AG.Editor.Core.AGEContext.Current.Settings.LatestEProjectPath = launchWindow.SelectedEProject.Path;
+                AG.Editor.Core.AGEContext.Current.EProject = launchWindow.SelectedEProject;
+            }
+            else
+            {
+                return;
+            }
+
+            Application.Run(new MainWindow3());
+
+            
+            AGECache.Current.SettingsStore.SaveSettings(AG.Editor.Core.AGEContext.Current.Settings);
+
+            /*
+            AGEConfigUtil.Init(AppDomain.CurrentDomain);
             #region init workspace
             AGEditorConfig config = AGEConfigUtil.GetConfig();
             if (config == null)
@@ -57,10 +82,10 @@ namespace AGEditor
                 }
             }
             #endregion
-
             Application.Run(new MainWindow2());
 
             AGEConfigUtil.SaveConfig(AGEContext.Current.Config);
+            */
         }
     }
 }

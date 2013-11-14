@@ -296,7 +296,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(212, 280);
+            this.tabPage2.Size = new System.Drawing.Size(212, 281);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "地形";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -306,7 +306,7 @@
             this._ctlTreeTerrain.Dock = System.Windows.Forms.DockStyle.Fill;
             this._ctlTreeTerrain.Location = new System.Drawing.Point(3, 3);
             this._ctlTreeTerrain.Name = "_ctlTreeTerrain";
-            this._ctlTreeTerrain.Size = new System.Drawing.Size(206, 274);
+            this._ctlTreeTerrain.Size = new System.Drawing.Size(206, 275);
             this._ctlTreeTerrain.TabIndex = 0;
             // 
             // tabPage3
@@ -315,7 +315,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(212, 280);
+            this.tabPage3.Size = new System.Drawing.Size(212, 281);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "阵营";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -325,7 +325,7 @@
             this._treeCamp.Dock = System.Windows.Forms.DockStyle.Fill;
             this._treeCamp.Location = new System.Drawing.Point(3, 3);
             this._treeCamp.Name = "_treeCamp";
-            this._treeCamp.Size = new System.Drawing.Size(206, 274);
+            this._treeCamp.Size = new System.Drawing.Size(206, 275);
             this._treeCamp.TabIndex = 0;
             // 
             // toolStrip1

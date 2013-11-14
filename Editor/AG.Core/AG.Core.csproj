@@ -79,7 +79,7 @@
     <Compile Include="Model\Direction2DDef.cs" />
     <Compile Include="Model\Frame2D.cs" />
     <Compile Include="Model\Model2D.cs" />
-    <Compile Include="Model\ModelCategory.cs" />
+    <Compile Include="Metadata\ModelCategory.cs" />
     <Compile Include="Object\ObjBehavior.cs" />
     <Compile Include="Object\Object2D.cs" />
     <Compile Include="Object\ObjState.cs" />
