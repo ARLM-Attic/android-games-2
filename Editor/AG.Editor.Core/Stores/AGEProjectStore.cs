@@ -55,9 +55,8 @@ namespace AG.Editor.Core.Stores
                 AGModelRef model = project.Models[im];
                 XElement xmi = new XElement("mi");
                 xmi.Add(new XAttribute("i", model.Id));
-                xmi.Add(new XAttribute("n", model.Caption));
+                xmi.Add(new XAttribute("c", model.Caption));
                 xmi.Add(new XAttribute("mci", model.CategoryId));
-
                 xm.Add(xmi);
             }
 
@@ -67,6 +66,11 @@ namespace AG.Editor.Core.Stores
             project.DateVersion = dateVersion;
         }
 
+        /// <summary>
+        /// 加载EProject对象
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public AGEProject GetEProject(string filePath)
         {
             XDocument xDoc = XDocument.Load(filePath);
@@ -82,6 +86,16 @@ namespace AG.Editor.Core.Stores
             // 加载TProject
             project.TProject = AGECache.Current.TProjectStore.GetTProject(project.TPName);
 
+            List<XElement> xMis = xEl.Element("m").Elements("mi").ToList();
+            for (int im = 0; im < xMis.Count; im++)
+            {
+                XElement xmi = xMis[im];
+                AGModelRef modelRef = new AGModelRef();
+                modelRef.Id = Convert.ToInt32(xmi.Attribute("i").Value);
+                modelRef.Caption = xmi.XGetAttrStringValue("c", "unknown");
+                modelRef.CategoryId = Convert.ToInt32(xmi.Attribute("mci").Value);
+                project.Models.Add(modelRef);
+            }
             return project;
         }
     }

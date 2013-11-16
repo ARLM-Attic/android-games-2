@@ -14,14 +14,27 @@ namespace AG.Editor.Windows.Controls
     {
         private AGEFrameEditPanel _editPanel;
 
-        public AGEFrameEditWrapper(AGEFrameEditPanel editPanel)
+        public AGEFrameEditWrapper(List<AGFrame> frames, AGFrame curFrame, AGEFrameEditPanel editPanel)
         {
             InitializeComponent();
 
             _editPanel = editPanel;
             _editPanel.Dock = DockStyle.Fill;
             this.Controls.Add(_editPanel);
+            _editPanel.BringToFront();
             _editPanel.AttachObserver(this);
+
+            foreach (var frame in frames)
+            {
+                if (frame == curFrame)
+                {
+                    this.checkedListBox1.Items.Add(frame, true);
+                }
+                else
+                {
+                    this.checkedListBox1.Items.Add(frame, false);
+                }
+            }
         }
 
         public void OnFrameChanged(AGFrame frame)
@@ -60,6 +73,24 @@ namespace AG.Editor.Windows.Controls
         private void _ctlBtnX2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (this._editPanel.Frames != null)
+            {
+                int index = e.Index;
+                if (e.NewValue == CheckState.Unchecked)
+                {
+                    // unchecked;
+                    this._editPanel.SetVisible(this._editPanel.Frames[index], false);
+                }
+                else if (e.NewValue == CheckState.Checked)
+                {
+                    // checked;
+                    this._editPanel.SetVisible(this._editPanel.Frames[index], true);
+                }
+            }
         }
     }
 }

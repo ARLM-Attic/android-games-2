@@ -82,6 +82,12 @@
     <Compile Include="Controls\AGEPreviewFramePanel.Designer.cs">
       <DependentUpon>AGEPreviewFramePanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AGEPreviewModelPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AGEPreviewModelPanel.Designer.cs">
+      <DependentUpon>AGEPreviewModelPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\IFrameEditObserver.cs" />
     <Compile Include="Controls\AGEFrameEditPanel.cs">
       <SubType>UserControl</SubType>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\AGEFrameEditWrapper.resx">
       <DependentUpon>AGEFrameEditWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AGEPreviewModelPanel.resx">
+      <DependentUpon>AGEPreviewModelPanel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

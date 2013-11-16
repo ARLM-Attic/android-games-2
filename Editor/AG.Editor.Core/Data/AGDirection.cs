@@ -14,15 +14,59 @@ namespace AG.Editor.Core.Data
         public List<AGFrame> Frames { get; private set; }
         public AGAction Action { get; set; }
 
+        public int? RefDirectionId { get; private set; }
+        public AGDirection RefDirection { get; private set; }
+
         public AGDirection()
         {
             Frames = new List<AGFrame>();
+        }
+
+        public AGDirection(int id, int refDirectionId)
+        {
+            Id = id;
+            RefDirectionId = refDirectionId;
+        }
+
+        /// <summary>
+        /// 获取此方向上的帧，如果是引用其他方向则获取其他方向的帧
+        /// </summary>
+        /// <returns></returns>
+        public List<AGFrame> GetFrames()
+        {
+            if (RefDirection != null)
+            {
+                return RefDirection.GetFrames();
+            }
+            return Frames;
+        }
+
+        /// <summary>
+        /// 设置引用模式，设置之后，此direction所有的frame信息都将被删除，因为这些信息将会从引用的direction中取得
+        /// </summary>
+        /// <param name="direction"></param>
+        public void SetRefDirection(AGDirection direction)
+        {
+            RefDirection = direction;
+            RefDirectionId = RefDirection.Id;
         }
 
         public void AddFrame(AGFrame frame)
         {
             Frames.Add(frame);
             frame.Direction = this;
+        }
+
+        public override string ToString()
+        {
+            if (RefDirectionId != null)
+            {
+                return string.Format("{0}ref:{1}", Caption, RefDirection.Caption);
+            }
+            else
+            {
+                return Caption;
+            }
         }
 
         public static string GetCaption(AGDirectionMode mode, int dirId)

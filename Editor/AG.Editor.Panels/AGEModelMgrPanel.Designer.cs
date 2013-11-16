@@ -55,6 +55,7 @@
             this.ctlTreeModels.Name = "ctlTreeModels";
             this.ctlTreeModels.Size = new System.Drawing.Size(200, 384);
             this.ctlTreeModels.TabIndex = 0;
+            this.ctlTreeModels.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.ctlTreeModels_NodeMouseDoubleClick);
             // 
             // AGEModelMgrPanel
             // 

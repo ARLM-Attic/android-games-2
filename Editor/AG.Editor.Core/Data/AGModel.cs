@@ -26,5 +26,10 @@ namespace AG.Editor.Core.Data
             Actions.Add(action);
             action.Model = this;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}[{1}]", Caption, Id);
+        }
     }
 }

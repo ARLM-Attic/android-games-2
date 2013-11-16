@@ -22,5 +22,41 @@ namespace AG.Editor.Core.Stores
             }
             return xAttr.Value;
         }
+
+        public static int XGetAttrIntValue(this XElement xEl, string attrName, int defaultValue)
+        {
+            if (xEl == null)
+            {
+                return defaultValue;
+            }
+
+            XAttribute xAttr = xEl.Attribute(attrName);
+            if (xAttr == null)
+            {
+                return defaultValue;
+            }
+
+            int value = 0;
+            if (int.TryParse(xAttr.Value, out value))
+            {
+                return value;
+            }
+            return defaultValue;
+        }
+
+        public static string XGetAttrStringValue(this XElement xEl, string attrName, string defaultValue)
+        {
+            if (xEl == null)
+            {
+                return defaultValue;
+            }
+
+            XAttribute xAttr = xEl.Attribute(attrName);
+            if (xAttr == null)
+            {
+                return defaultValue;
+            }
+            return xAttr.Value;
+        }
     }
 }

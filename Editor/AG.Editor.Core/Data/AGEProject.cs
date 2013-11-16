@@ -28,6 +28,60 @@ namespace AG.Editor.Core.Data
             Models = new List<AGModelRef>();
         }
 
+        /// <summary>
+        /// 根据actionid获取 action的名称
+        /// </summary>
+        /// <param name="modelCategoryId"></param>
+        /// <param name="actionId"></param>
+        /// <returns></returns>
+        public string GetActionCapton(int modelCategoryId, int actionId)
+        {
+            foreach (var mc in TProject.ModelCategories)
+            {
+                if (mc.Id == modelCategoryId)
+                {
+                    foreach (var act in mc.Actions)
+                    {
+                        if (act.Id == actionId)
+                        {
+                            return act.Caption;
+                        }
+                    }
+                }
+            }
+            return "unknown";
+        }
+
+        /// <summary>
+        /// 根据direction id获取direction的名称
+        /// </summary>
+        /// <param name="modelCategoryId"></param>
+        /// <param name="actionId"></param>
+        /// <param name="directionId"></param>
+        /// <returns></returns>
+        public string GetDirectionCapton(int modelCategoryId, int actionId, int directionId)
+        {
+            foreach (var mc in TProject.ModelCategories)
+            {
+                if (mc.Id == modelCategoryId)
+                {
+                    foreach (var act in mc.Actions)
+                    {
+                        if (act.Id == actionId)
+                        {
+                            foreach (var dir in act.Directions)
+                            {
+                                if (dir.Id == directionId)
+                                {
+                                    return dir.Caption;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return "unknown";
+        }
 
         public string GetFolder(AGEProject project)
         {

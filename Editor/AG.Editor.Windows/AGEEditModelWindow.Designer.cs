@@ -30,12 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AGEEditModelWindow));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.ctlBtnSave = new System.Windows.Forms.ToolStripButton();
+            this.ctlBtnAddFrame = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ctlTreeModel = new System.Windows.Forms.TreeView();
-            this.ctlBtnAddFrame = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ctlBtnSave = new System.Windows.Forms.ToolStripButton();
+            this.ctlBtnCopyRef = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -46,12 +47,31 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ctlBtnSave,
-            this.ctlBtnAddFrame});
+            this.ctlBtnAddFrame,
+            this.ctlBtnCopyRef});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(555, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // ctlBtnSave
+            // 
+            this.ctlBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnSave.Image")));
+            this.ctlBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnSave.Name = "ctlBtnSave";
+            this.ctlBtnSave.Size = new System.Drawing.Size(49, 22);
+            this.ctlBtnSave.Text = "保存";
+            this.ctlBtnSave.Click += new System.EventHandler(this.ctlBtnSave_Click);
+            // 
+            // ctlBtnAddFrame
+            // 
+            this.ctlBtnAddFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnAddFrame.Image")));
+            this.ctlBtnAddFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnAddFrame.Name = "ctlBtnAddFrame";
+            this.ctlBtnAddFrame.Size = new System.Drawing.Size(61, 22);
+            this.ctlBtnAddFrame.Text = "添加帧";
+            this.ctlBtnAddFrame.Click += new System.EventHandler(this.ctlBtnAddFrame_Click);
             // 
             // statusStrip1
             // 
@@ -88,15 +108,6 @@
             this.ctlTreeModel.TabIndex = 0;
             this.ctlTreeModel.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ctlTreeModel_AfterSelect);
             // 
-            // ctlBtnAddFrame
-            // 
-            this.ctlBtnAddFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnAddFrame.Image")));
-            this.ctlBtnAddFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnAddFrame.Name = "ctlBtnAddFrame";
-            this.ctlBtnAddFrame.Size = new System.Drawing.Size(61, 22);
-            this.ctlBtnAddFrame.Text = "添加帧";
-            this.ctlBtnAddFrame.Click += new System.EventHandler(this.ctlBtnAddFrame_Click);
-            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -105,14 +116,14 @@
             this.panel1.Size = new System.Drawing.Size(366, 329);
             this.panel1.TabIndex = 0;
             // 
-            // ctlBtnSave
+            // ctlBtnCopyRef
             // 
-            this.ctlBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnSave.Image")));
-            this.ctlBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnSave.Name = "ctlBtnSave";
-            this.ctlBtnSave.Size = new System.Drawing.Size(49, 22);
-            this.ctlBtnSave.Text = "保存";
-            this.ctlBtnSave.Click += new System.EventHandler(this.ctlBtnSave_Click);
+            this.ctlBtnCopyRef.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnCopyRef.Image")));
+            this.ctlBtnCopyRef.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnCopyRef.Name = "ctlBtnCopyRef";
+            this.ctlBtnCopyRef.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnCopyRef.Text = "拷贝引用";
+            this.ctlBtnCopyRef.Click += new System.EventHandler(this.OnBtnCopyRefClick);
             // 
             // AGEEditModelWindow
             // 
@@ -146,5 +157,6 @@
         private System.Windows.Forms.ToolStripButton ctlBtnAddFrame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripButton ctlBtnSave;
+        private System.Windows.Forms.ToolStripButton ctlBtnCopyRef;
     }
 }

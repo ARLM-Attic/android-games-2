@@ -24,5 +24,10 @@ namespace AG.Editor.Core.Data
             Caption = model.Caption;
             this.CategoryId = model.CategoryId;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0}[{1}]", Caption, Id);
+        }
     }
 }

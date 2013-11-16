@@ -40,6 +40,14 @@ namespace AG.Editor.Windows.Controls
             }
         }
 
+        public AGFrame CurFrame
+        {
+            get
+            {
+                return _curFrame;
+            }
+        }
+
         public AGEFrameEditPanel()
         {
             InitializeComponent();

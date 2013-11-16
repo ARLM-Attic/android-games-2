@@ -27,10 +27,9 @@ namespace AGEditor
             tabModelMgr.Controls.Add(modelMgrPanel);
             ctlTabControl.TabPages.Add(tabModelMgr);
 
-
-            ctlTabControl.TabPages.Add(new TabPage("a1"));
-            ctlTabControl.TabPages.Add(new TabPage("a2"));
-            ctlTabControl.TabPages.Add(new TabPage("a3"));
+            //ctlTabControl.TabPages.Add(new TabPage("a1"));
+            //ctlTabControl.TabPages.Add(new TabPage("a2"));
+            //ctlTabControl.TabPages.Add(new TabPage("a3"));
 
             toolStripStatusLabel1.Text = AG.Editor.Core.AGEContext.Current.EProject.DateVersion;
         }

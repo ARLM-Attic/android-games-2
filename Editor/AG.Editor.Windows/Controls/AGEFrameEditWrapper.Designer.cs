@@ -36,7 +36,7 @@ namespace AG.Editor.Windows.Controls
             this._ctlBtnSetOffsetX = new System.Windows.Forms.LinkLabel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,22 +117,23 @@ namespace AG.Editor.Windows.Controls
             this.label1.TabIndex = 1;
             this.label1.Text = "offset-x:";
             // 
-            // listBox1
+            // checkedListBox1
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(416, 39);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(200, 306);
-            this.listBox1.TabIndex = 1;
+            this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(416, 39);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(200, 306);
+            this.checkedListBox1.TabIndex = 1;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // AGEFrameEditWrapper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.panel1);
             this.Name = "AGEFrameEditWrapper";
             this.Size = new System.Drawing.Size(616, 345);
@@ -151,6 +152,6 @@ namespace AG.Editor.Windows.Controls
         private System.Windows.Forms.LinkLabel _ctlBtnSetOffsetX;
         private System.Windows.Forms.Button _ctlBtnX2;
         private System.Windows.Forms.Button _ctlBtnX1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }

@@ -24,5 +24,39 @@ namespace AG.Editor.Core.Data
             Directions.Add(direction);
             direction.Action = this;
         }
+
+        public override string ToString()
+        {
+            return Caption;
+        }
+
+        /// <summary>
+        /// 将sourceDir的引用到其他所有方位
+        /// </summary>
+        /// <param name="sourceDir"></param>
+        public void CopyRefToAll(AGDirection sourceDir)
+        {
+            for (int iDir = 0; iDir < Directions.Count; iDir++)
+            {
+                AGDirection direction = Directions[iDir];
+                if (direction.Id != sourceDir.Id)
+                {
+                    direction.SetRefDirection(sourceDir);
+                }
+            }
+        }
+
+        public AGDirection GetDirection(int dirId)
+        {
+            for (int iDir = 0; iDir < Directions.Count; iDir++)
+            {
+                AGDirection direction = Directions[iDir];
+                if (direction.Id == dirId)
+                {
+                    return direction;
+                }
+            }
+            return null;
+        }
     }
 }

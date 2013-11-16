@@ -14,7 +14,8 @@ namespace AG.Editor.Windows
 {
     public partial class AGEEditModelWindow : Form
     {
-        private AGModel _model;
+        public AGModel Model { get; private set; }
+        public AGModel SavedModel { get; set; }
 
         public AGEEditModelWindow()
         {
@@ -23,7 +24,7 @@ namespace AG.Editor.Windows
 
         public AGEEditModelWindow(AGModel model)
         {
-            _model = model;
+            Model = model;
 
             InitializeComponent();
         }
@@ -32,14 +33,12 @@ namespace AG.Editor.Windows
         {
             base.OnShown(e);
 
-            if (_model == null)
+            if (Model == null)
             {
                 AGECreateModelWindow window = new AGECreateModelWindow();
                 if (window.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    _model = window.CreatedModel;
-                    // 添加到项目中
-                    AG.Editor.Core.AGEContext.Current.EProject.Models.Add(new AGModelRef(_model));
+                    Model = window.CreatedModel;
                 }
                 else
                 {
@@ -51,14 +50,15 @@ namespace AG.Editor.Windows
 
         private void InitUI()
         {
-            this.Text = _model.Caption;
+            this.Text = Model.Caption;
 
             BindModelTree();
         }
 
         private void BindModelTree()
         {
-            foreach (AGAction action in _model.Actions)
+            ctlTreeModel.Nodes.Clear();
+            foreach (AGAction action in Model.Actions)
             {
                 TreeNode tnAction = new TreeNode();
                 tnAction.Tag = action;
@@ -69,18 +69,23 @@ namespace AG.Editor.Windows
                 {
                     TreeNode tnDirection = new TreeNode();
                     tnDirection.Tag = direction;
-                    tnDirection.Text = direction.Caption;
+                    tnDirection.Text = direction.ToString();
                     tnAction.Nodes.Add(tnDirection);
 
-                    foreach (AGFrame frame in direction.Frames)
+                    if (direction.RefDirectionId == null)
                     {
-                        TreeNode tnFrame = new TreeNode();
-                        tnFrame.Tag = frame;
-                        tnFrame.Text = frame.Id.ToString();
-                        tnDirection.Nodes.Add(tnFrame);
+                        // 只有非引用方位才显示帧信息
+                        foreach (AGFrame frame in direction.Frames)
+                        {
+                            TreeNode tnFrame = new TreeNode();
+                            tnFrame.Tag = frame;
+                            tnFrame.Text = frame.ToString();
+                            tnDirection.Nodes.Add(tnFrame);
+                        }
                     }
                 }
             }
+            ctlTreeModel.ExpandAll();
         }
 
         private void ctlBtnAddFrame_Click(object sender, EventArgs e)
@@ -90,7 +95,7 @@ namespace AG.Editor.Windows
                 AGAction act = ctlTreeModel.SelectedNode.Parent.Tag as AGAction;
                 AGDirection dir = ctlTreeModel.SelectedNode.Tag as AGDirection;
 
-                string modelFolder = AG.Editor.Core.AGEContext.Current.EProject.GetFolder(_model);
+                string modelFolder = AG.Editor.Core.AGEContext.Current.EProject.GetFolder(Model);
                 if (!Directory.Exists(modelFolder))
                 {
                     Directory.CreateDirectory(modelFolder);
@@ -158,7 +163,7 @@ namespace AG.Editor.Windows
 
                         TreeNode tnFrame = new TreeNode();
                         tnFrame.Tag = frame;
-                        tnFrame.Text = frame.ImageFileName;
+                        tnFrame.Text = frame.ToString();
                         ctlTreeModel.SelectedNode.Nodes.Add(tnFrame);
                         ctlTreeModel.SelectedNode.Expand();
                     }
@@ -181,7 +186,7 @@ namespace AG.Editor.Windows
                 AGFrame frame = selNode.Tag as AGFrame;
                 //AGEPreviewFramePanel previewPanel = new AGEPreviewFramePanel(frame);
                 AGEFrameEditPanel panel = new AGEFrameEditPanel();
-                AGEFrameEditWrapper wrapper = new AGEFrameEditWrapper(panel);
+                AGEFrameEditWrapper wrapper = new AGEFrameEditWrapper(direction.Frames, frame, panel);
                 wrapper.Dock = DockStyle.Fill;
                 this.panel1.Controls.Add(wrapper);
                 panel.Settings(direction.Frames, frame);
@@ -190,23 +195,42 @@ namespace AG.Editor.Windows
 
         private void ctlBtnSave_Click(object sender, EventArgs e)
         {
-
+            AG.Editor.Core.AGECache.Current.ModelStore.SaveModel(AG.Editor.Core.AGEContext.Current.EProject, Model);
+            MessageBox.Show("保存成功!","提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SavedModel = Model;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if (MessageBox.Show("是否要保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+            if (MessageBox.Show("是否保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
             {
-                AG.Editor.Core.AGECache.Current.ModelStore.SaveModel(AG.Editor.Core.AGEContext.Current.EProject, _model);
-                AG.Editor.Core.AGECache.Current.EProjectStore.SaveEProject(AG.Editor.Core.AGEContext.Current.EProject);
-            }
-            else
-            {
-                // 必须保存。哈哈
-                return;
+                AG.Editor.Core.AGECache.Current.ModelStore.SaveModel(AG.Editor.Core.AGEContext.Current.EProject, Model);
+                SavedModel = Model;
             }
 
             base.OnClosing(e);
+        }
+
+        private void OnBtnCopyRefClick(object sender, EventArgs e)
+        {
+            TreeNode selNode = ctlTreeModel.SelectedNode;
+            if (selNode.Tag is AGDirection)
+            {
+                AGDirection dir = selNode.Tag as AGDirection;
+                if (dir.RefDirection != null)
+                {
+                    // 引用别人的direction无法作为拷贝数据源
+                    MessageBox.Show(string.Format("{0}不包含实际的帧信息，无法作为拷贝源!", dir.Caption), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (MessageBox.Show("拷贝到其他方位，其他方位的帧数据将会被删除。\r\n是否执行拷贝操作?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+                {
+                    AGAction action = selNode.Parent.Tag as AGAction;
+                    action.CopyRefToAll(dir);
+                    BindModelTree();
+                }
+            }
         }
     }
 }
