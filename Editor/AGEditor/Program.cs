@@ -38,9 +38,6 @@ namespace AGEditor
 
             Application.Run(new MainWindow3());
 
-            
-            AGECache.Current.SettingsStore.SaveSettings(AG.Editor.Core.AGEContext.Current.Settings);
-
             /*
             AGEConfigUtil.Init(AppDomain.CurrentDomain);
             #region init workspace

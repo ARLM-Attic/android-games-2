@@ -28,7 +28,7 @@ namespace AG.Editor.Windows.Controls
             {
                 if (frame == curFrame)
                 {
-                    this.checkedListBox1.Items.Add(frame, true);
+                    //this.checkedListBox1.Items.Add(frame, true);
                 }
                 else
                 {

@@ -30,8 +30,10 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.ctlTabControl = new System.Windows.Forms.TabControl();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ctlTabControl = new System.Windows.Forms.TabControl();
+            this.ctlTxtProjectState = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,12 +48,20 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.ctlTxtProjectState});
             this.statusStrip1.Location = new System.Drawing.Point(0, 351);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(608, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // ctlTabControl
             // 
@@ -62,11 +72,18 @@
             this.ctlTabControl.Size = new System.Drawing.Size(608, 327);
             this.ctlTabControl.TabIndex = 2;
             // 
-            // toolStripStatusLabel1
+            // ctlTxtProjectState
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.ctlTxtProjectState.Name = "ctlTxtProjectState";
+            this.ctlTxtProjectState.Size = new System.Drawing.Size(101, 17);
+            this.ctlTxtProjectState.Text = "已修改，需要保存";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Enabled = false;
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(330, 17);
+            this.toolStripStatusLabel2.Spring = true;
             // 
             // MainWindow3
             // 
@@ -94,5 +111,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.TabControl ctlTabControl;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel ctlTxtProjectState;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }

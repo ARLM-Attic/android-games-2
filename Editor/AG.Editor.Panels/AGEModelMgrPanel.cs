@@ -59,6 +59,15 @@ namespace AG.Editor.Panels
             if (this.Visible)
             {
                 _menuMidiator.Clear();
+
+                ToolStripMenuItem mFile = _menuMidiator.AddMenu(new ToolStripMenuItem("文件"));
+                ToolStripMenuItem miSaveProject = new ToolStripMenuItem("保存项目");
+                miSaveProject.Click += new EventHandler(miSaveProject_Click);
+                mFile.DropDownItems.Add(miSaveProject);
+                ToolStripMenuItem miClose = new ToolStripMenuItem("关闭");
+                miClose.Click += new EventHandler(miClose_Click);
+                mFile.DropDownItems.Add(miClose);
+
                 ToolStripMenuItem m1 = _menuMidiator.AddMenu(new ToolStripMenuItem("模型管理"));
 
                 ToolStripMenuItem miCreateModel = new ToolStripMenuItem("创建模型");
@@ -77,8 +86,45 @@ namespace AG.Editor.Panels
             base.OnVisibleChanged(e);
         }
 
+        void miClose_Click(object sender, EventArgs e)
+        {
+            (this.ParentForm).Close();
+        }
+
+        void miSaveProject_Click(object sender, EventArgs e)
+        {
+            if (AG.Editor.Core.AGEContext.Current.EProject.HasChanged)
+            {
+                AG.Editor.Core.AGECache.Current.EProjectStore.SaveEProject(AG.Editor.Core.AGEContext.Current.EProject);
+                AG.Editor.Core.AGEContext.Current.EProject.SaveComplete();
+                MessageBox.Show("保存完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        /// <summary>
+        /// 删除模型
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void miRemoveModel_Click(object sender, EventArgs e)
         {
+            TreeNode selNode = ctlTreeModels.SelectedNode;
+            if (selNode == null)
+            {
+                return;
+            }
+
+            AGModelRef modelRef = selNode.Tag as AGModelRef;
+            if (modelRef == null)
+            {
+                return;
+            }
+
+            if (MessageBox.Show(string.Format("是否要删除模型[{0}]", modelRef.Caption), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                AGEContext.Current.EProject.RemoveModel(modelRef.Id);
+                BindModelTree();
+            }
         }
 
         /// <summary>
@@ -123,8 +169,11 @@ namespace AG.Editor.Panels
             TreeNode selNode = e.Node;
             AGModelRef selModel = selNode.Tag as AGModelRef;
 
-            AGModel model = AGECache.Current.ModelStore.GetModel(AGEContext.Current.EProject, selModel);
-            _previewPanel.SetModel(model);
+            if (selModel != null)
+            {
+                AGModel model = AGECache.Current.ModelStore.GetModel(AGEContext.Current.EProject, selModel);
+                _previewPanel.SetModel(model);
+            }
         }
     }
 }
