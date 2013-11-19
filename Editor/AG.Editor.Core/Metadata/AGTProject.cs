@@ -15,10 +15,12 @@ namespace AG.Editor.Core.Metadata
         /// 模型类别列表
         /// </summary>
         public List<AGModelCategory> ModelCategories { get; set; }
+        public List<AGAudioCategory> AudioCateogries { get; set; }
 
         public AGTProject()
         {
             ModelCategories = new List<AGModelCategory>();
+            AudioCateogries = new List<AGAudioCategory>();
         }
     }
 }

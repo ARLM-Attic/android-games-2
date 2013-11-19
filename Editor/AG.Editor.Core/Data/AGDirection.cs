@@ -57,6 +57,22 @@ namespace AG.Editor.Core.Data
             frame.Direction = this;
         }
 
+        /// <summary>
+        /// 删除指定的帧
+        /// </summary>
+        /// <param name="frameId"></param>
+        public void RemoveFrame(int frameId)
+        {
+            for (int index = 0; index < Frames.Count; index++)
+            {
+                if (Frames[index].Id == frameId)
+                {
+                    Frames.RemoveAt(index);
+                    return;
+                }
+            }
+        }
+
         public override string ToString()
         {
             if (RefDirectionId != null)

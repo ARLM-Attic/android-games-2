@@ -22,6 +22,10 @@ namespace AG.Editor.Core.Data
         public string DateVersion { get; set; }
 
         public List<AGModelRef> Models { get; set; }
+        /// <summary>
+        /// 音频资源列表
+        /// </summary>
+        public List<AGAudio> Audios { get; private set; }
 
         private bool _hasChanged;
         /// <summary>
@@ -46,6 +50,7 @@ namespace AG.Editor.Core.Data
         public AGEProject()
         {
             Models = new List<AGModelRef>();
+            Audios = new List<AGAudio>();
         }
 
         /// <summary>
@@ -55,6 +60,44 @@ namespace AG.Editor.Core.Data
         {
             HasChanged = false;
         }
+
+        #region audio
+        public void AddAudio(AGAudio audio)
+        {
+            Audios.Add(audio);
+            HasChanged = true;
+        }
+
+        public void RemoveAudio(int audioId)
+        {
+            for (int index = 0; index < Audios.Count; index++)
+            {
+                if (Audios[index].Id == audioId)
+                {
+                    Audios.RemoveAt(index);
+                    HasChanged = true;
+                    return;
+                }
+            }
+        }
+
+        public AGAudio GetAudio(int audioId)
+        {
+            for (int index = 0; index < Audios.Count; index++)
+            {
+                if (Audios[index].Id == audioId)
+                {
+                    return Audios[index];
+                }
+            }
+            return null;
+        }
+
+        public List<AGAudio> GetAudios()
+        {
+            return Audios;
+        }
+        #endregion
 
         /// <summary>
         /// 删除模型
@@ -142,6 +185,18 @@ namespace AG.Editor.Core.Data
             string folder = fileInfo.Directory.FullName;
             string modelsFolder = System.IO.Path.Combine(folder, ".\\data\\models\\");
             return modelsFolder;
+        }
+
+        /// <summary>
+        /// 获取声音资源存放的目录 .\data\audio\
+        /// </summary>
+        /// <returns></returns>
+        public string GetDataAudioFolder()
+        {
+            FileInfo fileInfo = new FileInfo(Path);
+            string folder = fileInfo.Directory.FullName;
+            string audioFolder = System.IO.Path.Combine(folder, ".\\data\\audio\\");
+            return audioFolder;
         }
 
         /// <summary>

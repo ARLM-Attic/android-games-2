@@ -32,6 +32,12 @@ namespace AG.Editor.Core.V1_0
             tProject.Caption = caption;
             tProject.Version = ver;
 
+            List<XElement> xAcList = xEl.Element("ac").Elements("aci").ToList();
+            foreach (XElement xAci in xAcList)
+            {
+                tProject.AudioCateogries.Add(ConvertAudioCategoryFromXml(xAci));
+            }
+
             List<XElement> xMciLst = xEl.Element("mc").Elements("mci").ToList();
             foreach (XElement xMci in xMciLst)
             {
@@ -40,6 +46,16 @@ namespace AG.Editor.Core.V1_0
 
             return tProject;
         }
+
+        #region audio category
+        private static AGAudioCategory ConvertAudioCategoryFromXml(XElement xAci)
+        {
+            AGAudioCategory category = new AGAudioCategory();
+            category.Id = xAci.XGetAttrIntValue("i", AGECONST.INT_NULL);
+            category.Caption = xAci.XGetAttrStringValue("c", AGECONST.STRING_NULL);
+            return category;
+        }
+        #endregion
 
         #region model category
         private static AGModelCategory ConvertModelCategoryFromXml(XElement xMci)

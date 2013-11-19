@@ -164,9 +164,4 @@ namespace AG.Editor.Core.Stores
             return model;
         }
     }
-
-    public class AGECONST
-    {
-        public const int INT_NULL = -1;
-    }
 }

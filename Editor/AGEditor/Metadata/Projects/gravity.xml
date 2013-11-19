@@ -9,8 +9,17 @@
       <act i="1" c="stand(站立)"/>
       <act i="2" c="fly(飞行)"/>
     </mci>
-    <mci i="2" c="effect(效果)" dir="4">
-      <act i="1" c="爆炸"/>
+    <mci i="2" c="bullet(子弹)" dir="8">
+      <act i="1" c="fly(飞行)"/>
+      <act i="2" c="explode(爆炸)"/>
+    </mci>
+    <mci i="3" c="effect(效果)" dir="8">
+      <act i="1" c="角色加速"/>
     </mci>
   </mc>
+  <!-- audio category definition -->
+  <ac>
+    <aci i="1" c="launch(发射声音)"/>
+    <aci i="2" c="explode(爆炸声音)"/>
+  </ac>
 </pt>

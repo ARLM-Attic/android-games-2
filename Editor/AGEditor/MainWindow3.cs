@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using AG.Editor.Core;
 using AG.Editor.Panels;
+using AG.Editor.UI;
 
 namespace AGEditor
 {
@@ -23,18 +24,33 @@ namespace AGEditor
             _menuMidiator = new AGEMainMenuMidiator(menuStrip1);
 
             TabPage tabModelMgr = new TabPage("模型管理");
-            AG.Editor.Panels.AGEModelMgrPanel modelMgrPanel = new AG.Editor.Panels.AGEModelMgrPanel(_menuMidiator);
+            AG.Editor.Panels.AGEModelMgrPanel modelMgrPanel = new AG.Editor.Panels.AGEModelMgrPanel();
             modelMgrPanel.Dock = DockStyle.Fill;
             tabModelMgr.Controls.Add(modelMgrPanel);
+            tabModelMgr.Tag = modelMgrPanel;
             ctlTabControl.TabPages.Add(tabModelMgr);
 
-            //ctlTabControl.TabPages.Add(new TabPage("a1"));
-            //ctlTabControl.TabPages.Add(new TabPage("a2"));
-            //ctlTabControl.TabPages.Add(new TabPage("a3"));
+            TabPage tabAudioMgr = new TabPage("音频管理");
+            AG.Editor.AudioUI.AGEAudioMgrPanel audioMgrPanel = new AG.Editor.AudioUI.AGEAudioMgrPanel();
+            audioMgrPanel.Dock = DockStyle.Fill;
+            tabAudioMgr.Controls.Add(audioMgrPanel);
+            tabAudioMgr.Tag = audioMgrPanel;
+            ctlTabControl.TabPages.Add(tabAudioMgr);
+
+            ctlTabControl.SelectedIndex = 0;
+            modelMgrPanel.OnActived(_menuMidiator);
+            ctlTabControl.SelectedIndexChanged += new EventHandler(ctlTabControl_SelectedIndexChanged);
 
             toolStripStatusLabel1.Text = AG.Editor.Core.AGEContext.Current.EProject.DateVersion;
             AG.Editor.Core.AGEContext.Current.EProject.SaveComplete();
             AG.Editor.Core.AGEContext.Current.EProject.PropertyChanged += new PropertyChangedEventHandler(EProject_PropertyChanged);
+        }
+
+        void ctlTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabPage selTab = ctlTabControl.SelectedTab;
+            IAGEMainComponent component = selTab.Tag as IAGEMainComponent;
+            component.OnActived(_menuMidiator);
         }
 
         void EProject_PropertyChanged(object sender, PropertyChangedEventArgs e)

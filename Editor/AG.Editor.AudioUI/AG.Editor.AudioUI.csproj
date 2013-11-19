@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</ProjectGuid>
+    <ProjectGuid>{762B24DD-A4E6-4E15-92E3-F23C331DA49D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AG.Editor.Panels</RootNamespace>
-    <AssemblyName>AG.Editor.Panels</AssemblyName>
+    <RootNamespace>AG.Editor.AudioUI</RootNamespace>
+    <AssemblyName>AG.Editor.AudioUI</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -45,13 +45,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AGEModelMgrPanel.cs">
+    <Compile Include="AGEAudioMgrPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AGEModelMgrPanel.Designer.cs">
-      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
+    <Compile Include="AGEAudioMgrPanel.Designer.cs">
+      <DependentUpon>AGEAudioMgrPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AGEEditAudioWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AGEEditAudioWindow.Designer.cs">
+      <DependentUpon>AGEEditAudioWindow.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AGEAudioMgrPanel.resx">
+      <DependentUpon>AGEAudioMgrPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AGEEditAudioWindow.resx">
+      <DependentUpon>AGEEditAudioWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
@@ -62,15 +85,6 @@
       <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>
       <Name>AG.Editor.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
-      <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>
-      <Name>AG.Editor.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AGEModelMgrPanel.resx">
-      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

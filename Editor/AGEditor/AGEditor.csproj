@@ -359,6 +359,10 @@
       <Project>{40289A74-734D-4131-9B5F-628CFC6FBEB1}</Project>
       <Name>AG.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.AudioUI\AG.Editor.AudioUI.csproj">
+      <Project>{762B24DD-A4E6-4E15-92E3-F23C331DA49D}</Project>
+      <Name>AG.Editor.AudioUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
       <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
       <Name>AG.Editor.Core</Name>
@@ -366,6 +370,10 @@
     <ProjectReference Include="..\AG.Editor.Panels\AG.Editor.Panels.csproj">
       <Project>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</Project>
       <Name>AG.Editor.Panels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.UI\AG.Editor.UI.csproj">
+      <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>
+      <Name>AG.Editor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
       <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>

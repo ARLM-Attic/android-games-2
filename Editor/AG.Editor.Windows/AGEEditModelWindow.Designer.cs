@@ -32,12 +32,12 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ctlBtnSave = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnAddFrame = new System.Windows.Forms.ToolStripButton();
+            this.ctlBtnRemoveFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnCopyRef = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ctlTreeModel = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ctlBtnRemoveFrame = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,15 @@
             this.ctlBtnAddFrame.Size = new System.Drawing.Size(61, 22);
             this.ctlBtnAddFrame.Text = "添加帧";
             this.ctlBtnAddFrame.Click += new System.EventHandler(this.ctlBtnAddFrame_Click);
+            // 
+            // ctlBtnRemoveFrame
+            // 
+            this.ctlBtnRemoveFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveFrame.Image")));
+            this.ctlBtnRemoveFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnRemoveFrame.Name = "ctlBtnRemoveFrame";
+            this.ctlBtnRemoveFrame.Size = new System.Drawing.Size(61, 22);
+            this.ctlBtnRemoveFrame.Text = "删除帧";
+            this.ctlBtnRemoveFrame.Click += new System.EventHandler(this.ctlBtnRemoveFrame_Click);
             // 
             // ctlBtnCopyRef
             // 
@@ -126,14 +135,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(366, 329);
             this.panel1.TabIndex = 0;
-            // 
-            // ctlBtnRemoveFrame
-            // 
-            this.ctlBtnRemoveFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveFrame.Image")));
-            this.ctlBtnRemoveFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnRemoveFrame.Name = "ctlBtnRemoveFrame";
-            this.ctlBtnRemoveFrame.Size = new System.Drawing.Size(61, 22);
-            this.ctlBtnRemoveFrame.Text = "删除帧";
             // 
             // AGEEditModelWindow
             // 

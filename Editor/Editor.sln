@@ -13,9 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Panels", "AG.Edit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Controls", "AG.Editor.Controls\AG.Editor.Controls.csproj", "{7670F86F-16DE-4E57-BE4E-98307A7077C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.AudioUI", "AG.Editor.AudioUI\AG.Editor.AudioUI.csproj", "{762B24DD-A4E6-4E15-92E3-F23C331DA49D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.UI", "AG.Editor.UI\AG.Editor.UI.csproj", "{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs23
 		SccLocalPath0 = .
@@ -37,6 +41,12 @@ Global
 		SccProjectUniqueName6 = AG.Editor.Controls\\AG.Editor.Controls.csproj
 		SccProjectName6 = AG.Editor.Controls
 		SccLocalPath6 = AG.Editor.Controls
+		SccProjectUniqueName7 = AG.Editor.AudioUI\\AG.Editor.AudioUI.csproj
+		SccProjectName7 = AG.Editor.AudioUI
+		SccLocalPath7 = AG.Editor.AudioUI
+		SccProjectUniqueName8 = AG.Editor.UI\\AG.Editor.UI.csproj
+		SccProjectName8 = AG.Editor.UI
+		SccLocalPath8 = AG.Editor.UI
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +117,26 @@ Global
 		{7670F86F-16DE-4E57-BE4E-98307A7077C7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7670F86F-16DE-4E57-BE4E-98307A7077C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7670F86F-16DE-4E57-BE4E-98307A7077C7}.Release|x86.ActiveCfg = Release|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{762B24DD-A4E6-4E15-92E3-F23C331DA49D}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

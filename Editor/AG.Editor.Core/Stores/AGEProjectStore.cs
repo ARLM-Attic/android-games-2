@@ -47,6 +47,22 @@ namespace AG.Editor.Core.Stores
             xP.Add(new XAttribute("dtver", dateVersion));
             xP.Add(new XAttribute("tpn", project.TPName));
             xP.Add(new XAttribute("tpver", project.TPVersion));
+            xDoc.Add(xP);
+
+            #region save audios
+            XElement xa = new XElement("a");
+            xP.Add(xa);
+            for (int ia = 0; ia < project.Audios.Count; ia++)
+            {
+                AGAudio audio = project.Audios[ia];
+                XElement xai = new XElement("ai");
+                xa.Add(xai);
+                xai.Add(new XAttribute("i", audio.Id));
+                xai.Add(new XAttribute("c", audio.Caption));
+                xai.Add(new XAttribute("fp", audio.FilePath));
+                xai.Add(new XAttribute("ci", audio.CategoryId));
+            }
+            #endregion
 
             XElement xm = new XElement("m");
             xP.Add(xm);
@@ -54,13 +70,11 @@ namespace AG.Editor.Core.Stores
             {
                 AGModelRef model = project.Models[im];
                 XElement xmi = new XElement("mi");
+                xm.Add(xmi);
                 xmi.Add(new XAttribute("i", model.Id));
                 xmi.Add(new XAttribute("c", model.Caption));
                 xmi.Add(new XAttribute("mci", model.CategoryId));
-                xm.Add(xmi);
             }
-
-            xDoc.Add(xP);
 
             xDoc.Save(filePath);
             project.DateVersion = dateVersion;
@@ -85,6 +99,20 @@ namespace AG.Editor.Core.Stores
 
             // 加载TProject
             project.TProject = AGECache.Current.TProjectStore.GetTProject(project.TPName);
+
+            #region load audios
+            List<XElement> xAis = xEl.XGetElement("a").XGetElements("ai").ToList();
+            for (int ia = 0; ia < xAis.Count; ia++)
+            {
+                AGAudio audio = new AGAudio();
+                project.AddAudio(audio);
+
+                audio.Id = xAis[ia].XGetAttrIntValue("i", AGECONST.INT_NULL);
+                audio.Caption = xAis[ia].XGetAttrStringValue("c", "unknown");
+                audio.FilePath = xAis[ia].XGetAttrStringValue("fp", "unknown");
+                audio.CategoryId = xAis[ia].XGetAttrIntValue("ci", AGECONST.INT_NULL);
+            }
+            #endregion
 
             List<XElement> xMis = xEl.Element("m").Elements("mi").ToList();
             for (int im = 0; im < xMis.Count; im++)

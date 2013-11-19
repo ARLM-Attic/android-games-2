@@ -46,11 +46,13 @@
     <Compile Include="AGECache.cs" />
     <Compile Include="AGEContext.cs" />
     <Compile Include="Data\AGAction.cs" />
+    <Compile Include="Data\AGAudio.cs" />
     <Compile Include="Data\AGDirection.cs" />
     <Compile Include="Data\AGFrame.cs" />
     <Compile Include="Data\AGModel.cs" />
     <Compile Include="Data\AGModelRef.cs" />
     <Compile Include="Data\AGModelSummary.cs" />
+    <Compile Include="Metadata\AGAudioCategory.cs" />
     <Compile Include="Stores\AGEProjectStore.cs" />
     <Compile Include="Stores\AGMetadataStore.cs" />
     <Compile Include="Stores\AGModelStore.cs" />

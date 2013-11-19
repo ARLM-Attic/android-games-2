@@ -202,15 +202,23 @@ namespace AG.Editor.Windows
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            if (MessageBox.Show("是否保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+            if (Model.HasChanged)
             {
-                AG.Editor.Core.AGECache.Current.ModelStore.SaveModel(AG.Editor.Core.AGEContext.Current.EProject, Model);
-                SavedModel = Model;
+                if (MessageBox.Show("是否保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+                {
+                    AG.Editor.Core.AGECache.Current.ModelStore.SaveModel(AG.Editor.Core.AGEContext.Current.EProject, Model);
+                    SavedModel = Model;
+                }
             }
 
             base.OnClosing(e);
         }
 
+        /// <summary>
+        /// 拷贝引用
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnBtnCopyRefClick(object sender, EventArgs e)
         {
             TreeNode selNode = ctlTreeModel.SelectedNode;
@@ -230,6 +238,34 @@ namespace AG.Editor.Windows
                     action.CopyRefToAll(dir);
                     BindModelTree();
                 }
+            }
+        }
+
+        /// <summary>
+        /// 删除帧
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ctlBtnRemoveFrame_Click(object sender, EventArgs e)
+        {
+            TreeNode selNode = ctlTreeModel.SelectedNode;
+            if (selNode.Tag is AGFrame)
+            {
+                AGAction action = selNode.Parent.Parent.Tag as AGAction;
+                AGDirection direction = selNode.Parent.Tag as AGDirection;
+                AGFrame frame = selNode.Tag as AGFrame;
+
+                if (MessageBox.Show(string.Format("是否要删除帧[{0}]?", frame.ImageFileName), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.panel1.Controls.Clear();
+                    Model.RemoveFrame(action.Id, direction.Id, frame.Id);
+
+                    BindModelTree();
+                }
+            }
+            else
+            {
+                MessageBox.Show("需要选择帧!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

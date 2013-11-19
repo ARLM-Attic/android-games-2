@@ -4,10 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace AG.Editor.Core.Stores
+namespace AG.Editor.Core
 {
+    public class AGECONST
+    {
+        public const int INT_NULL = -1;
+        public const string STRING_NULL = "unknown";
+    }
+
     public static class XDocumentExtension
     {
+        public static XElement XGetElement(this XElement xEl, string name)
+        {
+            if (xEl == null)
+            {
+                return null;
+            }
+            return xEl.Element(name);
+        }
+
+        public static IEnumerable<XElement> XGetElements(this XElement xEl, string name)
+        {
+            if (xEl == null)
+            {
+                return new List<XElement>();
+            }
+            return xEl.Elements(name);
+        }
+
         /// <summary>
         /// 获取属性的值
         /// </summary>

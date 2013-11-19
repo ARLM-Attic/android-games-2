@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</ProjectGuid>
+    <ProjectGuid>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AG.Editor.Panels</RootNamespace>
-    <AssemblyName>AG.Editor.Panels</AssemblyName>
+    <RootNamespace>AG.Editor.UI</RootNamespace>
+    <AssemblyName>AG.Editor.UI</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -45,32 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AGEModelMgrPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AGEModelMgrPanel.Designer.cs">
-      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
-    </Compile>
+    <Compile Include="AGEMainMenuMidiator.cs" />
+    <Compile Include="IAGEMainComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
-      <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
-      <Name>AG.Editor.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AG.Editor.UI\AG.Editor.UI.csproj">
-      <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>
-      <Name>AG.Editor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
-      <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>
-      <Name>AG.Editor.Windows</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="AGEModelMgrPanel.resx">
-      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
