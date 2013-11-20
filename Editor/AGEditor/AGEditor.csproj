@@ -367,9 +367,9 @@
       <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
       <Name>AG.Editor.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AG.Editor.Panels\AG.Editor.Panels.csproj">
+    <ProjectReference Include="..\AG.Editor.Panels\AG.Editor.ModelUI.csproj">
       <Project>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</Project>
-      <Name>AG.Editor.Panels</Name>
+      <Name>AG.Editor.ModelUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\AG.Editor.UI\AG.Editor.UI.csproj">
       <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using AG.Editor.Core.Metadata;
 using AG.Editor.Core.Data;
 
-namespace AG.Editor.Windows
+namespace AG.Editor.ModelUI.Windows
 {
     public partial class AGECreateModelWindow : Form
     {

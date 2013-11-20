@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using AG.Editor.Core;
-using AG.Editor.Windows;
 using AG.Editor.Core.Data;
-using AG.Editor.Windows.Controls;
 using AG.Editor.UI;
+using AG.Editor.ModelUI.Windows;
+using AG.Editor.ModelUI.Controls;
 
-namespace AG.Editor.Panels
+namespace AG.Editor.ModelUI
 {
     public partial class AGEModelMgrPanel : UserControl, IAGEMainComponent
     {

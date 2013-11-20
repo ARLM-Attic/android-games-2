@@ -1,6 +1,7 @@
-﻿namespace AG.Editor.Windows.Controls
+﻿
+namespace AG.Editor.ModelUI.Controls
 {
-    partial class AGEPreviewFramePanel
+    partial class AGEFrameEditPanel
     {
         /// <summary> 
         /// 必需的设计器变量。
@@ -30,12 +31,13 @@
         {
             this.SuspendLayout();
             // 
-            // AGEPreviewFramePanel
+            // AGEFrameEditPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "AGEPreviewFramePanel";
-            this.Size = new System.Drawing.Size(557, 416);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Name = "AGEFrameEditPanel";
+            this.Size = new System.Drawing.Size(639, 396);
             this.ResumeLayout(false);
 
         }

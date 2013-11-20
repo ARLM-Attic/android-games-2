@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Core", "AG.Editor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Windows", "AG.Editor.Windows\AG.Editor.Windows.csproj", "{23A35E7E-10BF-454F-8306-7BBBE60E993D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Panels", "AG.Editor.Panels\AG.Editor.Panels.csproj", "{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.ModelUI", "AG.Editor.Panels\AG.Editor.ModelUI.csproj", "{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Editor.Controls", "AG.Editor.Controls\AG.Editor.Controls.csproj", "{7670F86F-16DE-4E57-BE4E-98307A7077C7}"
 EndProject
@@ -35,18 +35,18 @@ Global
 		SccProjectUniqueName4 = AG.Editor.Windows\\AG.Editor.Windows.csproj
 		SccProjectName4 = AG.Editor.Windows
 		SccLocalPath4 = AG.Editor.Windows
-		SccProjectUniqueName5 = AG.Editor.Panels\\AG.Editor.Panels.csproj
-		SccProjectName5 = AG.Editor.Panels
-		SccLocalPath5 = AG.Editor.Panels
-		SccProjectUniqueName6 = AG.Editor.Controls\\AG.Editor.Controls.csproj
-		SccProjectName6 = AG.Editor.Controls
-		SccLocalPath6 = AG.Editor.Controls
-		SccProjectUniqueName7 = AG.Editor.AudioUI\\AG.Editor.AudioUI.csproj
-		SccProjectName7 = AG.Editor.AudioUI
-		SccLocalPath7 = AG.Editor.AudioUI
-		SccProjectUniqueName8 = AG.Editor.UI\\AG.Editor.UI.csproj
-		SccProjectName8 = AG.Editor.UI
-		SccLocalPath8 = AG.Editor.UI
+		SccProjectUniqueName5 = AG.Editor.Controls\\AG.Editor.Controls.csproj
+		SccProjectName5 = AG.Editor.Controls
+		SccLocalPath5 = AG.Editor.Controls
+		SccProjectUniqueName6 = AG.Editor.AudioUI\\AG.Editor.AudioUI.csproj
+		SccProjectName6 = AG.Editor.AudioUI
+		SccLocalPath6 = AG.Editor.AudioUI
+		SccProjectUniqueName7 = AG.Editor.UI\\AG.Editor.UI.csproj
+		SccProjectName7 = AG.Editor.UI
+		SccLocalPath7 = AG.Editor.UI
+		SccProjectUniqueName8 = AG.Editor.Panels\\AG.Editor.ModelUI.csproj
+		SccProjectName8 = AG.Editor.Panels
+		SccLocalPath8 = AG.Editor.Panels
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

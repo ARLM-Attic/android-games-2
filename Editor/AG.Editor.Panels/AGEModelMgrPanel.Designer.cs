@@ -1,4 +1,4 @@
-﻿namespace AG.Editor.Panels
+﻿namespace AG.Editor.ModelUI
 {
     partial class AGEModelMgrPanel
     {

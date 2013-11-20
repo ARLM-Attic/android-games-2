@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using AG.Editor.Core.Data;
 using System.IO;
-using AG.Editor.Windows.Controls;
+using AG.Editor.ModelUI.Controls;
 
-namespace AG.Editor.Windows
+namespace AG.Editor.ModelUI.Windows
 {
     public partial class AGEEditModelWindow : Form
     {

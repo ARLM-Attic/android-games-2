@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using AG.Editor.Core;
-using AG.Editor.Panels;
 using AG.Editor.UI;
 
 namespace AGEditor
@@ -24,7 +18,7 @@ namespace AGEditor
             _menuMidiator = new AGEMainMenuMidiator(menuStrip1);
 
             TabPage tabModelMgr = new TabPage("模型管理");
-            AG.Editor.Panels.AGEModelMgrPanel modelMgrPanel = new AG.Editor.Panels.AGEModelMgrPanel();
+            AG.Editor.ModelUI.AGEModelMgrPanel modelMgrPanel = new AG.Editor.ModelUI.AGEModelMgrPanel();
             modelMgrPanel.Dock = DockStyle.Fill;
             tabModelMgr.Controls.Add(modelMgrPanel);
             tabModelMgr.Tag = modelMgrPanel;

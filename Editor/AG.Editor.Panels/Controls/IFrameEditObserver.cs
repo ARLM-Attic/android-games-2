@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AG.Editor.Core.Data;
 
-namespace AG.Editor.Windows.Controls
+namespace AG.Editor.ModelUI.Controls
 {
     public interface IFrameEditObserver
     {

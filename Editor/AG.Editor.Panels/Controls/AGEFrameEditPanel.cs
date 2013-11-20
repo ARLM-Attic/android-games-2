@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using AG.Editor.Core.Data;
 
-namespace AG.Editor.Windows.Controls
+namespace AG.Editor.ModelUI.Controls
 {
     public partial class AGEFrameEditPanel : UserControl
     {

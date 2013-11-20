@@ -1,4 +1,5 @@
-﻿namespace AG.Editor.Windows
+﻿
+namespace AG.Editor.ModelUI.Windows
 {
     partial class AGEEditModelWindow
     {
@@ -34,10 +35,12 @@
             this.ctlBtnAddFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnRemoveFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnCopyRef = new System.Windows.Forms.ToolStripButton();
+            this.ctlBtnAddAudio = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ctlTreeModel = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ctlBtnRemoveAudio = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,7 +53,9 @@
             this.ctlBtnSave,
             this.ctlBtnAddFrame,
             this.ctlBtnRemoveFrame,
-            this.ctlBtnCopyRef});
+            this.ctlBtnCopyRef,
+            this.ctlBtnAddAudio,
+            this.ctlBtnRemoveAudio});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(555, 25);
@@ -92,6 +97,14 @@
             this.ctlBtnCopyRef.Size = new System.Drawing.Size(73, 22);
             this.ctlBtnCopyRef.Text = "拷贝引用";
             this.ctlBtnCopyRef.Click += new System.EventHandler(this.OnBtnCopyRefClick);
+            // 
+            // ctlBtnAddAudio
+            // 
+            this.ctlBtnAddAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnAddAudio.Image")));
+            this.ctlBtnAddAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnAddAudio.Name = "ctlBtnAddAudio";
+            this.ctlBtnAddAudio.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnAddAudio.Text = "设置音效";
             // 
             // statusStrip1
             // 
@@ -136,6 +149,14 @@
             this.panel1.Size = new System.Drawing.Size(366, 329);
             this.panel1.TabIndex = 0;
             // 
+            // ctlBtnRemoveAudio
+            // 
+            this.ctlBtnRemoveAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveAudio.Image")));
+            this.ctlBtnRemoveAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnRemoveAudio.Name = "ctlBtnRemoveAudio";
+            this.ctlBtnRemoveAudio.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnRemoveAudio.Text = "删除音效";
+            // 
             // AGEEditModelWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -170,5 +191,7 @@
         private System.Windows.Forms.ToolStripButton ctlBtnSave;
         private System.Windows.Forms.ToolStripButton ctlBtnCopyRef;
         private System.Windows.Forms.ToolStripButton ctlBtnRemoveFrame;
+        private System.Windows.Forms.ToolStripButton ctlBtnAddAudio;
+        private System.Windows.Forms.ToolStripButton ctlBtnRemoveAudio;
     }
 }

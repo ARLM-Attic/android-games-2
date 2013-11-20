@@ -1,4 +1,4 @@
-﻿namespace AG.Editor.Windows
+﻿namespace AG.Editor.ModelUI.Windows
 {
     partial class AGECreateModelWindow
     {

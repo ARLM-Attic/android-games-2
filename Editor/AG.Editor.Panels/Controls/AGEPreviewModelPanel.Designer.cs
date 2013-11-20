@@ -1,4 +1,4 @@
-﻿namespace AG.Editor.Windows.Controls
+﻿namespace AG.Editor.ModelUI.Controls
 {
     partial class AGEPreviewModelPanel
     {
