@@ -268,5 +268,15 @@ namespace AG.Editor.ModelUI.Windows
                 MessageBox.Show("需要选择帧!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        /// <summary>
+        /// 设置音效，对模型设置音效
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ctlBtnAddAudio_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

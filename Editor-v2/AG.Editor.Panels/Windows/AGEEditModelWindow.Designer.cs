@@ -36,11 +36,11 @@ namespace AG.Editor.ModelUI.Windows
             this.ctlBtnRemoveFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnCopyRef = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnAddAudio = new System.Windows.Forms.ToolStripButton();
+            this.ctlBtnRemoveAudio = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ctlTreeModel = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ctlBtnRemoveAudio = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -105,6 +105,15 @@ namespace AG.Editor.ModelUI.Windows
             this.ctlBtnAddAudio.Name = "ctlBtnAddAudio";
             this.ctlBtnAddAudio.Size = new System.Drawing.Size(73, 22);
             this.ctlBtnAddAudio.Text = "设置音效";
+            this.ctlBtnAddAudio.Click += new System.EventHandler(this.ctlBtnAddAudio_Click);
+            // 
+            // ctlBtnRemoveAudio
+            // 
+            this.ctlBtnRemoveAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveAudio.Image")));
+            this.ctlBtnRemoveAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnRemoveAudio.Name = "ctlBtnRemoveAudio";
+            this.ctlBtnRemoveAudio.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnRemoveAudio.Text = "删除音效";
             // 
             // statusStrip1
             // 
@@ -148,14 +157,6 @@ namespace AG.Editor.ModelUI.Windows
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(366, 329);
             this.panel1.TabIndex = 0;
-            // 
-            // ctlBtnRemoveAudio
-            // 
-            this.ctlBtnRemoveAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveAudio.Image")));
-            this.ctlBtnRemoveAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnRemoveAudio.Name = "ctlBtnRemoveAudio";
-            this.ctlBtnRemoveAudio.Size = new System.Drawing.Size(73, 22);
-            this.ctlBtnRemoveAudio.Text = "删除音效";
             // 
             // AGEEditModelWindow
             // 

@@ -89,6 +89,12 @@
     <Compile Include="Windows\AGEEditModelWindow.Designer.cs">
       <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Windows\AGESetAudioWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AGESetAudioWindow.Designer.cs">
+      <DependentUpon>AGESetAudioWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\AGEEditModelWindow.resx">
       <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AGESetAudioWindow.resx">
+      <DependentUpon>AGESetAudioWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
