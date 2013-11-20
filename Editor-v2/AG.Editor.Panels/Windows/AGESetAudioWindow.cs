@@ -13,16 +13,21 @@ namespace AG.Editor.ModelUI.Windows
 {
     public partial class AGESetAudioWindow : Form
     {
+        private AGModel _model;
+
         /// <summary>
         /// 选中的音效
         /// </summary>
         public AGAudio SelectedAudio { get; private set; }
 
-        public AGESetAudioWindow()
+        public AGESetAudioWindow(AGModel model)
         {
             InitializeComponent();
 
+            _model = model;
+
             BindAudioTree();
+            BindListActions();
         }
 
         private void ctlBtnOK_Click(object sender, EventArgs e)
@@ -61,6 +66,22 @@ namespace AG.Editor.ModelUI.Windows
                 }
             }
             ctlTreeAudio.ExpandAll();
+        }
+
+        private void BindListActions()
+        {
+            AGAction defaultAction = _model.GetAction(1);
+            AGDirection defaultDirection = defaultAction.GetDirection(1);
+
+            foreach (var action in _model.Actions)
+            {
+                ctlListAction.Items.Add(action);
+            }
+
+            for (int index = 0; index < defaultDirection.Frames.Count; index++)
+            {
+                ctlListFrame.Items.Add(string.Format("frame-{0}",defaultDirection.Frames[index].Id));
+            }
         }
     }
 }

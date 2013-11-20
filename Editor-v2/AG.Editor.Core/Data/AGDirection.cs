@@ -85,6 +85,35 @@ namespace AG.Editor.Core.Data
             }
         }
 
+
+        public static string[] GetCaptions(AGDirectionMode mode)
+        {
+            if (mode == AGDirectionMode.Two)
+            {
+                string[] strs = { "右", "左" };
+                return strs;
+            }
+            else if (mode == AGDirectionMode.Four)
+            {
+                string[] strs = { "右", "下", "左", "上" };
+                return strs;
+            }
+            else if (mode == AGDirectionMode.Eight)
+            {
+                string[] strs = { "右", "右下", "下", "左下", "左", "左上", "上", "右上" };
+                return strs;
+            }
+            else if (mode == AGDirectionMode.Sixteen)
+            {
+                string[] strs = { "右", "右下1", "右下2", "右3", 
+                                    "下", "左下1", "左下2", "左下3",
+                                    "左", "左上1","左上2","左上3", 
+                                    "上", "右上1", "右上2", "右上3" };
+                return strs;
+            }
+            return null;
+        }
+
         public static string GetCaption(AGDirectionMode mode, int dirId)
         {
             if (mode == AGDirectionMode.Two)

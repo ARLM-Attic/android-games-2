@@ -47,6 +47,7 @@
     <Compile Include="AGEContext.cs" />
     <Compile Include="Data\AGAction.cs" />
     <Compile Include="Data\AGAudio.cs" />
+    <Compile Include="Data\AGAudioRef.cs" />
     <Compile Include="Data\AGDirection.cs" />
     <Compile Include="Data\AGFrame.cs" />
     <Compile Include="Data\AGModel.cs" />

@@ -36,6 +36,20 @@ namespace AG.Editor.Core.Stores
             xM.Add(new XAttribute("ci", model.CategoryId));
             xDoc.Add(xM);
 
+            #region save audio ref
+            XElement xARefs = new XElement("audio");
+            xM.Add(xARefs);
+            for (int iAudio = 0; iAudio < model.AudioRefs.Count; iAudio++)
+            {
+                AGAudioRef audioRef = model.AudioRefs[iAudio];
+                XElement xARef = new XElement("i");
+                xARef.Add(new XAttribute("a", audioRef.ActionId));
+                xARef.Add(new XAttribute("f", audioRef.FrameId));
+                xARef.Add(new XAttribute("ref", audioRef.AudioId));
+                xARefs.Add(xARef);
+            }
+            #endregion
+
             for (int iact = 0; iact < model.Actions.Count; iact++ )
             {
                 // 保存action
@@ -101,6 +115,18 @@ namespace AG.Editor.Core.Stores
             model.Id = xm.XGetAttrIntValue("i", 0);
             model.Caption = xm.XGetAttrStringValue("c", "unknown");
             model.CategoryId = xm.XGetAttrIntValue("ci", 0);
+
+            #region load audio ref
+            List<XElement> xAudios = xm.XGetElement("audio").XGetElements("i").ToList();
+            for (int iAudio = 0; iAudio < xAudios.Count; iAudio++)
+            {
+                AGAudioRef audioRef = new AGAudioRef();
+                audioRef.ActionId = xAudios[iAudio].XGetAttrIntValue("a", AGECONST.INT_NULL);
+                audioRef.FrameId = xAudios[iAudio].XGetAttrIntValue("f", AGECONST.INT_NULL);
+                audioRef.AudioId = xAudios[iAudio].XGetAttrIntValue("ref", AGECONST.INT_NULL);
+                model.AudioRefs.Add(audioRef);
+            }
+            #endregion
 
             List<XElement> xas = xm.Elements("a").ToList();
             for (int ia = 0; ia < xas.Count; ia++)

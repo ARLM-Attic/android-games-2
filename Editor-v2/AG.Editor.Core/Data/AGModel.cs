@@ -16,6 +16,8 @@ namespace AG.Editor.Core.Data
 
         public List<AGAction> Actions { get; private set; }
 
+        public List<AGAudioRef> AudioRefs { get; private set; }
+
         private bool _hasChanged;
 
         public bool HasChanged
@@ -38,6 +40,7 @@ namespace AG.Editor.Core.Data
         {
             _hasChanged = false;
             Actions = new List<AGAction>();
+            AudioRefs = new List<AGAudioRef>();
         }
 
         /// <summary>
@@ -47,6 +50,31 @@ namespace AG.Editor.Core.Data
         {
             _hasChanged = false;
         }
+
+        #region audio
+        public List<AGAudioRef> GetAudioRefs()
+        {
+            return AudioRefs;
+        }
+
+        public void AddAudioRef(AGAudioRef audio)
+        {
+            AudioRefs.Add(audio);
+        }
+
+        public void RemoveAudioRef(int actionId, int frameId)
+        {
+            for(int index = 0; index< AudioRefs.Count;index++)
+            {
+                AGAudioRef audio = AudioRefs[index];
+                if (audio.ActionId == actionId && audio.FrameId == frameId)
+                {
+                    AudioRefs.RemoveAt(index);
+                    return;
+                }
+            }
+        }
+        #endregion
 
         #region model
         public void AddAction(AGAction action)
