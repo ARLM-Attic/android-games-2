@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AG.Editor.ModelUI</RootNamespace>
+    <AssemblyName>AG.Editor.ModelUI</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AGEModelMgrPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AGEModelMgrPanel.Designer.cs">
+      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AGEFrameEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AGEFrameEditPanel.Designer.cs">
+      <DependentUpon>AGEFrameEditPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AGEFrameEditWrapper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AGEFrameEditWrapper.Designer.cs">
+      <DependentUpon>AGEFrameEditWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AGEPreviewFramePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AGEPreviewFramePanel.Designer.cs">
+      <DependentUpon>AGEPreviewFramePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\AGEPreviewModelPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\AGEPreviewModelPanel.Designer.cs">
+      <DependentUpon>AGEPreviewModelPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IFrameEditObserver.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Windows\AGECreateModelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AGECreateModelWindow.Designer.cs">
+      <DependentUpon>AGECreateModelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AGEEditModelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AGEEditModelWindow.Designer.cs">
+      <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
+      <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
+      <Name>AG.Editor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.UI\AG.Editor.UI.csproj">
+      <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>
+      <Name>AG.Editor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
+      <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>
+      <Name>AG.Editor.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AGEModelMgrPanel.resx">
+      <DependentUpon>AGEModelMgrPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AGEFrameEditPanel.resx">
+      <DependentUpon>AGEFrameEditPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AGEFrameEditWrapper.resx">
+      <DependentUpon>AGEFrameEditWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AGEPreviewFramePanel.resx">
+      <DependentUpon>AGEPreviewFramePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AGEPreviewModelPanel.resx">
+      <DependentUpon>AGEPreviewModelPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AGECreateModelWindow.resx">
+      <DependentUpon>AGECreateModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AGEEditModelWindow.resx">
+      <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

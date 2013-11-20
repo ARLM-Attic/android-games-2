@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEA4EB82-A67C-460F-B5A3-AF46113E3083}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AGEditor</RootNamespace>
+    <AssemblyName>AGEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auto\AutoModelingWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auto\AutoModelingWindow.designer.cs">
+      <DependentUpon>AutoModelingWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Camp\CampWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Camp\CampWindow.Designer.cs">
+      <DependentUpon>CampWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Camp\CreateCampWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Camp\CreateCampWindow.Designer.cs">
+      <DependentUpon>CreateCampWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MapDesignPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MapDesignPanel.designer.cs">
+      <DependentUpon>MapDesignPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModelPreviewPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ModelPreviewPanel.designer.cs">
+      <DependentUpon>ModelPreviewPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UnitPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UnitPanel.designer.cs">
+      <DependentUpon>UnitPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WorldMapDesignPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\WorldMapDesignPanel.Designer.cs">
+      <DependentUpon>WorldMapDesignPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AGEContext.cs" />
+    <Compile Include="DesignState.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow2.Designer.cs">
+      <DependentUpon>MainWindow2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow3.Designer.cs">
+      <DependentUpon>MainWindow3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CreateModelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\CreateModelWindow.designer.cs">
+      <DependentUpon>CreateModelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FrameWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\FrameWindow.designer.cs">
+      <DependentUpon>FrameWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ModelLoader.cs" />
+    <Compile Include="Model\ModelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\ModelWindow.designer.cs">
+      <DependentUpon>ModelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PackagingUtility.cs" />
+    <Compile Include="Model\PreviewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\PreviewWindow.designer.cs">
+      <DependentUpon>PreviewWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\CreateUnitWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Unit\CreateUnitWindow.designer.cs">
+      <DependentUpon>CreateUnitWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Unit\UnitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Unit\UnitForm.designer.cs">
+      <DependentUpon>UnitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\AGEConfigUtil.cs" />
+    <Compile Include="Utilities\AGEditorConfig.cs" />
+    <Compile Include="Windows\Common\AGEInputIntegerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Common\AGEInputIntegerWindow.Designer.cs">
+      <DependentUpon>AGEInputIntegerWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\MapWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\MapWindow.designer.cs">
+      <DependentUpon>MapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\IFrameEditObserver.cs" />
+    <Compile Include="Windows\Model\ModelFrameEditPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditPanel.Designer.cs">
+      <DependentUpon>ModelFrameEditPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditWrapper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelFrameEditWrapper.Designer.cs">
+      <DependentUpon>ModelFrameEditWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelListWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelListWindow.Designer.cs">
+      <DependentUpon>ModelListWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Model\ModelEditWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Model\ModelEditWindow.designer.cs">
+      <DependentUpon>ModelEditWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectMapWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectMapWindow.designer.cs">
+      <DependentUpon>SelectMapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectModelWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectModelWindow.designer.cs">
+      <DependentUpon>SelectModelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectWorkspaceWindow.Designer.cs">
+      <DependentUpon>SelectWorkspaceWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SelectWorldMapWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\SelectWorldMapWindow.Designer.cs">
+      <DependentUpon>SelectWorldMapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Workspace\ConfirmWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Workspace\ConfirmWorkspaceWindow.Designer.cs">
+      <DependentUpon>ConfirmWorkspaceWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Workspace\CreateWorkspaceWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\Workspace\CreateWorkspaceWindow.Designer.cs">
+      <DependentUpon>CreateWorkspaceWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldMap\CreateWorldMapWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldMap\CreateWorldMapWindow.Designer.cs">
+      <DependentUpon>CreateWorldMapWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WorldMap\WorldMapWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldMap\WorldMapWindow.Designer.cs">
+      <DependentUpon>WorldMapWindow.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Auto\AutoModelingWindow.resx">
+      <DependentUpon>AutoModelingWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Camp\CampWindow.resx">
+      <DependentUpon>CampWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Camp\CreateCampWindow.resx">
+      <DependentUpon>CreateCampWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MapDesignPanel.resx">
+      <DependentUpon>MapDesignPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ModelPreviewPanel.resx">
+      <DependentUpon>ModelPreviewPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UnitPanel.resx">
+      <DependentUpon>UnitPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow2.resx">
+      <DependentUpon>MainWindow2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow3.resx">
+      <DependentUpon>MainWindow3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\CreateModelWindow.resx">
+      <DependentUpon>CreateModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\FrameWindow.resx">
+      <DependentUpon>FrameWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ModelWindow.resx">
+      <DependentUpon>ModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\PreviewWindow.resx">
+      <DependentUpon>PreviewWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Unit\CreateUnitWindow.resx">
+      <DependentUpon>CreateUnitWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Unit\UnitForm.resx">
+      <DependentUpon>UnitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Common\AGEInputIntegerWindow.resx">
+      <DependentUpon>AGEInputIntegerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\MapWindow.resx">
+      <DependentUpon>MapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelFrameEditPanel.resx">
+      <DependentUpon>ModelFrameEditPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelFrameEditWrapper.resx">
+      <DependentUpon>ModelFrameEditWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelListWindow.resx">
+      <DependentUpon>ModelListWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Model\ModelEditWindow.resx">
+      <DependentUpon>ModelEditWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectMapWindow.resx">
+      <DependentUpon>SelectMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectModelWindow.resx">
+      <DependentUpon>SelectModelWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectWorkspaceWindow.resx">
+      <DependentUpon>SelectWorkspaceWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\SelectWorldMapWindow.resx">
+      <DependentUpon>SelectWorldMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Workspace\ConfirmWorkspaceWindow.resx">
+      <DependentUpon>ConfirmWorkspaceWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Windows\Workspace\CreateWorkspaceWindow.resx">
+      <DependentUpon>CreateWorkspaceWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldMap\CreateWorldMapWindow.resx">
+      <DependentUpon>CreateWorldMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldMap\WorldMapWindow.resx">
+      <DependentUpon>WorldMapWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\config.xml.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Metadata\Projects\gravity.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AG.Core\AG.Core.csproj">
+      <Project>{40289A74-734D-4131-9B5F-628CFC6FBEB1}</Project>
+      <Name>AG.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.AudioUI\AG.Editor.AudioUI.csproj">
+      <Project>{762B24DD-A4E6-4E15-92E3-F23C331DA49D}</Project>
+      <Name>AG.Editor.AudioUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Core\AG.Editor.Core.csproj">
+      <Project>{626F4C07-6BCC-4A87-92DD-3CDA68D3D473}</Project>
+      <Name>AG.Editor.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Panels\AG.Editor.ModelUI.csproj">
+      <Project>{78AA6861-3C1C-49C8-8FF8-0841B2E6C2B6}</Project>
+      <Name>AG.Editor.ModelUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.UI\AG.Editor.UI.csproj">
+      <Project>{FD5DF323-8EED-4EE1-B2B0-878DEB7B943B}</Project>
+      <Name>AG.Editor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AG.Editor.Windows\AG.Editor.Windows.csproj">
+      <Project>{23A35E7E-10BF-454F-8306-7BBBE60E993D}</Project>
+      <Name>AG.Editor.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder1\" />
+    <Folder Include="Windows\Metadata\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
