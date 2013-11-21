@@ -5,21 +5,21 @@
     <!-- 
     dir:方向模式: 2,4,8,16
     -->
-    <mci i="1" c="object(物体)" dir="8">
-      <act i="1" c="stand(站立)"/>
-      <act i="2" c="fly(飞行)"/>
-    </mci>
-    <mci i="2" c="bullet(子弹)" dir="8">
+    <mci i="0" c="object(物体)" dir="8">
+      <act i="0" c="stand(站立)"/>
       <act i="1" c="fly(飞行)"/>
-      <act i="2" c="explode(爆炸)"/>
     </mci>
-    <mci i="3" c="effect(效果)" dir="8">
-      <act i="1" c="角色加速"/>
+    <mci i="1" c="bullet(子弹)" dir="8">
+      <act i="0" c="fly(飞行)"/>
+      <act i="1" c="explode(爆炸)"/>
+    </mci>
+    <mci i="2" c="effect(效果)" dir="8">
+      <act i="0" c="角色加速"/>
     </mci>
   </mc>
   <!-- audio category definition -->
   <ac>
-    <aci i="1" c="launch(发射声音)"/>
-    <aci i="2" c="explode(爆炸声音)"/>
+    <aci i="0" c="launch(发射声音)"/>
+    <aci i="1" c="explode(爆炸声音)"/>
   </ac>
 </pt>

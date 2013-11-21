@@ -7,6 +7,7 @@ namespace AG.Editor.Core.Data
 {
     public class AGFrame
     {
+        public Guid UniqueId { get; private set; }
         public int Id { get; set; }
         public string ImageFileName { get; set; }
         public int AnchorPointX { get; set; }
@@ -17,18 +18,24 @@ namespace AG.Editor.Core.Data
         /// <summary>
         /// 引用的frameId
         /// </summary>
-        public int? RefFrameId { get; private set; }
+        public Guid RefFrameUniqueId { get; private set; }
         public AGFrame RefFrame { get; private set; }
         public AGDirection Direction { get; internal set; }
 
         public AGFrame()
         {
+            UniqueId = Guid.NewGuid();
         }
 
-        public AGFrame(int id, int refFrameId)
+        public AGFrame(Guid uniqueId)
         {
-            Id = id;
-            RefFrameId = refFrameId;
+            UniqueId = uniqueId;
+        }
+
+        public AGFrame(Guid uniqueId, Guid refFrameUniqueId)
+        {
+            UniqueId = uniqueId;
+            RefFrameUniqueId = refFrameUniqueId;
         }
 
         /// <summary>
@@ -37,13 +44,13 @@ namespace AG.Editor.Core.Data
         /// <param name="frame"></param>
         public void SetRefFrame(AGFrame frame)
         {
-            RefFrameId = frame.Id;
+            RefFrameUniqueId = frame.UniqueId;
             RefFrame = frame;
         }
 
         public override string ToString()
         {
-            if (RefFrameId != null)
+            if (RefFrameUniqueId != Guid.Empty)
             {
                 return string.Format("ref:{0}", RefFrame.ImageFileName); 
             }

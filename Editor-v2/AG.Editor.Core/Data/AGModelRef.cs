@@ -10,7 +10,7 @@ namespace AG.Editor.Core.Data
     /// </summary>
     public class AGModelRef
     {
-        public int Id { get; set; }
+        public Guid ModelUniqueId { get; set; }
         public string Caption { get; set; }
         public int CategoryId { get; set; }
 
@@ -20,14 +20,14 @@ namespace AG.Editor.Core.Data
 
         public AGModelRef(AGModel model)
         {
-            Id = model.Id;
+            ModelUniqueId = model.UniqueId;
             Caption = model.Caption;
             this.CategoryId = model.CategoryId;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}[{1}]", Caption, Id);
+            return Caption;
         }
     }
 }

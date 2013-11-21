@@ -103,12 +103,12 @@ namespace AG.Editor.Core.Data
         /// 删除模型
         /// </summary>
         /// <param name="modelId"></param>
-        public void RemoveModel(int modelId)
+        public void RemoveModel(Guid modelUniqueId)
         {
             for (int index = 0; index < Models.Count; index++)
             {
                 AGModelRef refModel = Models[index];
-                if (refModel.Id == modelId)
+                if (refModel.ModelUniqueId == modelUniqueId)
                 {
                     Models.RemoveAt(index);
                     HasChanged = true;
@@ -209,7 +209,7 @@ namespace AG.Editor.Core.Data
             FileInfo fileInfo = new FileInfo(Path);
             string folder = fileInfo.Directory.FullName;
             string modelsFolder = System.IO.Path.Combine(folder, ".\\data\\models\\");
-            string modelFolder = System.IO.Path.Combine(modelsFolder, string.Format(".\\{0:d8}\\", obj.Id));
+            string modelFolder = System.IO.Path.Combine(modelsFolder, string.Format(".\\{0}\\", obj.UniqueId));
             return modelFolder;
         }
 

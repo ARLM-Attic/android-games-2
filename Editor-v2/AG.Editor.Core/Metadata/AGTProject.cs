@@ -22,5 +22,22 @@ namespace AG.Editor.Core.Metadata
             ModelCategories = new List<AGModelCategory>();
             AudioCateogries = new List<AGAudioCategory>();
         }
+
+        /// <summary>
+        /// 获取模型定义
+        /// </summary>
+        /// <param name="modelCategoryId"></param>
+        /// <returns></returns>
+        public AGModelCategory GetModelCategory(int modelCategoryId)
+        {
+            foreach (var item in ModelCategories)
+            {
+                if (item.Id == modelCategoryId)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }

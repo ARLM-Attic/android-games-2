@@ -42,38 +42,39 @@ namespace AG.Editor.Core.Stores
                 xDoc.RemoveNodes();
             }
 
-            XElement xP = new XElement("p");
-            xP.Add(new XAttribute("n", project.Name));
-            xP.Add(new XAttribute("dtver", dateVersion));
-            xP.Add(new XAttribute("tpn", project.TPName));
-            xP.Add(new XAttribute("tpver", project.TPVersion));
+            XElement xP = new XElement("project");
+            xP.Add(new XAttribute("nanme", project.Name));
+            xP.Add(new XAttribute("date-version", dateVersion));
+            xP.Add(new XAttribute("template-name", project.TPName));
+            xP.Add(new XAttribute("template-version", project.TPVersion));
             xDoc.Add(xP);
 
             #region save audios
-            XElement xa = new XElement("a");
+            XElement xa = new XElement("audio-list");
             xP.Add(xa);
             for (int ia = 0; ia < project.Audios.Count; ia++)
             {
                 AGAudio audio = project.Audios[ia];
-                XElement xai = new XElement("ai");
+                XElement xai = new XElement("audio");
                 xa.Add(xai);
-                xai.Add(new XAttribute("i", audio.Id));
-                xai.Add(new XAttribute("c", audio.Caption));
-                xai.Add(new XAttribute("fp", audio.FilePath));
-                xai.Add(new XAttribute("ci", audio.CategoryId));
+                xai.Add(new XAttribute("unique-id", audio.UniqueId));
+                xai.Add(new XAttribute("id", audio.Id));
+                xai.Add(new XAttribute("caption", audio.Caption));
+                xai.Add(new XAttribute("file-name", audio.FilePath));
+                xai.Add(new XAttribute("category-id", audio.CategoryId));
             }
             #endregion
 
-            XElement xm = new XElement("m");
+            XElement xm = new XElement("model-list");
             xP.Add(xm);
             for (int im = 0; im < project.Models.Count; im++)
             {
                 AGModelRef model = project.Models[im];
-                XElement xmi = new XElement("mi");
+                XElement xmi = new XElement("model");
                 xm.Add(xmi);
-                xmi.Add(new XAttribute("i", model.Id));
-                xmi.Add(new XAttribute("c", model.Caption));
-                xmi.Add(new XAttribute("mci", model.CategoryId));
+                xmi.Add(new XAttribute("model-unique-id", model.ModelUniqueId));
+                xmi.Add(new XAttribute("caption", model.Caption));
+                xmi.Add(new XAttribute("category-id", model.CategoryId));
             }
 
             xDoc.Save(filePath);
@@ -89,39 +90,40 @@ namespace AG.Editor.Core.Stores
         {
             XDocument xDoc = XDocument.Load(filePath);
 
-            XElement xEl = xDoc.Element("p");
+            XElement xEl = xDoc.Element("project");
             AGEProject project = new AGEProject();
             project.Path = filePath;
-            project.Name = xEl.Attribute("n").Value;
-            project.DateVersion = xEl.Attribute("dtver").XGetValueString(DateTime.MinValue.ToString(_dateVersionFormat));
-            project.TPName = xEl.Attribute("tpn").Value;
-            project.TPVersion = xEl.Attribute("tpver").Value;
+            project.Name = xEl.XGetAttrString("name");
+            project.DateVersion = xEl.XGetAttrStringValue("date-version", DateTime.MinValue.ToString(_dateVersionFormat));
+            project.TPName = xEl.XGetAttrString("template-name");
+            project.TPVersion = xEl.XGetAttrString("template-version");
 
             // 加载TProject
             project.TProject = AGECache.Current.TProjectStore.GetTProject(project.TPName);
 
             #region load audios
-            List<XElement> xAis = xEl.XGetElement("a").XGetElements("ai").ToList();
+            List<XElement> xAis = xEl.XGetElement("audio-list").XGetElements("audio").ToList();
             for (int ia = 0; ia < xAis.Count; ia++)
             {
-                AGAudio audio = new AGAudio();
+                XElement xAudio = xAis[ia];
+                AGAudio audio = new AGAudio(xAudio.XGetAttrGuid("unique-id"));
                 project.AddAudio(audio);
 
-                audio.Id = xAis[ia].XGetAttrIntValue("i", AGECONST.INT_NULL);
-                audio.Caption = xAis[ia].XGetAttrStringValue("c", "unknown");
-                audio.FilePath = xAis[ia].XGetAttrStringValue("fp", "unknown");
-                audio.CategoryId = xAis[ia].XGetAttrIntValue("ci", AGECONST.INT_NULL);
+                audio.Id = xAudio.XGetAttrInt("id");
+                audio.Caption = xAudio.XGetAttrString("caption");
+                audio.FilePath = xAudio.XGetAttrString("file-name");
+                audio.CategoryId = xAudio.XGetAttrInt("category-id");
             }
             #endregion
 
-            List<XElement> xMis = xEl.Element("m").Elements("mi").ToList();
+            List<XElement> xMis = xEl.Element("model-list").Elements("model").ToList();
             for (int im = 0; im < xMis.Count; im++)
             {
                 XElement xmi = xMis[im];
                 AGModelRef modelRef = new AGModelRef();
-                modelRef.Id = Convert.ToInt32(xmi.Attribute("i").Value);
-                modelRef.Caption = xmi.XGetAttrStringValue("c", "unknown");
-                modelRef.CategoryId = Convert.ToInt32(xmi.Attribute("mci").Value);
+                modelRef.ModelUniqueId = xmi.XGetAttrGuid("model-unique-id");
+                modelRef.Caption = xmi.XGetAttrString("caption");
+                modelRef.CategoryId = xmi.XGetAttrInt("category-id");
                 project.Models.Add(modelRef);
             }
             return project;

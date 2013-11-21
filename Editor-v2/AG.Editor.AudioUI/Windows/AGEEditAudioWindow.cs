@@ -35,7 +35,7 @@ namespace AG.Editor.AudioUI.Windows
         {
             if (Audio == null)
             {
-                Audio = new AGAudio();
+                Audio = new AGAudio(Guid.NewGuid());
             }
             UpdateUI();
 

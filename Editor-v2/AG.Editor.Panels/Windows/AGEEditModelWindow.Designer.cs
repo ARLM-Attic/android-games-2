@@ -31,16 +31,17 @@ namespace AG.Editor.ModelUI.Windows
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AGEEditModelWindow));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.ctlTreeModel = new System.Windows.Forms.TreeView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.ctlBtnSave = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnAddFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnRemoveFrame = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnCopyRef = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnAddAudio = new System.Windows.Forms.ToolStripButton();
             this.ctlBtnRemoveAudio = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.ctlTreeModel = new System.Windows.Forms.TreeView();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.ctlBtnValidate = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -54,6 +55,7 @@ namespace AG.Editor.ModelUI.Windows
             this.ctlBtnAddFrame,
             this.ctlBtnRemoveFrame,
             this.ctlBtnCopyRef,
+            this.ctlBtnValidate,
             this.ctlBtnAddAudio,
             this.ctlBtnRemoveAudio});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -61,59 +63,6 @@ namespace AG.Editor.ModelUI.Windows
             this.toolStrip1.Size = new System.Drawing.Size(555, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // ctlBtnSave
-            // 
-            this.ctlBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnSave.Image")));
-            this.ctlBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnSave.Name = "ctlBtnSave";
-            this.ctlBtnSave.Size = new System.Drawing.Size(49, 22);
-            this.ctlBtnSave.Text = "保存";
-            this.ctlBtnSave.Click += new System.EventHandler(this.ctlBtnSave_Click);
-            // 
-            // ctlBtnAddFrame
-            // 
-            this.ctlBtnAddFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnAddFrame.Image")));
-            this.ctlBtnAddFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnAddFrame.Name = "ctlBtnAddFrame";
-            this.ctlBtnAddFrame.Size = new System.Drawing.Size(61, 22);
-            this.ctlBtnAddFrame.Text = "添加帧";
-            this.ctlBtnAddFrame.Click += new System.EventHandler(this.ctlBtnAddFrame_Click);
-            // 
-            // ctlBtnRemoveFrame
-            // 
-            this.ctlBtnRemoveFrame.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveFrame.Image")));
-            this.ctlBtnRemoveFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnRemoveFrame.Name = "ctlBtnRemoveFrame";
-            this.ctlBtnRemoveFrame.Size = new System.Drawing.Size(61, 22);
-            this.ctlBtnRemoveFrame.Text = "删除帧";
-            this.ctlBtnRemoveFrame.Click += new System.EventHandler(this.ctlBtnRemoveFrame_Click);
-            // 
-            // ctlBtnCopyRef
-            // 
-            this.ctlBtnCopyRef.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnCopyRef.Image")));
-            this.ctlBtnCopyRef.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnCopyRef.Name = "ctlBtnCopyRef";
-            this.ctlBtnCopyRef.Size = new System.Drawing.Size(73, 22);
-            this.ctlBtnCopyRef.Text = "拷贝引用";
-            this.ctlBtnCopyRef.Click += new System.EventHandler(this.OnBtnCopyRefClick);
-            // 
-            // ctlBtnAddAudio
-            // 
-            this.ctlBtnAddAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnAddAudio.Image")));
-            this.ctlBtnAddAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnAddAudio.Name = "ctlBtnAddAudio";
-            this.ctlBtnAddAudio.Size = new System.Drawing.Size(73, 22);
-            this.ctlBtnAddAudio.Text = "设置音效";
-            this.ctlBtnAddAudio.Click += new System.EventHandler(this.ctlBtnAddAudio_Click);
-            // 
-            // ctlBtnRemoveAudio
-            // 
-            this.ctlBtnRemoveAudio.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnRemoveAudio.Image")));
-            this.ctlBtnRemoveAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ctlBtnRemoveAudio.Name = "ctlBtnRemoveAudio";
-            this.ctlBtnRemoveAudio.Size = new System.Drawing.Size(73, 22);
-            this.ctlBtnRemoveAudio.Text = "删除音效";
             // 
             // statusStrip1
             // 
@@ -158,6 +107,69 @@ namespace AG.Editor.ModelUI.Windows
             this.panel1.Size = new System.Drawing.Size(366, 329);
             this.panel1.TabIndex = 0;
             // 
+            // ctlBtnSave
+            // 
+            this.ctlBtnSave.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnSave.Image")));
+            this.ctlBtnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnSave.Name = "ctlBtnSave";
+            this.ctlBtnSave.Size = new System.Drawing.Size(49, 22);
+            this.ctlBtnSave.Text = "保存";
+            this.ctlBtnSave.Click += new System.EventHandler(this.ctlBtnSave_Click);
+            // 
+            // ctlBtnAddFrame
+            // 
+            this.ctlBtnAddFrame.Image = global::AG.Editor.ModelUI.Properties.Resources.image_add;
+            this.ctlBtnAddFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnAddFrame.Name = "ctlBtnAddFrame";
+            this.ctlBtnAddFrame.Size = new System.Drawing.Size(61, 22);
+            this.ctlBtnAddFrame.Text = "添加帧";
+            this.ctlBtnAddFrame.Click += new System.EventHandler(this.ctlBtnAddFrame_Click);
+            // 
+            // ctlBtnRemoveFrame
+            // 
+            this.ctlBtnRemoveFrame.Image = global::AG.Editor.ModelUI.Properties.Resources.image_delete;
+            this.ctlBtnRemoveFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnRemoveFrame.Name = "ctlBtnRemoveFrame";
+            this.ctlBtnRemoveFrame.Size = new System.Drawing.Size(61, 22);
+            this.ctlBtnRemoveFrame.Text = "删除帧";
+            this.ctlBtnRemoveFrame.Click += new System.EventHandler(this.ctlBtnRemoveFrame_Click);
+            // 
+            // ctlBtnCopyRef
+            // 
+            this.ctlBtnCopyRef.Image = global::AG.Editor.ModelUI.Properties.Resources.image_link;
+            this.ctlBtnCopyRef.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnCopyRef.Name = "ctlBtnCopyRef";
+            this.ctlBtnCopyRef.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnCopyRef.Text = "拷贝引用";
+            this.ctlBtnCopyRef.Click += new System.EventHandler(this.OnBtnCopyRefClick);
+            // 
+            // ctlBtnAddAudio
+            // 
+            this.ctlBtnAddAudio.Image = global::AG.Editor.ModelUI.Properties.Resources.bell_add;
+            this.ctlBtnAddAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnAddAudio.Name = "ctlBtnAddAudio";
+            this.ctlBtnAddAudio.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnAddAudio.Text = "设置音效";
+            this.ctlBtnAddAudio.Click += new System.EventHandler(this.ctlBtnAddAudio_Click);
+            // 
+            // ctlBtnRemoveAudio
+            // 
+            this.ctlBtnRemoveAudio.Image = global::AG.Editor.ModelUI.Properties.Resources.bell_delete;
+            this.ctlBtnRemoveAudio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnRemoveAudio.Name = "ctlBtnRemoveAudio";
+            this.ctlBtnRemoveAudio.Size = new System.Drawing.Size(73, 22);
+            this.ctlBtnRemoveAudio.Text = "删除音效";
+            this.ctlBtnRemoveAudio.Click += new System.EventHandler(this.ctlBtnRemoveAudio_Click);
+            // 
+            // ctlBtnValidate
+            // 
+            this.ctlBtnValidate.Image = ((System.Drawing.Image)(resources.GetObject("ctlBtnValidate.Image")));
+            this.ctlBtnValidate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ctlBtnValidate.Name = "ctlBtnValidate";
+            this.ctlBtnValidate.Size = new System.Drawing.Size(49, 22);
+            this.ctlBtnValidate.Text = "检查";
+            this.ctlBtnValidate.Click += new System.EventHandler(this.ctlBtnValidate_Click);
+            // 
             // AGEEditModelWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -194,5 +206,6 @@ namespace AG.Editor.ModelUI.Windows
         private System.Windows.Forms.ToolStripButton ctlBtnRemoveFrame;
         private System.Windows.Forms.ToolStripButton ctlBtnAddAudio;
         private System.Windows.Forms.ToolStripButton ctlBtnRemoveAudio;
+        private System.Windows.Forms.ToolStripButton ctlBtnValidate;
     }
 }

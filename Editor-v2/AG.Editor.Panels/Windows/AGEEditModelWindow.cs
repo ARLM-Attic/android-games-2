@@ -72,7 +72,7 @@ namespace AG.Editor.ModelUI.Windows
                     tnDirection.Text = direction.ToString();
                     tnAction.Nodes.Add(tnDirection);
 
-                    if (direction.RefDirectionId == null)
+                    if (direction.RefDirection == null)
                     {
                         // 只有非引用方位才显示帧信息
                         foreach (AGFrame frame in direction.Frames)
@@ -276,7 +276,32 @@ namespace AG.Editor.ModelUI.Windows
         /// <param name="e"></param>
         private void ctlBtnAddAudio_Click(object sender, EventArgs e)
         {
+            AGESetAudioWindow window = new AGESetAudioWindow(Model);
+            if (window.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Model.AddAudioRef(window.AudioRef);
+            }
+        }
 
+        private void ctlBtnRemoveAudio_Click(object sender, EventArgs e)
+        {
+            AGERemoveAudioWindow window = new AGERemoveAudioWindow(Model);
+            if (window.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Model.RemoveAudioRef(window.SelectedAudioRef);
+            }
+        }
+
+        private void ctlBtnValidate_Click(object sender, EventArgs e)
+        {
+            if (Model.Validate())
+            {
+                MessageBox.Show("检查通过!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("检查未通过，请调整模型信息!","提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

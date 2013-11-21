@@ -47,6 +47,11 @@ namespace AG.Editor.Core
             return xAttr.Value;
         }
 
+        public static int XGetAttrInt(this XElement xEl, string attrName)
+        {
+            return XGetAttrIntValue(xEl, attrName, AGECONST.INT_NULL);
+        }
+
         public static int XGetAttrIntValue(this XElement xEl, string attrName, int defaultValue)
         {
             if (xEl == null)
@@ -68,6 +73,11 @@ namespace AG.Editor.Core
             return defaultValue;
         }
 
+        public static string XGetAttrString(this XElement xEl, string attrName)
+        {
+            return XGetAttrStringValue(xEl, attrName, AGECONST.STRING_NULL);
+        }
+
         public static string XGetAttrStringValue(this XElement xEl, string attrName, string defaultValue)
         {
             if (xEl == null)
@@ -81,6 +91,37 @@ namespace AG.Editor.Core
                 return defaultValue;
             }
             return xAttr.Value;
+        }
+
+        public static Guid XGetAttrGuid(this XElement xEl, string attrName)
+        {
+            return XGetAttrGuid(xEl, attrName, Guid.Empty);
+        }
+
+        public static Guid XGetAttrGuid(this XElement xEl, string attrName, Guid defaultValue)
+        {
+            if (xEl == null)
+            {
+                return defaultValue;
+            }
+
+            try
+            {
+                XAttribute xAttr = xEl.Attribute(attrName);
+                if (xAttr != null)
+                {
+                    Guid guid = new Guid(xEl.Attribute(attrName).Value);
+                    return guid;
+                }
+                else
+                {
+                    return defaultValue;
+                }
+            }
+            catch (Exception ex)
+            {
+                return defaultValue;
+            }
         }
     }
 }

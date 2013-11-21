@@ -8,18 +8,18 @@ namespace AG.Editor.Core.Data
     public class AGAudioRef
     {
         public int ActionId { get; set; }
-        public int FrameId { get; set; }
-        public int AudioId { get; set; }
+        public int FrameIndex { get; set; }
+        public Guid AudioUniqueId { get; set; }
 
         public AGAudioRef()
         {
         }
 
-        public AGAudioRef(int actionId, int frameId, int audioId)
+        public AGAudioRef(int actionId, int frameIndex, Guid audioUniqueId)
         {
             ActionId = actionId;
-            FrameId = frameId;
-            AudioId = audioId;
+            FrameIndex = frameIndex;
+            AudioUniqueId = audioUniqueId;
         }
     }
 }

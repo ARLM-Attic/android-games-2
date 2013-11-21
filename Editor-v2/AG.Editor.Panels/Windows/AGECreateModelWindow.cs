@@ -37,29 +37,9 @@ namespace AG.Editor.ModelUI.Windows
                 return;
             }
 
-            AGModel model = new AGModel();
+            AGModel model = AGModel.ModelWidthCategory(selectedItem, Guid.NewGuid());
             model.Id = id;
             model.Caption = ctlEditCaption.Text;
-            model.CategoryId = selectedItem.Id;
-            model.Category = selectedItem;
-
-            foreach (var actionItem in selectedItem.Actions)
-            {
-                AGAction action = new AGAction();
-                action.Id = actionItem.Id;
-                action.Caption = actionItem.Caption;
-
-                foreach (var dirItem in actionItem.Directions)
-                {
-                    AGDirection direction = new AGDirection();
-                    direction.Id = dirItem.Id;
-                    direction.Caption = dirItem.Caption;
-                    action.AddDirection(direction);
-                }
-
-                model.AddAction(action);
-            }
-
             CreatedModel = model;
             DialogResult = System.Windows.Forms.DialogResult.OK;
         }

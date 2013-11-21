@@ -5,25 +5,29 @@ using System.Text;
 
 namespace AG.Editor.Core.Data
 {
+    /// <summary>
+    /// action信息是由metadata定义，id无法修改
+    /// </summary>
     public class AGAction
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Caption { get; set; }
 
         public List<AGDirection> Directions { get; private set; }
 
         public AGModel Model { get; set; }
 
-        public AGAction()
+        public AGAction(int id)
         {
+            Id = id;
             Directions = new List<AGDirection>();
         }
 
-        public void AddDirection(AGDirection direction)
-        {
-            Directions.Add(direction);
-            direction.Action = this;
-        }
+        //public void AddDirection(AGDirection direction)
+        //{
+        //    Directions.Add(direction);
+        //    direction.Action = this;
+        //}
 
         public override string ToString()
         {

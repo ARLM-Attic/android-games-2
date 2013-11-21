@@ -85,6 +85,7 @@
             // 
             // ctlListAction
             // 
+            this.ctlListAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ctlListAction.FormattingEnabled = true;
             this.ctlListAction.Location = new System.Drawing.Point(53, 6);
             this.ctlListAction.Name = "ctlListAction";
@@ -102,19 +103,20 @@
             // 
             // ctlListFrame
             // 
+            this.ctlListFrame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ctlListFrame.FormattingEnabled = true;
             this.ctlListFrame.Location = new System.Drawing.Point(53, 32);
             this.ctlListFrame.Name = "ctlListFrame";
             this.ctlListFrame.Size = new System.Drawing.Size(308, 20);
             this.ctlListFrame.TabIndex = 7;
             // 
-            // AGESelectAudioWindow
+            // AGESetAudioWindow
             // 
             this.AcceptButton = this.ctlBtnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ctlBtnCancel;
-            this.ClientSize = new System.Drawing.Size(373, 449);
+            this.ClientSize = new System.Drawing.Size(378, 449);
             this.Controls.Add(this.ctlListFrame);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ctlListAction);
@@ -126,7 +128,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "AGESelectAudioWindow";
+            this.Name = "AGESetAudioWindow";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AGESelectAudioWindow";

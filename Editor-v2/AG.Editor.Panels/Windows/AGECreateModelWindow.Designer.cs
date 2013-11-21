@@ -36,13 +36,14 @@
             this.ctlEditId = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ctlListCategory
             // 
             this.ctlListCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ctlListCategory.FormattingEnabled = true;
-            this.ctlListCategory.Location = new System.Drawing.Point(76, 67);
+            this.ctlListCategory.Location = new System.Drawing.Point(76, 92);
             this.ctlListCategory.Name = "ctlListCategory";
             this.ctlListCategory.Size = new System.Drawing.Size(121, 20);
             this.ctlListCategory.TabIndex = 20;
@@ -50,7 +51,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 70);
+            this.label4.Location = new System.Drawing.Point(35, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 19;
@@ -59,7 +60,7 @@
             // ctlBtnCancel
             // 
             this.ctlBtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ctlBtnCancel.Location = new System.Drawing.Point(375, 104);
+            this.ctlBtnCancel.Location = new System.Drawing.Point(375, 129);
             this.ctlBtnCancel.Name = "ctlBtnCancel";
             this.ctlBtnCancel.Size = new System.Drawing.Size(75, 21);
             this.ctlBtnCancel.TabIndex = 18;
@@ -68,7 +69,7 @@
             // 
             // ctlBtnOK
             // 
-            this.ctlBtnOK.Location = new System.Drawing.Point(294, 104);
+            this.ctlBtnOK.Location = new System.Drawing.Point(294, 129);
             this.ctlBtnOK.Name = "ctlBtnOK";
             this.ctlBtnOK.Size = new System.Drawing.Size(75, 21);
             this.ctlBtnOK.TabIndex = 17;
@@ -78,7 +79,7 @@
             // 
             // ctlEditCaption
             // 
-            this.ctlEditCaption.Location = new System.Drawing.Point(76, 43);
+            this.ctlEditCaption.Location = new System.Drawing.Point(76, 68);
             this.ctlEditCaption.Name = "ctlEditCaption";
             this.ctlEditCaption.Size = new System.Drawing.Size(374, 21);
             this.ctlEditCaption.TabIndex = 16;
@@ -93,7 +94,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 46);
+            this.label2.Location = new System.Drawing.Point(35, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 14;
@@ -108,13 +109,23 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "编号:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(76, 47);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(149, 12);
+            this.label3.TabIndex = 21;
+            this.label3.Text = "编号只能输入0-9999的数字";
+            // 
             // AGECreateModelWindow
             // 
             this.AcceptButton = this.ctlBtnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.ctlBtnCancel;
-            this.ClientSize = new System.Drawing.Size(483, 150);
+            this.ClientSize = new System.Drawing.Size(483, 170);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.ctlListCategory);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ctlBtnCancel);
@@ -123,6 +134,9 @@
             this.Controls.Add(this.ctlEditId);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AGECreateModelWindow";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -142,5 +156,6 @@
         private System.Windows.Forms.TextBox ctlEditId;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }

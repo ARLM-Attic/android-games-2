@@ -91,14 +91,12 @@ namespace AG.Editor.Core.V1_0
                 int actId = Convert.ToInt32(xAct.Attribute("i").Value);
                 string actCaption = xAct.Attribute("c").Value;
 
-                AGAction action = new AGAction();
-                action.Id = actId;
+                AGAction action = new AGAction(actId);
                 action.Caption = actCaption;
 
                 for (int dirIndex = 0; dirIndex < dir; dirIndex++)
 			    {
-			        AGDirection direction = new AGDirection();
-                    direction.Id = dirIndex;
+                    AGDirection direction = new AGDirection(dirIndex);
                     direction.Caption = AGDirection.GetCaption(category.DirectionMode, direction.Id);
                     action.Directions.Add(direction);
                 }

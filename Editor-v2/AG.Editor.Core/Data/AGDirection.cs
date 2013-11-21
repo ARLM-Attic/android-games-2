@@ -6,26 +6,34 @@ using AG.Editor.Core.Metadata;
 
 namespace AG.Editor.Core.Data
 {
+    /// <summary>
+    /// 方向信息是由metadata定义的，所以id是无法修改的
+    /// <para>
+    /// id，的编号规则是从0开始
+    /// </para>
+    /// </summary>
     public class AGDirection
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public string Caption { get; set; }
 
         public List<AGFrame> Frames { get; private set; }
         public AGAction Action { get; set; }
 
-        public int? RefDirectionId { get; private set; }
+        public int? RefId { get; set; }
         public AGDirection RefDirection { get; private set; }
 
-        public AGDirection()
+        public AGDirection(int id)
         {
+            Id = id;
             Frames = new List<AGFrame>();
         }
 
-        public AGDirection(int id, int refDirectionId)
+        public AGDirection(int id, int refId)
         {
             Id = id;
-            RefDirectionId = refDirectionId;
+            RefId = refId;
+            Frames = new List<AGFrame>();
         }
 
         /// <summary>
@@ -41,6 +49,18 @@ namespace AG.Editor.Core.Data
             return Frames;
         }
 
+        public AGFrame GetFrame(int frameId)
+        {
+            for (int index = 0; index < Frames.Count; index++)
+            {
+                if (Frames[index].Id == frameId)
+                {
+                    return Frames[index];
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// 设置引用模式，设置之后，此direction所有的frame信息都将被删除，因为这些信息将会从引用的direction中取得
         /// </summary>
@@ -48,7 +68,7 @@ namespace AG.Editor.Core.Data
         public void SetRefDirection(AGDirection direction)
         {
             RefDirection = direction;
-            RefDirectionId = RefDirection.Id;
+            RefId = RefDirection.Id;
         }
 
         public void AddFrame(AGFrame frame)
@@ -75,9 +95,9 @@ namespace AG.Editor.Core.Data
 
         public override string ToString()
         {
-            if (RefDirectionId != null)
+            if (RefId != null)
             {
-                return string.Format("{0}ref:{1}", Caption, RefDirection.Caption);
+                return string.Format("{0}[ref:{1}]", Caption, RefDirection.Caption);
             }
             else
             {

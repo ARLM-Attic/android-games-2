@@ -64,12 +64,12 @@ namespace AG.Editor.ModelUI
 
         void miSaveProject_Click(object sender, EventArgs e)
         {
-            if (AG.Editor.Core.AGEContext.Current.EProject.HasChanged)
-            {
+            //if (AG.Editor.Core.AGEContext.Current.EProject.HasChanged)
+            //{
                 AG.Editor.Core.AGECache.Current.EProjectStore.SaveEProject(AG.Editor.Core.AGEContext.Current.EProject);
                 AG.Editor.Core.AGEContext.Current.EProject.SaveComplete();
                 MessageBox.Show("保存完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //}
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace AG.Editor.ModelUI
 
             if (MessageBox.Show(string.Format("是否要删除模型[{0}]", modelRef.Caption), "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                AGEContext.Current.EProject.RemoveModel(modelRef.Id);
+                AGEContext.Current.EProject.RemoveModel(modelRef.ModelUniqueId);
                 BindModelTree();
             }
         }

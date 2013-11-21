@@ -24,6 +24,8 @@ namespace AG.Editor.Windows
             List<AGTProjectSummary> tpList = AGECache.Current.TProjectStore.GetTProjects();
             ctlListTProject.DisplayMember = "Name";
             ctlListTProject.DataSource = tpList;
+
+            ctlEditPath.Text = AppDomain.CurrentDomain.BaseDirectory +"output\\";
         }
 
         private void ctlBtnOK_Click(object sender, EventArgs e)

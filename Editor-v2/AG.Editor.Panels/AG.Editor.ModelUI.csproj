@@ -77,6 +77,11 @@
     </Compile>
     <Compile Include="Controls\IFrameEditObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AGECreateModelWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +93,12 @@
     </Compile>
     <Compile Include="Windows\AGEEditModelWindow.Designer.cs">
       <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\AGERemoveAudioWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Windows\AGERemoveAudioWindow.Designer.cs">
+      <DependentUpon>AGERemoveAudioWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Windows\AGESetAudioWindow.cs">
       <SubType>Form</SubType>
@@ -126,15 +137,52 @@
     <EmbeddedResource Include="Controls\AGEPreviewModelPanel.resx">
       <DependentUpon>AGEPreviewModelPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AGECreateModelWindow.resx">
       <DependentUpon>AGECreateModelWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Windows\AGEEditModelWindow.resx">
       <DependentUpon>AGEEditModelWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Windows\AGERemoveAudioWindow.resx">
+      <DependentUpon>AGERemoveAudioWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Windows\AGESetAudioWindow.resx">
       <DependentUpon>AGESetAudioWindow.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image_link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

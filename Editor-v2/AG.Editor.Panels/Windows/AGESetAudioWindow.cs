@@ -18,7 +18,7 @@ namespace AG.Editor.ModelUI.Windows
         /// <summary>
         /// 选中的音效
         /// </summary>
-        public AGAudio SelectedAudio { get; private set; }
+        public AGAudioRef AudioRef { get; private set; }
 
         public AGESetAudioWindow(AGModel model)
         {
@@ -40,7 +40,9 @@ namespace AG.Editor.ModelUI.Windows
             AGAudio audio = ctlTreeAudio.SelectedNode.Tag as AGAudio;
             if (audio != null)
             {
-                SelectedAudio = audio;
+                AGAction defaultAction = ctlListAction.SelectedItem as AGAction;
+
+                AudioRef = new AGAudioRef(defaultAction.Id, ctlListFrame.SelectedIndex, audio.UniqueId);
                 DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         }
@@ -70,17 +72,18 @@ namespace AG.Editor.ModelUI.Windows
 
         private void BindListActions()
         {
-            AGAction defaultAction = _model.GetAction(1);
-            AGDirection defaultDirection = defaultAction.GetDirection(1);
+            AGAction defaultAction = _model.GetAction(0);
+            AGDirection defaultDirection = defaultAction.GetDirection(0);
 
             foreach (var action in _model.Actions)
             {
                 ctlListAction.Items.Add(action);
             }
 
-            for (int index = 0; index < defaultDirection.Frames.Count; index++)
+            List<AGFrame> frames = defaultDirection.GetFrames();
+            for (int index = 0; index < frames.Count; index++)
             {
-                ctlListFrame.Items.Add(string.Format("frame-{0}",defaultDirection.Frames[index].Id));
+                ctlListFrame.Items.Add(string.Format("frame-{0}", frames[index].Id));
             }
         }
     }
