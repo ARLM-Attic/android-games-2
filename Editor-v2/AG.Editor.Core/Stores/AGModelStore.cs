@@ -140,7 +140,7 @@ namespace AG.Editor.Core.Stores
             model.CategoryId = modelCategory.Id;
 
             #region load audio ref
-            List<XElement> xAudios = xm.XGetElement("audio-ref-liat").XGetElements("audio-ref").ToList();
+            List<XElement> xAudios = xm.XGetElement("audio-ref-list").XGetElements("audio-ref").ToList();
             for (int iAudio = 0; iAudio < xAudios.Count; iAudio++)
             {
                 AGAudioRef audioRef = new AGAudioRef();
