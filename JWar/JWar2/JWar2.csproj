@@ -117,7 +117,7 @@
     <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\JWar2Core\JWar2Core.csproj">
+    <ProjectReference Include="..\JWar2Core\JWar2Core.csproj">
       <Project>{36639E6F-6539-45F3-9600-8F9FEBA24C8B}</Project>
       <Name>JWar2Core</Name>
     </ProjectReference>
