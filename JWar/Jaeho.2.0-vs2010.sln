@@ -9,13 +9,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JWar2Content", "JWar2Conten
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs23
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = JWar2Content\\JWar2Content.contentproj
 		SccProjectName1 = JWar2Content
 		SccLocalPath1 = JWar2Content
+		SccProjectUniqueName2 = JWar2Core\\JWar2Core.csproj
+		SccProjectName2 = JWar2Core
+		SccLocalPath2 = JWar2Core
+		SccProjectUniqueName3 = JWar2\\JWar2.csproj
+		SccProjectName3 = JWar2
+		SccLocalPath3 = JWar2
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

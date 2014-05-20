@@ -9,31 +9,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JWar2.Scenes
 {
-    public class TestScene : Scene
+    public class TestScene : JScene
     {
-        JWar2Core.UI.TextBlock textBlock;
+        JWar2Core.UI.JTextBlock textBlock;
         public TestScene()
             : base()
         {
-            textBlock = new JWar2Core.UI.TextBlock();
-            textBlock.Font = ResourceManager.Load<SpriteFont>("SpriteFont1");
+            textBlock = new JWar2Core.UI.JTextBlock();
+            textBlock.Font = JResource.Load<SpriteFont>("SpriteFont1");
             textBlock.Text = "this is a textblock!";
-            textBlock.Color = new Color(255, 0, 0);
+            textBlock.Foreground = new Color(255, 0, 0);
             this._objectList.Add(textBlock);
         }
 
-        public override void OnUpdate(GameTime gameTime)
+        protected override bool OnUpdate(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 textBlock.Text = "Left key down";
+                JCore.Show(new HomeScene());
+                return true;
             }
             else
             {
                 textBlock.Text = "None";
             }
 
-            base.OnUpdate(gameTime);
+            return base.OnUpdate(gameTime);
         }
     }
 }

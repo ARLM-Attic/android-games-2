@@ -11,28 +11,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace JWar2Core.UI
 {
-    public class TextBlock : JObject2D
+    public class JTextBlock : JControl
     {
         /// <summary>
         /// ÎÄ±¾ÄÚÈÝ
         /// </summary>
         public string Text { get; set; }
-        public Vector2 Position { get; set; }
-        public SpriteFont Font { set; get; }
-        public Color Color { get; set; }
 
-        public TextBlock()
+        public JTextBlock()
         {
         }
 
-        public override void OnDraw(SpriteBatch spriteBatch, GameTime gameTime)
+        protected override void OnDraw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (!String.IsNullOrEmpty(Text) && Font != null)
             {
                 spriteBatch.DrawString(this.Font,
-                    this.Text + gameTime.TotalGameTime.ToString(),
+                    this.Text,
                     this.Position,
-                    this.Color,
+                    this.Foreground,
                     0,
                     Position,
                     1,

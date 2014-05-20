@@ -11,33 +11,37 @@ using Microsoft.Xna.Framework.Media;
 
 namespace JWar2Core
 {
-    public class Scene : JObject2D
+    public class JScene : JObject
     {
-        public List<JObject2D> _objectList;
+        public List<JObject> _objectList;
 
-        public Scene()
+        public JScene()
         {
-            _objectList = new List<JObject2D>();
+            _objectList = new List<JObject>();
         }
 
-        public void AddObject(JObject2D obj)
+        public void AddObject(JObject obj)
         {
             _objectList.Add(obj);
         }
 
-        public override void OnUpdate(GameTime gameTime)
+        protected override bool OnUpdate(GameTime gameTime)
         {
             for (int index = 0; index < _objectList.Count; index++)
             {
-                _objectList[index].OnUpdate(gameTime);
+                if (_objectList[index].Update(gameTime))
+                {
+                    return true;
+                }
             }
+            return false;
         }
 
-        public override void OnDraw(SpriteBatch spriteBatch, GameTime gameTime)
+        protected override void OnDraw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             for (int index = 0; index < _objectList.Count; index++)
             {
-                _objectList[index].OnDraw(spriteBatch, gameTime);
+                _objectList[index].Draw(spriteBatch, gameTime);
             }
         }
     }

@@ -20,7 +20,7 @@ namespace JWar2
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        JWar2Core.Scene _scene;
+        JWar2Core.JScene _scene;
 
         public Game1()
         {
@@ -39,9 +39,13 @@ namespace JWar2
             // TODO: Add your initialization logic here
             // 显示鼠标
             IsMouseVisible = true;
-            ResourceManager.Init(Content);
+            // 设置分辨率
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
+            graphics.ApplyChanges();
 
-            _scene = new JWar2.Scenes.TestScene();
+            JResource.Init(Content);
+            JCore.Show(new JWar2.Scenes.TestScene());
 
             base.Initialize();
         }
@@ -79,7 +83,7 @@ namespace JWar2
                 this.Exit();
 
             // TODO: Add your update logic here
-            _scene.OnUpdate(gameTime);
+            JCore.CurrentScene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -94,7 +98,7 @@ namespace JWar2
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
-            _scene.OnDraw(spriteBatch, gameTime);
+            JCore.CurrentScene.Draw(spriteBatch, gameTime);
             spriteBatch.End();
 
             base.Draw(gameTime);

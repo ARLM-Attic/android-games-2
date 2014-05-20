@@ -6,20 +6,16 @@ using System.Threading.Tasks;
 
 namespace JWar2Core
 {
-    public class Model2D
+    public class JModel
     {
         public int Id { get; set; }
-        public string Caption { get; set; }
-        public ModelCategory Category { get; set; }
+        public List<JAction> Actions { get; set; }
 
-        public List<Action2D> Actions { get; set; }
-
-        public Model2D()
+        public JModel()
         {
-            Actions = new List<Action2D>();
         }
 
-        public Action2D GetAction(int actionId)
+        public JAction GetAction(int actionId)
         {
             foreach (var item in Actions)
             {
@@ -31,7 +27,7 @@ namespace JWar2Core
             return null;
         }
 
-        public Frame2D GetFrame(int actionId, int directionId, int index)
+        public JFrame GetFrame(int actionId, int directionId, int index)
         {
             foreach (var action in Actions)
             {
@@ -43,7 +39,7 @@ namespace JWar2Core
                         {
                             foreach (var frame in direction.Frames)
                             {
-                                if (frame.Index == index)
+                                if (frame.Id == index)
                                 {
                                     return frame;
                                 }
@@ -55,7 +51,7 @@ namespace JWar2Core
             return Actions[0].Directions[0].Frames[0];
         }
 
-        public List<Frame2D> GetFrames(int actionId, int directionId)
+        public List<JFrame> GetFrames(int actionId, int directionId)
         {
             foreach (var action in Actions)
             {

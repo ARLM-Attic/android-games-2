@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Content;
 
 namespace JWar2Core
 {
-    public class Direction2D
+    public class JDirection
     {
         public int Id { get; set; }
-        public string Caption { get; set; }
 
-        public List<Frame2D> Frames { get; set; }
+        public List<JFrame> Frames { get; set; }
 
-        public Direction2D()
+        public JDirection()
         {
-            Frames = new List<Frame2D>();
         }
 
         /// <summary>
