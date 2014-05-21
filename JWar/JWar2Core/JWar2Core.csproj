@@ -107,6 +107,7 @@
     <Compile Include="JResource.cs" />
     <Compile Include="JScene.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\JModelViewer.cs" />
     <Compile Include="UI\JTextureButton.cs" />
     <Compile Include="UI\JButtonBase.cs" />
     <Compile Include="UI\JImage.cs" />

@@ -16,7 +16,7 @@ namespace JWar2.Scenes
             : base()
         {
             textBlock = new JWar2Core.UI.JTextBlock();
-            textBlock.Font = JResource.Load<SpriteFont>("SpriteFont1");
+            textBlock.Font = JResource.Global.Load<SpriteFont>("SpriteFont1");
             textBlock.Text = "this is a textblock!";
             textBlock.Foreground = new Color(255, 0, 0);
             this._objectList.Add(textBlock);

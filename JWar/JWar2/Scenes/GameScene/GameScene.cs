@@ -10,12 +10,13 @@ using JWar2Core.UI;
 
 namespace JWar2.Scenes
 {
-    public class HomeScene : JScene
+    public class GameScene : JScene
     {
         JImage _image;
         JTextureButton _btnOK;
+        GameHudLayer _hudLayer;
 
-        public HomeScene()
+        public GameScene()
         {
             _image = new JImage(JResource.Global.Load<Texture2D>("Images\\SelectMode"));
             this.AddObject(_image);
@@ -26,11 +27,14 @@ namespace JWar2.Scenes
             _btnOK.Text = "Start";
             _btnOK.Click += new OnClickEventHandler(_btnOK_Click);
             this.AddObject(_btnOK);
+
+            _hudLayer = new GameHudLayer();
+            this.AddObject(_hudLayer);
         }
 
         void _btnOK_Click(JButtonBase sender)
         {
-            JCore.Show(new GameScene());
+            JResource.Global.GetModel(1);
         }
 
         protected override bool OnUpdate(GameTime gameTime)

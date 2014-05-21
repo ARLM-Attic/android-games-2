@@ -27,7 +27,7 @@ namespace JWar2Core
 
         protected override bool OnUpdate(GameTime gameTime)
         {
-            for (int index = 0; index < _objectList.Count; index++)
+            for (int index = _objectList.Count - 1; index >= 0; index--)
             {
                 if (_objectList[index].Update(gameTime))
                 {

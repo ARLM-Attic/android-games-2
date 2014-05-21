@@ -81,7 +81,7 @@ namespace JWar2Core.UI
         {
             Foreground = Color.Black;
             Background = Color.White;
-            Font = JResource.Load<SpriteFont>("SpriteFont1");
+            Font = JResource.Global.Load<SpriteFont>("SpriteFont1");
         }
 
         /// <summary>

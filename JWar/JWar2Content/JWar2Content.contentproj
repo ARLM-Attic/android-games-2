@@ -72,8 +72,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\1.xml">
-      <Name>1</Name>
+    <Compile Include="Models\0001.xml">
+      <Name>0001</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
@@ -83,6 +83,13 @@
       <Project>{36639E6F-6539-45F3-9600-8F9FEBA24C8B}</Project>
       <Name>JWar2Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\0001\0001-0001-0001-0001.bmp">
+      <Name>0001-0001-0001-0001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
