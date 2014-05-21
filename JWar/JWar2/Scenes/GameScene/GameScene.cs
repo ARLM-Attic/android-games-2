@@ -16,6 +16,10 @@ namespace JWar2.Scenes
         JTextureButton _btnOK;
         GameHudLayer _hudLayer;
 
+        JMap _map;
+
+        JMapRender _mapRender;
+
         public GameScene()
         {
             _image = new JImage(JResource.Global.Load<Texture2D>("Images\\SelectMode"));
@@ -30,6 +34,10 @@ namespace JWar2.Scenes
 
             _hudLayer = new GameHudLayer();
             this.AddObject(_hudLayer);
+
+            _map = LoadMap0();
+            _mapRender = new JMapRender(_map);
+            this.AddObject(_mapRender);
         }
 
         void _btnOK_Click(JButtonBase sender)
@@ -40,6 +48,29 @@ namespace JWar2.Scenes
         protected override bool OnUpdate(GameTime gameTime)
         {
             return base.OnUpdate(gameTime);
+        }
+
+        private JMap LoadMap0()
+        {
+            int m_rowCount = 15;
+            int m_colCount = 15;
+            JMap map = new JMap(m_rowCount, m_colCount);
+
+            for (int i = 0; i < m_rowCount; i++)
+            {
+                for (int j = 0; j < m_colCount; j++)
+                {
+                    if ((i + j) % 2 == 0)
+                    {
+                        map.Cells[i * m_colCount + j] = new JMapCell(new JMapPos(i,j), 0);
+                    }
+                    else
+                    {
+                        map.Cells[i * m_colCount + j] = new JMapCell(new JMapPos(i, j), 1);
+                    }
+                }
+            }
+            return map;
         }
     }
 }

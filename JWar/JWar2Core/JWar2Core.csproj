@@ -100,6 +100,10 @@
     <Compile Include="JCore.cs" />
     <Compile Include="JLayer.cs" />
     <Compile Include="JObject.cs" />
+    <Compile Include="MapRender\JMapRender.cs" />
+    <Compile Include="Map\JMap.cs" />
+    <Compile Include="Map\JMapCell.cs" />
+    <Compile Include="Map\JMapPos.cs" />
     <Compile Include="Models\JAction.cs" />
     <Compile Include="Models\JDirection.cs" />
     <Compile Include="Models\JFrame.cs" />
@@ -113,6 +117,8 @@
     <Compile Include="UI\JImage.cs" />
     <Compile Include="UI\JControl.cs" />
     <Compile Include="UI\JTextBlock.cs" />
+    <Compile Include="Unit\JSprite.cs" />
+    <Compile Include="Unit\JUnit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
