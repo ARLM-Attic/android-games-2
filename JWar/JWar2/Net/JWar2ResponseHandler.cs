@@ -27,6 +27,10 @@ namespace JWar2
                 {
                     Response.CreateRoom(buffer, length);
                 }
+                else if (command == NET_COMMAND.GETROOMLIST)
+                {
+                    Response.GetRoomList(buffer, length);
+                }
             }
         }
     }

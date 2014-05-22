@@ -51,6 +51,7 @@
     <Compile Include="Data\Player.cs" />
     <Compile Include="Data\Room.cs" />
     <Compile Include="Net\JWar2RequestHandler.cs" />
+    <Compile Include="Net\Request\Request.Hall.GetRoomList.cs" />
     <Compile Include="Net\Request\Request.Hall.CreateRoom.cs" />
     <Compile Include="Net\Request\Request.Login.cs" />
     <Compile Include="Program.cs" />

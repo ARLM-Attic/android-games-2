@@ -113,8 +113,10 @@
   <ItemGroup>
     <Compile Include="Net\JWar2ResponseHandler.cs" />
     <Compile Include="Net\PlayerData.cs" />
+    <Compile Include="Net\Request\Request.Hall.GetRoomList.cs" />
     <Compile Include="Net\Request\Request.Hall.CreateRoom.cs" />
     <Compile Include="Net\Request\Request.Login.cs" />
+    <Compile Include="Net\Response\Response.Hall.GetRoomList.cs" />
     <Compile Include="Net\Response\Response.Hall.CreateRoom.cs" />
     <Compile Include="Net\Response\Response.Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

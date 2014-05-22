@@ -201,5 +201,10 @@ namespace JWar2Server
             }
             return false;
         }
+
+        public Room GetRoom(uint roomId)
+        {
+            return RoomArray[roomId];
+        }
     }
 }

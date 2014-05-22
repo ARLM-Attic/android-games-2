@@ -12,5 +12,7 @@ namespace JWar2NetContract
         public const byte LOGOUT = 0x02;
 
         public const byte CREATEROOM = 0x01;
+
+        public const byte GETROOMLIST = 0x02;
     }
 }

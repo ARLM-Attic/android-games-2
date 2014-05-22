@@ -17,6 +17,7 @@ namespace JWar2.Scenes
     {
         JTextureButton _btnCreateGame;
         JTextureButton _btnJoinGame;
+        JTextureButton _btnRefresh;
         JTextBlock _ctlPlayerId;
 
         public HallScene()
@@ -32,13 +33,19 @@ namespace JWar2.Scenes
             _btnCreateGame.Click += new OnClickEventHandler(_btnOK_Click);
             this.AddObject(_btnCreateGame);
 
-
             _btnJoinGame = new JTextureButton(JResource.Global.Load<Texture2D>("UI\\TextButton"),
                 JResource.Global.Load<Texture2D>("UI\\TextButton_U"));
             _btnJoinGame.Position = new Vector2(100, 300);
             _btnJoinGame.Text = "Join";
             _btnJoinGame.Click += new OnClickEventHandler(_btnJoinGame_Click);
             this.AddObject(_btnJoinGame);
+
+            _btnRefresh = new JTextureButton(JResource.Global.Load<Texture2D>("UI\\TextButton"),
+                JResource.Global.Load<Texture2D>("UI\\TextButton_U"));
+            _btnRefresh.Position = new Vector2(200, 300);
+            _btnRefresh.Text = "Refresh";
+            _btnRefresh.Click += new OnClickEventHandler(_btnRefresh_Click);
+            this.AddObject(_btnRefresh);
         }
 
         void _btnOK_Click(JButtonBase sender)
@@ -50,12 +57,22 @@ namespace JWar2.Scenes
         {
         }
 
+        void _btnRefresh_Click(JButtonBase sender)
+        {
+            Request.GetRoomList(JNetClient.Instance);
+        }
+
         protected override bool OnUpdate(GameTime gameTime)
         {
             if (JNetVar.Get(0x01) == 0x01)
             {
                 JNetVar.Remove(0x01);
+                JNetVar.Remove(0x02);
                 JCore.Show(new RoomScene());
+            }
+            else if (JNetVar.Get(0x02) == 0x01)
+            {
+                JNetVar.Set(0x02, 0x00);
             }
             return base.OnUpdate(gameTime);
         }
