@@ -21,6 +21,13 @@ namespace JWar2
                     Response.Login(buffer, length);
                 }
             }
+            else if (scenario == NET_SCENARIO.HALL)
+            {
+                if (command == NET_COMMAND.CREATEROOM)
+                {
+                    Response.CreateRoom(buffer, length);
+                }
+            }
         }
     }
 }

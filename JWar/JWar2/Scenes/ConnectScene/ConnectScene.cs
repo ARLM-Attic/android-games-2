@@ -21,6 +21,8 @@ namespace JWar2.Scenes
 
         public ConnectScene()
         {
+            PlayerData.Instance.Name = System.Net.Dns.GetHostName();
+
             _ctlText = new JTextBlock();
             _ctlText.Text = "Connecting...";
             _ctlText.Position = new Vector2(100, 100);
@@ -48,7 +50,7 @@ namespace JWar2.Scenes
             if (JNetVar.Get(0x01) == 0x01)
             {
                 JNetVar.Remove(0x01);
-                JCore.Show(new HomeScene());
+                JCore.Show(new HallScene());
             }
             else if (_connectState == 2)
             {
@@ -59,7 +61,7 @@ namespace JWar2.Scenes
             else if (_connectState == 1)
             {
                 //
-                Net.Request.Login(JNetClient.Instance, System.Net.Dns.GetHostName());
+                Net.Request.Login(JNetClient.Instance, PlayerData.Instance.Name);
             }
             return base.OnUpdate(gameTime);
         }

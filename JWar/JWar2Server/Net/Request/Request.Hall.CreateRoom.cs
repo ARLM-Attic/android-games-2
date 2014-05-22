@@ -14,11 +14,15 @@ namespace JWar2Server.Net
         public static void Hall_CreateRoom(JNetClientChannel channel, byte[] buffer, int length)
         {
             int offset = 2;
+            uint playerId = BufferUtil.GetUInt(buffer, ref offset);
             string roomName = BufferUtil.GetString(buffer, 32, ref offset);
 
+            Player player = CacheData.GetInstance().GetPlayer(playerId);
             Room room = new Room();
             room.Name = roomName;
-            //room.AddPlayer(null);
+            room.AddPlayer(player);
+            CacheData.GetInstance().AddRoom(room);
+
             Hall_CreateRoomSuccess(channel, room);
         }
 
@@ -29,6 +33,7 @@ namespace JWar2Server.Net
             BufferUtil.SetByte(buffer, NET_SCENARIO.HALL, ref offset);
             BufferUtil.SetByte(buffer, NET_COMMAND.CREATEROOM, ref offset);
             BufferUtil.SetByte(buffer, 0x01, ref offset);
+            BufferUtil.SetUInt(buffer, room.Id, ref offset);
 
             channel.Client.SendData(buffer, offset);
         }

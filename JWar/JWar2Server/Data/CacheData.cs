@@ -15,7 +15,8 @@ namespace JWar2Server
 
         private static CacheData s_instance;
 
-        public List<Player> PlayerList2 = new List<Player>();
+        public Player[] PlayerList2 = new Player[100];
+        public Room[] RoomArray = new Room[20];
 
         public static void Init()
         {
@@ -68,9 +69,18 @@ namespace JWar2Server
             }
         }
 
-        public void AddPlayer(Player player)
+        public bool AddPlayer(Player player)
         {
-            PlayerList2.Add(player);
+            for (uint index = 1; index < PlayerList2.Length; index++)
+            {
+                if (PlayerList2[index] == null)
+                {
+                    player.Id = index;
+                    PlayerList2[index] = player;
+                    return true;
+                }
+            }
+            return false;
         }
 
         //public void RemvoeClient(RPGPlayer player, int clientIndex)
@@ -172,5 +182,24 @@ namespace JWar2Server
         //        }
         //    }
         //}
+
+        public Player GetPlayer(uint playerId)
+        {
+            return PlayerList2[playerId];
+        }
+
+        public bool AddRoom(Room room)
+        {
+            for (uint index = 1; index < RoomArray.Length; index++)
+            {
+                if (RoomArray[index] == null)
+                {
+                    RoomArray[index] = room;
+                    room.Id = index;
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

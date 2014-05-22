@@ -32,6 +32,7 @@ namespace JWar2Server.Net
             BufferUtil.SetByte(buffer, NET_SCENARIO.CONNECT, ref offset);
             BufferUtil.SetByte(buffer, NET_COMMAND.LOGIN, ref offset);
             BufferUtil.SetByte(buffer, 0x01, ref offset);
+            BufferUtil.SetUInt(buffer, player.Id, ref offset);
 
             player.Client.Client.SendData(buffer, offset);
         }

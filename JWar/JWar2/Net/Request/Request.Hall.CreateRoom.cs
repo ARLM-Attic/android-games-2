@@ -16,6 +16,7 @@ namespace JWar2.Net
             int offset = 0;
             BufferUtil.SetByte(data, NET_SCENARIO.HALL, ref offset);
             BufferUtil.SetByte(data, NET_COMMAND.CREATEROOM, ref offset);
+            BufferUtil.SetUInt(data, PlayerData.Instance.PlayerId, ref offset);
             BufferUtil.SetString(data, name, 32, ref offset);
 
             client.Send(data, data.Length);

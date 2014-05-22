@@ -10,12 +10,12 @@ namespace JWar2.Net
 {
     public partial class Response
     {
-        public static void Login(byte[] buffer, int length)
+        public static void CreateRoom(byte[] buffer, int length)
         {
             int offset = 2;
             byte errorCode = BufferUtil.GetByte(buffer, ref offset);
-            uint playerId = BufferUtil.GetUInt(buffer, ref offset);
-            PlayerData.Instance.PlayerId = playerId;
+            uint roomId = BufferUtil.GetUInt(buffer, ref offset);
+            PlayerData.Instance.RoomId = roomId;
             JNetVar.Set(0x01, 0x01);
         }
     }

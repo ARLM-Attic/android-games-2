@@ -20,6 +20,28 @@ namespace JWar2Net
             return returnValue;
         }
 
+        public static void SetUInt(byte[] buffer, uint value, ref int offset)
+        {
+            buffer[offset] = (byte)(value & 0xFF);
+            uint tempValue = value >> 8;
+            buffer[offset + 1] = (byte)(tempValue & 0xFF);
+            tempValue = value >> 8;
+            buffer[offset + 2] = (byte)(tempValue & 0xFF);
+            tempValue = value >> 8;
+            buffer[offset + 3] = (byte)(tempValue & 0xFF);
+            offset += 4;
+        }
+
+        public static uint GetUInt(byte[] buffer, ref int offset)
+        {
+            uint value = (uint)buffer[offset];
+            value = (uint)((((uint)buffer[offset + 1]) << 8) | value);
+            value = (uint)((((uint)buffer[offset + 2]) << 8) | value);
+            value = (uint)((((uint)buffer[offset + 3]) << 8) | value);
+            offset += 4;
+            return value;
+        }
+
         /// <summary>
         /// 把字符串填充到buffer中，填充区域是[index, index+length)
         /// </summary>

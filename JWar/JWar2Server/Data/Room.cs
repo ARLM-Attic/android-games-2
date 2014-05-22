@@ -10,6 +10,9 @@ namespace JWar2Server.Data
         public string Name { get; set; }
 
         public List<Player> PlayerList { get; set; }
+
+        public uint Id { get; set; }
+
         public Room()
         {
             PlayerList = new List<Player>();
