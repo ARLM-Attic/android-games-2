@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using JWar2Core;
+using JWar2Net.Client;
 
 namespace JWar2
 {
@@ -45,9 +46,16 @@ namespace JWar2
             graphics.ApplyChanges();
 
             JResource.Init(Content);
-            JCore.Show(new JWar2.Scenes.TestScene());
+            JCore.Show(new JWar2.Scenes.ConnectScene());
 
             base.Initialize();
+        }
+
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            JNetClient.Instance.DisConnect();
+
+            base.OnExiting(sender, args);
         }
 
         /// <summary>

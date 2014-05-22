@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="JWar2Core.JModel">
+    <Id>1</Id>
+    <Actions>
+       <Item>
+          <Id>1</Id>
+         <Directions>
+           <Item>
+             <Id>1</Id>
+             <Frames>
+               <Item>
+                 <Id>1</Id>
+                 <Width>41</Width>
+                 <Height>49</Height>
+                 <OffsetX>10</OffsetX>
+                 <OffsetY>10</OffsetY>
+               </Item>
+             </Frames>
+           </Item>
+         </Directions>
+        </Item>
+     </Actions>
+  </Asset>
+</XnaContent>

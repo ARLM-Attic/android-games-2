@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<server>
+  <!--<ip>172.17.125.138</ip>-->
+  <!--<ip>192.168.1.116</ip>-->
+  <ip>127.0.0.1</ip>
+  <port>8599</port>
+  <ver-major>1</ver-major>
+  <ver-minor>0</ver-minor>
+  <ver-build>0</ver-build>
+</server>

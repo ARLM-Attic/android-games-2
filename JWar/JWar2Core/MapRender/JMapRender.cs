@@ -18,7 +18,7 @@ namespace JWar2Core
         public JMapRender(JMap map)
         {
             _map = map;
-            _tex = JResource.Global.Load<Texture2D>("UI\\TextButton");
+            _tex = JResource.Global.Load<Texture2D>("Grounds\\ground1");
         }
 
         protected override void OnDraw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -31,6 +31,14 @@ namespace JWar2Core
                     spriteBatch.Draw(_tex, rect, Color.White);
                 }
             }
+
+            for (int index = 0; index < _map.Widgets.Count; index++)
+            {
+                JSprite sprite = _map.Widgets[index];
+                sprite.Position = sprite.PositionInMap;
+                sprite.Draw(spriteBatch, gameTime);
+            }
+
             base.OnDraw(spriteBatch, gameTime);
         }
     }

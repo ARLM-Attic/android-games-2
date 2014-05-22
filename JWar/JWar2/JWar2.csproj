@@ -111,9 +111,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Net\JWar2ResponseHandler.cs" />
+    <Compile Include="Net\Request\Request.CreateRoom.cs" />
+    <Compile Include="Net\Request\Request.Login.cs" />
+    <Compile Include="Net\Response\Response.Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Scenes\ConnectScene\ConnectScene.cs" />
     <Compile Include="Scenes\GameScene\GameHudLayer.cs" />
     <Compile Include="Scenes\GameScene\GameScene.cs" />
     <Compile Include="Scenes\HomeScene.cs" />
@@ -129,8 +134,17 @@
       <Name>JWar2Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\JWar2Content\JWar2Content.contentproj">
-      <Name>JWar2Content</Name>
+      <Name>JWar2Content %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{B6125FBD-1477-4587-8AEF-9E5986B730D9}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\JWar2NetContract\JWar2NetContract.csproj">
+      <Project>{9879C6F7-19AD-4071-9ABB-53384D9474E0}</Project>
+      <Name>JWar2NetContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JWar2Net\JWar2Net.csproj">
+      <Project>{6ED3054B-B7D6-4E96-ADA1-81D3836753DD}</Project>
+      <Name>JWar2Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

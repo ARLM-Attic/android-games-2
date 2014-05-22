@@ -19,6 +19,7 @@ namespace JWar2.Scenes
         JMap _map;
 
         JMapRender _mapRender;
+        JSprite _sprite;
 
         public GameScene()
         {
@@ -37,6 +38,19 @@ namespace JWar2.Scenes
 
             _map = LoadMap0();
             _mapRender = new JMapRender(_map);
+
+            _sprite = new JSprite(JResource.Global.GetModel(1));
+            _sprite.Pos = new JMapPos(1, 1);
+            _map.Widgets.Add(_sprite);
+
+            for (int index = 0; index < 5; index++)
+            {
+                JSprite _box1 = new JSprite(JResource.Global.GetModel(8001));
+                _box1.Pos = new JMapPos(1, 1);
+                _box1.PositionInMap = new Vector2(40 + 40 * index, 160);
+                _map.Widgets.Add(_box1);
+            }
+
             this.AddObject(_mapRender);
         }
 
@@ -47,6 +61,24 @@ namespace JWar2.Scenes
 
         protected override bool OnUpdate(GameTime gameTime)
         {
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (keyboardState.IsKeyDown(Keys.Left))
+            {
+                _sprite.Move(-5, 0);
+            }
+            else if(keyboardState.IsKeyDown(Keys.Right))
+            {
+                _sprite.Move(5,0);
+            }
+            else if(keyboardState.IsKeyDown(Keys.Up))
+            {
+                _sprite.Move(0,-5);
+            }
+            else if (keyboardState.IsKeyDown(Keys.Down))
+            {
+                _sprite.Move(0, 5);
+            }
+
             return base.OnUpdate(gameTime);
         }
 
