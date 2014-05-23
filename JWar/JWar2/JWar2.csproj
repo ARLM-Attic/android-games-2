@@ -111,6 +111,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Net\Data\Room.cs" />
     <Compile Include="Net\JWar2ResponseHandler.cs" />
     <Compile Include="Net\PlayerData.cs" />
     <Compile Include="Net\Request\Request.Hall.GetRoomList.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Net\Response\Response.Hall.GetRoomList.cs" />
     <Compile Include="Net\Response\Response.Hall.CreateRoom.cs" />
     <Compile Include="Net\Response\Response.Login.cs" />
+    <Compile Include="Net\VarFlag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />

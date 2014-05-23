@@ -25,7 +25,11 @@ namespace JWar2Server
             {
                 if (command == NET_COMMAND.CREATEROOM)
                 {
-                    Request.Hall_CreateRoom(player, buffer, length);
+                    Request.Hall.CreateRoom(player, buffer, length);
+                }
+                else if (command == NET_COMMAND.GETROOMLIST)
+                {
+                    Request.Hall.GetRoomList(player, buffer, length);
                 }
             }
         }

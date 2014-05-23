@@ -8,6 +8,7 @@ namespace JWar2Net
     public static class JNetVar
     {
         private static Dictionary<byte, byte> s_varDict = new Dictionary<byte, byte>();
+        private static Dictionary<byte, object> s_varObjDict = new Dictionary<byte, object>();
 
         public static byte Get(byte key)
         {
@@ -35,6 +36,35 @@ namespace JWar2Net
             if (s_varDict.ContainsKey(key))
             {
                 s_varDict.Remove(key);
+            }
+        }
+
+        public static object GetObj(byte key)
+        {
+            if (s_varObjDict.ContainsKey(key))
+            {
+                return s_varObjDict[key];
+            }
+            return null;
+        }
+
+        public static void SetObj(byte key, object value)
+        {
+            if (s_varObjDict.ContainsKey(key))
+            {
+                s_varObjDict[key] = value;
+            }
+            else
+            {
+                s_varObjDict.Add(key, value);
+            }
+        }
+
+        public static void RemoveObj(byte key)
+        {
+            if (s_varObjDict.ContainsKey(key))
+            {
+                s_varObjDict.Remove(key);
             }
         }
     }

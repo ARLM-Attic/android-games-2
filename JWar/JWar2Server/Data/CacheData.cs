@@ -17,6 +17,10 @@ namespace JWar2Server
 
         public Player[] PlayerList2 = new Player[100];
         public Room[] RoomArray = new Room[20];
+        /// <summary>
+        /// 处于等待状态的房间列表
+        /// </summary>
+        public List<Room> WaitRoomList = new List<Room>();
 
         public static void Init()
         {
@@ -196,6 +200,8 @@ namespace JWar2Server
                 {
                     RoomArray[index] = room;
                     room.Id = index;
+
+                    WaitRoomList.Add(room);
                     return true;
                 }
             }

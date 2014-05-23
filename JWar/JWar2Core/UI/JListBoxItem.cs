@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -9,18 +9,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace JWar2Core
+namespace JWar2Core.UI
 {
-    public class JHudLayer : DrawableGameComponent
+    public class JListBoxItem
     {
-        public JHudLayer(Game game)
-            : base(game)
-        {
-        }
+        public string Text { get; set; }
+        public object Tag { get; set; }
 
-        public override void Draw(GameTime gameTime)
+        public JListBoxItem(string text)
         {
-            base.Draw(gameTime);
+            Text = text;
         }
     }
 }
